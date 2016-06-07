@@ -9,5 +9,5 @@ The goal of this project is to facilitate the communication and integration acro
 
 ## Awesome lists
 
-## Communities
-* [Catania](isamuni/communities/Catania.md)
+### Communities
+* [Catania](communities/Catania.md)
