@@ -7,3 +7,7 @@ The goal of this project is to facilitate the communication and integration acro
 * Type II : Incubators, accellerators, universities, and communities
 * Type III : Students, professionals, and enthusiasts
 
+## Awesome lists
+
+## Communities
+* [Catania](isamuni/communities/Catania.md)
