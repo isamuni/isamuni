@@ -1,0 +1,154 @@
+Progetto isamuni
+
+ * Far conoscere communities e aziende ai membri di PAC
+ * Creare un database pubblico di communities, aziende, utenti
+ * Utenti possono richiedere un account "azienda" per poterla pubblicizzare
+ * In ordine di importanza: communities, aziende, utenti
+
+
+Primo step: creare una lista di communities e in caso anche di aziende (vedi github)
+Come usare github e pull requests
+
+Accesso tramite facebook (solamente)
+Front-end
+ * html, js
+ * bootstrap
+ * jquery
+ * typeahead
+ * epiceditor, simpleMDE
+Back-end
+ * node.js ruby on rails su Heroku
+ * storage su AWS S3
+ * DB su AWS (Postgres)
+
+Automated posting
+ * tag per communities
+ * jobs
+ * aziende
+
+Scenario:
+utente si iscrive
+utente richiede una pagina per la sua azienda
+utente collega la pagina della sua azienda alla pagina facebook
+nella pagina dell'azienda sono mostrati i post dalla pagina facebook associata
+
+Bacheca centrale in cui mostriamo i post #jobs da programmatori a catania
+ * post di lavori
+ * post di eventi
+ * menu di rubriche: aziende, communities, eventi?, utenti
+ * funzione di ricerca
+
+Cosa farne della lista in markdown? 
+Idea di Gabriele e' quella di creare una awesome-catania
+
+informatica:
+...
+..
+
+ambiente:
+lungo
+...
+
+
+
+-------------
+
+
+Model (db tables)
+
+class User {
+    id user_id
+    string facebook_id
+    string facebook_token fbid;
+    string nome
+    string description;
+    string jsonProjects;
+    string jsonlinks ;
+        
+    static User create(fbid)
+    static User login(fbid)
+    static void delete(fbid)
+    void updateDescription(text)
+    void richiediPagina(nome pagina)
+}
+
+class Page {
+    boolean active
+    int type (company, community)
+    
+    id pageId
+    fbid utente (belongs to User)  
+    string page_name
+    string jsonlLinks ' { mioSitoPersonale : "www..fòal," , fbpage: "..." } '
+    string description
+    string contact (e.g. email, facebook link, whatever)
+    coordinate
+    
+    static Page create(fbid, page_name)
+    static void delete(page.id)
+    void id addLink(...)
+    void removeLink(link.id)
+    void edit(...)
+}
+
+class PostBachecaPrincipale {
+    id postId_di_fb
+    fbid tizioCHeHaPostato
+    string nomeTizioCheHapostato
+    string link_a_quel_post_su_facebook
+    string text
+}
+
+[chron job?]
+posts = prendiPostDaProgrammatoriACataniaConTag(tag)
+for post in posts:
+    if !Post.find(fb_id...): 
+        Post.create(post_id, ...)
+        
+https://www.facebook.com/groups/programmatoriCatania/search/?query=%23job
+
+View (web pages)
+ * PaginaPrincipale
+   * Login
+   * Link a pagine Aziende, Communities, Utenti, Eventi
+   * Ultimi 20 post da gruppo facebook (con set di tag)
+   * Chi siamo
+   * Github or this website is opensource
+ * Aziende    /companies
+   * mappa
+   * ricerca
+   * lista aziende
+ * Azienda /companies/companyId
+   * i campi della tabella page
+ * Communities and Community 
+   * (vedi aziende e azienda)
+ * Events  /events
+   * TODO
+ * Utenti  /users
+   * lista degli utenti per nome + descrizione?
+ * Utente     /users/userid
+ * EditAccount
+ * EditPagina
+
+
+Controller
+
+/   {
+    query per i post
+    render PaginaPrincipale
+}
+
+/companies.json?query=filtro per typeahead
+/companies?query=filtro {
+    query per pagine di tipo azienda (filtrando per type=company, per filtro)
+    renderizzare Aziende
+    }
+
+/companies/:companyid {
+      query per info azienda  
+    }
+
+/users?
+/users/:id
+
+
