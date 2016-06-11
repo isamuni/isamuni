@@ -14,3 +14,7 @@
 * OrangeDotNet - [Site](http://www.orangedotnet.org/), [FB group](https://www.facebook.com/groups/orangedotnet/)
 * MSP Catania - [FB Page](https://www.facebook.com/MSPUnict/)
 * Big data for you - [FB Page](https://www.facebook.com/bigdata4you/)
+* CoderDojo Etneo - [FB Page](https://www.facebook.com/CoderDojoEtneo/?fref=ts)
+* FabLab Catania - [FB Page](https://www.facebook.com/FABLAB.CATANIA.make.your.idea/?fref=ts)
+* OpenDataSicilia - [FB Group](https://www.facebook.com/groups/opendatasicilia/?fref=ts)
+* Linux User Group - [Site](http://catania.linux.it/)
