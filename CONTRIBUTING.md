@@ -1,15 +1,11 @@
 # How to contribute
 
 ## isamuni web app
-**Work in progress**
+1. Fork the project
+2. Modify the project, fix bugs, propose a feature
+3. Push your changes
+4. Request a pull request
 
-## awesome lists
-We are using awesome lists just as a temporary solution for providing a comprehensive list of all tech communities in Catania and Sicily.
 
-### By-Fork
-* Fork
-* Contribute
-* Make a pull-request
-
-### By-issue
-* Open an issue
+## Issues
+Use Github **issues** to propose features, ask for clarifications, file a bug and/or misbehaviour of the application, and any other related matter to the **isamuni** project.
