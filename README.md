@@ -101,5 +101,5 @@ $ rake db::migrate
 **Running the App**
 ```
 $ rails server
-Connect to localhost:3000
+Connect to squirrels.vii.ovh:3000  
 ```
