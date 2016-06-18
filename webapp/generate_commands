@@ -1,0 +1,5 @@
+rails g model user provider uid name oauth_token oauth_expires_at:datetime description:text projects:text links:text
+
+rails g scaffold page name owner_id:integer active:boolean name links description contacts coordinates
+
+rails g scaffold post author_name author_uid link content:text

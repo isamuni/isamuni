@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @page.name %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @page.owner_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @page.active %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @page.name %>
+</p>
+
+<p>
+  <strong>Links:</strong>
+  <%= @page.links %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @page.description %>
+</p>
+
+<p>
+  <strong>Contacts:</strong>
+  <%= @page.contacts %>
+</p>
+
+<p>
+  <strong>Coordinates:</strong>
+  <%= @page.coordinates %>
+</p>
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>

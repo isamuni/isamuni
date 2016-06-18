@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Active</th>
+      <th>Name</th>
+      <th>Links</th>
+      <th>Description</th>
+      <th>Contacts</th>
+      <th>Coordinates</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.name %></td>
+        <td><%= page.owner_id %></td>
+        <td><%= page.active %></td>
+        <td><%= page.name %></td>
+        <td><%= page.links %></td>
+        <td><%= page.description %></td>
+        <td><%= page.contacts %></td>
+        <td><%= page.coordinates %></td>
+        <td><%= link_to 'Show', page %></td>
+        <td><%= link_to 'Edit', edit_page_path(page) %></td>
+        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page', new_page_path %>
