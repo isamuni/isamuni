@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :pages
+  self.primary_key = 'uid'
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|

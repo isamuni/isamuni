@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<div class="row">
+  <div class="col-lg-4">
+    <%= form_tag users_path, :method => "get" do %>
+    <div class="input-group">
+        <%= text_field_tag :query, params[:query], placeholder: "Search for Users", class: 'form-control' %>
+        <span class="input-group-btn">
+          <%= button_tag type: "submit", class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-search"></i>
+          <% end %>
+        </span>
+    </div>
+    <% end %>
+  </div>
+</div><!-- /.row -->
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Projects</th>
+      <th>Links</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.provider %></td>
+        <td><%= user.uid %></td>
+        <td><%= user.name %></td>
+        <td><%= user.description %></td>
+        <td><%= user.projects %></td>
+        <td><%= user.links %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
