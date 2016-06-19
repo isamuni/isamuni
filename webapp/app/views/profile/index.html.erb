@@ -1,10 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Users</h1>
-
-<div class="row">
-  <div class="col-lg-4">
-    <%= form_tag users_path, :method => "get" do %>
+<!-- SEARCH COMPONENT -->
+<% content_for :search do %>
+  <%= form_tag users_path, :method => "get" do %>
     <div class="input-group">
         <%= text_field_tag :query, params[:query], placeholder: "Search for Users", class: 'form-control' %>
         <span class="input-group-btn">
@@ -13,9 +9,13 @@
           <% end %>
         </span>
     </div>
-    <% end %>
-  </div>
-</div><!-- /.row -->
+  <% end %>
+<% end %>
+
+<!-- BODY -->
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
 
 <table class="table table-hover table-condensed">
   <thead>
