@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  
   get 'home/index'
 
-  get 'profile/edit'
-
-  get 'profile/update'
-
+  # User routing
+  get 'me', to: 'profile#edit', as: 'edit_user'
+  get 'users(/query/:query)', to: 'profile#index', as: 'users'
+  get 'users/:uid', to: 'profile#show', as: 'user'
   get 'profile/delete'
+  get 'me/new', to: 'profile#new', as: 'new_user'
+  post 'me', to: 'profile#create', as: 'create_user'
 
   resources :posts
   resources :pages
