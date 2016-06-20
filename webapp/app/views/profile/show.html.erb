@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Provider:</strong>
   <%= @user.provider %>
@@ -30,5 +28,8 @@
   <%= @user.links %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p id="notice" class="text-success"><strong><%= notice %></strong></p>
+
+<% if @user.uid == current_user.uid %>
+  <%= link_to 'Edit', edit_user_path(@user) %>
+<% end %>

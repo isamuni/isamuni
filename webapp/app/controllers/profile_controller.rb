@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  before_action :set_post, only: [:show, :edit]
+  before_action :set_post, only: [:show, :update]
 
   # GET /users/query/name
   # GET /users?query=text
@@ -17,19 +17,16 @@ class ProfileController < ApplicationController
   end
 
   def new
-    puts "test new simone"
     @user = User.new
   end
 
   # GET /me
   def edit
-    puts "test edit simone"
   end
 
   # POST /users
   # POST /users.json
   def create
-    puts "test create simone"
     @user = User.new(post_params)
 
     respond_to do |format|
@@ -39,6 +36,20 @@ class ProfileController < ApplicationController
     else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /posts/1
+  # PATCH/PUT /posts/1.json
+  def update
+    respond_to do |format|
+      if current_user.update(post_params)
+        format.html { redirect_to current_user, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_user }
+      else
+        format.html { render :edit }
+        format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end
   end

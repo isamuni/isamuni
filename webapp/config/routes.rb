@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'profile/delete'
   get 'me/new', to: 'profile#new', as: 'new_user'
   post 'me', to: 'profile#create', as: 'create_user'
-
+  patch 'users/:uid', to: 'profile#update', as: 'update_user'
   resources :posts
   resources :pages
   #get 'session/create'

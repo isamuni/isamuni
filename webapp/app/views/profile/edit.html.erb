@@ -1,2 +1,6 @@
-<h1>Profile#edit</h1>
-<p>Find me in app/views/profile/edit.html.erb</p>
+<h3>Hi, <%= current_user.name.partition(" ").first %> </h3>
+<p>Here you can change details about your profile</p>
+<%= render 'update_form' %>
+
+<br>
+<p>See how others are going to see your profile <%= link_to 'Show', user_path(current_user) %></p>

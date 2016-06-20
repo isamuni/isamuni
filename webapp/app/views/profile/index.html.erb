@@ -40,7 +40,11 @@
         <td><%= user.projects %></td>
         <td><%= user.links %></td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <% if user.uid == current_user.uid %>
+          <td><%= link_to 'Edit', edit_user_path %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
