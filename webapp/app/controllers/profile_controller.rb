@@ -11,9 +11,9 @@ class ProfileController < ApplicationController
       end
   end
 
-  # GET /users/:uid
+  # GET /users/:id
   def show
-    @user = User.find(params[:uid])
+    @user = User.find(params[:id])
   end
 
   def new
@@ -57,9 +57,10 @@ class ProfileController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @user = User.find(params[:uid])
+      @user = User.find(params[:id])
     end
 
+    # FIXME - Remove private params before deploying the application - These are here only for test purposes
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:user).permit(:provider, :uid, :name, :oauth_token, :oauth_expires_at, :description, :projects, :links)

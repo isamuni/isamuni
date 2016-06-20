@@ -30,6 +30,6 @@
 
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
-<% if @user.uid == current_user.uid %>
+<% if current_user && @user.id == current_user.id %>
   <%= link_to 'Edit', edit_user_path(@user) %>
 <% end %>
