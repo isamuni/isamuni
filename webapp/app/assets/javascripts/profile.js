@@ -12,9 +12,12 @@ ready = function() {
 bloodhound.initialize();
 
 // instantiate the typeahead UI
-$(searchSelector).typeahead(null, {
+$(searchSelector).typeahead({
+    minLength: 0,
+    highlight: true
+}, {
   displayKey: 'name',
-  source: bloodhound.ttAdapter()
+  source: bloodhound.ttAdapter(),
 });
 
 // this is the event that is fired when a user clicks on a suggestion
