@@ -2,3 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
+
+// Need to align search form with bootstrap button
+.input-group .twitter-typeahead {
+	display: table-cell !important;
+}
+
+.tt-dropdown-menu .tt-suggestion {
+	color: #333333;
+	white-space: nowrap;
+}

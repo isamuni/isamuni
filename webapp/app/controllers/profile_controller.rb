@@ -1,14 +1,17 @@
 class ProfileController < ApplicationController
   before_action :set_post, only: [:show, :update]
 
+  # GET /users/typeahead?query=text
+  def typeahead
+    @search  = UserSearch.new(typeahead: params[:query])
+    render json: @search.results
+  end
+
   # GET /users/query/name
   # GET /users?query=text
   def index 
-      if params[:query]
-          @users = User.where(User.arel_table[:name].matches('%' + params[:query] + '%'))
-      else
-          @users = User.all
-      end
+    @search = UserSearch.new(search_params)
+    @users = search_params.present? ? @search.results : User.all
   end
 
   # GET /users/:id
@@ -64,6 +67,10 @@ class ProfileController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:user).permit(:provider, :uid, :name, :oauth_token, :oauth_expires_at, :description, :projects, :links)
+    end
+
+    def search_params
+      params[:user_search].presence || {}
     end
 
 end
