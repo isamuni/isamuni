@@ -1,13 +1,15 @@
 # Isamuni
-An information aggregator for Facebook groups.
 
-The word **isamuni** comes from the Sicilian dialect and means: let's stand up. 
-The goal of this project is to facilitate the communication and integration across the following parties:
+The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**.
+
+Isamuni is an aggregator of information for Facebook groups. The goal is to facilitate the communication and integration across the following parties:
 * Type I : Companies, corporations, startups, and spin-offs in the tech world
 * Type II : Incubators, accellerators, universities, and communities
 * Type III : Students, professionals, and enthusiasts
 
 ## Configuring and Running the App
+
+You can skip this section if you do not need to deploy **isamuni** in a cloud service.
 
 ### Connecting to the droplet
 
@@ -15,7 +17,7 @@ The first step to connect to the droplet is to generate a valid pair of ssh keys
 
 For Mac/Linux
 ```
-$ ssh-keygen -f ~/.ssh/YOURID -C "YOURID" // YOURID is just a readable string (e.g. pacid)
+$ ssh-keygen -f ~/.ssh/YOURID -C "YOURID" # YOURID is just a readable string (e.g. pacid)
 
 Generating public/private rsa key pair.
 Enter passphrase (empty for no passphrase):
@@ -45,8 +47,10 @@ If you want to manage multiple keys, you can create an `SSH config file`.
 
 ```
 $ touch ~/.ssh/config
+$ emacs ~/.ssh/config # use any editor you like
 
-// Open and edit the file with your favourite editor.
+
+# Manage your keys in ~/.ssh/config as below
 
 Host workid
  HostName bitbucket.org
@@ -75,7 +79,7 @@ export ISAMUNI_APP_SECRET=secret
 ```
 
 #### Test end-point
-If you want to run the app locally, you need to redirect the requests to the `squirrels.vii.ovh` server to your machine.
+If you want to run the app locally, you need to redirect the requests to the `squirrels.vii.ovh` server to your machine (localhost).
 
 ```
 $ sudo /etc/hosts
@@ -87,6 +91,7 @@ Add the following to the file:
 ### Run the Rails App
 
 **Requirements**
+
 1. Install Ruby
 2. Install Rails
 3. Install rake --> `gem install rake`
@@ -94,12 +99,13 @@ Add the following to the file:
 **Setup**
 ```
 $ cd /isamuni/webapp/
-$ rake db::create // if necessary
+$ rake db::create # if necessary
 $ rake db::migrate
 ```
 
 **Running the App**
 ```
+$ bundle install
 $ rails server
 Connect to squirrels.vii.ovh:3000  
 ```
