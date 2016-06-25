@@ -3,7 +3,7 @@
  <%= form_for @search, url:users_path, :method => "get" do |f| %>
     <div class="form-group">
       <div class="input-group">
-          <%= f.text_field :name_like, placeholder: "Search Users", class: 'typeahead form-control', autocomplete: 'off' %> 
+          <%= f.text_field :name_like, class: 'typeahead form-control', autocomplete: 'off' %> 
           <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-primary" do %>
                 <i class="fa fa-search"></i>
