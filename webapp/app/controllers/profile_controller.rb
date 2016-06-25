@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  before_action :set_post, only: [:show, :update]
+  before_action :set_user, only: [:show, :update]
 
   # GET /users/typeahead?query=text
   def typeahead
@@ -9,14 +9,13 @@ class ProfileController < ApplicationController
 
   # GET /users/query/name
   # GET /users?query=text
-  def index 
+  def index
     @search = UserSearch.new(search_params)
     @users = search_params.present? ? @search.results : User.all
   end
 
   # GET /users/:id
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -59,8 +58,8 @@ class ProfileController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @user = User.find(params[:id])
+    def set_user
+      @user = User.friendly.find(params[:id])
     end
 
     # FIXME - Remove private params before deploying the application - These are here only for test purposes

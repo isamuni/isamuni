@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'home/index'
 
   # User routing
@@ -12,9 +12,30 @@ Rails.application.routes.draw do
   post 'me', to: 'profile#create', as: 'create_user'
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
-  resources :posts
-  resources :pages
-  #get 'session/create'
+  #resources :posts
+
+  resources :pages, path: '/me/pages'
+  resources :communities
+  resources :companies
+
+  # get 'me/pages/new', to: 'pages#new', as: 'new_page'
+  # get 'me/pages', to: 'pages#my_pages', as: 'pages'
+  # post 'me/pages/', to: 'pages#create'
+  # get 'me/pages/:id', to: 'pages#edit', as: 'edit_page'
+  # delete '/me/pages/:id', to: 'pages#destroy', as: 'delete_page'
+  #
+  # put 'pages/:id', to: 'pages#update'
+  # patch 'pages/:id', to: 'pages#update'
+  #
+  # get 'companies/', to: 'companies#index', as: 'companies'
+  # get 'companies/:id', to: 'companies#show', as: 'company'
+  # put 'companies/:id', to: 'pages#update'
+  # patch 'companies/:id', to: 'pages#update'
+
+  # get 'communities/', to: 'communities#index', as: 'communities'
+  # get 'communities/:id', to: 'communities#show', as: 'community'
+  # put 'communities/:id', to: 'pages#update'
+  # patch 'communities/:id', to: 'pages#update'
 
   get '/auth/:provider/callback', to: 'session#create'
   get '/auth/failure', to: 'session#auth_failure'

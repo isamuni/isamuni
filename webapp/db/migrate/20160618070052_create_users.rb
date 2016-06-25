@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :provider
       t.string :uid
-      t.string :name
+      t.string :name, null:false
       t.string :oauth_token
       t.datetime :oauth_expires_at
       t.text :description
@@ -11,6 +11,12 @@ class CreateUsers < ActiveRecord::Migration
       t.text :links
 
       t.timestamps null: false
+
+      t.string :slug, null:false
+
     end
+
+    add_index :users, :slug, :unique => true
+
   end
 end

@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.all
+    @pages = current_user.pages
   end
 
   # GET /pages/1
@@ -27,6 +27,8 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(page_params)
+    @page.owner_id = current_user.id
+    @page.active = false
 
     respond_to do |format|
       if @page.save
@@ -64,6 +66,24 @@ class PagesController < ApplicationController
   end
 
   private
+    def page_url(page, options = {})
+      if page.community?
+        community_url page
+      else
+        company_url page
+      end
+    end
+
+    def page_path(page, options = {})
+      if page.community?
+        community_path page
+      else
+        company_path page
+      end
+    end
+
+    helper_method :page_url
+    helper_method :page_path
 
     def check_logged_in
       redirect_to "/", notice: "You need to be logged in to perform that action" unless current_user
@@ -75,11 +95,11 @@ class PagesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find(params[:id])
+      @page = Page.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :owner_id, :active, :name, :links, :description, :contacts, :coordinates)
+      params.require(:page).permit(:name, :links, :description, :contacts, :coordinates, :kind)
     end
 end
