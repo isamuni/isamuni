@@ -1,3 +1,23 @@
+<!-- SEARCH COMPONENT -->
+<% content_for :search do %>
+ <%= form_tag companies_path, :method => "get" do |f| %>
+    <div class="form-group">
+      <div class="input-group">
+          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+          <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-primary" do %>
+                <i class="fa fa-search"></i>
+            <% end %>
+          </span>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<script>
+$(document).ready(function(){
+  initTypeahead('/companies/typeahead', '/companies/');
+});
+</script>
 <p id="notice"><%= notice %></p>
 
 <h1>Aziende</h1>
