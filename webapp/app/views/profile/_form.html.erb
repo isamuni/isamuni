@@ -46,3 +46,12 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script>
+var fields = document.querySelectorAll('textarea');
+for (var i = 0; i < fields.length; ++i) {
+  var item = fields[i];
+  var simplemde = new SimpleMDE({ element: item });
+}
+</script>

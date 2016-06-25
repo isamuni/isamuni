@@ -16,7 +16,7 @@
   </div>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name , class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :active %><br>
@@ -24,21 +24,29 @@
   </div>
   <div class="field">
     <%= f.label :links %><br>
-    <%= f.text_field :links %>
+    <%= f.text_field :links, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area  :description, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :contacts %><br>
-    <%= f.text_field :contacts %>
+    <%= f.text_area :contacts , class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :coordinates %><br>
-    <%= f.text_field :coordinates %>
+    <%= f.text_area :coordinates, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit%>
   </div>
 <% end %>
+
+<script>
+var fields = document.querySelectorAll('textarea');
+for (var i = 0; i < fields.length; ++i) {
+  var item = fields[i];
+  var simplemde = new SimpleMDE({ element: item });
+}
+</script>

@@ -1,44 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h2>
   <%= @page.name %>
-</p>
+</h2>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @page.owner_id %>
-</p>
+<div class="card">
+  <div class="card-header">
+    Links
+  </div>
+  <div class="card-block">
+    <p class="card-text"><%= @page.links %></p>
+  </div>
+</div>
 
-<p>
-  <strong>Active:</strong>
-  <%= @page.active %>
-</p>
+<div class="card">
+  <div class="card-header">
+    Descrizione
+  </div>
+  <div class="card-block">
+    <p class="card-text"><%= markdown(@page.description) %></p>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @page.name %>
-</p>
-
-<p>
-  <strong>Links:</strong>
-  <%= @page.links %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @page.description %>
-</p>
-
-<p>
-  <strong>Contacts:</strong>
-  <%= @page.contacts %>
-</p>
+<div class="card">
+  <div class="card-header">
+    Contatti
+  </div>
+  <div class="card-block">
+    <p class="card-text"><%= markdown(@page.contacts) %></p>
+  </div>
+</div>
 
 <p>
   <strong>Coordinates:</strong>
   <%= @page.coordinates %>
 </p>
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>

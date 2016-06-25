@@ -12,21 +12,30 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :projects %><br>
-    <%= f.text_area :projects %>
+    <%= f.text_area :projects, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :links %><br>
-    <%= f.text_area :links %>
+    <%= f.text_area :links, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script>
+var fields = document.querySelectorAll('textarea');
+for (var i = 0; i < fields.length; ++i) {
+  var item = fields[i];
+  var simplemde = new SimpleMDE({ element: item });
+}
+</script>
