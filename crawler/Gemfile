@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in crawler.gemspec
-gemspec
+gem "activerecord", "~>4.2.6"
+gem "pg"
+gem 'sqlite3'
+gem 'friendly_id', '~> 5.1.0'
