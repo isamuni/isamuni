@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
   #resources :posts
-
   
   get 'communities/typeahead', to:'communities#typeahead'
   get 'companies/typeahead', to:'companies#typeahead'

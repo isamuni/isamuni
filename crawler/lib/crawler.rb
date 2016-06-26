@@ -1,14 +1,11 @@
-require "crawler/version"
 require 'koala'
+require 'json'
 
-Sleep_default_time = 5 * 60 # 5 minutes - time is in seconds
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback" # Auth callback of your application
-Group_to_track = 281460675321367 # this is the id for the group Programmatori a Catania
-Feed_limit = 1000 # No need to have this very high, except for the first time
 Feed_fields = ['message', 'id', 'from', 'type',
                 'picture', 'link', 'created_time', 'updated_time']
 
-module Crawler  
+class Crawler  
   
   # Authenticate the registered Facebook App and return an oauth Koala object
   def Crawler.oauth
@@ -42,25 +39,21 @@ module Crawler
   # +feed+:: feed of posts
   def Crawler.populateDatabase(feed)
     puts "Here I will be populating the DB"
+    # puts feed
+    feed.each do | feed_post |
+      if Post.exists?(uid: feed_post['id'])
+        next
+      end
+
+      post = Post.new()
+      post.uid = feed_post['id']
+      post.content = feed_post['message']
+      post.author_name = feed_post['from']['name']
+      post.author_uid = feed_post['from']['id']
+      post.created_at = feed_post['created_time']
+      post.updated_at = feed_post['updated_time']
+      post.save!
+    end
   end
-
-  while true
-    if !defined? @token
-      @token = oauth.get_app_access_token 
-      @graph = Koala::Facebook::API.new(@token)
-    end
-
-    since = checkDatabaseForLatest
-    feed = feed @graph, Group_to_track, Feed_limit, since
-
-    if false # Check feed for errors
-      @token = nil
-      next
-    else
-      populateDatabase feed
-      sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
-    end
-    
-  end # end of while loop
   
 end

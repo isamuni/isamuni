@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true
 
   create_table "posts", force: :cascade do |t|
+    t.string   "uid"
     t.string   "author_name"
     t.string   "author_uid"
     t.string   "link"
