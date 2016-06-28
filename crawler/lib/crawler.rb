@@ -30,14 +30,15 @@ class Crawler
   end
 
   # Get date (yyyy-mm-dd) of the latest post in the db
-  def Crawler.checkDatabaseForLatest
-    puts "Here I will look for the date (yyyy-mm-dd) of the latest stored post or return nothing if DB is empty"
+  def Crawler.check_database_for_latest
+    last_post_date = Post.maximum(:created_at)
+    last_post_date.strftime("%Y-%m-%d")
   end
 
   # Add the posts in the feed to the database
   # Params:
   # +feed+:: feed of posts
-  def Crawler.populateDatabase(feed)
+  def Crawler.populate_database(feed)
     puts "Here I will be populating the DB"
     # puts feed
     feed.each do | feed_post |

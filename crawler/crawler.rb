@@ -31,14 +31,14 @@ end
 
 puts "Token is: " +  @token 
 
-since = Crawler.checkDatabaseForLatest
+since = Crawler.check_database_for_latest
 feed = Crawler.feed @graph, Group_to_track, Feed_limit, since
 
 if false # Check feed for errors
   @token = nil
   next
 else
-  Crawler.populateDatabase feed
+  Crawler.populate_database feed
   sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
 end
 

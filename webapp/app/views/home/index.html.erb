@@ -1,2 +1,42 @@
 <p>An information aggregator for Facebook groups.</p>
 <p>The word <strong>isamuni</strong> comes from the Sicilian dialect and means: let's stand up.</p>
+
+<p>Here will go a D3 graph showing posts over time, type of posts and who has posted. Possible to select a time period</p>
+
+<div class="row">
+	<div class="col-lg-8">
+	<div class="card-columns">
+	   <% @posts.each do |post| %>
+		<div class="card card-inverse" style="background-color: #333; border-color: #333;">
+			<div class="card-block"> 
+				<blockquote class="card-blockquote">
+					<p><%= post.content[0, 150] %> ...</p>
+				</blockquote>
+				<p class="card-text text-xs-right">
+					<small class="text-success"><%= post.author_name %></small>
+					<br>
+					<small class="text-muted"><%= post.created_at %></small>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	</div>
+	<div class="col-lg-4">
+        <% @posts.each do |post| %>
+		<div class="card card-inverse card-primary">
+			<div class="card-block"> 
+				<blockquote class="card-blockquote">
+					<p><%= post.content[0, 150] %> ...</p>
+				</blockquote>
+				<p class="card-text text-xs-right">
+					<small style="color:black;"><%= post.author_name %></small>
+					<br>
+					<small style="color:black;"><%= post.created_at %></small>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>
+  

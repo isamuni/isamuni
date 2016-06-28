@@ -17,45 +17,45 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
 <div class="container">
   <a class="navbar-brand" href="#"><%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %></a>
-    <ul class="nav navbar-nav">
-      <% if current_user %>
-        <li class="nav-item btn-group">
-          <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user"></i>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
-            <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
-            <%= link_to "Le mie pagine", pages_path, class: "dropdown-item" %>
-            <%= link_to signout_path, id: "sign_out", class: "dropdown-item" do %>
-              <i class="fa fa-sign-out"></i> Log Out
-            <% end %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link' do %>
-            <i class="fa fa-facebook" ></i>
+  <ul class="nav navbar-nav">
+    <% if current_user %>
+      <li class="nav-item btn-group">
+        <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+          <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
+          <%= link_to "Le mie pagine", pages_path, class: "dropdown-item" %>
+          <%= link_to signout_path, id: "sign_out", class: "dropdown-item" do %>
+            <i class="fa fa-sign-out"></i> Log Out
           <% end %>
-        </li>
-      <% end %>
-      <li class="nav-item">
-        <%= link_to 'Utenti', users_path, class: 'nav-link' %>
+        </div>
       </li>
+    <% else %>
       <li class="nav-item">
-        <%= link_to 'Aziende', companies_path, class: 'nav-link' %>
+        <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link' do %>
+          <i class="fa fa-facebook" ></i>
+        <% end %>
       </li>
-      <li class="nav-item">
-        <%= link_to 'Comunità', communities_path, class: 'nav-link' %>
-      </li>
-    </ul>
-    <form class="form-inline pull-xs-right" role="search">
-      <%= yield :search %>
-    </form>
-    </div>
+    <% end %>
+    <li class="nav-item">
+      <%= link_to 'Utenti', users_path, class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Aziende', companies_path, class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Comunità', communities_path, class: 'nav-link' %>
+    </li>
+  </ul>
+  <form class="form-inline pull-xs-right" role="search">
+    <%= yield :search %>
+  </form>
+</div>
 </nav>
 
 <br><br>
-<div class="container-fluid">
+<div class="container">
   <%= yield %>
 </div>
 </body>
