@@ -12,23 +12,31 @@
 				<blockquote class="card-blockquote">
 					<p><%= post.content[0, 150] %> ...</p>
 				</blockquote>
-				<% if post.link.present? %>
-					<%= link_to post.link, :target => "_blank" do %>
-						<% if post.post_type.eql? 'event' %>
-							<i class="fa fa-calendar" ></i>
-						<% else %>
-							<i class="fa fa-link" ></i>
+				<div class="row">
+					<div class="col-xs-6">
+						<% if post.link.present? %>
+							<%= link_to post.link, :target => "_blank" do %>
+								<% if post.post_type.eql? 'event' %>
+									<i class="fa fa-calendar" ></i>
+								<% else %>
+									<i class="fa fa-link" ></i>
+								<% end %>
+							<% end %>
 						<% end %>
-					<% end %>
-				<% end %>
-				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-					<i class="fa fa-facebook" ></i>
-				<% end %>
-				<p class="card-text text-xs-right">
-					<small style="color:black;"><%= post.author_name %></small>
-					<br>
-					<small style="color:black;"><%= post.created_at %></small>
-				</p>
+						<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+							<i class="fa fa-facebook" ></i>
+						<% end %>
+					</div>
+					<div class="col-xs-6 text-xs-right">
+						<small style="color:black;"><%= post.author_name %></small>
+					</div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-6"></div>
+				  <div class="col-xs-6 text-xs-right">
+				  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
+				  </div>
+				</div>
 			</div>
 		</div>
 		<% end %>
@@ -41,19 +49,27 @@
 				<blockquote class="card-blockquote">
 					<p><%= post.content[0, 150] %> ...</p>
 				</blockquote>
-				<% if post.link.present? %>
-					<%= link_to post.link, :target => "_blank" do %>
-						<i class="fa fa-link" ></i>
-					<% end %>
-				<% end %>
-				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-					<i class="fa fa-facebook" ></i>
-				<% end %>
-				<p class="card-text text-xs-right">
-					<small style="color:black;"><%= post.author_name %></small>
-					<br>
-					<small style="color:black;"><%= post.created_at %></small>
-				</p>
+				<div class="row">
+					<div class="col-xs-6">
+						<% if post.link.present? %>
+							<%= link_to post.link, :target => "_blank" do %>
+								<i class="fa fa-link" ></i>
+							<% end %>
+						<% end %>
+						<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+							<i class="fa fa-facebook" ></i>
+						<% end %>
+					</div>
+					<div class="col-xs-6 text-xs-right">
+						<small style="color:black;"><%= post.author_name %></small>
+					</div>
+				</div>
+				<div class="row">
+				  <div class="col-xs-6"></div>
+				  <div class="col-xs-6 text-xs-right">
+				  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
+				  </div>
+				</div>
 			</div>
 		</div>
 		<% end %>
