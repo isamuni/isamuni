@@ -24,22 +24,20 @@ Group_to_track = 281460675321367 # this is the id for the group Programmatori a 
 Feed_limit = 1000 # No need to have this very high, except for the first time
 
 while true
-if !defined? @token
-  @token = Crawler.oauth.get_app_access_token 
-  @graph = Koala::Facebook::API.new(@token)
-end
+  if !defined? @token
+    @token = Crawler.oauth.get_app_access_token 
+    @graph = Koala::Facebook::API.new(@token)
+  end
 
-puts "Token is: " +  @token 
+  since = Crawler.check_database_for_latest
+  feed = Crawler.feed @graph, Group_to_track, Feed_limit, since
 
-since = Crawler.check_database_for_latest
-feed = Crawler.feed @graph, Group_to_track, Feed_limit, since
-
-if false # Check feed for errors
-  @token = nil
-  next
-else
-  Crawler.populate_database feed
-  sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
-end
+  if false # TODO - Check feed for errors
+    @token = nil
+    next
+  else
+    Crawler.populate_database feed
+    sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
+  end
 
 end # end of while loop

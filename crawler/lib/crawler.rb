@@ -4,6 +4,7 @@ require 'json'
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback" # Auth callback of your application
 Feed_fields = ['message', 'id', 'from', 'type',
                 'picture', 'link', 'created_time', 'updated_time']
+Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio']
 
 class Crawler  
   
@@ -32,15 +33,15 @@ class Crawler
   # Get date (yyyy-mm-dd) of the latest post in the db
   def Crawler.check_database_for_latest
     last_post_date = Post.maximum(:created_at)
-    last_post_date.strftime("%Y-%m-%d")
+    if last_post_date != nil 
+      last_post_date.strftime("%Y-%m-%d")
+    end
   end
 
   # Add the posts in the feed to the database
   # Params:
   # +feed+:: feed of posts
   def Crawler.populate_database(feed)
-    puts "Here I will be populating the DB"
-    # puts feed
     feed.each do | feed_post |
       if Post.exists?(uid: feed_post['id'])
         next
@@ -53,6 +54,18 @@ class Crawler
       post.author_uid = feed_post['from']['id']
       post.created_at = feed_post['created_time']
       post.updated_at = feed_post['updated_time']
+      post.post_type = feed_post['type']
+      if feed_post['link'] != nil
+        post.link = feed_post['link']
+      end
+
+      if post.content != nil
+        jobs = Job_tags.any? { |word| post.content.downcase.include?(word) }
+        if jobs
+          post.tags = 'job' # Improve?
+        end
+      end
+    
       post.save!
     end
   end

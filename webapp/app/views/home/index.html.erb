@@ -7,15 +7,27 @@
 	<div class="col-lg-8">
 	<div class="card-columns">
 	   <% @posts.each do |post| %>
-		<div class="card card-inverse" style="background-color: #333; border-color: #333;">
+		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
 			<div class="card-block"> 
 				<blockquote class="card-blockquote">
 					<p><%= post.content[0, 150] %> ...</p>
 				</blockquote>
+				<% if post.link.present? %>
+					<%= link_to post.link, :target => "_blank" do %>
+						<% if post.post_type.eql? 'event' %>
+							<i class="fa fa-calendar" ></i>
+						<% else %>
+							<i class="fa fa-link" ></i>
+						<% end %>
+					<% end %>
+				<% end %>
+				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+					<i class="fa fa-facebook" ></i>
+				<% end %>
 				<p class="card-text text-xs-right">
-					<small class="text-success"><%= post.author_name %></small>
+					<small style="color:black;"><%= post.author_name %></small>
 					<br>
-					<small class="text-muted"><%= post.created_at %></small>
+					<small style="color:black;"><%= post.created_at %></small>
 				</p>
 			</div>
 		</div>
@@ -23,12 +35,20 @@
 	</div>
 	</div>
 	<div class="col-lg-4">
-        <% @posts.each do |post| %>
-		<div class="card card-inverse card-primary">
+        <% @posts_jobs.each do |post| %>
+		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;">
 			<div class="card-block"> 
 				<blockquote class="card-blockquote">
 					<p><%= post.content[0, 150] %> ...</p>
 				</blockquote>
+				<% if post.link.present? %>
+					<%= link_to post.link, :target => "_blank" do %>
+						<i class="fa fa-link" ></i>
+					<% end %>
+				<% end %>
+				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+					<i class="fa fa-facebook" ></i>
+				<% end %>
 				<p class="card-text text-xs-right">
 					<small style="color:black;"><%= post.author_name %></small>
 					<br>

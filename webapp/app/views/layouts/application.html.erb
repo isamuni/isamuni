@@ -14,9 +14,9 @@
 -->
 <br>
 
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+<nav class="navbar navbar-fixed-top" style="background-color: #4DB6AC;">
 <div class="container">
-  <a class="navbar-brand" href="#"><%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %></a>
+  <%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %>
   <ul class="nav navbar-nav">
     <% if current_user %>
       <li class="nav-item btn-group">
@@ -34,7 +34,7 @@
     <% else %>
       <li class="nav-item">
         <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link' do %>
-          <i class="fa fa-facebook" ></i>
+          <i class="fa fa-facebook"></i>
         <% end %>
       </li>
     <% end %>
@@ -51,12 +51,17 @@
   <form class="form-inline pull-xs-right" role="search">
     <%= yield :search %>
   </form>
+
+  <a href="https://github.com/sic2/isamuni"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 </div>
 </nav>
+
 
 <br><br>
 <div class="container">
   <%= yield %>
 </div>
+
+
 </body>
 </html>

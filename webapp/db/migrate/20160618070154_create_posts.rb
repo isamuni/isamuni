@@ -6,7 +6,8 @@ class CreatePosts < ActiveRecord::Migration
       t.string :author_uid
       t.string :link
       t.text :content
-      t.string :type
+      t.string :post_type
+      t.string :tags
 
       t.timestamps null: false
     end
