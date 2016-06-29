@@ -8,36 +8,7 @@
 	<div class="card-columns">
 	   <% @posts.each do |post| %>
 		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
-			<div class="card-block"> 
-				<blockquote class="card-blockquote">
-					<p><%= post.content[0, 150] %> ...</p>
-				</blockquote>
-				<div class="row">
-					<div class="col-xs-6">
-						<% if post.link.present? %>
-							<%= link_to post.link, :target => "_blank" do %>
-								<% if post.post_type.eql? 'event' %>
-									<i class="fa fa-calendar" ></i>
-								<% else %>
-									<i class="fa fa-link" ></i>
-								<% end %>
-							<% end %>
-						<% end %>
-						<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-							<i class="fa fa-facebook" ></i>
-						<% end %>
-					</div>
-					<div class="col-xs-6 text-xs-right">
-						<small style="color:black;"><%= post.author_name %></small>
-					</div>
-				</div>
-				<div class="row">
-				  <div class="col-xs-6"></div>
-				  <div class="col-xs-6 text-xs-right">
-				  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
-				  </div>
-				</div>
-			</div>
+			<%= render partial: "card", locals: {post: post} %>
 		</div>
 		<% end %>
 	</div>
@@ -45,32 +16,7 @@
 	<div class="col-lg-4">
         <% @posts_jobs.each do |post| %>
 		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;">
-			<div class="card-block"> 
-				<blockquote class="card-blockquote">
-					<p><%= post.content[0, 150] %> ...</p>
-				</blockquote>
-				<div class="row">
-					<div class="col-xs-6">
-						<% if post.link.present? %>
-							<%= link_to post.link, :target => "_blank" do %>
-								<i class="fa fa-link" ></i>
-							<% end %>
-						<% end %>
-						<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-							<i class="fa fa-facebook" ></i>
-						<% end %>
-					</div>
-					<div class="col-xs-6 text-xs-right">
-						<small style="color:black;"><%= post.author_name %></small>
-					</div>
-				</div>
-				<div class="row">
-				  <div class="col-xs-6"></div>
-				  <div class="col-xs-6 text-xs-right">
-				  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
-				  </div>
-				</div>
-			</div>
+			<%= render partial: "card", locals: {post: post} %>
 		</div>
 		<% end %>
 	</div>

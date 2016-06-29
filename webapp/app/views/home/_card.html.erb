@@ -1,0 +1,53 @@
+<%= div_for(post, class:'card-block') do |post| %>
+	<blockquote class="card-blockquote">
+		<p><%= post.content[0, 150] %> ...</p>
+	</blockquote>
+	<div class="row">
+		<div class="col-xs-6">
+			<% if post.link.present? %>
+				<%= link_to post.link, :target => "_blank" do %>
+					<% if post.post_type.eql? 'event' %>
+						<i class="fa fa-calendar" ></i>
+					<% else %>
+						<i class="fa fa-link" ></i>
+					<% end %>
+				<% end %>
+			<% end %>
+			<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+				<i class="fa fa-facebook" ></i>
+			<% end %>
+		</div>
+		<div class="col-xs-6 text-xs-right">
+			<small style="color:black;"><%= post.author_name %></small>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-xs-6">
+	  	<%= link_to "#", data: {toggle: "modal", target: '#' + post.uid} do %>
+	  		<i class="fa fa-plus" ></i>
+		<% end %>
+	  </div>
+	  <div class="col-xs-6 text-xs-right">
+	  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
+	  </div>
+	</div>
+
+	<div class="modal fade" id=<%= post.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title" id="myModalLabel">TODO</h4>
+	      </div>
+	      <div class="modal-body">
+	        <%= post.content %>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
