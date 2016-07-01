@@ -1,0 +1,27 @@
+<h1>Eventi</h1>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th class="col-xs-9">Evento</th>
+      <th class="col-xs-2">Data Post</th>
+      <th class="col-xs-1">Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td class="col-xs-9"><%= event.content %></td>
+        <td class="col-xs-2"><%= event.created_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
+        <td class="col-xs-1">
+          <%= link_to event.link, :target => "_blank" do %>
+            <i class="fa fa-calendar" ></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
