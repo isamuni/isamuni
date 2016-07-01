@@ -16,4 +16,5 @@
 //= require bootstrap-typeahead-rails
 //= require tether
 //= require bootstrap-sprockets
+//= require introjs
 //= require_tree .

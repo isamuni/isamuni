@@ -3,7 +3,7 @@
  <%= form_for @search, url:users_path, :method => "get" do |f| %>
     <div class="form-group">
       <div class="input-group">
-          <%= f.text_field :name_like, class: 'typeahead form-control', autocomplete: 'off' %>
+          <%= f.text_field :name_like, class: 'typeahead form-control', autocomplete: 'off'%>
           <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-primary" do %>
                 <i class="fa fa-search"></i>
@@ -26,7 +26,7 @@ $(document).ready(function(){
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
+      <th data-step="1" data-intro="Test">Name</th>
       <th>Description</th>
       <th>Projects</th>
       <th>Links</th>

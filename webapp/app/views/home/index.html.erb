@@ -6,16 +6,24 @@
 <div class="row">
 	<div class="col-lg-8">
 	<div class="card-columns">
-	   <% @posts.each do |post| %>
-		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
+	   <% @posts.each_with_index do |post, index| %>
+		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;"
+			<% if index==0 %>
+				data-step="2" data-intro="This is a post recently posts on the group PAC" data-position='right'
+			<% end %>
+		>
 			<%= render partial: "card", locals: {post: post} %>
 		</div>
 		<% end %>
 	</div>
 	</div>
 	<div class="col-lg-4">
-        <% @posts_jobs.each do |post| %>
-		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;">
+        <% @posts_jobs.each_with_index do |post, index| %>
+		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;"
+			<% if index==0 %>
+				data-step="3" data-intro="This is a post about jobs recently posts on the group PAC" data-position='left'
+			<% end %>
+		>
 			<%= render partial: "card", locals: {post: post} %>
 		</div>
 		<% end %>
