@@ -1,7 +1,9 @@
 <p>An information aggregator for Facebook groups.</p>
 <p>The word <strong>isamuni</strong> comes from the Sicilian dialect and means: let's stand up.</p>
 
-<p>Here will go a D3 graph showing posts over time, type of posts and who has posted. Possible to select a time period</p>
+<p data-intro="Qui ci sarà un bellissimo grafico">
+Here will go a D3 graph showing posts over time, type of posts and who has posted. Possible to select a time period
+</p>
 
 <div class="row">
 	<div class="col-lg-8">
@@ -9,7 +11,7 @@
 	   <% @posts.each_with_index do |post, index| %>
 		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;"
 			<% if index==0 %>
-				data-step="2" data-intro="This is a post recently posts on the group PAC" data-position='right'
+				data-intro="This is a post recently posts on the group PAC" data-position='right'
 			<% end %>
 		>
 			<%= render partial: "card", locals: {post: post} %>
@@ -21,7 +23,7 @@
         <% @posts_jobs.each_with_index do |post, index| %>
 		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;"
 			<% if index==0 %>
-				data-step="3" data-intro="This is a post about jobs recently posts on the group PAC" data-position='left'
+				data-intro="This is a post about jobs recently posts on the group PAC" data-position='left'
 			<% end %>
 		>
 			<%= render partial: "card", locals: {post: post} %>

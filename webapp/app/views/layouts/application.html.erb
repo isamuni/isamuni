@@ -33,22 +33,22 @@
       </li>
     <% else %>
       <li class="nav-item">
-        <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {step:'1', intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+        <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
           <i class="fa fa-facebook"></i>
         <% end %>
       </li>
     <% end %>
     <li class="nav-item">
-      <%= link_to 'Utenti', users_path, class: 'nav-link' %>
+      <%= link_to 'Utenti', users_path, class: 'nav-link', data: {intro:'Trova gli utenti di questo gruppo'}  %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Aziende', companies_path, class: 'nav-link' %>
+      <%= link_to 'Aziende', companies_path, class: 'nav-link', data: {intro:'Trova le aziende tech Siciliane'}  %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Comunità', communities_path, class: 'nav-link' %>
+      <%= link_to 'Comunità', communities_path, class: 'nav-link', data: {intro:'Trova le communità tech Siciliane'}  %>
     </li>
     <li class="nav-item">
-      <a class='nav-link' href="javascript:void(0);" onclick="javascript:introJs().start();">Tour</a>
+      <a class='nav-link' href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();">Tour</a>
     </li>
   </ul>
   <form class="form-inline pull-xs-right" role="search">
