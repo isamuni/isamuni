@@ -21,7 +21,7 @@
     <% if current_user %>
       <li class="nav-item btn-group">
         <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-user"></i> Account
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
           <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
@@ -34,7 +34,7 @@
     <% else %>
       <li class="nav-item">
         <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
-          <i class="fa fa-facebook"></i>
+          <i class="fa fa-facebook"></i> Login
         <% end %>
       </li>
     <% end %>

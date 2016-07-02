@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-typeahead-rails
+//= require twitter/typeahead.min
 //= require tether
 //= require bootstrap-sprockets
 //= require introjs
+//= require simplemde.min.js
 //= require_tree .

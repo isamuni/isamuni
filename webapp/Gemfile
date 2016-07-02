@@ -32,7 +32,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
-gem 'bootstrap-typeahead-rails'
+gem 'twitter-typeahead-rails'
+
 gem 'searchlight'
 gem 'friendly_id', '~> 5.1.0'
 gem 'redcarpet'

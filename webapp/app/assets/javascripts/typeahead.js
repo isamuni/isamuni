@@ -5,7 +5,7 @@ function initTypeahead(remoteUrl, itemUrl) {
 
   var bloodhound = new Bloodhound({
     remote: {
-      url: remoteUrl + "?query=%QUERY"
+      url: remoteUrl
     },
     datumTokenizer: function(d) {
       return Bloodhound.tokenizers.whitespace(d.name);
