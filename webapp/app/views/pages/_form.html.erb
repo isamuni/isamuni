@@ -19,6 +19,14 @@
     <%= f.text_field :name , class: "form-control"%>
   </div>
   <div class="field">
+    <%= f.label "posizione" %><br>
+    <%= f.text_field :location , class: "form-control"%>
+  </div>
+  <div class="field">
+    <%= f.label :coordinates %><br>
+    <%= f.text_field :coordinates, class: "form-control" %>
+  </div>
+  <div class="field">
     <%= f.label :active %><br>
     <%= f.check_box :active, disabled: true %>
   </div>
@@ -35,11 +43,11 @@
     <%= f.text_area :contacts , class: "form-control"%>
   </div>
   <div class="field">
-    <%= f.label :coordinates %><br>
-    <%= f.text_area :coordinates, class: "form-control" %>
+    <%= f.label "In cerca di" %><br>
+    <%= f.text_area :lookingfor, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit%>
+    <%= f.submit %>
   </div>
 <% end %>
 

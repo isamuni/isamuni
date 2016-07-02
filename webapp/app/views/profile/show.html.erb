@@ -1,35 +1,20 @@
-<p>
-  <strong>Provider:</strong>
-  <%= @user.provider %>
-</p>
-
-<p>
-  <strong>Uid:</strong>
-  <%= @user.uid %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
-
-<p>
-  <strong>Projects:</strong>
-  <%= @user.projects %>
-</p>
-
-<p>
-  <strong>Links:</strong>
-  <%= @user.links %>
-</p>
+<h2><%= @user.name %></h2>
 
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
+<h3>Occupazione</h3>
+<p><%= @user.occupation %></p>
+
+<h3>Descrizione</h3>
+<p><%= markdown(@user.description) %></p>
+
+<h3>Progetti</h3>
+<p><%= markdown(@user.projects)  %></p>
+
+<h3>Collegamenti</h3>
+<p><%= markdown(@user.links) %></p>
+
+
 <% if current_user && @user.id == current_user.id %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
+  <%= link_to 'Modifica profilo', edit_user_path(@user) %>
 <% end %>

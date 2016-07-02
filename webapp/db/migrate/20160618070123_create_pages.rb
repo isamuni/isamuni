@@ -5,10 +5,13 @@ class CreatePages < ActiveRecord::Migration
       t.integer :kind, null:false
       t.integer :owner_id, null:false
       t.boolean :active
+
       t.string :links
       t.string :description
       t.string :contacts
       t.string :coordinates
+      t.string :location
+      t.string :lookingfor
 
       t.timestamps null: false
       t.string :slug, null: false

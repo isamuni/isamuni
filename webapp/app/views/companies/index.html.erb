@@ -26,7 +26,8 @@ $(document).ready(function(){
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nome</th>
+      <th>Sede</th>
     </tr>
   </thead>
 
@@ -34,6 +35,7 @@ $(document).ready(function(){
     <% @pages.each do |page| %>
       <tr>
         <td><%= link_to page.name, page %></td>
+        <td><%= page.location %></td>
       </tr>
     <% end %>
   </tbody>

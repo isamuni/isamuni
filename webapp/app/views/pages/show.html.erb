@@ -6,10 +6,20 @@
 
 <div class="card">
   <div class="card-header">
+    Sede
+  </div>
+  <div class="card-block">
+    <p class="card-text"><%= @page.location %></p>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
     Links
   </div>
   <div class="card-block">
-    <p class="card-text"><%= @page.links %></p>
+    <p class="card-text"><%= markdown(@page.links) %></p>
   </div>
 </div>
 

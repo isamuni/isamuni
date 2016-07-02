@@ -1,6 +1,7 @@
 module ApplicationHelper
 
   def markdown(text)
+    text ||= "vuoto"
 
     unless @markdown
       options = {
