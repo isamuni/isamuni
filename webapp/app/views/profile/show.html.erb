@@ -2,19 +2,34 @@
 
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
-<h3>Occupazione</h3>
-<p><%= @user.occupation %></p>
 
-<h3>Descrizione</h3>
-<p><%= markdown(@user.description) %></p>
+<div class="row">
+	<div class="col-lg-4">
+		<img src=<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %> class="img-responsive img-rounded" height="250">
+		<br><br>
+        <h3>Occupazione</h3>
+		<p><%= @user.occupation %></p>
 
-<h3>Progetti</h3>
-<p><%= markdown(@user.projects)  %></p>
+		<h3>Descrizione</h3>
+		<p><%= markdown(@user.description) %></p>
 
-<h3>Collegamenti</h3>
-<p><%= markdown(@user.links) %></p>
+		<h3>Progetti</h3>
+		<p><%= markdown(@user.projects)  %></p>
 
+		<h3>Collegamenti</h3>
+		<p><%= markdown(@user.links) %></p>
 
-<% if current_user && @user.id == current_user.id %>
-  <%= link_to 'Modifica profilo', edit_user_path(@user) %>
-<% end %>
+		<% if current_user && @user.id == current_user.id %>
+		  <%= link_to 'Modifica profilo', edit_user_path(@user) %>
+		<% end %>
+	</div>
+	<div class="col-lg-8">
+	<div class="card-columns">
+	   <% @posts.each_with_index do |post, index| %>
+		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
+			<%= render partial: "card", locals: {post: post} %>
+		</div>
+		<% end %>
+	</div>
+	</div>
+</div>

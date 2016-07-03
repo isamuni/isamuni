@@ -5,9 +5,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :uid
       t.string :name, null:false
       t.string :oauth_token
-      t.string :occupation
-      
+
       t.datetime :oauth_expires_at
+
+      t.string :occupation
+
       t.text :description
       t.text :projects
       t.text :links
