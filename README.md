@@ -103,6 +103,11 @@ $ rake db::create # if necessary
 $ rake db::migrate
 ```
 
+To populate the database run:
+```
+$ rake db:seed
+```
+
 **Running the App**
 ```
 $ bundle install
