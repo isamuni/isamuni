@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20160624213850) do
 
+  create_table "events", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.string   "link"
+    t.text     "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "location"
+    t.string   "coordinates"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
