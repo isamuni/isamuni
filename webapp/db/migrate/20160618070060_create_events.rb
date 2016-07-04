@@ -7,6 +7,9 @@ class CreateEvents < ActiveRecord::Migration
       
       t.timestamps null: false
 
+      t.datetime :starts_at
+      t.datetime :ends_at
+
       t.string :location
       t.string :coordinates
       

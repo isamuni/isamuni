@@ -41,6 +41,8 @@ class Crawler
     event.uid = fb_event['id']
     event.name = fb_event['name']
     event.content = fb_event['description']
+    event.starts_at = fb_event['start_time']
+    event.ends_at = fb_event['end_time']
 
     if fb_event['place'] != nil
       event.location = fb_event['place']['name']

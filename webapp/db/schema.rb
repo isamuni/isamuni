@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.text     "content"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.string   "location"
     t.string   "coordinates"
   end
