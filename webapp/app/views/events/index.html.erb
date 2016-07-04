@@ -1,10 +1,9 @@
-<h1>Eventi</h1>
 
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
       <th class="col-xs-6">Evento</th>
-      <th class="col-xs-2">Data Post</th>
+      <th class="col-xs-2">Data</th>
       <th class="col-xs-3">Location</th>
       <th class="col-xs-1">Link</th>
     </tr>
@@ -14,7 +13,7 @@
     <% @events.each do |event| %>
       <tr>
         <td class="col-xs-6"><%= event.name %></td>
-        <td class="col-xs-2"><%= event.created_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
+        <td class="col-xs-2"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
         <td class="col-xs-3"><%= event.location %></td>
         <td class="col-xs-1">
           <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>

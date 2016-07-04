@@ -2,7 +2,6 @@
 
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
-
 <div class="row">
 	<div class="col-lg-4">
 		<img src=<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %> class="img-responsive img-rounded" height="250">
@@ -25,10 +24,17 @@
 	</div>
 	<div class="col-lg-8">
 	<div class="card-columns">
-	   <% @posts.each_with_index do |post, index| %>
-		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
-			<%= render partial: "card", locals: {post: post} %>
-		</div>
+	   <% @posts.each_with_index do |post| %>
+	   	<% if post.tags == 'job' %>
+	   		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;">
+				<%= render partial: "card", locals: {post: post} %>
+			</div>
+	   	<% else %>
+	   		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
+				<%= render partial: "card", locals: {post: post} %>
+			</div>
+	   	<% end %>
+		
 		<% end %>
 	</div>
 	</div>
