@@ -36,7 +36,7 @@ while true
     @token = nil
     next
   else
-    Crawler.populate_database feed
+    Crawler.populate_database @graph, feed
     sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
   end
 

@@ -2,8 +2,10 @@ require 'koala'
 require 'json'
 
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback" # Auth callback of your application
-Feed_fields = ['message', 'id', 'from', 'type',
+Feed_fields = ['id', 'message', 'from', 'type',
                 'picture', 'link', 'created_time', 'updated_time']
+Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
+                'place']
 Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio']
 
 class Crawler  
@@ -20,7 +22,7 @@ class Crawler
   # +id+:: of the group
   # +limit+:: number of maximum posts to query for
   # +since+:: (optional) query all the posts since this date (yyyy-mm-dd)
-  def Crawler.feed(graph, id, limit, since=nil)
+  def Crawler.feed graph, id, limit, since=nil
     options = { limit: limit, fields: Feed_fields }
 
     if defined? since
@@ -28,6 +30,23 @@ class Crawler
     end
 
     posts = graph.get_connection(id, 'feed', options)
+  end
+
+  # Get info about an event
+  def Crawler.add_event graph, id
+
+    fb_event = graph.get_object(id, { fields: Event_fields })
+
+    event = Event.new()
+    event.uid = fb_event['id']
+    event.name = fb_event['name']
+    event.content = fb_event['description']
+
+    if fb_event['place'] != nil
+      event.location = fb_event['place']['name']
+    end
+
+    event.save!
   end
 
   # Get date (yyyy-mm-dd) of the latest post in the db
@@ -38,35 +57,56 @@ class Crawler
     end
   end
 
+  def Crawler.add_post feed_post
+
+    post = Post.new()
+    post.uid = feed_post['id']
+    post.content = feed_post['message']
+    post.author_name = feed_post['from']['name']
+    post.author_uid = feed_post['from']['id']
+    post.created_at = feed_post['created_time']
+    post.updated_at = feed_post['updated_time']
+    post.post_type = feed_post['type']
+    if feed_post['link'] != nil
+      post.link = feed_post['link']
+    end
+
+    if post.content != nil
+      jobs = Job_tags.any? { |word| post.content.downcase.include?(word) }
+      if jobs
+        post.tags = 'job' # Improve?
+      end
+    end
+
+    post.save!
+  end
+
   # Add the posts in the feed to the database
   # Params:
   # +feed+:: feed of posts
-  def Crawler.populate_database(feed)
+  def Crawler.populate_database graph, feed
+
+    events = []
     feed.each do | feed_post |
       if Post.exists?(uid: feed_post['id'])
         next
       end
 
-      post = Post.new()
-      post.uid = feed_post['id']
-      post.content = feed_post['message']
-      post.author_name = feed_post['from']['name']
-      post.author_uid = feed_post['from']['id']
-      post.created_at = feed_post['created_time']
-      post.updated_at = feed_post['updated_time']
-      post.post_type = feed_post['type']
-      if feed_post['link'] != nil
-        post.link = feed_post['link']
+      case feed_post['type'] 
+      when 'status', 'link', 'photo'
+        add_post feed_post
+      when 'event' 
+        # This is a dirty way to get the id of the event
+        # It is not possible to have /events call on the group
+        # unless we have a user token (not for app tokens)
+        event_id = feed_post['link'][/events\/(.?)*\//][7..-2]
+        events.push event_id
+        
       end
+    end
 
-      if post.content != nil
-        jobs = Job_tags.any? { |word| post.content.downcase.include?(word) }
-        if jobs
-          post.tags = 'job' # Improve?
-        end
-      end
-    
-      post.save!
+    events.each do | event_id |
+      add_event graph, event_id
     end
   end
   
