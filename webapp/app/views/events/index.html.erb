@@ -3,8 +3,9 @@
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th class="col-xs-9">Evento</th>
+      <th class="col-xs-6">Evento</th>
       <th class="col-xs-2">Data Post</th>
+      <th class="col-xs-3">Location</th>
       <th class="col-xs-1">Link</th>
     </tr>
   </thead>
@@ -12,16 +13,41 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td class="col-xs-9"><%= event.content %></td>
+        <td class="col-xs-6"><%= event.name %></td>
         <td class="col-xs-2"><%= event.created_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
+        <td class="col-xs-3"><%= event.location %></td>
         <td class="col-xs-1">
-          <%= link_to event.link, :target => "_blank" do %>
+          <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
             <i class="fa fa-calendar" ></i>
+          <% end %>
+          <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid} do %>
+            <i class="fa fa-plus" ></i>
           <% end %>
         </td>
       </tr>
+
+      <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel"><%= event.name %></h4>
+            </div>
+            <div class="modal-body">
+              <%= markdown(event.content) %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <% end %>
   </tbody>
+
 </table>
 
 <br>

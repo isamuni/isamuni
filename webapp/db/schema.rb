@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20160624213850) do
   create_table "events", force: :cascade do |t|
     t.string   "uid"
     t.string   "name"
-    t.string   "link"
     t.text     "content"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

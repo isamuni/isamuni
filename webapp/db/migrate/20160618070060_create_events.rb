@@ -3,7 +3,6 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :uid
       t.string :name
-      t.string :link
       t.text :content
       
       t.timestamps null: false

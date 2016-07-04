@@ -44,7 +44,7 @@
 	        <h4 class="modal-title" id="myModalLabel">TODO</h4>
 	      </div>
 	      <div class="modal-body">
-	        <%= post.content %>
+	        <%= markdown(post.content) %>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
