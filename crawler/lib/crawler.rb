@@ -32,11 +32,33 @@ class Crawler
     posts = graph.get_connection(id, 'feed', options)
   end
 
+  def Crawler.events graph, pages
+    options = { fields: Event_fields }
+
+    if defined? since
+      options[:since] = since # Use this if there are posts in the DB (using date from latest post)
+    end
+
+    events = []
+    pages.each do | id |
+      page_events = graph.get_connection(id, 'events', options)
+      
+      page_events.each do | page_event |
+        events.push page_event
+      end
+    end
+
+    return events
+  end
+
+
   # Get info about an event
-  def Crawler.add_event graph, id
+  def Crawler.get_event graph, id
+    return graph.get_object(id, { fields: Event_fields })
+  end
 
-    fb_event = graph.get_object(id, { fields: Event_fields })
-
+  def Crawler.add_event fb_event
+    
     event = Event.new()
     event.uid = fb_event['id']
     event.name = fb_event['name']
@@ -50,6 +72,7 @@ class Crawler
 
     event.save!
   end
+
 
   # Get date (yyyy-mm-dd) of the latest post in the db
   def Crawler.check_database_for_latest
@@ -86,18 +109,23 @@ class Crawler
   # Add the posts in the feed to the database
   # Params:
   # +feed+:: feed of posts
-  def Crawler.populate_database graph, feed
+  def Crawler.populate_database_feed graph, feed
 
     events = []
     feed.each do | feed_post |
-      if Post.exists?(uid: feed_post['id'])
-        next
-      end
-
+      
       case feed_post['type'] 
       when 'status', 'link', 'photo'
+        if Post.exists?(uid: feed_post['id']) 
+          next
+        end
         add_post feed_post
+
       when 'event' 
+        if Event.exists?(uid: feed_post['id'])
+          next
+        end
+
         # This is a dirty way to get the id of the event
         # It is not possible to have /events call on the group
         # unless we have a user token (not for app tokens)
@@ -108,8 +136,21 @@ class Crawler
     end
 
     events.each do | event_id |
-      add_event graph, event_id
+      event = get_event graph, event_id
+      add_event event
     end
+  end
+
+  def Crawler.populate_database_events graph, events
+    
+    events.each do | event |
+      if Event.exists?(uid: event['id'])
+        next
+      end
+
+      add_event event
+    end
+
   end
   
 end

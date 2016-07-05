@@ -10,7 +10,9 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+
+    <h1>Old</h1>
+    <% @old.each do |event| %>
       <tr>
         <td class="col-xs-6"><%= event.name %></td>
         <td class="col-xs-2"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
