@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'me', to: 'profile#create', as: 'create_user'
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
-  get 'events', to: 'events#index'
+  get 'events', to: 'events#index', defaults: { format: 'html' }
   get 'events/typeahead', to:'events#typeahead'
   
   get 'communities/typeahead', to:'communities#typeahead'

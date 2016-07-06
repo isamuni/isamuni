@@ -7,6 +7,12 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * Type II : Incubators, accellerators, universities, and communities
 * Type III : Students, professionals, and enthusiasts
 
+## Index
+
+* [Configuring and Running the App](#configuring-and-running-the-app)
+* [How to deploy](#how-to-deploy)
+* [Open Data](#open-data)
+
 ## Configuring and Running the App
 
 You can skip this section if you do not need to deploy **isamuni** in a cloud service.
@@ -114,3 +120,9 @@ $ bundle install
 $ rails server
 Connect to squirrels.vii.ovh:3000  
 ```
+
+## Open Data
+
+You can get data in json format by appending `.json` to the web pages.
+
+For example, you can get data about events by making a **GET** request to `/events.json`
