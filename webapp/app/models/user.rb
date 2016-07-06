@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.safe_fields
+    select(:id, :name, :uid, :slug, :occupation)
+  end
   def first_name
     name.partition(" ").first
   end

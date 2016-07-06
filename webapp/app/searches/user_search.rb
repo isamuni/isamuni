@@ -7,14 +7,14 @@ class UserSearch < Searchlight::Search
   include ActiveModel::Conversion
 
   def base_query
-  	User.all
+  	User.safe_fields
   end
 
   def search_name_like
-  	User.where(User.arel_table[:name].matches("%#{name_like}%"))
+  	query.where(User.arel_table[:name].matches("%#{name_like}%"))
   end
 
   def search_typeahead
-  	User.where(User.arel_table[:name].matches("%#{typeahead}%"))
+  	query.where(User.arel_table[:name].matches("%#{typeahead}%"))
   end
 end
