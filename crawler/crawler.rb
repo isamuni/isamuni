@@ -17,7 +17,7 @@ ActiveRecord::Base.establish_connection(
 
 # Test queries:
 # puts ActiveRecord::Base.connection.tables
-# puts User.all.collect(&:name) 
+# puts User.all.collect(&:name)
 
 Sleep_default_time = 5 * 60 # 5 minutes - time is in seconds
 Group_to_track = 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
@@ -29,8 +29,10 @@ Pages_to_track = [
 Feed_limit = 1000 # No need to have this very high, except for the first time
 
 while true
-  if !defined? @token
-    @token = Crawler.oauth.get_app_access_token 
+  puts "crawling"
+
+  unless @token
+    @token = Crawler.oauth.get_app_access_token
     @graph = Koala::Facebook::API.new(@token)
   end
 
@@ -44,7 +46,10 @@ while true
   else
     Crawler.populate_database_feed @graph, feed
     Crawler.populate_database_events @graph, events
-    sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API 
+
+    puts "crawling done, will check again in 5 minutes"
+    sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API
   end
+
 
 end # end of while loop
