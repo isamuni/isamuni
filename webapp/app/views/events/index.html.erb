@@ -1,13 +1,36 @@
-<div class="text-center">
+<!-- SEARCH COMPONENT -->
+<% content_for :search do %>
+ <%= form_tag events_path, :method => "get" do |f| %>
+    <div class="form-group">
+      <div class="input-group">
+          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+          <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-primary" do %>
+                <i class="fa fa-search"></i>
+            <% end %>
+          </span>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<script>
+$(document).ready(function(){
+  initTypeahead('/events/typeahead', '/events/');
+});
+</script>
+
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-4 text-center">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <a class="btn btn-secondary" href="#upcoming">Upcoming</a>
-    <a class="btn btn-secondary" href="#future">Future</a>
-    <a class="btn btn-secondary" href="#old">Old</a>
+    <a class="btn btn-success" href="#upcoming">Upcoming</a>
+    <a class="btn btn-info" href="#future">Future</a>
+    <a class="btn btn-warning" href="#old">Old</a>
+  </div>
   </div>
 </div>
 <br><br>
 <table class="table table-hover table-condensed">
-  <thead>
+  <thead class="thead-inverse">
     <tr>
       <th class="col-xs-6">Evento</th>
       <th class="col-xs-2">Data</th>
@@ -17,19 +40,8 @@
   </thead>
 
   <tbody>
-  <tr>
-    <td class="text-center" id="upcoming"> Upcoming </td>
-  <tr>  
-  <%= render partial: "table", locals: {events: @upcoming} %>
-
-  <tr>
-    <td class="text-center" id="future"> Future </td>
-  <tr>  
-  <%= render partial: "table", locals: {events: @future} %>
-
-  <tr>
-    <td id="old"> Old </td>
-  <tr>  
-  <%= render partial: "table", locals: {events: @old} %>
-</tbody>
+    <%= render partial: "table", locals: {events: @upcoming, type: :upcoming} %>
+    <%= render partial: "table", locals: {events: @future, type: :future} %>
+    <%= render partial: "table", locals: {events: @old, type: :old} %>
+  </tbody>
 </table>
