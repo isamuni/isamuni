@@ -13,15 +13,17 @@ Rails.application.routes.draw do
   post 'me', to: 'profile#create', as: 'create_user'
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
-  get 'events', to: 'events#index', defaults: { format: 'html' }
-  get 'events/typeahead', to:'events#typeahead'
-  
   get 'communities/typeahead', to:'communities#typeahead'
   get 'companies/typeahead', to:'companies#typeahead'
 
   resources :pages, path: '/me/pages'
   resources :communities
   resources :companies
+
+  get 'events', to: 'events#index', defaults: { format: 'html' }
+  get 'events/typeahead', to:'events#typeahead'
+
+  get 'opendata', to: 'opendata#index'
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'
