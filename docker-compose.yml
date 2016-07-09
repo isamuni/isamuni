@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  web:
+    env_file: .env
+    build: ./webapp/.
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./webapp:/app
+    ports:
+      - "3000:3000"
