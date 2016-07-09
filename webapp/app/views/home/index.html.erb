@@ -1,9 +1,82 @@
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages':['corechart', 'controls']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+  	var jsonData = $.ajax({
+      url: "/home/data",
+      dataType: "json",
+      async: false
+      }).responseText;
+
+    // Create the data table.
+    var data = new google.visualization.DataTable(jsonData);
+
+    var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+    var today = new Date();
+    var last_sixty = new Date(today.getTime() - (60*60*24*60*1000)); 
+    var timeSlider = new google.visualization.ControlWrapper({
+      'controlType': 'ChartRangeFilter',
+      'containerId': 'filter_div',
+      'options': {
+        'filterColumnIndex': 0,
+        ui: {
+            chartOptions: {
+                height: 50,
+                chartArea: {
+                    width: '80%'
+                }
+            },
+            chartView: {
+                columns: [0, 1]
+            }
+        }
+      },
+      'state': {'range': {'start': last_sixty, 'end': today}}
+    });
+
+    // Create a pie chart, passing some options
+    var graph = new google.visualization.ChartWrapper({
+      'chartType': 'LineChart',
+      'containerId': 'chart_div',
+      'options': {
+        'pieSliceText': 'value',
+        'legend': 'none',
+        series: {
+            0: { color: '#1B5E20' },
+        }
+        }
+    });
+
+    dashboard.bind(timeSlider, graph);
+    dashboard.draw(data);
+  }
+
+  $(window).resize(function(){
+	  drawChart();
+	});
+
+</script>
+
 <p>An information aggregator for Facebook groups.</p>
 <p>The word <strong>isamuni</strong> comes from the Sicilian dialect and means: let's stand up.</p>
 
-<p data-intro="Qui ci sarà un bellissimo grafico">
-Here will go a D3 graph showing posts over time, type of posts and who has posted. Possible to select a time period
-</p>
+ <!--Div that will hold the dashboard-->
+<div id="dashboard_div">
+  <div id="chart_div"></div>
+  <div id="filter_div"></div>
+</div>
+
+<br>
+    
 
 <div class="row">
 	<div class="col-lg-8">
