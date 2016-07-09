@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio']
   
-  def self.from_fb_post
+  def self.from_fb_post feed_post
     post = Post.new()
     post.uid = feed_post['id']
     post.content = feed_post['message']
