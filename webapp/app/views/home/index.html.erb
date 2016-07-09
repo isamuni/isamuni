@@ -45,16 +45,26 @@
 
     // Create a pie chart, passing some options
     var graph = new google.visualization.ChartWrapper({
-      'chartType': 'LineChart',
-      'containerId': 'chart_div',
-      'options': {
-        'pieSliceText': 'value',
-        'legend': 'none',
+      chartType: 'LineChart',
+      containerId: 'chart_div',
+      options: {
+      	curveType: 'function',
+        legend: 'none',
+        vAxis: { 
+        	viewWindow: {
+                min:0
+              }},
         series: {
             0: { color: '#1B5E20' },
         }
         }
     });
+
+    google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+
+		function selectHandler(e) {
+		  console.log(timeSlider.getState());
+		}
 
     dashboard.bind(timeSlider, graph);
     dashboard.draw(data);
@@ -77,7 +87,6 @@
 
 <br>
     
-
 <div class="row">
 	<div class="col-lg-8">
 	<div class="card-columns">
