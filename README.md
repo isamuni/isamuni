@@ -145,9 +145,18 @@ $ ruby crawler.rb
 - Install Docker for Mac
 - Run `docker run hello-world` to check your installation
  - If a timout error is given, change your DNS to Google's DNS
+ 
 
 #### Building the Image and Running the App 
-- Build image by running: `docker-compose up` 
+
+- Create a `.env` file containing the following:
+
+```
+ISAMUNI_APP_ID=appid
+ISAMUNI_APP_SECRET=secret
+```
+
+- Create the docker and run it with: `$ docker-compose up` 
 
 ## Open Data
 
