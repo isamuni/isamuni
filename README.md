@@ -11,11 +11,13 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 
 * [Configuring and Running the App](#configuring-and-running-the-app)
 * [How to deploy](#how-to-deploy)
+ * [Via Docker](#docker)
 * [Open Data](#open-data)
 
 ## Configuring and Running the App
 
 You can skip this section if you do not need to deploy **isamuni** in a cloud service.
+In the following section, we show all the steps to deploy **isamuni** on Digital Ocean's droplets. The app, however, can be easily deployed on any server.
 
 ### Connecting to the droplet
 
@@ -120,6 +122,32 @@ $ bundle install
 $ rails server
 Connect to squirrels.vii.ovh:3000  
 ```
+
+**Running the Crawler**
+
+Before running the crawler, make sure that the database was built.
+```
+$ cd crawler/
+$ ruby crawler.rb
+```
+
+### Docker
+
+#### Installation
+
+**Linux**
+
+- Install Docker for Linux ([see here](https://docs.docker.com/engine/installation/))
+
+**Mac**
+
+- Install Virtual Box
+- Install Docker for Mac
+- Run `docker run hello-world` to check your installation
+ - If a timout error is given, change your DNS to Google's DNS
+
+#### Building the Image and Running the App 
+- Build image by running: `docker-compose up` 
 
 ## Open Data
 
