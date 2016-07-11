@@ -38,4 +38,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def more
+    start_time = Time.at(params[:start].to_i / 1000.0)
+    end_time = Time.at(params[:end].to_i / 1000.0)
+    
+    @posts = Post.where(:created_at => start_time..end_time)
+            .limit(50).order('created_at desc')
+    render partial: "posts", :posts => @posts
+  end
+
 end

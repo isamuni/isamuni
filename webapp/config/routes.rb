@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get 'home/data', to: 'home#data', defaults: { format: 'json' }
+  get 'home/more(/query/:query)', to: 'home#more'
 
   # User routing
   get 'me', to: 'profile#edit', as: 'edit_user'

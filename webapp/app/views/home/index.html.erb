@@ -62,8 +62,28 @@
 
     google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
 
+    var timeout;
+
 		function selectHandler(e) {
-		  console.log(timeSlider.getState());
+      if(timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+
+      timeout = setTimeout(selectHandler, 5000);
+
+      var range = timeSlider.getState().range;
+      var start = range.start.getTime();
+      var end = range.end.getTime();
+
+      $.ajax({
+        type: 'GET',
+        url: '/home/more',
+        data: {'start' : start, 'end' : end}
+        }).done(function(data) {
+          $('#posts-view').html(data);
+      });
+      
 		}
 
     dashboard.bind(timeSlider, graph);
@@ -89,17 +109,9 @@
     
 <div class="row">
 	<div class="col-lg-8">
-	<div class="card-columns">
-	   <% @posts.each_with_index do |post, index| %>
-		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;"
-			<% if index==0 %>
-				data-intro="This is a post recently posts on the group PAC" data-position='right'
-			<% end %>
-		>
-			<%= render partial: "card", locals: {post: post} %>
-		</div>
-		<% end %>
-	</div>
+    <div id="posts-view" class="card-columns">
+	   <%= render partial: "posts", locals: {posts: @posts} %>
+    </div>
 	</div>
 	<div class="col-lg-4">
         <% @posts_jobs.each_with_index do |post, index| %>
