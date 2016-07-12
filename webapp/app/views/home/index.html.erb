@@ -1,67 +1,80 @@
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
   // Load the Visualization API and the corechart package.
-  google.charts.load('current', {'packages':['corechart', 'controls']});
+  google.charts.load('current', {
+    'packages': ['corechart', 'controls']
+  });
 
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
 
-  	var jsonData = $.ajax({
-      url: "/home/data",
-      dataType: "json",
-      async: false
-      }).responseText;
+  function drawChart() {
+    var jsonData = $.ajax({url: "/home/data", dataType: "json", async: false}).responseText;
 
     // Create the data table.
     var data = new google.visualization.DataTable(jsonData);
 
-    var dashboard = new google.visualization.Dashboard(
-            document.getElementById('dashboard_div'));
+    var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
     var today = new Date();
-    var last_sixty = new Date(today.getTime() - (60*60*24*60*1000)); 
+    var last_sixty = new Date(today.getTime() - (60 * 60 * 24 * 60 * 1000));
     var timeSlider = new google.visualization.ControlWrapper({
       'controlType': 'ChartRangeFilter',
       'containerId': 'filter_div',
       'options': {
         'filterColumnIndex': 0,
         ui: {
-            chartOptions: {
-                height: 50,
-                chartArea: {
-                    width: '80%'
-                }
-            },
-            chartView: {
-                columns: [0, 1]
+          chartOptions: {
+            height: 50,
+            chartArea: {
+              width: '80%'
             }
+          },
+          chartView: {
+            columns: [0, 1]
+          }
         }
       },
-      'state': {'range': {'start': last_sixty, 'end': today}}
+      'state': {
+        'range': {
+          'start': last_sixty,
+          'end': today
+        }
+      }
     });
 
     var chart = new google.visualization.ChartWrapper({
       chartType: 'LineChart',
       containerId: 'chart_div',
       options: {
-      	curveType: 'function',
+        curveType: 'function',
         legend: 'none',
-        vAxis: { 
-        	viewWindow: {
-                min:0
-              }},
+        vAxis: {
+          viewWindow: {
+            min: 0
+          }
+        },
         series: {
-            0: { color: '#1B5E20' },
+          0: {
+            color: '#1B5E20'
+          }
         }
-        }
+      }
     });
 
     google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
 
-		function selectHandler(e) {
+    var timeout = null;
+    function selectHandler(e) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      timeout = setTimeout(reloadPosts, 1000);
+    }
+
+    function reloadPosts() {
       var range = timeSlider.getState().range;
       var start = range.start.getTime();
       var end = range.end.getTime();
@@ -69,46 +82,45 @@
       $.ajax({
         type: 'GET',
         url: '/home/posts',
-        data: {'start' : start, 'end' : end}
-        })
-        .done(function(data) {
-          $('#posts-view').html(data);
-        })
-		  }
+        data: {
+          'start': start,
+          'end': end
+        }
+      }).done(function (data) {
+        $('#posts-view').html(data);
+      }).fail(function (error) {
+        console.error("reloadPosts failed");
+        console.error(error);
+      })
+    }
 
     dashboard.bind(timeSlider, chart);
     dashboard.draw(data);
   }
 
-  $(window).resize(function(){
-	  drawChart();
-	});
-
+  $(window).resize(function () {
+    drawChart();
+  });
 </script>
 
 <div id="dashboard_div">
-  <div id="chart_div" data-intro="This graph shows you the number of posts over time" ></div>
-  <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)" ></div>
+  <div id="chart_div" data-intro="This graph shows you the number of posts over time"></div>
+  <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)"></div>
 </div>
-    
+
 <br>
 
 <div class="row">
-	<div class="col-lg-8">
+  <div class="col-lg-8">
     <div id="posts-view" class="card-columns">
-	   <%= render partial: "posts", locals: {posts: @posts} %>
+      <%= render partial: "posts", locals: {posts: @posts} %>
     </div>
-	</div>
-	<div class="col-lg-4">
-        <% @posts_jobs.each_with_index do |post, index| %>
-		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;"
-			<% if index==0 %>
-				data-intro="This is a post about jobs recently posts on the group PAC" data-position='left'
-			<% end %>
-		>
-			<%= render partial: "card", locals: {post: post} %>
-		</div>
-		<% end %>
-	</div>
+  </div>
+  <div class="col-lg-4">
+    <% @posts_jobs.each_with_index do |post, index| %>
+    <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about jobs recently posts on the group PAC" data-position='left' <% end %>>
+      <%= render partial: "card", locals: {post: post} %>
+    </div>
+    <% end %>
+  </div>
 </div>
-  
