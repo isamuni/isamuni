@@ -1,7 +1,7 @@
 <%= div_for(post, class:'card-block') do |post| %>
 	<blockquote class="card-blockquote">
 		<% if post.content != nil %>
-			<p><%= post.content[0, 150] %> ...</p>
+			<p><%= post.content[0, 50] %> ...</p>
 		<% end %>
 	</blockquote>
 	<div class="row">
@@ -20,7 +20,7 @@
 			<% end %>
 		</div>
 		<div class="col-xs-6 text-xs-right">
-			<small style="color:black;"><%= post.author_name %></small>
+			<small style="color:black;"><%= post.author_name[0..0] + ". " + post.author_name.split.last %></small>
 		</div>
 	</div>
 	<div class="row">
@@ -30,17 +30,48 @@
 		<% end %>
 	  </div>
 	  <div class="col-xs-6 text-xs-right">
-	  	<small style="color:black;"><%= post.created_at.strftime("%Y-%m-%d %H:%M %Z") %></small>
+	  	<small style="color:black;"><%= post.created_at.strftime("%d-%m-%y") %></small>
 	  </div>
 	</div>
 
 	<div class="modal fade" id=<%= post.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<div class="col-xs-6 text-xs-left">
+	      	<% if post.link.present? %>
+				<%= link_to post.link, :target => "_blank" do %>
+					<% if post.post_type.eql? 'event' %>
+						<i class="fa fa-calendar" ></i>
+					<% else %>
+						<i class="fa fa-link" ></i>
+					<% end %>
+				<% end %>
+			<% end %>
+	      	<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+				<i class="fa fa-facebook" ></i>
+			<% end %>
+			</div>
+			<div class="col-xs-6 text-xs-right">
+				<small style="color:black;"><%= post.created_at.strftime("%d-%m-%y %H:%M %Z") %></small>
+			</div>
+	      </div>
 	      <div class="modal-body">
 	        <%= markdown(post.content) %>
+
+	        <% if post.link != nil && post.picture != nil %>
+	        	<a href=<%= post.link %> target="_blank">
+	        		<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+	        	</a>
+	        <% elsif post.picture != nil %>
+	        	<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+	        <% end %>
+	        
 	      </div>
 	      <div class="modal-footer">
+	      	<div class="col-xs-6 text-xs-left">
+				<small style="color:black;">Posted by: <strong><%= post.author_name %></strong></small>
+			</div>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>

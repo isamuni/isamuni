@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.string   "uid"
     t.string   "name"
     t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "category"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "starts_at"
     t.datetime "ends_at"
+    t.string   "location_name"
     t.string   "location"
     t.string   "coordinates"
   end
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.string   "author_name"
     t.string   "author_uid"
     t.string   "link"
+    t.string   "picture"
     t.text     "content"
     t.string   "post_type"
     t.string   "tags"

@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :author_name
       t.string :author_uid
       t.string :link
+      t.string :picture
       t.text :content
       t.string :post_type
       t.string :tags

@@ -14,6 +14,10 @@ class Post < ActiveRecord::Base
       post.link = feed_post['link']
     end
 
+    if feed_post['picture'] != nil
+      post.picture = feed_post['picture']
+    end
+
     if post.content != nil
       jobs = Job_tags.any? { |word| post.content.downcase.include?(word) }
       if jobs

@@ -5,7 +5,7 @@ Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback" # Auth callback
 Feed_fields = ['id', 'message', 'from', 'type',
                 'picture', 'link', 'created_time', 'updated_time']
 Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
-                'place']
+                'place', 'category']
 
 class Crawler
 
@@ -62,7 +62,7 @@ class Crawler
 
       case feed_post['type']
 
-      when 'status', 'link', 'photo'
+      when 'status', 'link', 'photo', 'event'
         unless Post.exists?(uid: feed_post['id'])
           Post.from_fb_post(feed_post).save!
         end

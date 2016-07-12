@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 
   def index
-  	@posts = Post.limit(10).order('created_at desc')
-  	@posts_jobs = Post.where(tags: 'job').limit(5).order('created_at desc')
+  	@posts = Post.limit(30).order('created_at desc')
+  	@posts_jobs = Post.where(tags: 'job').limit(30).order('created_at desc')
 
   end
 
@@ -38,12 +38,12 @@ class HomeController < ApplicationController
     end
   end
 
-  def more
+  def posts
     start_time = Time.at(params[:start].to_i / 1000.0)
     end_time = Time.at(params[:end].to_i / 1000.0)
     
     @posts = Post.where(:created_at => start_time..end_time)
-            .limit(50).order('created_at desc')
+            .limit(30).order('created_at desc')
     render partial: "posts", :posts => @posts
   end
 

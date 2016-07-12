@@ -43,8 +43,7 @@
       'state': {'range': {'start': last_sixty, 'end': today}}
     });
 
-    // Create a pie chart, passing some options
-    var graph = new google.visualization.ChartWrapper({
+    var chart = new google.visualization.ChartWrapper({
       chartType: 'LineChart',
       containerId: 'chart_div',
       options: {
@@ -62,31 +61,22 @@
 
     google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
 
-    var timeout;
-
 		function selectHandler(e) {
-      if(timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-
-      timeout = setTimeout(selectHandler, 5000);
-
       var range = timeSlider.getState().range;
       var start = range.start.getTime();
       var end = range.end.getTime();
 
       $.ajax({
         type: 'GET',
-        url: '/home/more',
+        url: '/home/posts',
         data: {'start' : start, 'end' : end}
-        }).done(function(data) {
+        })
+        .done(function(data) {
           $('#posts-view').html(data);
-      });
-      
-		}
+        })
+		  }
 
-    dashboard.bind(timeSlider, graph);
+    dashboard.bind(timeSlider, chart);
     dashboard.draw(data);
   }
 
@@ -96,17 +86,13 @@
 
 </script>
 
-<p>An information aggregator for Facebook groups.</p>
-<p>The word <strong>isamuni</strong> comes from the Sicilian dialect and means: let's stand up.</p>
-
- <!--Div that will hold the dashboard-->
 <div id="dashboard_div">
-  <div id="chart_div"></div>
-  <div id="filter_div"></div>
+  <div id="chart_div" data-intro="This graph shows you the number of posts over time" ></div>
+  <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)" ></div>
 </div>
-
-<br>
     
+<br>
+
 <div class="row">
 	<div class="col-lg-8">
     <div id="posts-view" class="card-columns">
