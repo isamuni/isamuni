@@ -26,3 +26,9 @@
 .navbar-brand {
     color: #b71c1c;
 }
+
+.custom-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

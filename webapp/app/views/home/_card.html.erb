@@ -1,5 +1,5 @@
 <%= div_for(post, class:'card-block') do |post| %>
-	<blockquote class="card-blockquote">
+	<blockquote class="card-blockquote custom-overflow">
 		<% if post.content != nil %>
 			<p><%= post.content[0, 50] %> ...</p>
 		<% end %>

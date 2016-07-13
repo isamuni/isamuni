@@ -3,7 +3,6 @@ class HomeController < ApplicationController
   def index
   	@posts = Post.limit(30).order('created_at desc')
   	@posts_jobs = Post.where(tags: 'job').limit(30).order('created_at desc')
-
   end
 
   def data
