@@ -24,7 +24,12 @@ Group_to_track = 281460675321367 # Track posts of this group. This is the id for
 Pages_to_track = [
     116505148430596,  # YoutHub
     371576386279313,  # EESTEC Catania
-    1486797638277248  # CoderDojo Etneo
+    1486797638277248, # CoderDojo Etneo
+    887171771350676,  # ATFactory
+    1457341927813814, # Hackspacee Catania
+    859949567453237,  # MPS Catania
+    1380906508817529, # Startup Messina
+    146290095529300   # Consorzio Arca
     ] # track events only
 Feed_limit = 1000 # No need to have this very high, except for the first time
 
