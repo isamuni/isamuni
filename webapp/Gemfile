@@ -32,12 +32,14 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
+# Search gems
 gem 'twitter-typeahead-rails'
-
 gem 'searchlight'
+# Human readable URIs
 gem 'friendly_id', '~> 5.1.0'
+# Markdown renderer
 gem 'redcarpet'
-
+# Nice and neat Tour cards
 gem "introjs-rails"
 
 # Use ActiveModel has_secure_password
