@@ -1,7 +1,3 @@
-<!-- Must include datatables explicitly for bootstrap 4 - gems not available yet -->
-<%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" %>
-<%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap4.min.js" %>
-
 <!-- SEARCH COMPONENT -->
 <% content_for :search do %>
  <%= form_tag events_path, :method => "get" do |f| %>
@@ -17,18 +13,19 @@
     </div>
   <% end %>
 <% end %>
+
 <script>
   $(document).ready(function(){
     initTypeahead('/events/typeahead', '/events/');
-  });
 
-  $(document).ready(function() {
-      $('#table-events').DataTable({
+    $('#table-events').DataTable({
         ordering:  false,
         autoWidth: false,
         "language": { "search": "Advanced Search: "}
-      });
-  } );
+    });
+    
+  });
+
 </script>
 
 <table id="table-events" class="table table-hover table-condensed">

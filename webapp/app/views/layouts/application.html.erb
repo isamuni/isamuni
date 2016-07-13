@@ -4,6 +4,11 @@
   <title>Isamuni</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <!-- Must include datatables explicitly for bootstrap 4 - gems not available yet -->
+  <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"%>
+  <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap4.min.js" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
