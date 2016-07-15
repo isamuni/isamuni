@@ -1,13 +1,13 @@
-<%= div_for(events, event_type) do |event| %>
+<div class="event" %>
+  <% events.each do |event| %>
+    <% if event_type == :upcoming %>
+      <tr id="upcoming" class="table-success">
+    <% elsif event_type == :future %>
+      <tr id="future" class="table-info">
+    <% elsif event_type == :old%>
+      <tr id="old" class="table-warning">
+    <% end %>
 
-<% if event_type == :upcoming %>
-  <tr id="upcoming" class="table-success">
-<% elsif event_type == :future %>
-  <tr id="future" class="table-info">
-<% elsif event_type == :old%>
-  <tr id="old" class="table-warning">
-<% end %> 
-  
     <td class="col-xs"><%= event.name %></td>
     <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
     <td class="col-xs"><%= event.location_name %></td>
@@ -39,5 +39,5 @@
       </div>
     </div>
   </div>
-
-<% end %>
+  <% end %>
+</div>

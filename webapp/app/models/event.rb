@@ -1,6 +1,6 @@
 require_relative "sanitize"
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
 
   def self.from_fb_event fb_event
     event = Event.new({

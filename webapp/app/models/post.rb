@@ -1,6 +1,6 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio']
-  
+
   def self.from_fb_post feed_post
     post = Post.new()
     post.uid = feed_post['id']

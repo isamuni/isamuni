@@ -1,4 +1,4 @@
-<%= div_for(post, class:'card-block') do |post| %>
+<div class="post card-block">
 	<blockquote class="card-blockquote">
 		<% if post.content != nil %>
 			<p><%= post.content[0, 150] %> ...</p>
@@ -46,4 +46,4 @@
 	    </div>
 	  </div>
 	</div>
-<% end %>
+</div>
