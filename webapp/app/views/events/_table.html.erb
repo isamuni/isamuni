@@ -1,10 +1,10 @@
-<%= div_for(events, type) do |event| %>
+<%= div_for(events, event_type) do |event| %>
 
-<% if type == :upcoming %>
+<% if event_type == :upcoming %>
   <tr id="upcoming" class="table-success">
-<% elsif type == :future %>
+<% elsif event_type == :future %>
   <tr id="future" class="table-info">
-<% elsif type == :old%>
+<% elsif event_type == :old%>
   <tr id="old" class="table-warning">
 <% end %> 
   
@@ -22,7 +22,7 @@
   </tr>
 
   <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">

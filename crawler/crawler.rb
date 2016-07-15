@@ -29,7 +29,11 @@ Pages_to_track = [
     1457341927813814, # Hackspacee Catania
     859949567453237,  # MPS Catania
     1380906508817529, # Startup Messina
-    146290095529300   # Consorzio Arca
+    146290095529300,  # Consorzio Arca
+    444735402236013,  # GDG Catania
+    875340082514949,  # Vulcanic
+    150423961659353,  # Impact Hub Siracusa
+    189873531201389   # Fablab CT
     ] # track events only
 Feed_limit = 1000 # No need to have this very high, except for the first time
 
