@@ -102,13 +102,12 @@ Add the following to the file:
 
 1. Install Ruby
 2. Install Rails
-3. Install rake --> `gem install rake`
 
 **Setup**
 ```
 $ cd /isamuni/webapp/
-$ rake db::create # if necessary
-$ rake db::migrate
+$ rails db::create # if necessary
+$ rails db::migrate
 ```
 
 To populate the database run:
