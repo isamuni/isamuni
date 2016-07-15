@@ -5,7 +5,7 @@ Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback" # Auth callback
 Feed_fields = ['id', 'message', 'from', 'type',
                 'picture', 'link', 'created_time', 'updated_time']
 Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
-                'place', 'category']
+                'place']
 
 class Crawler
 
