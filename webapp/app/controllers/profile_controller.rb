@@ -17,7 +17,7 @@ class ProfileController < ApplicationController
   # GET /users/:id
   def show
     set_user
-    @posts = Post.where(author_uid: @user.uid).limit(10).order('created_at desc')
+    @posts = Post.where(author_uid: @user.uid).limit(30).order('created_at desc')
   end
 
   def new

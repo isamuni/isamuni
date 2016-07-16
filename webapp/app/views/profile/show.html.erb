@@ -24,17 +24,23 @@
 	</div>
 	<div class="col-lg-8">
 	<div class="card-columns">
-	   <% @posts.each_with_index do |post| %>
-	   	<% if post.tags == 'job' %>
-	   		<div class="card" style="background-color: #90CAF9; border-color: #64B5F6;">
-				<%= render partial: "card", locals: {post: post} %>
-			</div>
-	   	<% else %>
-	   		<div class="card" style="background-color: #C5E1A5; border-color: #AED581;">
-				<%= render partial: "card", locals: {post: post} %>
-			</div>
-	   	<% end %>
-		
+	   <% @posts.each do |post| %>
+
+	   <div class="card" 
+	   		<% if post.tags == 'job' %>
+	   			style="background-color: #90CAF9; border-color: #64B5F6;"
+			<% elsif post.post_type == 'link' %>
+				style="background-color: #FFEE58; border-color: #FDD835;"
+			<% elsif post.post_type == 'photo' %>
+				style="background-color: #FFCA28; border-color: #FFB300;"
+			<% else %>
+				style="background-color: #C5E1A5; border-color: #AED581;"
+			<% end %>
+			
+		>
+			<%= render partial: "card", locals: {post: post} %>
+		</div>
+
 		<% end %>
 	</div>
 	</div>

@@ -5,11 +5,16 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-  <!-- Must include datatables explicitly for bootstrap 4 - gems not available yet -->
-  <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"%>
-  <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap4.min.js" %>
-
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {
+    'packages': ['corechart', 'controls']
+  });
+  </script>
 </head>
 <body>
 <!-- Do not display alerts by default
@@ -20,64 +25,70 @@
 <br>
 
 <nav class="navbar navbar-fixed-top" style="background-color: #4DB6AC;">
+
 <div class="container">
-  <%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %>
-  <ul class="nav navbar-nav">
-    <% if current_user %>
-      <li class="nav-item btn-group">
-        <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user"></i> Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
-          <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
-          <%= link_to "Le mie pagine", pages_path, class: "dropdown-item" %>
-          <%= link_to signout_path, id: "sign_out", class: "dropdown-item" do %>
-            <i class="fa fa-sign-out"></i> Log Out
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+    &#9776;
+  </button>
+  <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
+    <%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %>
+    <ul class="nav navbar-nav">
+      <% if current_user %>
+        <li class="nav-item btn-group">
+          <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i> Account
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+            <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
+            <%= link_to "Le mie pagine", pages_path, class: "dropdown-item" %>
+            <%= link_to signout_path, id: "sign_out", class: "dropdown-item" do %>
+              <i class="fa fa-sign-out"></i> Log Out
+            <% end %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+            <i class="fa fa-facebook"></i> Login
           <% end %>
-        </div>
-      </li>
-    <% else %>
+        </li>
+      <% end %>
       <li class="nav-item">
-        <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
-          <i class="fa fa-facebook"></i> Login
+        <%= link_to users_path, class: 'nav-link' do %>
+          <i class="fa fa-user-plus"></i>
         <% end %>
       </li>
-    <% end %>
-    <li class="nav-item">
-      <%= link_to users_path, class: 'nav-link' do %>
-        <i class="fa fa-user-plus"></i>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to companies_path, class: 'nav-link' do %>
-        <i class="fa fa-industry"></i>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to communities_path, class: 'nav-link' do %>
-        <i class="fa fa-users"></i>
-      <% end %>
-    </li>
-    
-    <li class="nav-item">
-      <%= link_to events_path, class: 'nav-link' do %>
-        <i class="fa fa-calendar"></i>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to opendata_path, class: 'nav-link' do %>
-        <i class="fa fa-question-circle-o"></i>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <a class='nav-link' href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();">Tour</a>
-    </li>
-  </ul>
-  <form class="form-inline pull-xs-right" role="search">
-    <%= yield :search %>
-  </form>
+      <li class="nav-item">
+        <%= link_to companies_path, class: 'nav-link' do %>
+          <i class="fa fa-industry"></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to communities_path, class: 'nav-link' do %>
+          <i class="fa fa-users"></i>
+        <% end %>
+      </li>
+      
+      <li class="nav-item">
+        <%= link_to events_path, class: 'nav-link' do %>
+          <i class="fa fa-calendar"></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to opendata_path, class: 'nav-link' do %>
+          <i class="fa fa-question-circle-o"></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <a class='nav-link' href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();">Tour</a>
+      </li>
+    </ul>
+    <form class="form-inline pull-xs-right" role="search">
+      <%= yield :search %>
+    </form>
 
-  <a href="https://github.com/sic2/isamuni"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+    <a href="https://github.com/sic2/isamuni"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+  </div>
 </div>
 </nav>
 

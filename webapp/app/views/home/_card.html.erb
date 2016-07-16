@@ -1,24 +1,31 @@
 <div class='post card-block'>
 	<blockquote class="card-blockquote custom-overflow">
 		<% if post.content != nil %>
-			<p><%= post.content[0, 50] %> ...</p>
+			<p><%= post.content[0, 20] %> ...</p>
 		<% end %>
 	</blockquote>
 	<div class="row">
 		<div class="col-xs-6">
-			<% if post.link.present? %>
+			<% if post.link.present? and (post.post_type.eql? 'link' or post.post_type.eql? 'event') %>
 				<%= link_to post.link, :target => "_blank" do %>
-					<% if post.post_type.eql? 'event' %>
-						<i class="fa fa-calendar" ></i>
-					<% elsif post.post_type.eql? 'photo' %>
-						<i class="fa fa-photo" ></i>
+					<% if post.post_type.eql? 'link' %>
+						<i class="fa fa-link"></i>
 					<% else %>
-						<i class="fa fa-link" ></i>
+						<i class="fa fa-calendar"></i>
 					<% end %>
 				<% end %>
+			<% else %>				
+				<% if post.post_type.eql? 'photo' %>
+					<i class="fa fa-photo"></i>
+				<% else %>
+					<i class="fa fa-sticky-note-o"></i>
+				<% end %>
 			<% end %>
-			<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-				<i class="fa fa-facebook" ></i>
+
+			<% unless post.post_type.eql? 'event' %>
+				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+					<i class="fa fa-facebook" ></i>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="col-xs-6 text-xs-right">
@@ -41,19 +48,25 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	      	<div class="col-xs-6 text-xs-left">
-	      	<% if post.link.present? %>
+	      	<% if post.link.present? and (post.post_type.eql? 'link' or post.post_type.eql? 'event') %>
 				<%= link_to post.link, :target => "_blank" do %>
-					<% if post.post_type.eql? 'event' %>
-						<i class="fa fa-calendar" ></i>
-					<% elsif post.post_type.eql? 'photo' %>
-						<i class="fa fa-photo" ></i>
+					<% if post.post_type.eql? 'link' %>
+						<i class="fa fa-link"></i>
 					<% else %>
-						<i class="fa fa-link" ></i>
+						<i class="fa fa-calendar"></i>
 					<% end %>
 				<% end %>
+			<% else %>				
+				<% if post.post_type.eql? 'photo' %>
+					<i class="fa fa-photo"></i>
+				<% else %>
+					<i class="fa fa-sticky-note-o"></i>
+				<% end %>
 			<% end %>
-	      	<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-				<i class="fa fa-facebook" ></i>
+			<% unless post.post_type.eql? 'event' %>
+		      	<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+					<i class="fa fa-facebook" ></i>
+				<% end %>
 			<% end %>
 			</div>
 			<div class="col-xs-6 text-xs-right">
