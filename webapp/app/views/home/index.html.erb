@@ -104,7 +104,7 @@
 </script>
 
 <div id="dashboard_div">
-  <div id="chart_div" data-intro="This graph shows you the number of posts over time"></div>
+  <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
   <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)"></div>
 </div>
 
@@ -118,7 +118,7 @@
   </div>
   <div class="col-lg-4">
     <% @posts_jobs.each_with_index do |post, index| %>
-    <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about jobs recently posts on the group PAC" data-position='left' <% end %>>
+    <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
       <%= render partial: "card", locals: {post: post} %>
     </div>
     <% end %>

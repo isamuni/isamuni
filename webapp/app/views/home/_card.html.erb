@@ -10,6 +10,8 @@
 				<%= link_to post.link, :target => "_blank" do %>
 					<% if post.post_type.eql? 'event' %>
 						<i class="fa fa-calendar" ></i>
+					<% elsif post.post_type.eql? 'photo' %>
+						<i class="fa fa-photo" ></i>
 					<% else %>
 						<i class="fa fa-link" ></i>
 					<% end %>

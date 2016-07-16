@@ -44,19 +44,30 @@
       </li>
     <% end %>
     <li class="nav-item">
-      <%= link_to 'Utenti', users_path, class: 'nav-link' %>
+      <%= link_to users_path, class: 'nav-link' do %>
+        <i class="fa fa-user-plus"></i>
+      <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Aziende', companies_path, class: 'nav-link' %>
+      <%= link_to companies_path, class: 'nav-link' do %>
+        <i class="fa fa-industry"></i>
+      <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Comunità', communities_path, class: 'nav-link' %>
+      <%= link_to communities_path, class: 'nav-link' do %>
+        <i class="fa fa-users"></i>
+      <% end %>
+    </li>
+    
+    <li class="nav-item">
+      <%= link_to events_path, class: 'nav-link' do %>
+        <i class="fa fa-calendar"></i>
+      <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Eventi', events_path, class: 'nav-link' %>
-    </li>
-    <li class="nav-item">
-      <%= link_to 'Opendata', opendata_path, class: 'nav-link' %>
+      <%= link_to opendata_path, class: 'nav-link' do %>
+        <i class="fa fa-question-circle-o"></i>
+      <% end %>
     </li>
     <li class="nav-item">
       <a class='nav-link' href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();">Tour</a>
