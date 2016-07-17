@@ -153,6 +153,7 @@ $ ruby crawler.rb
 ```
 ISAMUNI_APP_ID=appid
 ISAMUNI_APP_SECRET=secret
+ISAMUNI_ADMINS=<list of user uids divided by comma ','>
 ```
 
 - Create the docker and run it with: `$ docker-compose up` 

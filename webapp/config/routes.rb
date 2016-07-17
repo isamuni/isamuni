@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'opendata', to: 'opendata#index'
 
   get 'admin', to: 'admin#index'
+  get 'admin/page_state(/query/:query)', to: 'admin#page_state', defaults: { format: 'json' }
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'
