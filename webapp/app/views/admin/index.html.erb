@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Kind</th>
-      <th colspan="2">Actions</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -17,11 +17,13 @@
         <td><%= link_to 'Show', page %></td>
         <td>
           <% if page.active %>
-            <button id="state-btn-<%= page.id %>" class="btn btn-danger-outline">Deactivate</button>
+            <button id="state-page-<%= page.id %>" class="btn btn-warning-outline">Deactivate</button>
           <% else %>
-            <button id="state-btn-<%= page.id %>" class="btn btn-success-outline">Activate</button>
+            <button id="state-page-<%= page.id %>" class="btn btn-success-outline">Activate</button>
           <% end %>
-          
+        </td>
+        <td>
+          <button id="delete-page-<%= page.id %>" class="btn btn-danger-outline">Delete</button>
         </td>
       </tr>
     <% end %>
@@ -34,7 +36,7 @@
 
 <script type="text/javascript">
 
-$("button[id^='state-btn']").click(function() {
+$("button[id^='state-page']").click(function() {
   var $this = $(this);
 
   $.ajax({
