@@ -40,6 +40,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuUser">
             <%= link_to current_user.first_name, edit_user_path, class: "dropdown-item" %>
+            <%= link_to "Admin", admin_path, class: "dropdown-item" %>
             <%= link_to "Le mie pagine", pages_path, class: "dropdown-item" %>
             <%= link_to signout_path, id: "sign_out", class: "dropdown-item" do %>
               <i class="fa fa-sign-out"></i> Log Out

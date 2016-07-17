@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get 'opendata', to: 'opendata#index'
 
+  get 'admin', to: 'admin#index'
+
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'
   # post 'me/pages/', to: 'pages#create'

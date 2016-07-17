@@ -2,14 +2,14 @@ class CompaniesController < PagesController
 
   def index
     if params[:query]
-      @pages = Page.companies.where("name LIKE ?", "%#{params[:query]}%")
+      @pages = Page.companies.where("name LIKE ? and active = 1", "%#{params[:query]}%")
     else
-      @pages = Page.companies
+      @pages = Page.companies.where("active = 1")
     end
   end
 
   def typeahead
-    @search = Page.companies.where("name LIKE ?", "%#{params[:query]}%")
+    @search = Page.companies.where("name LIKE ? and active = 1", "%#{params[:query]}%")
     render json: @search
   end
 
