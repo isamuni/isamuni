@@ -1,24 +1,27 @@
 class AdminController < ApplicationController
+  before_action :require_admin
 
   def index
-  	admins = ENV['ISAMUNI_ADMINS']
-
-  	if current_user != nil && admins.include?(current_user.uid)
   		@pages = Page.all
-	else
-		@pages =[] 
 	end
+
+  def make_page_inactive
+    page = Page.find(params[:pageid])
+    page.active = false
+    page.save
   end
 
-  def page_state
-  	page = Page.where('id = ?', params[:post_id]).first
-  	if page.active == false
-  		page.active = true
-  	else
-  		page.active = false
-  	end
-  	
-  	page.save
+  def make_page_active
+    page = Page.find(params[:pageid])
+    page.active = true
+    page.save
+  end
+
+  def require_admin
+    admins = ENV['ISAMUNI_ADMINS'].split(" ")
+    unless current_user != nil && admins.include?(current_user.uid)
+      render :file => "public/401.html", :status => :unauthorized
+    end
   end
 
 end

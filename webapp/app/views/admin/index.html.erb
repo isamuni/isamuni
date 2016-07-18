@@ -1,5 +1,3 @@
-<% if !@pages.empty? %>
-
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
@@ -9,50 +7,48 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="pages-table">
     <% @pages.each do |page| %>
-      <tr>
-        <td><%= page.name %></td>
-        <td><%= page.kind %></td>
-        <td><%= link_to 'Show', page %></td>
-        <td>
-          <% if page.active %>
-            <button id="state-page-<%= page.id %>" class="btn btn-warning-outline">Deactivate</button>
-          <% else %>
-            <button id="state-page-<%= page.id %>" class="btn btn-success-outline">Activate</button>
-          <% end %>
-        </td>
-        <td>
-          <button id="delete-page-<%= page.id %>" class="btn btn-danger-outline">Delete</button>
-        </td>
-      </tr>
+    <tr>
+      <td><%= page.name %></td>
+      <td><%= page.kind %></td>
+      <td><%= link_to 'Show', page %></td>
+      <td>
+        <% if page.active %>
+        <button data-page-id="<%= page.id %>" class="btn btn-warning-outline deactivate-page-btn">Deactivate</button>
+      <% else %>
+        <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-success-outline activate-page-btn">Activate</button>
+        <% end %>
+      </td>
+      <td>
+        <button id="delete-page-<%= page.id %>" class="btn btn-danger-outline">Delete</button>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
-<% else %>
-<p>Sorry, but you do not have permissions to access this page :( </p>
-<% end %>
-
 <script type="text/javascript">
 
-$("button[id^='state-page']").click(function() {
-  var $this = $(this);
+  $("#pages-table").on("click", ".deactivate-page-btn", function () {
+    var $this = $(this);
+    var pageid = $this.attr("data-page-id");
 
-  $.ajax({
-    url: "/admin/page_state", 
-    dataType: "json", 
-    async: true,
-    data: {'post_id' : $this.attr('id').substring(10)}
-  }).done(function() {
-    if($this.hasClass('btn-success-outline')){
-      $this.text('Deactivate');         
-    } else {
-      $this.text('Activate');
-    }
-
-    $this.toggleClass("btn btn-success-outline").toggleClass("btn btn-danger-outline");
+    $.post("/admin/make_page_inactive", {pageid: pageid}).done(function () {
+      $this.text("Activate").removeClass("btn-warning-outline deactivate-page-btn").addClass("btn-success-outline activate-page-btn");
+    }).fail(function (e) {
+      console.log("errore" + e);
+    })
   });
 
-})
+  $("#pages-table").on("click", ".activate-page-btn", function () {
+    var $this = $(this);
+    var pageid = $this.attr("data-page-id");
+
+    $.post("/admin/make_page_active", {pageid: pageid}).done(function () {
+      $this.text("Deactivate").removeClass("btn-success-outline activate-page-btn").addClass("btn-warning-outline deactivate-page-btn");
+    }).fail(function (e) {
+      console.log("errore" + e);
+    })
+  });
 </script>
