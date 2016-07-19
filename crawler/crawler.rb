@@ -19,7 +19,8 @@ ActiveRecord::Base.establish_connection(
 # puts ActiveRecord::Base.connection.tables
 # puts User.all.collect(&:name)
 
-Sleep_default_time = 5 * 60 # 5 minutes - time is in seconds
+Minutes = 5
+Sleep_default_time = Minutes * 60 # 5 minutes - time is in seconds
 Group_to_track = 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
 Pages_to_track = [
     116505148430596,  # YoutHub
@@ -38,7 +39,8 @@ Pages_to_track = [
 Feed_limit = 1000 # No need to have this very high, except for the first time
 
 while true
-  puts "crawling"
+  puts "Crawling - give me some time please!"
+  t1 = Time.now
 
   unless @token
     @token = Crawler.oauth.get_app_access_token
@@ -51,12 +53,15 @@ while true
 
   if false # TODO - Check feed for errors
     @token = nil
+
+    puts "Ops! Something went wrong. I will try again soon"
     next
   else
     Crawler.populate_database_feed @graph, feed
     Crawler.populate_database_events @graph, events
 
-    puts "crawling done, will check again in 5 minutes"
+    t2 = Time.now
+    puts "Crawling finished in " << (t2 - t1).to_s << " seconds. I will do some more crawling in " << Minutes.to_s << " minutes :)"
     sleep Sleep_default_time # Put the crawler to sleep, to avoid too many calls on the FB API
   end
 
