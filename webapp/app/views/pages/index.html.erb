@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Type</th>
       <th>Active</th>
       <th colspan="3"></th>
     </tr>
@@ -13,12 +14,34 @@
 
   <tbody>
     <% @pages.each do |page| %>
-      <tr>
+      <tr
+        <% if page.kind.eql? 'community' %>
+          class="table-success"
+        <% else %>
+          class="table-info"
+        <% end %>
+      >
         <td><%= page.name %></td>
-        <td><%= page.active %></td>
-        <td><%= link_to 'Show', page %></td>
-        <td><%= link_to 'Edit', edit_page_path(page) %></td>
-        <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= page.kind %></td>
+        <td>
+          <% if page.active == true %>
+            <i class="fa fa-plus"></i>
+          <% else %>
+            <i class="fa fa-minus"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= button_to "Show", page,
+                class: "btn btn-success" %>
+        </td>
+        <td>
+          <%= button_to "Edit", edit_page_path(page),
+                class: "btn btn-info" %>
+        </td>
+        <td>
+          <%= button_to "Delete", page,
+              class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

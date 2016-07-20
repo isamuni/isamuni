@@ -18,4 +18,5 @@
 //= require bootstrap-sprockets
 //= require introjs
 //= require simplemde.min.js
+//= require leaflet
 //= require_tree .
