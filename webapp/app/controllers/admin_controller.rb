@@ -17,6 +17,10 @@ class AdminController < ApplicationController
     page.save
   end
 
+  def delete_page
+    Page.delete(params[:pageid])
+  end
+
   def require_admin
     admins = ENV['ISAMUNI_ADMINS'].split(" ")
     unless current_user != nil && admins.include?(current_user.uid)
