@@ -26,7 +26,7 @@
 </script>
 
 <style>
-  #mapid { height: 400px; width: 800px; }
+  #mapid { height: 450px; width: 800px; }
 </style>
 
 <div class="row">
@@ -53,14 +53,19 @@
   </tbody>
 </table>
 
-
-
 <script type="text/javascript">
-  var mymap = L.map('mapid').setView([37.4579, 14.1368], 8);
+  // Coordinates of Sicily
+  var mymap = L.map('mapid').setView([37.5579, 14.1368], 8);
 
   var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(mymap);
   
+  $.get("/events/locations", function(data){
+        for (var i in data) {
+          var coordinates = data[i].coordinates.split(',');
+          L.marker([coordinates[0], coordinates[1]]).addTo(mymap);
+        }
+    });
 </script>

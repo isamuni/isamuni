@@ -12,6 +12,11 @@ class Event < ApplicationRecord
     })
     event.location_name = fb_event['place'] ? Sanitize.encode(fb_event['place']['name']) : nil
     event.location = fb_event['place'] ? Sanitize.encode(fb_event['place']['location'].to_json) : nil
+    
+    if fb_event['place'] && fb_event['place']['location']
+      event.coordinates = fb_event['place']['location']['latitude'].to_s + ', ' + fb_event['place']['location']['longitude'].to_s
+    end
+
     event
   end
 

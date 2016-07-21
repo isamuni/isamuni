@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'events', to: 'events#index', defaults: { format: 'html' }
   get 'events/typeahead', to:'events#typeahead'
+  get 'events/locations', to:'events#locations', defaults: { format: 'json' }
 
   get 'opendata', to: 'opendata#index'
 
