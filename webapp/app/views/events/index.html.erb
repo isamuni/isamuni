@@ -17,16 +17,24 @@
   <% end %>
 <% end %>
 
-<script>
+
+<script type="text/javascript">
   $(document).ready(function(){
     initTypeahead('/events/typeahead', '/events/');    
   });
 
 </script>
 
-<div id="mapid"></div>
+<style>
+  #mapid { height: 400px; width: 800px; }
+</style>
 
-<br>
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-1 text-center">
+  <div id="mapid" class="map"></div>
+</div>
+
+<br><br>
 
 <table id="table-events" class="table table-hover table-condensed">
   <thead class="thead-inverse">
@@ -44,3 +52,15 @@
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>
   </tbody>
 </table>
+
+
+
+<script type="text/javascript">
+  var mymap = L.map('mapid').setView([37.4579, 14.1368], 8);
+
+  var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mymap);
+  
+</script>
