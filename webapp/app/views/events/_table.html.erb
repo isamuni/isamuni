@@ -29,6 +29,7 @@
             <strong><%= event.name %></strong>
           </div>
           <div class="col-xs-6 text-xs-right">
+            <small style="color:black;">Starts at: <%= event.starts_at.strftime("%d-%m-%y %H:%M %Z") %></small>
             <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
               <i class="fa fa-calendar"></i>
             <% end %>

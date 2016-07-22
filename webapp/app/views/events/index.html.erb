@@ -65,7 +65,11 @@
   $.get("/events/locations", function(data){
         for (var i in data) {
           var coordinates = data[i].coordinates.split(',');
-          L.marker([coordinates[0], coordinates[1]]).addTo(mymap);
+          L.marker([coordinates[0], coordinates[1]])
+            .bindPopup(data[i].name + 
+              ' <a href="#" data-toggle="modal" data-target="#' 
+              + data[i].uid + '"> <i class="fa fa-plus" ></i></a>')
+            .addTo(mymap);
         }
     });
 </script>

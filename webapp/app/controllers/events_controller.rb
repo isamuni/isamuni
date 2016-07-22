@@ -25,11 +25,11 @@ class EventsController < ApplicationController
     render json: @search
   end
 
-  # How to get coordinates given address
-  # http://nominatim.openstreetmap.org/search?format=json&q=50+watson+avenue+st+andrews
   def locations
-    events = Event.where('coordinates IS NOT NULL')
-    events = events.map{ |event| {:coordinates => event.coordinates} }
+    events = Event.where('starts_at >= ? AND coordinates IS NOT NULL', Time.zone.now.beginning_of_day)
+    events = events.map{ |event| {:uid => event.uid,
+                                  :name => event.name,
+                                  :coordinates => event.coordinates } }
 
     render json: events
   end
