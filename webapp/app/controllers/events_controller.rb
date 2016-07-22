@@ -26,12 +26,22 @@ class EventsController < ApplicationController
   end
 
   def locations
-    events = Event.where('starts_at >= ? AND coordinates IS NOT NULL', Time.zone.now.beginning_of_day)
+    today_events = Event.where('starts_at = ? AND coordinates IS NOT NULL', Time.zone.now.beginning_of_day)
+    future_events = Event.where('starts_at > ? AND coordinates IS NOT NULL', Time.zone.now.beginning_of_day)
+    
+    today_events = map_events(today_events, true)
+    future_events = map_events(future_events, false)
+
+    all_events = today_events + future_events
+    render json: all_events
+  end
+
+  def map_events events, is_today
     events = events.map{ |event| {:uid => event.uid,
                                   :name => event.name,
-                                  :coordinates => event.coordinates } }
-
-    render json: events
+                                  :coordinates => event.coordinates,
+                                  :isToday => is_today } }
+    return events
   end
 
 end

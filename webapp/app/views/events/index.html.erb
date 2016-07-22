@@ -31,7 +31,9 @@
 
 <div class="row">
   <div class="col-sm-offset-2 col-sm-1 text-center">
-  <div id="mapid" class="map"></div>
+  <div id="mapid" class="map" 
+  data-intro="This map shows you the events of today (in red) and all future events (blue). 
+  You can click on the markers to see more about an event"></div>
 </div>
 
 <br><br>
@@ -65,7 +67,27 @@
   $.get("/events/locations", function(data){
         for (var i in data) {
           var coordinates = data[i].coordinates.split(',');
-          L.marker([coordinates[0], coordinates[1]])
+          var options = {}
+
+          var todayMarker = L.AwesomeMarkers.icon({
+            icon: 'star', 
+            markerColor: 'green', 
+            prefix: 'fa', 
+            spin:true});
+
+          var futureMarker = L.AwesomeMarkers.icon({
+            icon: 'star-o', 
+            markerColor: 'blue', 
+            prefix: 'fa', 
+            spin:false});
+
+          if (data[i].isToday == true) {
+            options = {icon: todayMarker}
+          } else {
+            options = {icon: futureMarker}
+          }
+ 
+          L.marker([coordinates[0], coordinates[1]], options)
             .bindPopup(data[i].name + 
               ' <a href="#" data-toggle="modal" data-target="#' 
               + data[i].uid + '"> <i class="fa fa-plus" ></i></a>')
