@@ -54,6 +54,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'session#create'
   get '/auth/failure', to: 'session#auth_failure'
   get 'signout', to: 'session#destroy', as: 'signout'
+  
+  get "community_feed", to: 'home#community_feed', as: "community_feed"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

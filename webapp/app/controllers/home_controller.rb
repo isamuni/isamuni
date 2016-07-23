@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
 
   def index
+  end
+
+  def community_feed
   	@posts = Post.limit(30).order('created_at desc')
   	@posts_jobs = Post.where(tags: 'job').limit(30).order('created_at desc')
   end
@@ -10,7 +13,7 @@ class HomeController < ApplicationController
 
     # String are concatenated using .concat which is magnitute of times faster than +
     posts = posts.map { |post| {:c => [
-      {:v => 
+      {:v =>
         'Date('
         .concat(
           post[0][0..3] # year
@@ -23,11 +26,11 @@ class HomeController < ApplicationController
       {:v => post[1]}
       ]} }
 
-   
+
     datatable = {
-      "cols": 
+      "cols":
         [{'id': '', 'label': 'day', 'type': 'date'},
-        {'id': '', 'label': 'posts', 'type': 'number'}],  
+        {'id': '', 'label': 'posts', 'type': 'number'}],
       "rows":
       posts
     }
@@ -40,7 +43,7 @@ class HomeController < ApplicationController
   def posts
     start_time = Time.at(params[:start].to_i / 1000.0)
     end_time = Time.at(params[:end].to_i / 1000.0)
-    
+
     @posts = Post.where(:created_at => start_time..end_time)
             .limit(30).order('created_at desc')
     render partial: "posts", :posts => @posts

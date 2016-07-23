@@ -1,117 +1,26 @@
-<div id="dashboard_div">
-  <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
-  <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)"></div>
-</div>
-<br>
-<div class="row">
-  <div class="col-lg-8">
-    <div id="posts-view" class="card-columns">
-      <%= render partial: "posts", locals: {posts: @posts} %>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <% @posts_jobs.each_with_index do |post, index| %>
-    <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
-      <%= render partial: "card", locals: {post: post} %>
-    </div>
-    <% end %>
-  </div>
-</div>
-
-<script type="text/javascript">
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var jsonData = $.ajax({url: "/home/data", dataType: "json", async: false}).responseText;
-
-    // Create the data table.
-    var data = new google.visualization.DataTable(jsonData);
-
-    var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
-
-    var today = new Date();
-    var last_sixty = new Date(today.getTime() - (60 * 60 * 24 * 60 * 1000));
-    var timeSlider = new google.visualization.ControlWrapper({
-      'controlType': 'ChartRangeFilter',
-      'containerId': 'filter_div',
-      'options': {
-        'filterColumnIndex': 0,
-        ui: {
-          chartOptions: {
-            height: 50,
-            chartArea: {
-              width: '80%'
-            }
-          },
-          chartView: {
-            columns: [0, 1]
-          }
-        }
-      },
-      'state': {
-        'range': {
-          'start': last_sixty,
-          'end': today
-        }
-      }
-    });
-
-    var chart = new google.visualization.ChartWrapper({
-      chartType: 'LineChart',
-      containerId: 'chart_div',
-      options: {
-        curveType: 'function',
-        legend: 'none',
-        vAxis: {
-          viewWindow: {
-            min: 0
-          }
-        },
-        series: {
-          0: {
-            color: '#1B5E20'
-          }
-        }
-      }
-    });
-
-    google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
-
-    var timeout = null;
-    function selectHandler(e) {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      timeout = setTimeout(reloadPosts, 1000);
-    }
-
-    function reloadPosts() {
-      var range = timeSlider.getState().range;
-      var start = range.start.getTime();
-      var end = range.end.getTime();
-
-      $.ajax({
-        type: 'GET',
-        url: '/home/posts',
-        data: {
-          'start': start,
-          'end': end
-        }
-      }).done(function (data) {
-        $('#posts-view').html(data);
-      }).fail(function (error) {
-        console.error("reloadPosts failed");
-        console.error(error);
-      })
-    }
-
-    dashboard.bind(timeSlider, chart);
-    dashboard.draw(data);
-  }
-
-  $(window).resize(function () {
-    drawChart();
-  });
-</script>
+<h2>Bevenuti a Isamuni</h2>
+<p>Isamuni è un progetto che mira a supportare il panorama IT in Sicilia in due modi:
+  <ul>
+    <li>dando una panoramica delle aziende e community siciliane nell'ambito IT</li>
+    <li>aggregando eventi e discussioni dalle varie community</li>
+  </ul>
+</p>
+<p>Isamuni è mantenuto dalla community di Programmatori a Catania ed un progetto opensource, che può essere usato per iniziative simili</p>
+<p>
+  <a href="<%= opendata_path %>">
+    I dati che raccogliamo sono disponibili tramite API
+  </a>
+</p>
+<h3>In Sicilia ci sono
+</h3>
+<h4>
+  <i class="fa fa-industry"></i> X aziende che si occupano di informatica
+  <br>
+  <i class="fa fa-institution"></i> Y comunità
+  <br>
+  <i class="fa fa-users"></i> Z studenti o professionisti nel campo
+  <br>
+  <i class="fa fa-rss-square"></i> la scorsa settimana ci sono stati W post nelle varie comunità tecniche
+  <br>
+  <i class="fa fa-calendar"></i> e sono organizzati L eventi per le prossime due settimane
+</h4>

@@ -13,7 +13,7 @@
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.min.js"></script>
-  
+
   <script type="text/javascript">
 
   // Load the Visualization API and the corechart package.
@@ -60,9 +60,15 @@
           <% end %>
         </li>
       <% end %>
+
       <li class="nav-item">
         <%= link_to users_path, title: 'Utenti', rel: 'tooltip', class: 'nav-link' do %>
           <i class="fa fa-users"></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to communities_path, title: 'Comunità', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-institution"></i>
         <% end %>
       </li>
       <li class="nav-item">
@@ -71,19 +77,13 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to communities_path, title: 'Comunità', rel: 'tooltip', class: 'nav-link' do %>
-          <i class="fa fa-institution"></i>
+        <%= link_to community_feed_path, title: 'Community Feed', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-rss-square"></i>
         <% end %>
       </li>
-      
       <li class="nav-item">
         <%= link_to events_path, title: 'Eventi', rel: 'tooltip', class: 'nav-link' do %>
           <i class="fa fa-calendar"></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to opendata_path, title: 'Opendata Info', rel: 'tooltip', class: 'nav-link' do %>
-          <i class="fa fa-universal-access"></i>
         <% end %>
       </li>
       <li class="nav-item">
