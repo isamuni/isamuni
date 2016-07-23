@@ -25,7 +25,7 @@ $(document).ready(function(){
 <!-- BODY -->
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Utenti</h1>
 
 <table class="table table-hover table-condensed">
   <thead>
@@ -39,7 +39,7 @@ $(document).ready(function(){
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><img src=<%= 'http://graph.facebook.com/' + user.uid + '/picture' %> class="img-responsive img-rounded"></td>
+        <td><img src="<%= user.profile_pic %>" class="img-responsive img-rounded"></td>
         <td><%= link_to user.name, user %></td>
         <td><%= user.occupation %></td>
       </tr>

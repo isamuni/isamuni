@@ -22,4 +22,9 @@ class User < ApplicationRecord
   def first_name
     name.partition(" ").first
   end
+
+  def profile_pic
+    'http://graph.facebook.com/' + uid + '/picture'
+  end
+  
 end
