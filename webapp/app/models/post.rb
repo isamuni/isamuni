@@ -27,4 +27,13 @@ class Post < ApplicationRecord
 
     post
   end
+
+  def facebook_link
+    if post_type == "event"
+      nil
+    else
+      'https://www.facebook.com/' + uid
+    end
+  end
+
 end
