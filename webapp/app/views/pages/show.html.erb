@@ -4,44 +4,36 @@
   <%= @page.name %>
 </h2>
 
-<div class="card">
-  <div class="card-header">
-    Sede
+<div class="row">
+  <div class="col-lg-8">
+    <h3>Sede</h3>
+    <p><%= @page.location %></p>
+    <button>Show on Map</button>
+
+    <h3>Links</h3>
+    <p><%= markdown(@page.links) %></p>
+
+    <h3>Descrizione</h3>
+    <p><%= markdown(@page.description) %></p>
+
+    <p>
+      <strong>Contatti:</strong>
+      <%= @page.contacts %>
+    </p>
+
+    <p>
+      <strong>Coordinates:</strong>
+      <%= @page.coordinates %>
+    </p>
   </div>
-  <div class="card-block">
-    <p class="card-text"><%= @page.location %></p>
+  <div class="col-lg-4">
+    <div class="card">
+      <h3 class="card-header">Test card</h3>
+      <div class="card-block">
+        <h4 class="card-title">Special title treatment</h4>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<div class="card">
-  <div class="card-header">
-    Links
-  </div>
-  <div class="card-block">
-    <p class="card-text"><%= markdown(@page.links) %></p>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-header">
-    Descrizione
-  </div>
-  <div class="card-block">
-    <p class="card-text"><%= markdown(@page.description) %></p>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-header">
-    Contatti
-  </div>
-  <div class="card-block">
-    <p class="card-text"><%= markdown(@page.contacts) %></p>
-  </div>
-</div>
-
-<p>
-  <strong>Coordinates:</strong>
-  <%= @page.coordinates %>
-</p>
