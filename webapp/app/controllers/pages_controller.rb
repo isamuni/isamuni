@@ -6,7 +6,11 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = current_user.pages
+    if !current_user.nil? 
+      @pages = current_user.pages
+    else
+      @pages = {}
+    end
   end
 
   # GET /pages/1
