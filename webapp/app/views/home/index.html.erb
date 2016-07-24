@@ -1,4 +1,4 @@
-<h2>Bevenuti a <strong>Isamuni</strong>!</h2>
+<h2>Benvenuti a <strong>Isamuni</strong>!</h2>
 
 <p>Isamuni è un progetto che mira a supportare il panorama IT in Sicilia in due modi:
   <ul>
@@ -7,21 +7,27 @@
   </ul>
 </p>
 
-<p>Isamuni è mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania</a> ed un progetto <a href="https://github.com/sic2/isamuni">opensource</a>, che può essere usato per iniziative simili</p>
+<p>Isamuni è mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania</a> ed un progetto <a href="https://github.com/sic2/isamuni">open-source (MIT)</a>, che può essere usato per iniziative simili.</p>
 
 <p>
   I dati che raccogliamo sono disponibili tramite <a href="<%= opendata_path %>"> REST API</a>
 </p>
-<h3>In Sicilia ci sono:
-</h3>
-<h4>
-  <i class="fa fa-industry"></i> X aziende che si occupano di informatica
-  <br>
-  <i class="fa fa-institution"></i> Y comunità
-  <br>
-  <i class="fa fa-users"></i> Z studenti o professionisti nel campo
-  <br>
-  <i class="fa fa-rss-square"></i> la scorsa settimana ci sono stati W post nelle varie comunità tecniche (FB only)
-  <br>
-  <i class="fa fa-calendar"></i> L eventi organizzati per le prossime due settimane
-</h4>
+<br>
+Qualche statistica :) Su <strong>isamuni</strong> ci sono:
+<ul style="list-style-type:none">
+  <li>
+    <a href="/companies"><i class="fa fa-industry"></i></a> <%= @companies_count %> aziende che si occupano di informatica
+  </li>
+  <li>
+    <a href="/communities"><i class="fa fa-institution"></i></a> <%= @communities_count %> comunità
+  </li>
+  <li>
+    <a href="/users"><i class="fa fa-users"></i></a> <%= @users_count %> studenti o professionisti nel campo
+  </li>
+  <li>
+    <a href="/community_feed"><i class="fa fa-rss-square"></i></a> la scorsa settimana ci sono stati <%= @posts_count %> post nelle varie comunità tecniche (PAC - Facebook only)
+  </li>
+  <li>
+    <a href="/events"><i class="fa fa-calendar"></i></a> <%= @upcoming_events_count %> eventi organizzati per le prossime tre settimane
+  </li>
+</ul>
