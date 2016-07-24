@@ -16,13 +16,6 @@
     </div>
   <% end %>
 <% end %>
-<script>
-$(document).ready(function(){
-  initTypeahead('/companies/typeahead', '/companies/');
-});
-</script>
-
-<p id="notice"><%= notice %></p>
 
 <h1>Aziende</h1>
 
@@ -31,6 +24,9 @@ $(document).ready(function(){
     <tr>
       <th>Nome</th>
       <th>Sede</th>
+      <th>Ambito</th>
+      <th># Dipendenti</th>
+      <th>Sito Web</th>
     </tr>
   </thead>
 
@@ -39,14 +35,16 @@ $(document).ready(function(){
       <tr>
         <td><%= link_to page.name, page %></td>
         <td><%= page.location %></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<p>
-<%= link_to 'Aggiungi la tua azienda', new_page_path %><br>
-<%= link_to 'Le pagine che ho aggiunto', pages_path %>
-</p>
+<script>
+$(document).ready(function(){
+  initTypeahead('/companies/typeahead', '/companies/');
+});
+</script>

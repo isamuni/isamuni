@@ -1,52 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Pages</h1>
+<h1>My Pages</h1>
 
-<table class="table table-hover table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Active</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
+<table class="table table-striped table-hover table-condensed">
   <tbody>
     <% @pages.each do |page| %>
-      <tr
-        <% if page.kind.eql? 'community' %>
-          class="table-success"
-        <% else %>
-          class="table-info"
-        <% end %>
-      >
-        <td><%= page.name %></td>
-        <td><%= page.kind %></td>
+      <tr>
         <td>
           <% if page.active == true %>
-            <i class="fa fa-plus"></i>
+            <i class="fa fa-check"></i>
           <% else %>
-            <i class="fa fa-minus"></i>
+            <i class="fa fa-times"></i>
           <% end %>
         </td>
         <td>
+          <% if page.community? == true %>
+            <i class="fa fa-institution"></i>
+          <% else %> 
+            <i class="fa fa-industry"></i>
+          <% end %>
+        </td>
+        
+        <td><%= page.name %></td>
+        <td>
           <%= button_to "Show", page,
-                class: "btn btn-success" %>
+                class: "btn btn-success btn-sm" %>
         </td>
         <td>
           <%= button_to "Edit", edit_page_path(page),
-                class: "btn btn-info" %>
+                class: "btn btn-info btn-sm" %>
         </td>
         <td>
           <%= button_to "Delete", page,
-              class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New Page', new_page_path %>

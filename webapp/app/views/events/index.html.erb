@@ -17,14 +17,6 @@
   <% end %>
 <% end %>
 
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    initTypeahead('/events/typeahead', '/events/');
-  });
-
-</script>
-
 <style>
   #mapid { height: 450px; width: 800px; }
 </style>
@@ -37,7 +29,8 @@
 </div>
 
 <br><br>
-
+<p>Here will go some toggles: show map, show future events, show past events, show upcoming events</p>
+<br><br>
 <table id="table-events" class="table table-hover table-condensed">
   <thead class="thead-inverse">
     <tr>
@@ -54,6 +47,13 @@
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    initTypeahead('/events/typeahead', '/events/');
+  });
+
+</script>
 
 <script type="text/javascript">
   // Coordinates of Sicily
@@ -90,7 +90,8 @@
           L.marker([coordinates[0], coordinates[1]], options)
             .bindPopup(data[i].name +
               ' <a href="#" data-toggle="modal" data-target="#'
-              + data[i].uid + '"> <i class="fa fa-expand" ></i></a>')
+              + data[i].uid 
+              + '"> <i class="fa fa-expand" ></i></a>')
             .addTo(mymap);
         }
     });
