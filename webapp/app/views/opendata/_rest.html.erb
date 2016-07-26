@@ -1,0 +1,39 @@
+# REST API
+
+The following documentation is work in progress. Please report any problems to the administrators of the project.
+
+## Index
+
+- [Users](#users)
+- [Pages](#pages)
+- [Events](#events)
+- [Communities Feed](#communities-feed)
+
+## Users
+
+## Pages 
+
+## Events
+
+**Get all events**
+
+``` 
+GET /events.json
+
+RESPONSE
+HTTP/1.1 200 OK
+Content-type: application/json
+
+[
+    {
+        "content" : "Content of the event",
+        "coordinates" : "long, lat",
+        "location" : LOC,
+        "location_name" : LOC_NAME,
+        "starts_at" : YYYY-MM-DD ..,
+        "fb_uid" : fb_uid
+    }
+]
+```
+
+## Communities Feed
