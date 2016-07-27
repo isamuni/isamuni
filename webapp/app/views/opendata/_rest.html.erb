@@ -32,35 +32,82 @@ Content-type: application/json
 ]
 ```
 
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseUsersTest" aria-expanded="false" aria-controls="collapseUsersTest">
+    Test
+  </button>
+</p>
+<div class="collapse" id="collapseUsersTest">
+  <p class="card card-block" style="font-family:monospace; white-space:pre" id="usersJSON" />
+</div>
+
+<script>
+$('#collapseUsersTest').on('show.bs.collapse', function () {
+  $.get("/users.json", function(data) {
+  	var json = JSON.stringify(data, null, '\t').substring(0, 500);
+  	$("#usersJSON").html(json);
+  });
+})
+</script>
+
 ---
 
 ### Pages
 
 Pages are of two categories: **community** pages and **company** pages.
 
-**Get all pages**
-
-```
-GET /pages.json
-
-...
-```
 
 **Get all community pages**
 
 ```
-GET /community/pages.json
+GET /communities.json
 
 ...
 ```
+
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCommunitiesTest" aria-expanded="false" aria-controls="collapseCommunitiesTest">
+    Test
+  </button>
+</p>
+<div class="collapse" id="collapseCommunitiesTest">
+  <p class="card card-block" style="font-family:monospace; white-space:pre" id="communitiesJSON" />
+</div>
+
+<script>
+$('#collapseCommunitiesTest').on('show.bs.collapse', function () {
+  $.get("/communities.json", function(data) {
+  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	$("#communitiesJSON").html(json);
+  });
+})
+</script>
 
 **Get all company pages**
 
 ```
-GET /company/pages.json
+GET /companies.json
 
 ...
 ```
+
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCompaniesTest" aria-expanded="false" aria-controls="collapseCompaniesTest">
+    Test
+  </button>
+</p>
+<div class="collapse" id="collapseCompaniesTest">
+  <p class="card card-block" style="font-family:monospace; white-space:pre" id="companiesJSON" />
+</div>
+
+<script>
+$('#collapseCompaniesTest').on('show.bs.collapse', function () {
+  $.get("/companies.json", function(data) {
+  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	$("#companiesJSON").html(json);
+  });
+})
+</script>
 
 ---
 
@@ -87,6 +134,26 @@ Content-type: application/json
 	}
 ]
 ```
+
+<p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseEventsTest" aria-expanded="false" aria-controls="collapseEventsTest">
+    Test
+  </button>
+</p>
+<div class="collapse" id="collapseEventsTest">
+  <p class="card card-block" style="font-family:monospace; white-space:pre" id="eventsJSON" />
+</div>
+
+<script>
+$('#collapseEventsTest').on('show.bs.collapse', function () {
+  $.get("/events.json", function(data) {
+  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	$("#eventsJSON").html(json);
+  });
+})
+</script>
+
+
 
 **Get all upcoming events**
 ```

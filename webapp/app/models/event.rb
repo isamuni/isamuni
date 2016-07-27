@@ -20,4 +20,8 @@ class Event < ApplicationRecord
     event
   end
 
+  def as_json(options={})
+    super(only: [:name])
+  end
+  
 end

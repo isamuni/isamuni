@@ -19,6 +19,7 @@ class User < ApplicationRecord
   def self.safe_fields
     select(:id, :name, :uid, :slug, :occupation)
   end
+  
   def first_name
     name.partition(" ").first
   end
@@ -27,4 +28,8 @@ class User < ApplicationRecord
     'http://graph.facebook.com/' + uid + '/picture'
   end
   
+  def as_json(options={})
+    super(only: [:name, :occupation, :projects, :description, :links])
+  end
+
 end

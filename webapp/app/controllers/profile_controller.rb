@@ -12,6 +12,11 @@ class ProfileController < ApplicationController
   def index
     @search = UserSearch.new(search_params)
     @users = search_params.present? ? @search.results : User.all
+
+    respond_to do |format|
+        format.html { render :index}
+        format.json { render json: @users }
+    end
   end
 
   # GET /users/:id
@@ -37,7 +42,7 @@ class ProfileController < ApplicationController
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
-    else
+      else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

@@ -12,6 +12,10 @@ class Page < ApplicationRecord
     where(kind: Page::kinds[:community])
   end
 
+  def as_json(options={})
+    super(only: [:name])
+  end
+
   enum kind: [ :company, :community ]
   validates :name, presence: true
 end

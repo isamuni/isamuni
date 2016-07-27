@@ -6,6 +6,11 @@ class CommunitiesController < PagesController
     else
       @pages = Page.communities.where("active = ?", true)
     end
+
+    respond_to do |format|
+        format.html { render :index}
+        format.json { render json: @pages }
+    end
   end
 
   def typeahead
