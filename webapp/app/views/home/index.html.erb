@@ -1,19 +1,30 @@
-<h2>Benvenuti a <strong>Isamuni</strong>!</h2>
+<h2>Benvenuti su <strong>Isamuni</strong>!</h2>
 
-<p>Isamuni è un progetto che mira a supportare il panorama IT in Sicilia in due modi:
+<p>
+  Isamuni è un progetto che mira a supportare il panorama IT in Sicilia in due modi:
   <ul>
     <li>dando una panoramica delle aziende e community siciliane nell'ambito IT</li>
     <li>aggregando eventi e discussioni dalle varie community</li>
   </ul>
 </p>
 
-<p>Isamuni è mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania</a> ed un progetto <a href="https://github.com/sic2/isamuni">open-source (MIT)</a>, che può essere usato per iniziative simili.</p>
+<p>
+  Perchè <strong>isamuni</strong>? Isamuni è una parola Siciliana che significa <i>alziamoci</i>. 
+</p>
+
+<div class="container">
+  <blockquote>
+    <p class="lead">La Sicilia è anche un insieme di realtà giovani, innovative e vibranti, che spesso hanno difficoltà a farsi conoscere, e non hanno il risalto che meritano. </p>
+    <footer><i>da <a href="https://github.com/sic2/awesome-sicily">awesome-sicily</a></i></footer>
+  </blockquote>
+</div>
 
 <p>
-  I dati che raccogliamo sono disponibili tramite <a href="<%= opendata_path %>"> REST API</a>
+  Già con <strong>awesome-sicily</strong> abbiamo provato e stiamo tuttora provando a portare molte realtà Siciliane insieme e a conoscenza di altri. Con isamuni è giunto il momento di <i>alzarsi</i> e far conoscere ancor meglio le realtà legate alla tecnologia e l'innovazione. 
 </p>
-<br>
-Qualche statistica :) Su <strong>isamuni</strong> ci sono:
+
+<hr>
+Su <strong>isamuni</strong> ci sono:
 <ul style="list-style-type:none">
   <li>
     <a href="/companies"><i class="fa fa-industry"></i></a> <%= @companies_count %> aziende che si occupano di informatica
@@ -31,3 +42,10 @@ Qualche statistica :) Su <strong>isamuni</strong> ci sono:
     <a href="/events"><i class="fa fa-calendar"></i></a> <%= @upcoming_events_count %> eventi organizzati per le prossime tre settimane
   </li>
 </ul>
+
+<hr>
+<p>
+  I dati che raccogliamo sono disponibili tramite <a href="<%= opendata_path %>"> REST API</a>.
+</p>
+
+<p>Isamuni è attualmente mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania (PAC)</a> ed un progetto <a href="https://github.com/sic2/isamuni">open-source (MIT)</a>, che può essere usato per iniziative simili.</p>
