@@ -1,19 +1,70 @@
-# REST API
+---
 
-The following documentation is work in progress. Please report any problems to the administrators of the project.
+## REST API
 
-## Index
+The following documentation is ==work in progress==. Please report any problems to the administrators of the project (via email programmatori.a.catania@gmail.com or submit an issue on the [github project](https://github.com/sic2/isamuni)).
+
+### Index
 
 - [Users](#users)
 - [Pages](#pages)
 - [Events](#events)
 - [Communities Feed](#communities-feed)
 
-## Users
+---
 
-## Pages 
+### Users
 
-## Events
+**Get all users**
+
+```
+GET /users.json
+
+RESPONSE
+HTTP/1.1 200 OK
+Content-type: application/json
+
+[
+	{
+		"name" : "name of user",
+		""
+	}
+]
+```
+
+---
+
+### Pages
+
+Pages are of two categories: **community** pages and **company** pages.
+
+**Get all pages**
+
+```
+GET /pages.json
+
+...
+```
+
+**Get all community pages**
+
+```
+GET /community/pages.json
+
+...
+```
+
+**Get all company pages**
+
+```
+GET /company/pages.json
+
+...
+```
+
+---
+
+### Events
 
 **Get all events**
 
@@ -25,15 +76,46 @@ HTTP/1.1 200 OK
 Content-type: application/json
 
 [
-    {
+	{
+		"title" : "title of the event",
         "content" : "Content of the event",
         "coordinates" : "long, lat",
         "location" : LOC,
         "location_name" : LOC_NAME,
         "starts_at" : YYYY-MM-DD ..,
-        "fb_uid" : fb_uid
-    }
+        "fb_uid" : "facebook event uid"
+	}
 ]
 ```
 
-## Communities Feed
+**Get all upcoming events**
+```
+GET /events/upcoming.json
+
+RESPONSE
+HTTP/1.1 200 OK
+Content-type: application/json
+
+...
+```
+
+---
+
+### Communities Feed
+
+```
+GET /feed.json
+
+RESPONSE
+HTTP/1.1 200 OK
+Content-type: application/json
+
+[
+	{
+		"content" : "content of the post",
+		"type" : "type of post: status, photo, link, video, event",
+		"submitted_by" : "submitter",
+		"data_submitted" : day and time
+	}
+]
+```
