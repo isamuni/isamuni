@@ -23,30 +23,41 @@
 
 <div class="row">
   <div class="col-sm-offset-2 col-sm-1 text-center">
-  <div id="mapid" class="map"
-  data-intro="This map shows you the events of today (in red) and all future events (blue).
-  You can click on the markers to see more about an event"></div>
+    <div id="mapid" class="map"
+    data-intro="This map shows you the events of today (in red) and all future events (blue).
+    You can click on the markers to see more about an event"></div>
+  </div>
 </div>
 
-<br><br>
-<p>Here will go some toggles: show map, show future events, show past events, show upcoming events</p>
-<br><br>
-<table id="table-events" class="table table-hover table-condensed">
-  <thead class="thead-inverse">
-    <tr>
-      <th class="col-xs">Evento</th>
-      <th class="col-xs">Date</th>
-      <th class="col-xs">Location</th>
-      <th class="col-xs">Link</th>
-    </tr>
-  </thead>
+<br>
 
-  <tbody>
-    <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
-    <%= render partial: "table", locals: {events: @future, event_type: :future} %>
-    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
-  </tbody>
-</table>
+<p>
+  <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseUpcoming" aria-expanded="false" aria-controls="collapseUpcoming">
+    Upcoming
+  </button>
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseFuture" aria-expanded="false" aria-controls="collapseFuture">
+    Future
+  </button>
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseOld" aria-expanded="false" aria-controls="collapseOld">
+    Old
+  </button>
+  <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+    <i class="fa fa-refresh"></i>
+  <% end %>
+</p>
+
+<div class="collapse" id="collapseUpcoming">
+  <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
+  <%= will_paginate @upcoming %>
+</div>
+<div class="collapse" id="collapseFuture">
+  <%= render partial: "table", locals: {events: @future, event_type: :future} %>
+  <%= will_paginate @future %>
+</div>
+<div class="collapse" id="collapseOld">
+  <%= render partial: "table", locals: {events: @old, event_type: :old} %>
+  <%= will_paginate @old %>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function(){

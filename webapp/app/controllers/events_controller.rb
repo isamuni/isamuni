@@ -4,13 +4,25 @@ class EventsController < ApplicationController
     three_weeks = Time.now + (3*7*24*60*60) 
 
     if params[:query]
-      @future = Event.where("name LIKE ? and starts_at >= ?", "%#{params[:query]}%", three_weeks).limit(100).order('starts_at desc')
-      @upcoming = Event.where("name LIKE ? and starts_at >= ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day, three_weeks).limit(100).order('starts_at desc')
-      @old = Event.where("name LIKE ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day).limit(78).order('starts_at desc')
+      @future = Event.page(params[:page])
+                .where("name LIKE ? and starts_at >= ?", "%#{params[:query]}%", three_weeks)
+                .order('starts_at desc')
+      @upcoming = Event.page(params[:page])
+                .where("name LIKE ? and starts_at >= ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day, three_weeks)
+                .order('starts_at desc')
+      @old = Event.page(params[:page])
+                .where("name LIKE ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day)
+                .order('starts_at desc')
     else
-      @future = Event.where("starts_at >= ?", three_weeks).limit(100).order('starts_at desc')
-      @upcoming = Event.where(:starts_at => Time.zone.now.beginning_of_day..three_weeks).limit(100).order('starts_at desc')
-      @old = Event.where("starts_at < ?", Time.zone.now.beginning_of_day).limit(78).order('starts_at desc')
+      @future = Event.page(params[:page])
+                .where("starts_at >= ?", three_weeks)
+                .order('starts_at desc')
+      @upcoming = Event.page(params[:page])
+                .where(:starts_at => Time.zone.now.beginning_of_day..three_weeks)
+                .order('starts_at desc')
+      @old = Event.page(params[:page])
+                .where("starts_at < ?", Time.zone.now.beginning_of_day)
+                .order('starts_at desc')
     end
 
     respond_to do |format|

@@ -25,3 +25,5 @@ class Event < ApplicationRecord
   end
   
 end
+
+WillPaginate.per_page = 10

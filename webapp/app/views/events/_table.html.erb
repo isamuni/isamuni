@@ -1,48 +1,61 @@
-<div class="event" %>
-  <% events.each do |event| %>
-    <% if event_type == :upcoming %>
-      <tr id="upcoming" class="table-success">
-    <% elsif event_type == :future %>
-      <tr id="future" class="table-info">
-    <% elsif event_type == :old%>
-      <tr id="old" class="table-warning">
-    <% end %>
+<table id="table-events" class="table table-hover table-condensed">
+  <thead class="thead-inverse">
+    <tr>
+      <th class="col-xs">Evento</th>
+      <th class="col-xs">Date</th>
+      <th class="col-xs">Location</th>
+      <th class="col-xs">Link</th>
+    </tr>
+  </thead>
 
-    <td class="col-xs"><%= event.name %></td>
-    <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
-    <td class="col-xs"><%= event.location_name %></td>
-    <td class="col-xs">
-      <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
-        <i class="fa fa-calendar" ></i>
-      <% end %>
-      <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid} do %>
-        <i class="fa fa-expand" ></i>
-      <% end %>
-    </td>
-  </tr>
+  <tbody>
+    <div class="event" %>
+      <% events.each do |event| %>
+        <% if event_type == :upcoming %>
+          <tr id="upcoming" class="table-success">
+        <% elsif event_type == :future %>
+          <tr id="future" class="table-info">
+        <% elsif event_type == :old%>
+          <tr id="old" class="table-warning">
+        <% end %>
 
-  <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="col-xs-6 text-xs-left">
-            <strong><%= event.name %></strong>
+        <td class="col-xs"><%= event.name %></td>
+        <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
+        <td class="col-xs"><%= event.location_name %></td>
+        <td class="col-xs">
+          <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
+            <i class="fa fa-calendar" ></i>
+          <% end %>
+          <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid} do %>
+            <i class="fa fa-expand" ></i>
+          <% end %>
+        </td>
+      </tr>
+
+      <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="col-xs-6 text-xs-left">
+                <strong><%= event.name %></strong>
+              </div>
+              <div class="col-xs-6 text-xs-right">
+                <small style="color:black;">Starts at: <%= event.starts_at.strftime("%d-%m-%y %H:%M %Z") %></small>
+                <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
+                  <i class="fa fa-calendar"></i>
+                <% end %>
+              </div>
+            </div>
+            <div class="modal-body">
+              <%= markdown(event.content) %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
           </div>
-          <div class="col-xs-6 text-xs-right">
-            <small style="color:black;">Starts at: <%= event.starts_at.strftime("%d-%m-%y %H:%M %Z") %></small>
-            <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
-              <i class="fa fa-calendar"></i>
-            <% end %>
-          </div>
-        </div>
-        <div class="modal-body">
-          <%= markdown(event.content) %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
+      <% end %>
     </div>
-  </div>
-  <% end %>
-</div>
+  </tbody>
+</table>
