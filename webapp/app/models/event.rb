@@ -21,7 +21,7 @@ class Event < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:name])
+    super(only: [:name, :starts_at, :uid])
   end
   
 end

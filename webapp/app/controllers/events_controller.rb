@@ -26,9 +26,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-        events = {'upcoming' => @upcoming, 'future' => @future, 'old' => @old}
+        events = {upcoming: @upcoming, future: @future, old: @old}
         format.html { render :index }
-        format.json { render json: events }
+        format.json { render json: @upcoming | @future | @old }
     end
   end
 
