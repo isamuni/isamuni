@@ -2,8 +2,9 @@
   <thead class="thead-inverse">
     <tr>
       <th class="col-xs">Evento</th>
-      <th class="col-xs">Date</th>
-      <th class="col-xs">Location</th>
+      <th class="col-xs">Quando</th>
+      <th class="col-xs">Dove</th>
+      <th class="col-xs">Chi</th>
       <th class="col-xs">Link</th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td class="col-xs"><%= event.name %></td>
         <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
         <td class="col-xs"><%= event.location_name %></td>
+        <td><!-- organiser goes here --></td>
         <td class="col-xs">
           <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
             <i class="fa fa-calendar" ></i>

@@ -48,15 +48,15 @@
 
 <div class="collapse" id="collapseUpcoming">
   <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
-  <%= will_paginate @upcoming %>
+  <%= will_paginate @upcoming, param_name: :upcoming_page %>
 </div>
 <div class="collapse" id="collapseFuture">
   <%= render partial: "table", locals: {events: @future, event_type: :future} %>
-  <%= will_paginate @future %>
+  <%= will_paginate @future, param_name: :future_page %>
 </div>
 <div class="collapse" id="collapseOld">
   <%= render partial: "table", locals: {events: @old, event_type: :old} %>
-  <%= will_paginate @old %>
+  <%= will_paginate @old, param_name: :old_page %>
 </div>
 
 <script type="text/javascript">
