@@ -102,8 +102,14 @@
             .bindPopup(data[i].name +
               ' <a href="#" data-toggle="modal" data-target="#'
               + data[i].uid 
-              + '"> <i class="fa fa-expand" ></i></a>')
+              + '" onclick="return expandTable();"> '
+              + '<i class="fa fa-expand" ></i></a>')
             .addTo(mymap);
         }
     });
+
+  function expandTable() {
+    $('#collapseUpcoming').toggleClass('collapse').toggleClass("in");
+    $('#collapseFuture').toggleClass('collapse').toggleClass("in");
+  }
 </script>
