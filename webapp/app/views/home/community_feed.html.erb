@@ -83,7 +83,20 @@
       }
     });
 
+    google.visualization.events.addListener(chart, 'select', pickHandler);
     google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+
+    function pickHandler() {
+      var selection = chart.getChart().getSelection();
+      if (selection.length > 0) {
+        var datePicked = data.getValue(selection[0].row, 0);
+        var nextDay = new Date(datePicked.getTime() + (1 * 60 * 24 * 60 * 1000));
+        reloadPosts(datePicked.getTime(), nextDay.getTime());
+      } else {
+        applySlider();
+      }
+     
+    }
 
     var timeout = null;
     function selectHandler(e) {
@@ -91,14 +104,18 @@
         clearTimeout(timeout);
         timeout = null;
       }
-      timeout = setTimeout(reloadPosts, 1000);
+      timeout = setTimeout(applySlider, 1000);
     }
 
-    function reloadPosts() {
+    function applySlider() {
       var range = timeSlider.getState().range;
       var start = range.start.getTime();
       var end = range.end.getTime();
 
+      reloadPosts(start, end);
+    }
+
+    function reloadPosts(start, end) {
       $.ajax({
         type: 'GET',
         url: '/home/posts',
