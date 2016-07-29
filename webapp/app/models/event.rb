@@ -1,8 +1,7 @@
 require_relative "sanitize"
 
 class Event < ApplicationRecord
-  self.per_page = 10
-
+  
   def self.from_fb_event fb_event
     event = Event.new({
       uid: fb_event['id'],

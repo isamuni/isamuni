@@ -16,7 +16,10 @@ class HomeController < ApplicationController
   end
 
   def data
-    posts = Post.select("date(created_at) as created_at").group("date(created_at)").order('created_at desc').distinct.count(:uid)
+    posts = Post.select("date(created_at) as created_at")
+                .group("date(created_at)")
+                .order('created_at desc')
+                .distinct.count(:uid)
 
     # String are concatenated using .concat which is magnitute of times faster than +
     posts = posts.map { |post| {:c => [
@@ -52,7 +55,8 @@ class HomeController < ApplicationController
     end_time = Time.at(params[:end].to_i / 1000.0)
 
     @posts = Post.where(:created_at => start_time..end_time)
-            .limit(30).order('created_at desc')
+                 .order('created_at desc')
+
     render partial: "posts", :posts => @posts
   end
 
