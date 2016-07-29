@@ -13,6 +13,7 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * [How to deploy](#how-to-deploy)
  * [Via Docker](#docker)
 * [Open Data](#open-data)
+* [Showcase](#showcase)
 
 ## Configuring and Running the App
 
@@ -163,3 +164,9 @@ ISAMUNI_ADMINS=<list of user uids divided by comma ','>
 You can get data in json format by appending `.json` to the web pages.
 
 For example, you can get data about events by making a **GET** request to `/events.json`
+
+# Showcase
+
+## Community Feed
+
+![Community Feed](/media/feed.gif)
