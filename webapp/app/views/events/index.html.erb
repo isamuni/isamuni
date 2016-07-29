@@ -92,9 +92,14 @@
 
           var todayMarker = L.AwesomeMarkers.icon({
             icon: 'star',
-            markerColor: 'green',
+            markerColor: 'red',
             prefix: 'fa',
             spin:true});
+
+          // var today - red
+          // var upcoming - green
+          // var future - blue
+          // var old - yellow
 
           var futureMarker = L.AwesomeMarkers.icon({
             icon: 'star-o',
@@ -122,8 +127,11 @@
     });
 
   function expandTable() {
-    $('#collapseUpcoming').toggleClass('collapse').toggleClass("in");
-    $('#collapseFuture').toggleClass('collapse').toggleClass("in");
+    if (!$('#collapseUpcoming').hasClass('in'))
+      $('#collapseUpcoming').toggleClass('collapse').toggleClass("in");
+
+    if (!$('#collapseFuture').hasClass('in'))
+      $('#collapseFuture').toggleClass('collapse').toggleClass("in");
   }
 </script>
 
@@ -145,7 +153,7 @@
     var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
     var today = new Date();
-    var last_sixty = new Date(today.getTime() - (60 * 60 * 24 * 60 * 1000));
+    var next_three_weeks = new Date(today.getTime() + (21 * 60 * 24 * 60 * 1000));
     var timeSlider = new google.visualization.ControlWrapper({
       'controlType': 'ChartRangeFilter',
       'containerId': 'filter_div',
@@ -165,8 +173,8 @@
       },
       'state': {
         'range': {
-          'start': last_sixty,
-          'end': today
+          'start': today,
+          'end': next_three_weeks
         }
       }
     });
