@@ -5,8 +5,11 @@
   <div class="row">
     <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)"></div>
   </div>
-  <br>
-  <div class="row">
+</div>
+
+<br>
+
+<div class="row">
     <div class="col-lg-8">
       <div id="posts-view" class="card-columns">
         <%= render partial: "posts", locals: {posts: @posts} %>
@@ -20,7 +23,6 @@
       </div>
       <% end %>
     </div>
-  </div>
 </div>
 
 <script type="text/javascript">

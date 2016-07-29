@@ -30,6 +30,16 @@
 </div>
 
 <br>
+<div id="dashboard_div" class="row">
+  <!-- This chart must be present, otherwise the filter cannot be drawn. -->
+  <div class="row" style="display: none;">
+    <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
+  </div>
+  <div class="row">
+    <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
+  </div>
+</div>
+<br>
 
 <p>
   <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseUpcoming" aria-expanded="false" aria-controls="collapseUpcoming">
@@ -113,3 +123,115 @@
     $('#collapseFuture').toggleClass('collapse').toggleClass("in");
   }
 </script>
+
+
+<script type="text/javascript">
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    // NOTE: This is some test data, however we should get the data via a GET request
+    // var jsonData = $.ajax({url: "/events/locations", dataType: "json", async: false}).responseText;
+    var jsonData = '{"cols":[{"id":"","label":"day","type":"date"},{"id":"","label":"posts","type":"number"}],"rows":[{"c":[{"v":"Date(2016, 6, 26)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 24)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 23)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 22)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 19)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 18)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 17)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 16)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 15)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 11)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 10)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 08)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 07)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 06)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 05)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 04)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 03)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 01)"},{"v":1}]}]}';
+    console.log(jsonData);
+
+    // Create the data table.
+    var data = new google.visualization.DataTable(jsonData);
+    debugger
+
+    var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+
+    var today = new Date();
+    var last_sixty = new Date(today.getTime() - (60 * 60 * 24 * 60 * 1000));
+    var timeSlider = new google.visualization.ControlWrapper({
+      'controlType': 'ChartRangeFilter',
+      'containerId': 'filter_div',
+      'options': {
+        'filterColumnIndex': 0,
+        ui: {
+          chartOptions: {
+            height: 50,
+            chartArea: {
+              width: '80%'
+            }
+          },
+          chartView: {
+            columns: [0, 1]
+          }
+        }
+      },
+      'state': {
+        'range': {
+          'start': last_sixty,
+          'end': today
+        }
+      }
+    });
+
+    // This chart must be present, otherwise the filter cannot be drawn.
+    var chart = new google.visualization.ChartWrapper({
+      chartType: 'LineChart',
+      containerId: 'chart_div',
+      options: {
+        curveType: 'function',
+        legend: 'none',
+        vAxis: {
+          viewWindow: {
+            min: 0
+          }
+        },
+        series: {
+          0: {
+            color: '#1B5E20'
+          }
+        }
+      }
+    });
+
+    google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+
+    var timeout = null;
+    function selectHandler(e) {
+      if (e.inProgress == true) {
+        return;
+      }
+
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      timeout = setTimeout(reloadPosts, 1000);
+    }
+
+    function reloadPosts() {
+      var range = timeSlider.getState().range;
+      var start = range.start.getTime();
+      var end = range.end.getTime();
+
+      // $.ajax({
+      //   type: 'GET',
+      //   url: '/home/posts',
+      //   data: {
+      //     'start': start,
+      //     'end': end
+      //   }
+      // }).done(function (data) {
+      //   $('#posts-view').html(data);
+      // }).fail(function (error) {
+      //   console.error("reloadPosts failed");
+      //   console.error(error);
+      // })
+    }
+
+     //timeSlider.draw(data);
+    dashboard.bind(timeSlider, chart);
+     dashboard.draw(data);
+
+
+  }
+
+  $(window).resize(function () {
+    drawChart();
+  });
+</script>
+
