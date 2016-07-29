@@ -102,13 +102,16 @@
             prefix: 'fa',
             spin:false});
 
+          var index = 0;
           if (data[i].isToday == true) {
             options = {icon: todayMarker}
+            index = data.length; // Puts all marker in front of the others
           } else {
             options = {icon: futureMarker}
           }
 
           L.marker([coordinates[0], coordinates[1]], options)
+            .setZIndexOffset(index)
             .bindPopup(data[i].name +
               ' <a href="#" data-toggle="modal" data-target="#'
               + data[i].uid 
