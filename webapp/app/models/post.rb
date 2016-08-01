@@ -28,6 +28,16 @@ class Post < ApplicationRecord
     post
   end
 
+  # Get date (yyyy-mm-dd) of the latest post in the db
+  def self.last_post_date
+    last_post_date = Post.maximum(:created_at)
+    if last_post_date
+      last_post_date.strftime("%Y-%m-%d")
+    else
+      nil
+    end
+  end
+
   def facebook_link
     if post_type == "event"
       nil
