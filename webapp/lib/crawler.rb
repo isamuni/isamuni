@@ -2,7 +2,7 @@ require 'koala'
 require 'json'
 
 class Crawler
-  
+
   Feed_fields = ['id', 'message', 'from', 'type',
                   'picture', 'link', 'created_time', 'updated_time']
   Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
@@ -36,7 +36,7 @@ class Crawler
     feed = group_raw_feed(groupid, limit, since)
 
     posts = feed.select { |fe|
-        fe['type'] in  ['status', 'link', 'photo', 'event']}
+          ['status', 'link', 'photo', 'event'].include? fe['type'] }
 
     events = feed.select{ |fe| fe['type'] == 'event'}.map do |event|
         # This is a dirty way to get the id of the event

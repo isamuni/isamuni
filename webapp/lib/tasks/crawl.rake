@@ -1,4 +1,4 @@
-require '../crawler'
+require 'crawler'
 
 Group_to_track = 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
 Pages_to_track = [
@@ -36,17 +36,22 @@ task :crawl => :environment do
   page_events = nil
 
   since = Post.last_post_date
+
+  puts "downloading group feed"
   feed = crawler.group_feed(Group_to_track, Feed_limit, since)
 
-  events = feed['events'] + crawler.page_events(Pages_to_track, Feed_limit)
-  posts = feed['posts']
+  puts "downloading page events"
+  events = feed[:events] + crawler.page_events(Pages_to_track, Feed_limit)
+  posts = feed[:posts]
 
+  puts "inserting events into the database"
   events.each do |event|
     unless Event.exists?(uid: event['id'])
       Event.from_fb_event(event).save
     end
   end
 
+  puts "inserting posts into the database"
   posts.each do |post|
     unless Post.exists?(uid: feed_post['id'])
       Post.from_fb_post(feed_post).save!
