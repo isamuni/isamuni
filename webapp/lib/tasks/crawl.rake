@@ -53,8 +53,8 @@ task :crawl => :environment do
 
   puts "inserting posts into the database"
   posts.each do |post|
-    unless Post.exists?(uid: feed_post['id'])
-      Post.from_fb_post(feed_post).save!
+    unless Post.exists?(uid: post['id'])
+      Post.from_fb_post(post).save!
     end
   end
 
