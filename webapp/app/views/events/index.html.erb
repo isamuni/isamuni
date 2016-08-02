@@ -119,7 +119,7 @@
             .setZIndexOffset(index)
             .bindPopup(data[i].name +
               ' <a href="#" data-toggle="modal" data-target="#'
-              + data[i].uid 
+              + data[i].uid
               + '" onclick="return expandTable();"> '
               + '<i class="fa fa-expand" ></i></a>')
             .addTo(mymap);
@@ -148,7 +148,6 @@
 
     // Create the data table.
     var data = new google.visualization.DataTable(jsonData);
-    debugger
 
     var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
@@ -245,4 +244,3 @@
     drawChart();
   });
 </script>
-
