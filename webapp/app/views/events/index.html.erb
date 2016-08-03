@@ -58,6 +58,7 @@
 </div>
 
 <script type="text/javascript">
+    var mymap = null;
 
     function iconForEvent(ev) {
         if (ev.isToday) {
@@ -94,7 +95,10 @@
     function drawMap(locations) {
         var sicily_coords = [37.5579, 14.1368];
         var zoom = 8;
-        var mymap = L.map('mapid').setView(sicily_coords, zoom);
+        if (mymap){
+          mymap.remove();
+        }
+        mymap = L.map('mapid').setView(sicily_coords, zoom);
 
         var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -207,7 +211,8 @@
     }
 
     $(document).ready(function () {
-        initTypeahead('/events/typeahead', '/events/');
+        initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
+
         //wait for gcharts to be loaded before loading the rest of the page
         google.charts.setOnLoadCallback(onGoogleChartsLoaded);
     });

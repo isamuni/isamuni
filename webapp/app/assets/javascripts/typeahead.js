@@ -1,5 +1,14 @@
-function initTypeahead(remoteUrl, itemUrl) {
+
+
+function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
   "use strict";
+
+  function defaultSuggestionClickHandler(event, datum, name){
+    var identifier = datum.slug || datum.uid || datum.id;
+    window.location.href = itemUrl + identifier;
+  }
+
+  suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;
 
   var searchSelector = 'input.typeahead';
 
@@ -27,8 +36,5 @@ function initTypeahead(remoteUrl, itemUrl) {
   });
 
   // this is the event that is fired when a user clicks on a suggestion
-  $(searchSelector).bind('typeahead:selected', function(event, datum, name) {
-    //console.debug('Suggestion clicked:', event, datum, name);
-    window.location.href = itemUrl + datum.slug;
-  });
+  $(searchSelector).bind('typeahead:selected', suggestionClickHandler);
 }
