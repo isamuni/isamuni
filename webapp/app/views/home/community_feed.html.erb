@@ -1,3 +1,5 @@
+<h2>Post dalla community di PAC</h2>
+<p>Breve descrizione della pagina e come usarla</p>
 <div id="dashboard_div" class="row">
   <div class="row">
     <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
@@ -15,7 +17,7 @@
         <%= render partial: "posts", locals: {posts: @posts} %>
       </div>
     </div>
-    
+
     <div class="col-lg-4">
       <% @posts_jobs.each_with_index do |post, index| %>
       <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
@@ -97,7 +99,7 @@
       } else {
         applySlider();
       }
-     
+
     }
 
     var timeout = null;
