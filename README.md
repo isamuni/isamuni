@@ -91,7 +91,7 @@ export ISAMUNI_APP_SECRET=secret
 If you want to run the app locally, you need to redirect the requests to the `squirrels.vii.ovh` server to your machine (localhost).
 
 ```
-$ sudo /etc/hosts
+$ sudo nano /etc/hosts
 
 Add the following to the file:
 127.0.0.1	squirrels.vii.ovh
@@ -125,11 +125,13 @@ Connect to squirrels.vii.ovh:3000
 
 **Running the Crawler**
 
-Before running the crawler, make sure that the database was built.
+Make sure the database was initialized, then
+
 ```
-$ cd crawler/
-$ ruby crawler.rb
+$ rake crawl
 ```
+
+You may want to add this command to your crontab
 
 ### Docker
 
@@ -145,9 +147,9 @@ $ ruby crawler.rb
 - Install Docker for Mac
 - Run `docker run hello-world` to check your installation
  - If a timout error is given, change your DNS to Google's DNS
- 
 
-#### Building the Image and Running the App 
+
+#### Building the Image and Running the App
 
 - Create a `.env` file containing the following:
 
@@ -157,7 +159,7 @@ ISAMUNI_APP_SECRET=secret
 ISAMUNI_ADMINS=<list of user uids divided by comma ','>
 ```
 
-- Create the docker and run it with: `$ docker-compose up` 
+- Create and run the required containers with: `$ docker-compose up`
 
 ## Open Data
 
