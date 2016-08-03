@@ -22,6 +22,14 @@ users = User.create([
     occupation: "student at josh's place",
     projects: "purr.js, catNamer.js",
     links: "my website: http://www.example.com"
+ },
+ {
+    uid: "789",
+    name: "CatCat",
+    description: "I'm a cat, I know **python**",
+    occupation: "student at josh's place",
+    projects: "purr.js, catNamer.js",
+    links: "my website: http://www.example.com"
  }
   ])
 
@@ -33,9 +41,21 @@ pages = Page.create([
     lookingfor: "Linux-passionate cactuses and humans!",
     links: "fbpage: http://facebook.com",
     contacts: "imacactus@gmail.com",
-    user: users.first
+    user: users.first,
+    active: true
+  },
+  {
+    name: "CactusCorp",
+    kind: Page::kinds[:company],
+    location: "Catania, via cactus 3",
+    lookingfor: "Linux cactuses and humans!",
+    links: "fbpage: http://facebook.com",
+    contacts: "cactuscorps@gmail.com",
+    user: users.first,
+    active: true
   }
   ])
+
 
 posts = Post.create([
   {
@@ -66,6 +86,5 @@ posts = Post.create([
     post_type: "event",
     created_at: "2016-06-12 19:16:24.000000"
   }
-  
+
   ])
-  
