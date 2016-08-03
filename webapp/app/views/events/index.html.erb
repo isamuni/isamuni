@@ -1,246 +1,214 @@
 <!-- SEARCH COMPONENT -->
 <% content_for :search do %>
- <%= form_tag events_path, :method => "get" do |f| %>
-    <div class="form-group">
-      <div class="input-group">
-          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
-          <span class="input-group-btn">
+<%= form_tag events_path, :method => "get" do |f| %>
+<div class="form-group">
+    <div class="input-group">
+        <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+        <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-primary" do %>
-                <i class="fa fa-search"></i>
+            <i class="fa fa-search"></i>
             <% end %>
             <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-              <i class="fa fa-refresh"></i>
+            <i class="fa fa-refresh"></i>
             <% end %>
-          </span>
-      </div>
+        </span>
     </div>
-  <% end %>
+</div>
+<% end %>
 <% end %>
 
 <style>
-  #mapid { height: 450px; width: 800px; }
+    #mapid {
+        height: 450px;
+        width: 800px;
+    }
+
 </style>
 
 <div class="row">
-  <div class="col-sm-offset-2 col-sm-1 text-center">
-    <div id="mapid" class="map"
-    data-intro="This map shows you the events of today (in red) and all future events (blue).
+    <div class="col-sm-offset-2 col-sm-1 text-center">
+        <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue).
     You can click on the markers to see more about an event"></div>
-  </div>
+    </div>
 </div>
 
 <br>
 <div id="dashboard_div" class="row">
-  <!-- This chart must be present, otherwise the filter cannot be drawn. -->
-  <div class="row" style="display: none;">
-    <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
-  </div>
-  <div class="row">
-    <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
-  </div>
+    <!-- This chart must be present, otherwise the filter cannot be drawn. -->
+    <div class="row" style="display: none;">
+        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
+    </div>
+    <div class="row">
+        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
+    </div>
 </div>
 <br>
 
-<p>
-  <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseUpcoming" aria-expanded="false" aria-controls="collapseUpcoming">
-    Upcoming
-  </button>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseFuture" aria-expanded="false" aria-controls="collapseFuture">
-    Future
-  </button>
-  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseOld" aria-expanded="false" aria-controls="collapseOld">
-    Old
-  </button>
-  <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-    <i class="fa fa-refresh"></i>
-  <% end %>
-</p>
-
-<div class="collapse" id="collapseUpcoming">
-  <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
-  <%= will_paginate @upcoming, param_name: :upcoming_page %>
+<div id="upcoming">
+    <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
+    <%= will_paginate @upcoming, param_name: :upcoming_page %>
 </div>
-<div class="collapse" id="collapseFuture">
-  <%= render partial: "table", locals: {events: @future, event_type: :future} %>
-  <%= will_paginate @future, param_name: :future_page %>
+<div id="future">
+    <%= render partial: "table", locals: {events: @future, event_type: :future} %>
+    <%= will_paginate @future, param_name: :future_page %>
 </div>
-<div class="collapse" id="collapseOld">
-  <%= render partial: "table", locals: {events: @old, event_type: :old} %>
-  <%= will_paginate @old, param_name: :old_page %>
+<div id="old">
+    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
+    <%= will_paginate @old, param_name: :old_page %>
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    initTypeahead('/events/typeahead', '/events/');
-  });
 
-</script>
-
-<script type="text/javascript">
-  // Coordinates of Sicily
-  var mymap = L.map('mapid').setView([37.5579, 14.1368], 8);
-
-  var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(mymap);
-
-  $.get("/events/locations", function(data){
-        for (var i in data) {
-          var coordinates = data[i].coordinates.split(',');
-          var options = {}
-
-          var todayMarker = L.AwesomeMarkers.icon({
-            icon: 'star',
-            markerColor: 'red',
-            prefix: 'fa',
-            spin:true});
-
-          // var today - red
-          // var upcoming - green
-          // var future - blue
-          // var old - yellow
-
-          var futureMarker = L.AwesomeMarkers.icon({
-            icon: 'star-o',
-            markerColor: 'blue',
-            prefix: 'fa',
-            spin:false});
-
-          var index = 0;
-          if (data[i].isToday == true) {
-            options = {icon: todayMarker}
-            index = data.length; // Puts all marker in front of the others
-          } else {
-            options = {icon: futureMarker}
-          }
-
-          L.marker([coordinates[0], coordinates[1]], options)
-            .setZIndexOffset(index)
-            .bindPopup(data[i].name +
-              ' <a href="#" data-toggle="modal" data-target="#'
-              + data[i].uid
-              + '" onclick="return expandTable();"> '
-              + '<i class="fa fa-expand" ></i></a>')
-            .addTo(mymap);
+    function iconForEvent(ev) {
+        if (ev.isToday) {
+            return L.AwesomeMarkers.icon({icon: 'star', markerColor: 'red', prefix: 'fa', spin: true});
+        } else {
+            return L.AwesomeMarkers.icon({icon: 'star-o', markerColor: 'blue', prefix: 'fa', spin: false});
         }
-    });
+    }
 
-  function expandTable() {
-    if (!$('#collapseUpcoming').hasClass('in'))
-      $('#collapseUpcoming').toggleClass('collapse').toggleClass("in");
+    function indexForEvent(ev) {
+        if (ev.isToday) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
-    if (!$('#collapseFuture').hasClass('in'))
-      $('#collapseFuture').toggleClass('collapse').toggleClass("in");
-  }
-</script>
+    function popupForEvent(ev) {
+        return ev.name + ' <a href="#" data-toggle="modal" data-target="#' + ev.uid + '"> <i class="fa fa-expand" ></i></a>';
+    }
 
+    function markerForEvent(ev) {
+        var coordinates = ev.coordinates.split(',');
+        var index = indexForEvent(ev);
+        var options = {
+            icon: iconForEvent(ev)
+        }
 
-<script type="text/javascript">
-  // Set a callback to run when the Google Visualization API is loaded.
-  google.charts.setOnLoadCallback(drawChart);
+        return L.marker([
+            coordinates[0], coordinates[1]
+        ], options).setZIndexOffset(index).bindPopup(popupForEvent(ev));
+    }
 
-  function drawChart() {
-    // NOTE: This is some test data, however we should get the data via a GET request
-    // var jsonData = $.ajax({url: "/events/locations", dataType: "json", async: false}).responseText;
-    var jsonData = '{"cols":[{"id":"","label":"day","type":"date"},{"id":"","label":"posts","type":"number"}],"rows":[{"c":[{"v":"Date(2016, 6, 26)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 24)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 23)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 22)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 19)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 18)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 17)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 16)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 15)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 11)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 10)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 08)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 07)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 06)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 05)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 04)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 03)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 01)"},{"v":1}]}]}';
-    console.log(jsonData);
+    function drawMap(locations) {
+        var sicily_coords = [37.5579, 14.1368];
+        var zoom = 8;
+        var mymap = L.map('mapid').setView(sicily_coords, zoom);
 
-    // Create the data table.
-    var data = new google.visualization.DataTable(jsonData);
+        var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(mymap);
 
-    var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+        //draw markers
+        locations.map(markerForEvent).forEach(function (marker) {
+            marker.addTo(mymap);
+        })
 
-    var today = new Date();
-    var next_three_weeks = new Date(today.getTime() + (21 * 60 * 24 * 60 * 1000));
-    var timeSlider = new google.visualization.ControlWrapper({
-      'controlType': 'ChartRangeFilter',
-      'containerId': 'filter_div',
-      'options': {
-        'filterColumnIndex': 0,
-        ui: {
-          chartOptions: {
-            height: 50,
-            chartArea: {
-              width: '80%'
+    }
+
+    function drawChart(jsonData) {
+        // Create the data table.
+        var data = new google.visualization.DataTable(jsonData);
+        var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+
+        var today = new Date();
+        var next_three_weeks = new Date(today.getTime() + (21 * 60 * 24 * 60 * 1000));
+
+        var timeSlider = new google.visualization.ControlWrapper({
+            'controlType': 'ChartRangeFilter',
+            'containerId': 'filter_div',
+            'options': {
+                'filterColumnIndex': 0,
+                ui: {
+                    chartOptions: {
+                        height: 50,
+                        chartArea: {
+                            width: '80%'
+                        }
+                    },
+                    chartView: {
+                        columns: [0, 1]
+                    }
+                }
+            },
+            'state': {
+                'range': {
+                    'start': today,
+                    'end': next_three_weeks
+                }
             }
-          },
-          chartView: {
-            columns: [0, 1]
-          }
+        });
+
+        // This chart must be present, otherwise the filter cannot be drawn.
+        var chart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'chart_div',
+            options: {
+                curveType: 'function',
+                legend: 'none',
+                vAxis: {
+                    viewWindow: {
+                        min: 0
+                    }
+                },
+                series: {
+                    0: {
+                        color: '#1B5E20'
+                    }
+                }
+            }
+        });
+
+        var timeout = null;
+        function selectHandler(e) {
+            if (e.inProgress == true) {
+                return;
+            }
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            timeout = setTimeout(reloadPosts, 1000);
         }
-      },
-      'state': {
-        'range': {
-          'start': today,
-          'end': next_three_weeks
+
+        function reloadPosts() {
+            console.log("TODO reload posts");
+            var range = timeSlider.getState().range;
+            var start = range.start.getTime();
+            var end = range.end.getTime();
+            // $.ajax({   type: 'GET',   url: '/home/posts',   data: {     'start': start,     'end': end   } }).done(function (data) {   $('#posts-view').html(data); }).fail(function (error) {   console.error("reloadPosts failed");   console.error(error); })
         }
-      }
-    });
 
-    // This chart must be present, otherwise the filter cannot be drawn.
-    var chart = new google.visualization.ChartWrapper({
-      chartType: 'LineChart',
-      containerId: 'chart_div',
-      options: {
-        curveType: 'function',
-        legend: 'none',
-        vAxis: {
-          viewWindow: {
-            min: 0
-          }
-        },
-        series: {
-          0: {
-            color: '#1B5E20'
-          }
-        }
-      }
-    });
+        //timeSlider.draw(data);
+        google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+        dashboard.bind(timeSlider, chart);
+        dashboard.draw(data);
 
-    google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
-
-    var timeout = null;
-    function selectHandler(e) {
-      if (e.inProgress == true) {
-        return;
-      }
-
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      timeout = setTimeout(reloadPosts, 1000);
     }
 
-    function reloadPosts() {
-      var range = timeSlider.getState().range;
-      var start = range.start.getTime();
-      var end = range.end.getTime();
+    function onGoogleChartsLoaded() {
+        //TODO handle fail
+        $.get("/events/locations", drawMap);
 
-      // $.ajax({
-      //   type: 'GET',
-      //   url: '/home/posts',
-      //   data: {
-      //     'start': start,
-      //     'end': end
-      //   }
-      // }).done(function (data) {
-      //   $('#posts-view').html(data);
-      // }).fail(function (error) {
-      //   console.error("reloadPosts failed");
-      //   console.error(error);
-      // })
+        //TODO This is some test data, however we should get the data via a GET request var jsonData = $.ajax({url: "/events/locations", dataType: "json", async: false}).responseText;
+        //TODO fixe here literals starting with 0 are interpreted as octals
+        var jsonData = '{"cols":[{"id":"","label":"day","type":"date"},{"id":"","label":"posts","type":"number"}],"rows":[{"c":[{"v":"Date(2016, 6, 26)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 24)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 23)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, ' +
+                '22)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 19)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 18)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 17)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 16)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 15)"},{"v":1}]},{"c":[{"v":"Date(2016, 6' +
+                ', 11)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 10)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 08)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 07)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 06)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 05)"},{"v":2}]},{"c":[{"v":"Date(2016,' +
+                ' 6, 04)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 03)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 01)"},{"v":1}]}]}';
+
+        drawChart(jsonData);
+
+        $(window).resize(function () {
+            drawChart(jsonData);
+        });
     }
 
-     //timeSlider.draw(data);
-    dashboard.bind(timeSlider, chart);
-     dashboard.draw(data);
-
-
-  }
-
-  $(window).resize(function () {
-    drawChart();
-  });
+    $(document).ready(function () {
+        initTypeahead('/events/typeahead', '/events/');
+        //wait for gcharts to be loaded before loading the rest of the page
+        google.charts.setOnLoadCallback(onGoogleChartsLoaded);
+    });
 </script>
