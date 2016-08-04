@@ -113,7 +113,7 @@ $ rails db::migrate
 
 To populate the database run:
 ```
-$ rake db:seed
+$ rails db:seed
 ```
 
 **Running the App**
@@ -128,7 +128,7 @@ Connect to squirrels.vii.ovh:3000
 Make sure the database was initialized, then
 
 ```
-$ rake crawl
+$ rails crawl
 ```
 
 You may want to add this command to your crontab

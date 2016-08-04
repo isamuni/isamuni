@@ -14,23 +14,56 @@ users = User.create([
     occupation: "student at succulents school",
     projects: "watering++",
     links: "my website: http://www.example.com"
- },
- {
+  },
+  {
     uid: "456",
     name: "LonelyCat2",
     description: "I'm a cat, I know ruby",
     occupation: "student at josh's place",
     projects: "purr.js, catNamer.js",
     links: "my website: http://www.example.com"
- },
- {
+  },
+  {
     uid: "789",
     name: "CatCat",
     description: "I'm a cat, I know **python**",
     occupation: "student at josh's place",
     projects: "purr.js, catNamer.js",
     links: "my website: http://www.example.com"
- }
+  },
+  {
+    uid: "1097",
+    name: "Simone Ivan Conte",
+    description: "#### Educazione e Ricerca
+Sono un dottorando (secondo anno) in informatica alla University of St Andrews, sotto la supervisione del Prof. Alan Dearle e il Dr. Graham Kirby. La mia ricerca consiste nello studiare e sviluppare nuove tecniche per la gestione e distribuzione di dati in quello da noi chiamato: Sea Of Stuff. La mia ricerca è sponsorizzata da EPSRC e Adobe Systems Inc.
+
+Ho una laurea in Informatica sempre presso la University of St Andrews (2010-2014), e un diploma IB presso lo United World College in Mostar (2008-2010).
+
+My research interests include distributed systems, data models, data science, open data, provenance, storage and software engineering.
+
+Sono stato membro del gruppo di ricerca SACHI (2012-2014).
+
+#### Altro
+Nel 2014 sono diventato sviluppatore di NOMAD, una spin-off che si occupa della gestione di dati generati da spettrometri NMR. Sono poi diventato lead developer del progetto. Nel 2016 mi sono brevemente distaccato da NOMAD per ritornare come consultant nel team. Da Maggio sono temporaneamente il CTO di NOMAD.
+
+Nel 2013 ho creato PAC - Programmatori a Catania - una community digitale si programmatori, designers e appassionati e professionisti del settore tech a Catania e dintorni.
+
+Sono stato a capo dell'organizzazione di [PAC15](http://pac15.github.io/).
+
+Nel 2016 la comunità di PAC ha lanciato il primo progetto satellite: [awesome-sicily](https://github.com/sic2/awesome-sicily)
+
+#### Altro ancora
+Mi piace leggere, scrivere, fare [foto](https://500px.com/sic2), cucinare e tantissimo altro ancora :)",
+    occupation: "Dottorando, Programmatore",
+    projects: "#### Open Source
+- [awesome-sicily](https://github.com/sic2/awesome-sicily)
+- [isamuni](https://github.com/sic2/isamuni)
+
+#### Altro
+- NOMAD",
+    links: "- https://sic2.host.cs.st-andrews.ac.uk/
+- https://uk.linkedin.com/in/simoneivanconte"
+  }
   ])
 
 pages = Page.create([
@@ -80,7 +113,7 @@ posts = Post.create([
   {
     uid: "ghi",
     author_name: "LonelyCat2",
-    author_uid: "456",
+    author_uid: "1097",
     link: "fbpost: http://facebook.com",
     content: "This is an event post",
     post_type: "event",

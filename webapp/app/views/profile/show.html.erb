@@ -1,50 +1,49 @@
-<h2><%= @user.name %></h2>
-
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
-<div class="row">
-	<div class="col-lg-4">
-		<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-responsive img-rounded" height="250">
+<h2><%= @user.name %></h2>
+
+<div class="row-fluid">
+	<div class="col-lg-3">
+		<p>
+			<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-responsive img-rounded" height="250">
+		</p>
+
+		<div id="user posts">
+		<% @posts.each do |post| %>
+		   <div class="card"
+		   		<% if post.tags == 'job' %>
+		   			style="background-color: #90CAF9; border-color: #64B5F6;"
+				<% elsif post.post_type == 'link' %>
+					style="background-color: #FFEE58; border-color: #FDD835;"
+				<% elsif post.post_type == 'photo' %>
+					style="background-color: #FFCA28; border-color: #FFB300;"
+				<% else %>
+					style="background-color: #C5E1A5; border-color: #AED581;"
+				<% end %>
+			>
+				<%= render partial: "card", locals: {post: post} %>
+			</div>
+
+		<% end %>
+		</div>
 	</div>
-	<div class="col-lg-8">
+	<div class="col-lg-9">
 		<div id="user-data">
-			<h3>Occupazione</h3>
+			<h2>Occupazione</h2>
 			<p><%= @user.occupation %></p>
 
-			<h3>Descrizione</h3>
+			<h2>Descrizione</h2>
 			<p><%= markdown(@user.description) %></p>
 
-			<h3>Progetti</h3>
+			<h2>Progetti</h2>
 			<p><%= markdown(@user.projects) %></p>
 
-			<h3>Collegamenti</h3>
+			<h2>Collegamenti</h2>
 			<p><%= markdown(@user.links) %></p>
 
 			<% if current_user && @user.id == current_user.id %>
 				<%= link_to 'Modifica profilo', edit_user_path(@user) %>
 			<% end %>
-		</div>
-		<div id="user posts">
-			<h3>Post su PAC</h3>
-			<div class="card-columns">
-			   <% @posts.each do |post| %>
-
-			   <div class="card"
-			   		<% if post.tags == 'job' %>
-			   			style="background-color: #90CAF9; border-color: #64B5F6;"
-					<% elsif post.post_type == 'link' %>
-						style="background-color: #FFEE58; border-color: #FDD835;"
-					<% elsif post.post_type == 'photo' %>
-						style="background-color: #FFCA28; border-color: #FFB300;"
-					<% else %>
-						style="background-color: #C5E1A5; border-color: #AED581;"
-					<% end %>
-				>
-					<%= render partial: "card", locals: {post: post} %>
-				</div>
-
-				<% end %>
-			</div>
 		</div>
 	</div>
 </div>
