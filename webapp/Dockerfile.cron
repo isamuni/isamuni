@@ -1,7 +1,9 @@
-FROM isamuni_web
+FROM ruby:2.3
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        sqlite3 \
         cron
 
 ADD crontab /etc/cron.d/crawl-cron
