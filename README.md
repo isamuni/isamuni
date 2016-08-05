@@ -159,7 +159,11 @@ ISAMUNI_APP_SECRET=secret
 ISAMUNI_ADMINS=<list of user uids divided by comma ','>
 ```
 
-- Create and run the required containers with: `$ docker-compose up`
+Then build and run the containers:
+```
+$ docker-compose build
+$ docker-compose up
+```
 
 ## Open Data
 
