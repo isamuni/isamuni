@@ -21,6 +21,8 @@ Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 desc "Crawls events and posts from the given set of pages and insert the result into the database"
 task :crawl => :environment do
 
+  puts "Crawler started, initializing"
+
   unless ENV['ISAMUNI_APP_ID'] && ENV['ISAMUNI_APP_SECRET']
     raise "Application id and/or secret are not specified in the environment"
   end

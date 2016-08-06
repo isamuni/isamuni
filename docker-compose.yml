@@ -3,9 +3,7 @@ version: '2'
 services:
   web:
     env_file: .env
-    build:
-      context: ./webapp/.
-      dockerfile: Dockerfile
+    build: ./webapp
     command: bash -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ./webapp:/app
@@ -13,8 +11,7 @@ services:
       - "3000:3000"
   crawler:
     env_file: .env
-    build:
-      context: ./webapp/.
-      dockerfile: Dockerfile.cron
+    build: ./webapp
     volumes:
       - ./webapp:/app
+    command: clockwork crawler_clock.rb

@@ -1,1 +1,0 @@
-*/1 * * * * rails crawl > /var/log/cron.log
