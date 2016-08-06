@@ -131,7 +131,11 @@ Make sure the database was initialized, then
 $ rails crawl
 ```
 
-You may want to add this command to your crontab
+To execute crawling periodically you can either add that command to a cron job (remember setting PATH and ENV) or use
+
+```
+$ clockwork crawler_clock.rb
+```
 
 ### Docker
 
@@ -163,6 +167,11 @@ Then build and run the containers:
 ```
 $ docker-compose build
 $ docker-compose up
+```
+
+You can also run a single components (eg. the crawler)
+```
+$ docker-compose up crawler
 ```
 
 ## Open Data
