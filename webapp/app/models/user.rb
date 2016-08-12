@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
   
   def as_json(options={})
-    super(only: [:name, :occupation, :projects, :description, :links])
+    super(only: [:name, :slug, :occupation, :projects, :description, :links])
   end
 
 end
