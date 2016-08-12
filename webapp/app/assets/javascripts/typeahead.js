@@ -8,29 +8,18 @@ function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
 
   suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;
 
-  var searchSelector = 'input.typeahead';
-
-  var bloodhound = new Bloodhound({
-    remote: {
-      url: remoteUrl + '?query=%QUERY',
-      wildcard: '%QUERY'
-    },
-    datumTokenizer: function(d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-  });
-
-  // initialize the bloodhound suggestion engine
-  bloodhound.initialize();
-
   // instantiate the typeahead UI
+  var searchSelector = 'input.typeahead';
   $(searchSelector).typeahead({
     minLength: 0,
     highlight: true
   }, {
     displayKey: 'name',
-    source: bloodhound.ttAdapter(),
+    source: function(query, syncResults, asyncResults) {
+      $.get(remoteUrl + '?query=' + query, function(data) {
+        asyncResults(data);
+      });
+    }
   });
 
   // this is the event that is fired when a user clicks on a suggestion

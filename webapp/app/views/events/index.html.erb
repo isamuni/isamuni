@@ -6,10 +6,11 @@
 </ul>
 </p>
 
-<%= form_tag events_path, :method => "get" do |f| %>
 <div class="form-group">
     <div class="input-group">
-        <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+        <%= form_tag events_path, :method => "get" do |f| %>
+            <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+        <% end %>
         <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-primary" do %>
             <i class="fa fa-search"></i>
@@ -20,14 +21,12 @@
         </span>
     </div>
 </div>
-<% end %>
 
 <style>
     #mapid {
         height: 450px;
         width: 800px;
     }
-
 </style>
 
 <div class="row">
