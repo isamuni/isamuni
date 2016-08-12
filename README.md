@@ -85,15 +85,14 @@ In your bash *.profile* file, add:
 ```
 export ISAMUNI_APP_ID=appid
 export ISAMUNI_APP_SECRET=secret
+export ISAMUNI_ADMINS=<list of user uids divided by comma ','> # This is required only if you want to be an admin
 ```
 
 #### Test end-point
 If you want to run the app locally, you need to redirect the requests to the `squirrels.vii.ovh` server to your machine (localhost).
 
+Change the file `/etc/hosts` (you must be root) to include the following line:
 ```
-$ sudo nano /etc/hosts
-
-Add the following to the file:
 127.0.0.1	squirrels.vii.ovh
 ```
 
@@ -101,12 +100,12 @@ Add the following to the file:
 
 **Requirements**
 
-1. Install Ruby
-2. Install Rails
+1. Install Ruby (2.2.2+)
+2. Install Rails (5.0+)
 
 **Setup**
 ```
-$ cd /isamuni/webapp/
+$ cd isamuni/webapp/
 $ rails db::create # if necessary
 $ rails db::migrate
 ```
@@ -115,6 +114,7 @@ To populate the database run:
 ```
 $ rails db:seed
 ```
+This will populate your database with some default entries. Otherwise use the crawler (see below).
 
 **Running the App**
 ```
@@ -176,9 +176,9 @@ $ docker-compose up crawler
 
 ## Open Data
 
-You can get data in json format by appending `.json` to the web pages.
+You can get data in json format by appending `.json` to the web pages. For example, you can get data about events by making a **GET** request to `/events.json`
 
-For example, you can get data about events by making a **GET** request to `/events.json`
+Once you run **isamuni** you can go to the opendata page and checkout all the documentation for getting data from the platform.
 
 # Showcase
 
