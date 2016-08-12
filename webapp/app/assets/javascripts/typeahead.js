@@ -1,5 +1,3 @@
-
-
 function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
   "use strict";
 

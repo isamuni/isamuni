@@ -1,31 +1,22 @@
-<!-- SEARCH COMPONENT -->
-<% content_for :search do %>
- <%= form_for @search, url:users_path, :method => "get" do |f| %>
-    <div class="form-group">
-      <div class="input-group">
-          <%= f.text_field :name_like, class: 'typeahead form-control', autocomplete: 'off'%>
-          <span class="input-group-btn">
-            <%= button_tag type: "submit", class: "btn btn-primary" do %>
-                <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to users_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-              <i class="fa fa-refresh"></i>
-            <% end %>
-          </span>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-<script>
-$(document).ready(function(){
-  initTypeahead('/users/typeahead', '/users/');
-});
-</script>
-
-<!-- BODY -->
 <p id="notice"><%= notice %></p>
 
 <h1>Utenti</h1>
+
+<%= form_for @search, url:users_path, :method => "get" do |f| %>
+  <div class="form-group">
+    <div class="input-group">
+        <%= f.text_field :name_like, class: 'typeahead form-control', autocomplete: 'off'%>
+        <span class="input-group-btn">
+          <%= button_tag type: "submit", class: "btn btn-primary" do %>
+              <i class="fa fa-search"></i>
+          <% end %>
+          <%= link_to users_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+            <i class="fa fa-refresh"></i>
+          <% end %>
+        </span>
+    </div>
+  </div>
+<% end %>
 
 <table class="table table-hover table-condensed">
   <thead>
@@ -50,3 +41,9 @@ $(document).ready(function(){
 <br>
 
 <%= link_to 'New User', new_user_path, class: 'btn btn-success-outline' %>
+
+<script>
+  $(document).ready(function(){
+    initTypeahead('/users/typeahead', '/users/');
+  });
+</script>

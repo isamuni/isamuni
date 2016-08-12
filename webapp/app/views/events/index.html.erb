@@ -1,5 +1,11 @@
-<!-- SEARCH COMPONENT -->
-<% content_for :search do %>
+<h2>Eventi dalle community di PAC</h2>
+<p>Breve descrizione della pagina e come usarla. Dati aggregati da
+<ul>
+  <li>PAC</li>
+  <li>Eccetera</li>
+</ul>
+</p>
+
 <%= form_tag events_path, :method => "get" do |f| %>
 <div class="form-group">
     <div class="input-group">
@@ -15,15 +21,6 @@
     </div>
 </div>
 <% end %>
-<% end %>
-
-<h2>Eventi dalle community di PAC</h2>
-<p>Breve descrizione della pagina e come usarla. Dati aggregati da
-<ul>
-  <li>PAC</li>
-  <li>Eccetera</li>
-</ul>
-</p>
 
 <style>
     #mapid {

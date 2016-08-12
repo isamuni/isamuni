@@ -1,23 +1,20 @@
-<!-- SEARCH COMPONENT -->
-<% content_for :search do %>
- <%= form_tag communities_path, :method => "get" do |f| %>
-    <div class="form-group">
-      <div class="input-group">
-          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
-          <span class="input-group-btn">
-            <%= button_tag type: "submit", class: "btn btn-primary" do %>
-                <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to communities_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-              <i class="fa fa-refresh"></i>
-            <% end %>
-          </span>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
 <h1>Comunità</h1>
+
+<%= form_tag communities_path, :method => "get" do |f| %>
+  <div class="form-group">
+    <div class="input-group">
+        <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+        <span class="input-group-btn">
+          <%= button_tag type: "submit", class: "btn btn-primary" do %>
+              <i class="fa fa-search"></i>
+          <% end %>
+          <%= link_to communities_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+            <i class="fa fa-refresh"></i>
+          <% end %>
+        </span>
+    </div>
+  </div>
+<% end %>
 
 <table class="table table-hover table-condensed">
   <thead>
