@@ -98,7 +98,7 @@ posts = Post.create([
     link: "fbpost: http://facebook.com",
     content: "Hi guys! I am trying to learn a new programming language. I already know C++, Java and Python. What do you suggest me to learn next?",
     post_type: "status",
-    created_at: "2016-06-06 09:08:24.000000"
+    created_at: "2010-06-06 09:08:24.000000"
   },
   {
     uid: "def",
@@ -108,7 +108,7 @@ posts = Post.create([
     content: "This is a job offer",
     tags: "job",
     post_type: "status",
-    created_at: "2016-06-12 19:16:24.000000"
+    created_at: "2010-06-12 19:16:24.000000"
   },
   {
     uid: "ghi",
@@ -117,7 +117,7 @@ posts = Post.create([
     link: "fbpost: http://facebook.com",
     content: "This is an event post",
     post_type: "event",
-    created_at: "2016-06-12 19:16:24.000000"
+    created_at: "2010-06-12 19:16:24.000000"
   }
 
   ])
