@@ -28,8 +28,8 @@ Rails.application.routes.draw do
   get 'opendata', to: 'opendata#index'
 
   get 'admin', to: 'admin#index'
-  post 'admin/make_page_active', to: 'admin#make_page_active'
-  post 'admin/make_page_inactive', to: 'admin#make_page_inactive'
+  put 'admin/make_page_active', to: 'admin#make_page_active'
+  put 'admin/make_page_inactive', to: 'admin#make_page_inactive'
   delete 'admin/delete_page', to: 'admin#delete_page'
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'session#create'
   get '/auth/failure', to: 'session#auth_failure'
   get 'signout', to: 'session#destroy', as: 'signout'
-  
+
   get "community_feed", to: 'home#community_feed', as: "community_feed"
 
   # The priority is based upon order of creation: first created -> highest priority.
