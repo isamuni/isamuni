@@ -1,3 +1,11 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).on('ready',function(){
+      initTypeahead('/communities/typeahead', '/communities/');
+    });
+  </script>
+<% end %>
+
 <h1>Comunità</h1>
 
 <div class="form-group">
@@ -35,9 +43,3 @@
     <% end %>
   </tbody>
 </table>
-
-<script>
-$(document).ready(function(){
-  initTypeahead('/communities/typeahead', '/communities/');
-});
-</script>

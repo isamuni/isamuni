@@ -1,65 +1,4 @@
-<h2>Eventi dalle community di PAC</h2>
-<p>Breve descrizione della pagina e come usarla. Dati aggregati da
-<ul>
-  <li>PAC</li>
-  <li>Eccetera</li>
-</ul>
-</p>
-
-<div class="form-group">
-    <div class="input-group">
-        <%= form_tag events_path, :method => "get" do |f| %>
-            <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
-        <% end %>
-        <span class="input-group-btn">
-            <%= button_tag type: "submit", class: "btn btn-primary" do %>
-            <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-            <i class="fa fa-refresh"></i>
-            <% end %>
-        </span>
-    </div>
-</div>
-
-<style>
-    #mapid {
-        height: 450px;
-        width: 800px;
-    }
-</style>
-
-<div class="row">
-    <div class="col-sm-offset-2 col-sm-1 text-center">
-        <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue).
-    You can click on the markers to see more about an event"></div>
-    </div>
-</div>
-
-<br>
-<div id="dashboard_div" class="row">
-    <!-- This chart must be present, otherwise the filter cannot be drawn. -->
-    <div class="row" style="display: none;">
-        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
-    </div>
-    <div class="row">
-        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
-    </div>
-</div>
-<br>
-
-<div id="upcoming">
-    <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
-    <%= will_paginate @upcoming, param_name: :upcoming_page %>
-</div>
-<div id="future">
-    <%= render partial: "table", locals: {events: @future, event_type: :future} %>
-    <%= will_paginate @future, param_name: :future_page %>
-</div>
-<div id="old">
-    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
-    <%= will_paginate @old, param_name: :old_page %>
-</div>
+<% content_for :head do %>
 
 <script type="text/javascript">
     var mymap = null;
@@ -214,10 +153,73 @@
         });
     }
 
-    $(document).ready(function () {
+    $(documentError: source does not appear to be markup.on('ready',function () {
         initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
 
         //wait for gcharts to be loaded before loading the rest of the page
         google.charts.setOnLoadCallback(onGoogleChartsLoaded);
     });
 </script>
+<% end %>
+
+<h2>Eventi dalle community di PAC</h2>
+<p>Breve descrizione della pagina e come usarla. Dati aggregati da
+<ul>
+  <li>PAC</li>
+  <li>Eccetera</li>
+</ul>
+</p>
+
+<div class="form-group">
+    <div class="input-group">
+        <%= form_tag events_path, :method => "get" do |f| %>
+            <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
+        <% end %>
+        <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-primary" do %>
+            <i class="fa fa-search"></i>
+            <% end %>
+            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+            <i class="fa fa-refresh"></i>
+            <% end %>
+        </span>
+    </div>
+</div>
+
+<style>
+    #mapid {
+        height: 450px;
+        width: 800px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-1 text-center">
+        <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue). You can click on the markers to see more about an event"></div>
+    </div>
+</div>
+
+<br>
+<div id="dashboard_div" class="row">
+    <!-- This chart must be present, otherwise the filter cannot be drawn. -->
+    <div class="row" style="display: none;">
+        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
+    </div>
+    <div class="row">
+        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
+    </div>
+</div>
+<br>
+
+<div id="upcoming">
+    <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
+    <%= will_paginate @upcoming, param_name: :upcoming_page %>
+</div>
+<div id="future">
+    <%= render partial: "table", locals: {events: @future, event_type: :future} %>
+    <%= will_paginate @future, param_name: :future_page %>
+</div>
+<div id="old">
+    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
+    <%= will_paginate @old, param_name: :old_page %>
+</div>

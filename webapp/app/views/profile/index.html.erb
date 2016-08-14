@@ -1,3 +1,11 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).on('ready',function(){
+      initTypeahead('/users/typeahead', '/users/');
+    });
+  </script>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Utenti</h1>
@@ -41,9 +49,3 @@
 <br>
 
 <%= link_to 'New User', new_user_path, class: 'btn btn-success-outline' %>
-
-<script>
-  $(document).ready(function(){
-    initTypeahead('/users/typeahead', '/users/');
-  });
-</script>

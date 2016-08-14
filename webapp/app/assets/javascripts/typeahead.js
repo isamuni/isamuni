@@ -10,6 +10,7 @@ function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
 
   // instantiate the typeahead UI
   var searchSelector = 'input.typeahead';
+  $(searchSelector).typeahead('destroy');
   $(searchSelector).typeahead({
     minLength: 0,
     highlight: true
