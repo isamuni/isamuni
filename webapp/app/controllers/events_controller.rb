@@ -48,6 +48,50 @@ class EventsController < ApplicationController
     render json: all_events
   end
 
+  def all_locations
+    events = Event.select("date(starts_at) as starts_at")
+                  .group("date(starts_at)")
+                  .order('starts_at desc')
+                  .distinct.count(:uid)
+    
+    events = events.map { |event| {:c => [
+      {:v =>
+        'Date('
+        .concat(
+          event[0][0..3] # year
+          .concat(', ')
+          .concat((event[0][5..6].to_i - 1).to_s) # month (0-based)
+          .concat(', ')
+          .concat(event[0][8..9])
+          )
+        .concat(')')},
+      {:v => event[1]}
+      ]} }
+
+    datatable = {
+      "cols":
+        [{'id': '', 'label': 'day', 'type': 'date'},
+        {'id': '', 'label': 'events', 'type': 'number'}],
+      "rows":
+      events
+    }
+
+    respond_to do |format|
+      format.json { render json: datatable }
+    end
+  end
+
+  def range_events
+    start_time = Time.at(params[:start].to_i / 1000.0)
+    end_time = Time.at(params[:end].to_i / 1000.0)
+
+    @events = Post.where(:starts_at => start_time..end_time)
+                 .order('starts_at desc')
+
+    # TODO - return the events to the index page
+    # render partial: "events", :events => @events
+  end
+
   def map_events events, is_today
     events = events.map{ |event| {:uid => event.uid,
                                   :name => event.name,

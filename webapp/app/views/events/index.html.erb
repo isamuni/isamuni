@@ -1,5 +1,4 @@
 <% content_for :head do %>
-
 <script type="text/javascript">
     var mymap = null;
 
@@ -108,43 +107,50 @@
             }
         });
 
+        google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+
         var timeout = null;
         function selectHandler(e) {
-            if (e.inProgress == true) {
-                return;
-            }
-            if (timeout) {
-                clearTimeout(timeout);
-                timeout = null;
-            }
-            timeout = setTimeout(reloadPosts, 1000);
+          if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+          }
+          timeout = setTimeout(applySlider, 1000);
         }
 
-        function reloadPosts() {
-            console.log("TODO reload posts");
-            var range = timeSlider.getState().range;
-            var start = range.start.getTime();
-            var end = range.end.getTime();
-            // $.ajax({   type: 'GET',   url: '/home/posts',   data: {     'start': start,     'end': end   } }).done(function (data) {   $('#posts-view').html(data); }).fail(function (error) {   console.error("reloadPosts failed");   console.error(error); })
+        function applySlider() {
+          var range = timeSlider.getState().range;
+          var start = range.start.getTime();
+          var end = range.end.getTime();
+
+          reloadEvents(start, end);
         }
 
-        //timeSlider.draw(data);
-        google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
+        function reloadEvents(start, end) {
+          $.ajax({
+            type: 'GET',
+            url: '/events/range_events',
+            data: {
+              'start': start,
+              'end': end
+            }
+          }).done(function (data) {
+            console.log("reload events");
+          }).fail(function (error) {
+            console.error("reloadEvents failed");
+            console.error(error);
+          })
+        }
+
         dashboard.bind(timeSlider, chart);
         dashboard.draw(data);
-
     }
 
     function onGoogleChartsLoaded() {
-        //TODO handle fail
         $.get("/events/locations", drawMap);
 
-        //TODO This is some test data, however we should get the data via a GET request var jsonData = $.ajax({url: "/events/locations", dataType: "json", async: false}).responseText;
-        //TODO fixe here literals starting with 0 are interpreted as octals
-        var jsonData = '{"cols":[{"id":"","label":"day","type":"date"},{"id":"","label":"posts","type":"number"}],"rows":[{"c":[{"v":"Date(2016, 6, 26)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 24)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 23)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, ' +
-                '22)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 19)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 18)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 17)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 16)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 15)"},{"v":1}]},{"c":[{"v":"Date(2016, 6' +
-                ', 11)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 10)"},{"v":3}]},{"c":[{"v":"Date(2016, 6, 08)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 07)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 06)"},{"v":2}]},{"c":[{"v":"Date(2016, 6, 05)"},{"v":2}]},{"c":[{"v":"Date(2016,' +
-                ' 6, 04)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 03)"},{"v":1}]},{"c":[{"v":"Date(2016, 6, 01)"},{"v":1}]}]}';
+        // FIXME here literals starting with 0 are interpreted as octals
+        var jsonData = $.ajax({url: "/events/all_locations", dataType: "json", async: false}).responseText;
 
         drawChart(jsonData);
 
@@ -153,7 +159,7 @@
         });
     }
 
-    $(documentError: source does not appear to be markup.on('ready',function () {
+    $(document).ready(function () {
         initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
 
         //wait for gcharts to be loaded before loading the rest of the page
