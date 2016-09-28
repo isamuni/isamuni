@@ -7,6 +7,9 @@
 		<p>
 			<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-responsive img-rounded" height="250">
 		</p>
+		<% if current_user && @user.id == current_user.id %>
+			<%= link_to 'Modifica profilo', edit_user_path(@user) %>
+		<% end %>
 
 		<div id="user posts">
 		<% @posts.each do |post| %>
@@ -29,21 +32,16 @@
 	</div>
 	<div class="col-lg-9">
 		<div id="user-data">
-			<h2>Occupazione</h2>
+			<h4>Occupazione</h4>
 			<p><%= @user.occupation %></p>
-
-			<h2>Descrizione</h2>
+			<hr>
 			<p><%= markdown(@user.description) %></p>
-
-			<h2>Progetti</h2>
+			<hr>
+			<h4>Progetti</h4>
 			<p><%= markdown(@user.projects) %></p>
-
-			<h2>Collegamenti</h2>
+			<hr>
+			<h4>Collegamenti</h4>
 			<p><%= markdown(@user.links) %></p>
-
-			<% if current_user && @user.id == current_user.id %>
-				<%= link_to 'Modifica profilo', edit_user_path(@user) %>
-			<% end %>
 		</div>
 	</div>
 </div>
