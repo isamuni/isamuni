@@ -1,0 +1,15 @@
+<div class="form-group">
+  <%= form_tag res_path, :method => "get" do |f| %>
+    <div class="input-group">
+      <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: placeholder %>
+      <span class="input-group-btn">
+        <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
+            <i class="fa fa-search"></i>
+        <% end %>
+        <%= link_to res_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+          <i class="fa fa-refresh"></i>
+        <% end %>
+      </span>
+    </div>
+  <% end %>
+</div>

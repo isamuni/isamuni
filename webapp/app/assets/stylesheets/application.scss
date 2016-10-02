@@ -33,3 +33,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+#main-container {
+    margin-top: 80px;
+}
+
+#user-table {
+   vertical-align: middle; 
+}
+
+#user-table td {
+    vertical-align: middle;
+    padding-top: 0.50rem;
+    padding-bottom: 0.50rem;
+}

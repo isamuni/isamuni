@@ -6,21 +6,12 @@
   </script>
 <% end %>
 
-<h1>Aziende</h1>
-
-<div class="form-group">
-  <div class="input-group">
-    <%= form_tag companies_path, :method => "get" do |f| %>
-      <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off' %>
-    <% end %>
-    <span class="input-group-btn">
-      <%= button_tag type: "submit", class: "btn btn-primary" do %>
-          <i class="fa fa-search"></i>
-      <% end %>
-      <%= link_to companies_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-        <i class="fa fa-refresh"></i>
-    <% end %>
-    </span>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Aziende</h1>
+  </div>
+  <div class="col-md-6">
+    <%= render partial: "search_form", locals: {res_path: companies_path, placeholder: "Ricerca aziende"}  %>
   </div>
 </div>
 
