@@ -12,11 +12,11 @@
 
   <div class="field">
     <%= f.label :nome %><br>
-    <%= f.text_field :name, class: "form-control"%>
+    <%= f.text_field :name, class: "form-control", disabled: true %>
   </div>
   <div class="field">
     <%= f.label :occupazione %><br>
-    <%= f.text_field :occupation, class: "form-control" %>
+    <%= f.text_field :occupation, class: "form-control", required: true %>
   </div>
   <div class="field">
     <%= f.label :descrizione %><br>
@@ -34,6 +34,7 @@
     <%= f.label :tags %><br>
     <%= f.text_area :links, class: "form-control" %>
   </div>
+  <br>
   <p class="actions">
     <button type="submit" class="btn btn-primary">
       Aggiorna
