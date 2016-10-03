@@ -46,8 +46,6 @@ class Crawler
         event_info(event_id)
       end
 
-    puts events
-
     return {posts: posts, events: events}
   end
 
