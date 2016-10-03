@@ -13,7 +13,8 @@ Pages_to_track = [
     444735402236013,  # GDG Catania
     875340082514949,  # Vulcanic
     150423961659353,  # Impact Hub Siracusa
-    189873531201389   # Fablab CT
+    189873531201389,  # Fablab CT
+    173047699475869   # Startupweekendcatania
     ] # track events only
 Feed_limit = 1000 # No need to have this very high, except for the first time
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
