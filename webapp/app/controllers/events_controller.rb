@@ -5,20 +5,14 @@ class EventsController < ApplicationController
 
     if params[:query]
       @future = Event.page(params[:future_page])
-                .where("name LIKE ? and starts_at >= ?", "%#{params[:query]}%", three_weeks)
-                .order('starts_at desc')
-      @upcoming = Event.page(params[:upcoming_page])
-                .where("name LIKE ? and starts_at >= ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day, three_weeks)
+                .where("name LIKE ? and starts_at >= ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day)
                 .order('starts_at desc')
       @old = Event.page(params[:old_page])
                 .where("name LIKE ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day)
                 .order('starts_at desc')
     else
       @future = Event.page(params[:future_page])
-                .where("starts_at >= ?", three_weeks)
-                .order('starts_at desc')
-      @upcoming = Event.page(params[:upcoming_page])
-                .where(:starts_at => Time.zone.now.beginning_of_day..three_weeks)
+                .where("starts_at >= ?", Time.zone.now.beginning_of_day)
                 .order('starts_at desc')
       @old = Event.page(params[:old_page])
                 .where("starts_at < ?", Time.zone.now.beginning_of_day)
@@ -26,9 +20,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-        events = {upcoming: @upcoming, future: @future, old: @old}
+        events = {future: @future, old: @old}
         format.html { render :index }
-        format.json { render json: @upcoming | @future | @old }
+        format.json { render json: @future | @old }
     end
   end
 

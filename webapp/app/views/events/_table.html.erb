@@ -12,10 +12,8 @@
   <tbody>
     <div class="event">
       <% events.each do |event| %>
-        <% if event_type == :upcoming %>
-          <tr id="upcoming" class="table-success">
-        <% elsif event_type == :future %>
-          <tr id="future" class="table-info">
+        <% if event_type == :future %>
+          <tr id="future" class="table-success">
         <% elsif event_type == :old%>
           <tr id="old" class="table-warning">
         <% end %>

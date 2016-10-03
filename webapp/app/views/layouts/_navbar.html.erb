@@ -10,13 +10,13 @@
       <% if current_user %>
         <li class="nav-item">
           <%= link_to "/me", id: "user_area", class: 'nav-link' do %>
-            <i class="fa fa-pencil-square-o"></i>AreaUtente(<%= current_user.first_name %>)
+            <i class="fa fa-pencil-square-o"></i> <%= current_user.first_name %>
           <% end %>
         </li>
       <% else %>
         <li class="nav-item">
           <%= link_to login_path, id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
-            <i class="fa fa-pencil-square-o"></i>AreaUtente
+            <i class="fa fa-pencil-square-o"></i> Me
           <% end %>
         </li>
       <% end %>
@@ -44,6 +44,11 @@
       <li class="nav-item">
         <%= link_to events_path, title: 'Eventi', rel: 'tooltip', class: 'nav-link' do %>
           <i class="fa fa-calendar"></i> Eventi
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to opendata_path, title: 'API', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-cloud"></i> API
         <% end %>
       </li>
       <li class="nav-item">

@@ -36,7 +36,7 @@
 
     function drawMap(locations) {
         var sicily_coords = [37.5579, 14.1368];
-        var zoom = 8;
+        var zoom = 7;
         if (mymap){
           mymap.remove();
         }
@@ -177,14 +177,6 @@
   </div>
 </div>
 
-<p>
-    Breve descrizione della pagina e come usarla. Dati aggregati da
-    <ul>
-      <li>PAC</li>
-      <li>Eccetera</li>
-    </ul>
-</p>
-
 <style>
     #mapid {
         height: 500px;
@@ -194,17 +186,13 @@
 
 <h3>Eventi correnti e futuri</h3>
 <div class="row">
-    <div class="col-md-6">
-        <div id="upcoming">
-            <%= render partial: "table", locals: {events: @upcoming, event_type: :upcoming} %>
-            <%= will_paginate @upcoming, param_name: :upcoming_page %>
-        </div>
+    <div class="col-md-8">
         <div id="future">
             <%= render partial: "table", locals: {events: @future, event_type: :future} %>
             <%= will_paginate @future, param_name: :future_page %>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue). You can click on the markers to see more about an event"></div>
     </div>
 </div>
