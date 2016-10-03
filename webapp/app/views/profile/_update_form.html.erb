@@ -16,28 +16,34 @@
   </div>
   <div class="field">
     <%= f.label :occupazione %><br>
-    <%= f.text_field :occupation, class: "form-control"%>
+    <%= f.text_field :occupation, class: "form-control richtext"%>
   </div>
   <div class="field">
     <%= f.label :descrizione %><br>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.text_area :description, class: "form-control richtext" %>
   </div>
   <div class="field">
     <%= f.label :progetti %><br>
-    <%= f.text_area :projects, class: "form-control" %>
+    <%= f.text_area :projects, class: "form-control richtext" %>
   </div>
   <div class="field">
     <%= f.label :links %><br>
+    <%= f.text_area :links, class: "form-control richtext" %>
+  </div>
+  <div class="field">
+    <%= f.label :tags %><br>
     <%= f.text_area :links, class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <p class="actions">
+    <button type="submit" class="btn btn-primary">
+      Aggiorna
+    </button>
+  </p>
 <% end %>
 
 
 <script>
-var fields = document.querySelectorAll('textarea');
+var fields = document.querySelectorAll('.richtext');
 for (var i = 0; i < fields.length; ++i) {
   var item = fields[i];
   var simplemde = new SimpleMDE({ element: item });

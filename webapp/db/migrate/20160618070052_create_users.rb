@@ -4,8 +4,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider
       t.string :uid
       t.string :name, null:false
-      t.string :oauth_token
 
+      t.string :oauth_token
       t.datetime :oauth_expires_at
 
       t.string :occupation
@@ -13,6 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :description
       t.text :projects
       t.text :links
+      t.text :tags
 
       t.timestamps null: false
 

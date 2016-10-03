@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.text     "description"
     t.text     "projects"
     t.text     "links"
+    t.text     "tags"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "slug",             null: false
