@@ -6,7 +6,7 @@ class Crawler
   Feed_fields = ['id', 'message', 'from', 'type',
                   'picture', 'link', 'created_time', 'updated_time']
   Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
-                  'place']
+                  'place', 'parent_group', 'owner']
 
   def initialize(token)
     @graph = Koala::Facebook::API.new(token)
@@ -45,6 +45,8 @@ class Crawler
         event_id = event['link'][/events\/(.?)*\//][7..-2]
         event_info(event_id)
       end
+
+    puts events
 
     return {posts: posts, events: events}
   end

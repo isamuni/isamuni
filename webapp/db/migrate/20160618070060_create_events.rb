@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :uid
       t.string :name
       t.text :content
+      t.string :organiser
       
       t.timestamps null: false
 

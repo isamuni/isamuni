@@ -21,6 +21,12 @@ class Event < ApplicationRecord
       event.coordinates = fb_event['place']['location']['latitude'].to_s + ', ' + fb_event['place']['location']['longitude'].to_s
     end
 
+    if fb_event['parent_group']
+      event.organiser = fb_event['parent_group']['name']
+    else
+      event.organiser = fb_event['owner']['name']
+    end
+
     event
   end
 

@@ -23,7 +23,7 @@
         <td class="col-xs"><%= event.name %></td>
         <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
         <td class="col-xs"><%= event.location_name %></td>
-        <td><!-- organiser goes here --></td>
+        <td class="col-xs"><%= event.organiser %></td>
         <td class="col-xs">
           <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
             <i class="fa fa-calendar" ></i>

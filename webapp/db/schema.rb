@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.string   "uid"
     t.string   "name"
     t.text     "content"
+    t.string   "organiser"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.datetime "starts_at"
