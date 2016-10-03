@@ -19,7 +19,7 @@
         <% end %>
 
         <td class="col-xs"><%= event.name %></td>
-        <td class="col-xs"><%= event.starts_at.strftime("%Y-%m-%d %H:%M %Z") %></td>
+        <td class="col-xs"><%= l event.starts_at, format: :short %></td>
         <td class="col-xs"><%= event.location_name %></td>
         <td class="col-xs"><%= event.organiser %></td>
         <td class="col-xs">
