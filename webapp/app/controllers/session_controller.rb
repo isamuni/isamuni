@@ -1,4 +1,8 @@
 class SessionController < ApplicationController
+  layout "user_area"
+
+  def login
+  end
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])

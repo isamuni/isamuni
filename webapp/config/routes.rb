@@ -6,12 +6,16 @@ Rails.application.routes.draw do
 
   # User routing
   get 'me', to: 'profile#edit', as: 'edit_user'
+  get 'login', to: 'session#login', as: 'login'
+
   get 'users/typeahead(/query/:query)', to:'profile#typeahead'
   get 'users(/query/:query)', to: 'profile#index', as: 'users'
   get 'users/:id', to: 'profile#show', as: 'user'
   get 'profile/delete'
-  get 'me/new', to: 'profile#new', as: 'new_user'
-  post 'me', to: 'profile#create', as: 'create_user'
+  
+  #get 'me/new', to: 'profile#new', as: 'new_user'
+  #post 'me', to: 'profile#create', as: 'create_user'
+  
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
   get 'communities/typeahead', to:'communities#typeahead'

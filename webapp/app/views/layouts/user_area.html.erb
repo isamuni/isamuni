@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Isamuni</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+
+  <%= csrf_meta_tags %>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.min.js"></script>
+
+  <script type="text/javascript">
+
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {
+    'packages': ['corechart', 'controls']
+  });
+  </script>
+
+  <%= yield :head %>
+</head>
+<body>
+<!-- Do not display alerts by default
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+-->
+
+<%= render partial: "layouts/navbar" %>
+
+<div class="container" id="main-container">
+	<div class="row">
+		<div class="col-md-2 sidebar">
+			<ul class="nav">
+			  <% if current_user %>
+		        <li class="nav-item">
+		            <%= link_to "Profilo", edit_user_path, class: "nav-link" %>
+		        </li>
+		        <li class="nav-item">
+		        	<%= link_to "Le mie pagine", pages_path, class: "nav-link"  %>
+		        </li>
+		        <% if current_user != nil && current_user.is_admin? %>
+		        <li class="nav-item">
+		            <%= link_to "Admin", admin_path, class: "nav-link"  %>
+		        </li>
+		        <% end %>
+		        <li class="nav-item">
+		        	<%= link_to signout_path, id: "sign_out", class: "nav-link" do %>
+		              <i class="fa fa-sign-out"></i> Log Out
+		            <% end %>
+		        </li>
+		      <% else %>
+		        <li class="nav-item">
+		          <%= link_to login_path, id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+		            <i class="fa fa-facebook"></i> Login
+		          <% end %>
+		        </li>
+		      <% end %>
+		    </ul>
+		</div>
+		<div class="col-md-10 container">
+	  		<%= yield %>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

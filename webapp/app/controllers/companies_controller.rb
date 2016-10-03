@@ -1,5 +1,6 @@
 class CompaniesController < PagesController
-
+  layout "application"
+  
   def index
     if params[:query]
       @pages = Page.companies.where("name LIKE ? and active = ?", "%#{params[:query]}%", true)

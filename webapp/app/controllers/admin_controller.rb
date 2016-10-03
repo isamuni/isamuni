@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  layout "user_area"
   before_action :require_admin
 
   def index
@@ -22,8 +23,7 @@ class AdminController < ApplicationController
   end
 
   def require_admin
-    admins = ENV['ISAMUNI_ADMINS'].split(" ")
-    unless current_user != nil && admins.include?(current_user.uid)
+    unless current_user != nil && current_user.is_admin?
       render :file => "public/401.html", :status => :unauthorized
     end
   end

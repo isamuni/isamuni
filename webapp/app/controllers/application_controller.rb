@@ -23,5 +23,12 @@ private
     end
   end
 
+protected 
+
+  def check_logged_in
+    redirect_to login_path, notice: "You need to be logged in to perform that action" unless current_user
+  end
+
+
   helper_method :current_user
 end

@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
   before_action :set_user, only: [:show, :update]
+  before_action :check_logged_in, only: [:edit, :update]
 
   # GET /users/typeahead?query=text
   def typeahead
@@ -31,23 +32,24 @@ class ProfileController < ApplicationController
 
   # GET /me
   def edit
+    render :edit, layout: "user_area"
   end
 
   # POST /users
   # POST /users.json
-  def create
-    @user = User.new(post_params)
+  # def create
+  #   @user = User.new(post_params)
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @user.save
+  #       format.html { redirect_to @user, notice: 'User was successfully created.' }
+  #       format.json { render :show, status: :created, location: @user }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @user.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json

@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  layout "user_area"
+
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :check_logged_in, only: [:new, :create]
   before_action :check_page_owner, only: [:edit, :update, :destroy]
@@ -15,6 +17,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   # GET /pages/1.json
+  # TODO still used?
   def show
   end
 
@@ -88,10 +91,6 @@ class PagesController < ApplicationController
 
     helper_method :page_url
     helper_method :page_path
-
-    def check_logged_in
-      redirect_to "/", notice: "You need to be logged in to perform that action" unless current_user
-    end
 
     def check_page_owner
       redirect_to "/", notice: 'Only a page owner can edit a page' unless current_user.id == @page.owner_id

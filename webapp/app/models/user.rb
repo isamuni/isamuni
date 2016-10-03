@@ -32,4 +32,9 @@ class User < ApplicationRecord
     super(only: [:name, :slug, :occupation, :projects, :description, :links])
   end
 
+  def is_admin?
+    admins = ENV['ISAMUNI_ADMINS'].split(" ")
+    return self.uid != nil && admins.include?(self.uid)
+  end
+
 end

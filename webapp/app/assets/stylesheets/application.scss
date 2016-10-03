@@ -1,8 +1,10 @@
 /*
  * "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
  */
+
+
 @import "bootstrap";
-@import "typeaheadjs.scss";
+@import "typeaheadjs.css";
 @import "font-awesome";
 @import "introjs";
 @import "home";
@@ -11,9 +13,7 @@
 @import "leaflet";
 
 .navbar .nav > li > a {
-    float: none;
     line-height: 19px;
-    padding: 9px 10px 11px;
     text-decoration: none;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color:  #eee;
@@ -26,6 +26,7 @@
 
 .navbar-brand {
     color: #b71c1c;
+    margin-right: 2rem;
 }
 
 .custom-overflow {
@@ -46,4 +47,8 @@
     vertical-align: middle;
     padding-top: 0.50rem;
     padding-bottom: 0.50rem;
+}
+
+.sidebar {
+    border-right: 2px solid #eee;
 }

@@ -1,4 +1,5 @@
 class CommunitiesController < PagesController
+  layout "application"
   
   def index
     if params[:query]

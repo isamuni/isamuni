@@ -1,0 +1,59 @@
+<nav class="navbar navbar-fixed-top" style="background-color: #4DB6AC;">
+<div class="container">
+  <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+    &#9776;
+  </button>
+  <%= link_to 'Isamuni', home_index_path, {class: "navbar-brand"} %>
+
+  <div class="collapse navbar-toggleable-sm" id="collapsingNavbar">
+    <ul class="nav navbar-nav">
+      <% if current_user %>
+        <li class="nav-item">
+          <%= link_to "/me", id: "user_area", class: 'nav-link' do %>
+            <i class="fa fa-pencil-square-o"></i>AreaUtente(<%= current_user.first_name %>)
+          <% end %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to login_path, id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+            <i class="fa fa-pencil-square-o"></i>AreaUtente
+          <% end %>
+        </li>
+      <% end %>
+
+      <li class="nav-item">
+        <%= link_to users_path, title: 'Utenti', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-users"></i> Utenti
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to communities_path, title: 'Comunità', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-institution"></i> Community
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to companies_path, title: 'Aziende', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-industry"></i> Aziende
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to community_feed_path, title: 'Community Feed', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-rss-square"></i> Feed
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to events_path, title: 'Eventi', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-calendar"></i> Eventi
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <a class='nav-link' title="Tour Me" href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();">
+          <i class="fa fa-question-circle-o"></i> Help
+        </a>
+      </li>
+    </ul>
+
+    <a href="https://github.com/sic2/isamuni"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+  </div>
+  </div>
+</nav>
