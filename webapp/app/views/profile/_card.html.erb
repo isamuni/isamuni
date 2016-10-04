@@ -70,7 +70,7 @@
 			<% end %>
 			</div>
 			<div class="col-xs-6 text-xs-right">
-				<small style="color:black;"><%= post.created_at.strftime("%d-%m-%y %H:%M %Z") %></small>
+				<small style="color:black;"><%= l post.created_at, format: :long %></small>
 			</div>
 	      </div>
 	      <div class="modal-body">

@@ -71,14 +71,22 @@ Mi piace leggere, scrivere, fare [foto](https://500px.com/sic2), cucinare e tant
 
 pages = Page.create([
   {
-    name: "CactusSchool LUG",
+    name: "PAC - Programmatori a Catania",
     kind: Page::kinds[:community],
-    location: "Catania, via cactus 3",
-    lookingfor: "Linux-passionate cactuses and humans!",
-    links: "fbpage: http://facebook.com",
-    contacts: "imacactus@gmail.com",
+    location: "Catania",
+    links: "https://www.facebook.com/groups/programmatoriCatania/",
+    contacts: "* Simone Iva Conte
+              * Gabriele Viglianisi
+              * Giuseppe Parasiliti",
     user: users.first,
-    active: true
+    active: true,
+    description: "PAC - Programmatori a Catania - é un gruppo Facebook no-profit nato nel 2013 da un gruppo di amici appassionati d'Informatica e ora conta piú di 900 membri che ogni giorno promuovono idee e discutono problemi informatici. 
+
+Nell'Ottobre 2015 abbiamo organizzato PAC15, il primo evento PAC per PAC. Tutte le info sull'evento sul sito: http://pac15.github.io/
+
+Nel 2016 abbiamo deciso di concentrare le nostre forze nella creazione di progetti Open Source rivolti alla comunita' Siciliana. **Isamuni** è uno di questi progetti, ma non l'unico: https://sic2.github.io/pac/
+
+Seguiteci anche su Twitter - [@DevsCT](https://twitter.com/DevsCT )"
   },
   {
     name: "CactusCorp",
