@@ -13,7 +13,8 @@ users = User.create([
     description: "hey, I can code in C++",
     occupation: "student at succulents school",
     projects: "watering++",
-    links: "my website: http://www.example.com"
+    links: "my website: http://www.example.com",
+    tags: "c++, c, java"
   },
   {
     uid: "456",
@@ -21,7 +22,8 @@ users = User.create([
     description: "I'm a cat, I know ruby",
     occupation: "student at josh's place",
     projects: "purr.js, catNamer.js",
-    links: "my website: http://www.example.com"
+    links: "my website: http://www.example.com",
+    tags: "c++, js, nodejs"
   },
   {
     uid: "789",
@@ -29,7 +31,8 @@ users = User.create([
     description: "I'm a cat, I know **python**",
     occupation: "student at josh's place",
     projects: "purr.js, catNamer.js",
-    links: "my website: http://www.example.com"
+    links: "my website: http://www.example.com",
+    tags: "javascript, node"
   },
   {
     uid: "1097",
