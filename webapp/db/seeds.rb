@@ -75,9 +75,11 @@ pages = Page.create([
     kind: Page::kinds[:community],
     location: "Catania",
     links: "https://www.facebook.com/groups/programmatoriCatania/",
-    contacts: "* Simone Iva Conte
-              * Gabriele Viglianisi
-              * Giuseppe Parasiliti",
+    contacts: "
+* Simone Iva Conte
+* Gabriele Viglianisi
+* Giuseppe Parasiliti
+    ",
     user: users.first,
     active: true,
     description: "PAC - Programmatori a Catania - é un gruppo Facebook no-profit nato nel 2013 da un gruppo di amici appassionati d'Informatica e ora conta piú di 900 membri che ogni giorno promuovono idee e discutono problemi informatici. 

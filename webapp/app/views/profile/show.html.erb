@@ -11,8 +11,10 @@
 				Modifica profilo
 			<% end %>
 		<% end %>
-		<br><br>
-
+		<h4>Occupazione</h4>
+		<p><%= @user.occupation %></p>
+		<h4>Tags</h4>
+		<p><%= @user.tags %></p>
 		<div id="user posts">
 		<h4>Post in community</h4>
 		<% @posts.each do |post| %>
@@ -35,11 +37,6 @@
 	</div>
 	<div class="col-lg-9">
 		<div id="user-data">
-			<h4>Occupazione</h4>
-			<p><%= @user.occupation %></p>
-			<h4>Tags</h4>
-			<p><%= @user.tags %></p>
-			<hr>
 			<h4>Descrizione</h4>
 			<p><%= markdown(@user.description) %></p>
 			<hr>

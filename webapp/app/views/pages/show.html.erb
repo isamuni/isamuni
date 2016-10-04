@@ -7,38 +7,30 @@
 
 <div class="row">
   <div class="col-lg-8">
-    <br>
+    <h4>Descrizione</h4>
     <p><%= markdown(@page.description) %></p>
-    <hr>
-    <h4>Links</h4>
-    <p><%= markdown(@page.links) %></p>
     <hr>
     <p>
       <strong>Contatti:</strong>
-      <%= @page.contacts %>
+      <%= markdown(@page.contacts) %>
     </p>
     <hr>
-    <h4>Sede</h4>
-    <p><%= @page.location %></p>
-    <p><%= @page.coordinates %></p>
-    <style>
-      #mapid {
-          height: 225px;
-          width: 400px;
-      }
-    </style>
-    <div id="mapid" class="map"></div>
 
-    <br><br>
   </div>
 
   <div class="col-lg-4">
-    <div class="card">
-      <h3 class="card-header">Post title + time</h3>
-      <div class="card-block">
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
+      <style>
+        #mapid {
+            height: 225px;
+            width: 100%px;
+        }
+      </style>
+      <h4>Links</h4>
+      <p><%= markdown(@page.links) %></p>
+      <h4>Sede</h4>
+      <p><%= @page.location %></p>
+      <p><%= @page.coordinates %></p>
+      <div id="mapid" class="map"></div>
   </div>
 </div>
 
