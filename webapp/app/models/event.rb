@@ -2,6 +2,14 @@ require_relative "sanitize"
 
 class Event < ApplicationRecord
 
+  scope :future, -> { where "starts_at >= ?", Time.zone.now.beginning_of_day }
+  scope :past, -> { where "starts_at < ?", Time.zone.now.beginning_of_day }
+  scope :only_with_coordinates, -> { where "coordinates IS NOT NULL" }
+
+  def self.name_like query
+    where "name LIKE ?", "%#{query}%"
+  end
+
   def self.from_fb_event fb_event
 
     #handle optional content
@@ -33,5 +41,6 @@ class Event < ApplicationRecord
   def as_json(options={})
     super(only: [:name, :starts_at, :uid])
   end
+
 
 end

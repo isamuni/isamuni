@@ -207,3 +207,7 @@ it:
       long: "%d %B %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  will_paginate:
+    previous_label: "precedente"
+    next_label: "successiva"
+    page_gap: " ... "

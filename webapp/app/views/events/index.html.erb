@@ -59,9 +59,6 @@
         var data = new google.visualization.DataTable(jsonData);
         var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
-        var today = new Date();
-        var next_three_weeks = new Date(today.getTime() + (21 * 60 * 24 * 60 * 1000));
-
         var timeSlider = new google.visualization.ControlWrapper({
             'controlType': 'ChartRangeFilter',
             'containerId': 'filter_div',
@@ -71,7 +68,7 @@
                     chartOptions: {
                         height: 50,
                         chartArea: {
-                            width: '80%'
+                            width: '100%'
                         }
                     },
                     chartView: {
@@ -81,8 +78,8 @@
             },
             'state': {
                 'range': {
-                    'start': today,
-                    'end': next_three_weeks
+                    'start': moment().subtract(2,'years').toDate(),
+                    'end': new Date()
                 }
             }
         });
@@ -123,27 +120,13 @@
           var start = range.start.getTime();
           var end = range.end.getTime();
 
-          reloadEvents(start, end);
-        }
-
-        function reloadEvents(start, end) {
-          $.ajax({
-            type: 'GET',
-            url: '/events/range_events',
-            data: {
-              'start': start,
-              'end': end
-            }
-          }).done(function (data) {
-            console.log("reload events");
-          }).fail(function (error) {
-            console.error("reloadEvents failed");
-            console.error(error);
-          })
+          $('#start_input').val(start);
+          $('#end_input').val(end);
         }
 
         dashboard.bind(timeSlider, chart);
         dashboard.draw(data);
+        applySlider();
     }
 
     function onGoogleChartsLoaded() {
@@ -162,29 +145,23 @@
     $(document).ready(function () {
         initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
 
+
         //wait for gcharts to be loaded before loading the rest of the page
         google.charts.setOnLoadCallback(onGoogleChartsLoaded);
     });
 </script>
 <% end %>
 
-<div class="row">
-  <div class="col-md-6">
-    <h1>Eventi</h1>
-  </div>
-  <div class="col-md-6">
-    <%= render partial: "search_form", locals: {res_path: events_path, placeholder: "Ricerca eventi"}  %>
-  </div>
-</div>
+<h1>Eventi</h1>
 
 <style>
     #mapid {
-        height: 500px;
+        height: 400px;
         width: 100%;
     }
 </style>
 
-<h3>Eventi correnti e futuri</h3>
+<h3>Prossimi eventi</h3>
 <div class="row">
     <div class="col-md-8">
         <div id="future">
@@ -198,26 +175,44 @@
 </div>
 <hr/>
 
-<div id="dashboard_div" class="row">
-  <div class="col-md-3">
+<div class="row">
+  <div class="col-md-6">
     <h3>Eventi passati</h3>
-    <p>Puoi usare lo slider sulla destra per filtrare i post. Il sistema mostra 30 post alla volta</p>
+    <p>Puoi usare la form sulla destra per filtrare gli eventi</p>
   </div>
-  <div class="col-md-9">
-    <div id="dashboard_div" class="row">
-        <!-- This chart must be present, otherwise the filter cannot be drawn. -->
-            <div class="row" style="display: none;">
-                <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
-            </div>
-            <div class="row">
-                <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
-            </div>
+  <div class="col-md-6">
+  <div id="dashboard_div" class="row">
+    <div class="row" style="display: none;">
+        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
     </div>
+    <div class="row">
+        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
+    </div>
+    <p>
+    <div class="form-group">
+      <%= form_tag events_path, :method => "get" do |f| %>
+        <div class="input-group">
+          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
+
+          <input type="hidden" id="start_input" name="start" value="0">
+          <input type="hidden" id="end_input" name="end" value="0">
+
+          <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
+                <i class="fa fa-search"></i>
+            <% end %>
+            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+              <i class="fa fa-refresh"></i>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    </p>
   </div>
 </div>
 
 <br>
-
 
 <div id="old">
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>

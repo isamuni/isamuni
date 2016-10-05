@@ -1,34 +1,29 @@
 class EventsController < ApplicationController
 
   def index
-    three_weeks = Time.now + (3*7*24*60*60) 
+    @future = Event.future.page(params[:future_page]).order('starts_at ASC')
+    @old = Event.page(params[:old_page]).order('starts_at desc')
 
-    if params[:query]
-      @future = Event.page(params[:future_page])
-                .where("name LIKE ? and starts_at >= ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day)
-                .order('starts_at desc')
-      @old = Event.page(params[:old_page])
-                .where("name LIKE ? and starts_at < ?", "%#{params[:query]}%", Time.zone.now.beginning_of_day)
-                .order('starts_at desc')
+    if params[:start] and params[:end]
+      start_time = Time.at(params[:start].to_i / 1000.0)
+      end_time = Time.at(params[:end].to_i / 1000.0)
+      
+      @old = @old.where(starts_at: start_time..end_time)
     else
-      @future = Event.page(params[:future_page])
-                .where("starts_at >= ?", Time.zone.now.beginning_of_day)
-                .order('starts_at desc')
-      @old = Event.page(params[:old_page])
-                .where("starts_at < ?", Time.zone.now.beginning_of_day)
-                .order('starts_at desc')
+      @old = @old.past
     end
 
+    @old = @old.name_like(params[:query]) if params[:query]
+
     respond_to do |format|
-        events = {future: @future, old: @old}
+        #events = {future: @future, old: @old}
         format.html { render :index }
         format.json { render json: @future | @old }
     end
   end
 
   def typeahead
-    @search  = Event.where("name LIKE ?", "%#{params[:query]}%")
-    render json: @search
+    render json: Event.name_like(params[:query])
   end
 
   def locations
@@ -48,26 +43,26 @@ class EventsController < ApplicationController
                   .order('starts_at desc')
                   .distinct.count(:uid)
     
-    events = events.map { |event| {:c => [
-      {:v =>
-        'Date('
-        .concat(
-          event[0][0..3] # year
-          .concat(', ')
-          .concat((event[0][5..6].to_i - 1).to_s) # month (0-based)
-          .concat(', ')
-          .concat(event[0][8..9])
-          )
-        .concat(')')},
-      {:v => event[1]}
-      ]} }
+    events = events.map do |event| 
+      
+      year = event[0][0..3]
+      month = (event[0][5..6].to_i - 1).to_s
+      day = event[0][8..9]
+      datestr = "Date(#{year},#{month},#{day})"
+      
+      {c:[
+        {v: datestr},
+        {v: event[1]}
+      ]}
+
+    end
 
     datatable = {
-      "cols":
-        [{'id': '', 'label': 'day', 'type': 'date'},
-        {'id': '', 'label': 'events', 'type': 'number'}],
-      "rows":
-      events
+      "cols": [
+        {'id': '', 'label': 'day', 'type': 'date'},
+        {'id': '', 'label': 'events', 'type': 'number'}
+      ],
+      "rows": events
     }
 
     respond_to do |format|
@@ -75,16 +70,15 @@ class EventsController < ApplicationController
     end
   end
 
-  def range_events
-    start_time = Time.at(params[:start].to_i / 1000.0)
-    end_time = Time.at(params[:end].to_i / 1000.0)
+  # def range_events
+  #   start_time = Time.at(params[:start].to_i / 1000.0)
+  #   end_time = Time.at(params[:end].to_i / 1000.0)
 
-    @events = Post.where(:starts_at => start_time..end_time)
-                 .order('starts_at desc')
+  #   events = Event.where(starts_at: start_time..end_time)
+  #                .order('starts_at desc')
 
-    # TODO - return the events to the index page
-    # render partial: "events", :events => @events
-  end
+  #   render partial: "table", :events => @events
+  # end
 
   def map_events events, is_today
     events = events.map{ |event| {:uid => event.uid,
