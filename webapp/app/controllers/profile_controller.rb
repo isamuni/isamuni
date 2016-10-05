@@ -24,6 +24,7 @@ class ProfileController < ApplicationController
   def show
     set_user
     @posts = Post.where(author_uid: @user.uid).limit(5).order('created_at desc')
+    @count = Post.where(author_uid: @user.uid).count()
   end
 
   def new
@@ -35,6 +36,7 @@ class ProfileController < ApplicationController
     render :edit, layout: "user_area"
   end
 
+  # GET /users/:id/all_posts
   def all_posts
     set_user
     @posts = Post.where(author_uid: @user.uid).order('created_at desc')
