@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio']
+  Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 
   def self.from_fb_post feed_post
     post = Post.new()
