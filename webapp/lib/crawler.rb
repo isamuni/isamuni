@@ -4,7 +4,7 @@ require 'json'
 class Crawler
 
   Feed_fields = ['id', 'message', 'from', 'type',
-                  'picture', 'link', 'created_time', 'updated_time']
+                  'picture', 'link', 'created_time', 'updated_time', 'name', 'caption', 'description']
   Event_fields = ['id', 'name', 'description', 'start_time', 'end_time', 'updated_time',
                   'place', 'parent_group', 'owner']
 

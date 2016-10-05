@@ -1,22 +1,13 @@
 require 'crawler'
+require 'yaml'
 
-Group_to_track = 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
-Pages_to_track = [
-    116505148430596,  # YoutHub
-    371576386279313,  # EESTEC Catania
-    1486797638277248, # CoderDojo Etneo
-    887171771350676,  # ATFactory
-    1457341927813814, # Hackspacee Catania
-    859949567453237,  # MPS Catania
-    1380906508817529, # Startup Messina
-    146290095529300,  # Consorzio Arca
-    444735402236013,  # GDG Catania
-    875340082514949,  # Vulcanic
-    150423961659353,  # Impact Hub Siracusa
-    189873531201389,  # Fablab CT
-    173047699475869   # Startupweekendcatania
-    ] # track events only
+config = YAML.load_file('crawler_config.yml')
+
+Group_to_track = config['group'] # Track posts of this group. This is the id for the group Programmatori a Catania
+Pages_to_track = config['pages'] # track events only
+
 Feed_limit = 1000 # No need to have this very high, except for the first time
+
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 
 desc "Crawls events and posts from the given set of pages and insert the result into the database"

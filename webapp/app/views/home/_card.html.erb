@@ -1,8 +1,12 @@
 <%= content_tag(:div, class: 'post card-block', data: {toggle: "modal", target: '#' + post.uid} ) do %>
-	<blockquote class="card-blockquote custom-overflow">
-		<% if post.content != nil %>
-			<p><%= post.content[0, 20] %> ...</p>
+		<% if post.picture %>
+			<img src=<%= post.picture %> class="center-block img-fluid img-rounded">
 		<% end %>
+	<blockquote class="card-blockquote">
+		<p>
+			<%= truncate(post.name, length: 40) if post.name %>
+			<%= truncate(post.content) if post.content %>
+		</p>
 	</blockquote>
 	<div class="row ">
 		<div class="col-md-12 text-right">
@@ -55,10 +59,10 @@
 
 				<% if post.link != nil && post.picture != nil %>
 					<a href=<%= post.link %> target="_blank">
-						<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+						<img src=<%= post.picture %> class="center-block img-fluid img-rounded">
 					</a>
 				<% elsif post.picture != nil %>
-					<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+					<img src=<%= post.picture %> class="center-block img-fluid img-rounded">
 				<% end %>
 
 			</div>

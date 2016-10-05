@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.text     "content"
     t.string   "post_type"
     t.string   "tags"
+    t.string   "caption"
+    t.string   "description"
+    t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

@@ -44,7 +44,7 @@
     <% @users.each do |user| %>
       <tr>
         <td>
-          <img src="<%= user.profile_pic %>" class="img-responsive img-rounded">
+          <img src="<%= user.profile_pic %>" class="img-fluid img-rounded">
         </td>
         <td><%= link_to user.name, user %></td>
         <td><%= user.occupation %></td>

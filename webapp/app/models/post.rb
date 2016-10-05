@@ -10,6 +10,10 @@ class Post < ApplicationRecord
     post.created_at = feed_post['created_time']
     post.updated_at = feed_post['updated_time']
     post.post_type = feed_post['type']
+    post.caption = feed_post['caption']
+    post.description = feed_post['description']
+    post.name = feed_post['name']
+
     if feed_post['link'] != nil
       post.link = feed_post['link']
     end

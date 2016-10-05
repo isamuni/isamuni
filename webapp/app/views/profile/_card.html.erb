@@ -55,10 +55,10 @@
 
 				<% if post.link != nil && post.picture != nil %>
 					<a href=<%= post.link %> target="_blank">
-						<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+						<img src=<%= post.picture %> class="center-block img-fluid img-rounded">
 					</a>
 				<% elsif post.picture != nil %>
-					<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+					<img src=<%= post.picture %> class="center-block img-fluid img-rounded">
 				<% end %>
 
 			</div>

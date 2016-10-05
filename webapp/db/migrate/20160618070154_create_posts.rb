@@ -9,6 +9,9 @@ class CreatePosts < ActiveRecord::Migration
       t.text :content
       t.string :post_type
       t.string :tags
+      t.string :caption
+      t.string :description
+      t.string :name
 
       t.timestamps null: false
     end
