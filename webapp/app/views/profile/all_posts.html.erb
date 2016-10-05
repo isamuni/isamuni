@@ -1,0 +1,7 @@
+<h2>Tutti i post di <%= link_to @user.name, @user %></h2>
+
+<div id="posts-view" class="card-columns">
+	<%= render partial: "posts", locals: {posts: @posts} %>
+</div>
+
+<br>

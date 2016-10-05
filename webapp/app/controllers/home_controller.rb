@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
 
+  MAX_NUMBER_OF_POSTS = 50
+  MAX_NUMBER_OF_JOB_POSTS = 20
+
   def index
     @posts_count = Post.where('created_at >= ?', 1.week.ago).count
     @users_count = User.count
@@ -11,8 +14,8 @@ class HomeController < ApplicationController
   end
 
   def community_feed
-  	@posts = Post.limit(30).order('created_at desc')
-  	@posts_jobs = Post.where(tags: 'job').limit(30).order('created_at desc')
+  	@posts = Post.limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
+  	@posts_jobs = Post.where(tags: 'job').limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
   end
 
   def data
@@ -55,6 +58,7 @@ class HomeController < ApplicationController
     end_time = Time.at(params[:end].to_i / 1000.0)
 
     @posts = Post.where(:created_at => start_time..end_time)
+                 .limit(MAX_NUMBER_OF_POSTS)
                  .order('created_at desc')
 
     render partial: "posts", :posts => @posts

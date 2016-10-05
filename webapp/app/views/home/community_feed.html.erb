@@ -1,38 +1,41 @@
 <h2>Post dalla community di PAC</h2>
 <p>Questa pagina aggrega i vari post delle varie community e permette di filtrarli per data</p>
-<hr/>
+<hr>
 <div id="dashboard_div" class="row">
   <div class="col-md-3">
-    <h3>Filtra</h3>
-    <p>Puoi usare lo slider sulla destra per filtrare i post. Il sistema mostra 30 post alla volta</p>
+    <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
+    </p>
+    <p>
+      Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
+    </p>
   </div>
   <div class="col-md-9">
     <div class="row">
       <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
     </div>
     <div class="row">
-      <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 30 posts at a time)"></div>
+      <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 50 posts at a time)"></div>
     </div>
   </div>
 </div>
 
 <br>
-<hr/>
+<hr>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <h4> Post </h4>
       <div id="posts-view" class="card-columns">
         <%= render partial: "posts", locals: {posts: @posts} %>
       </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <h4>Offerte di lavoro</h4>
       <% @posts_jobs.each_with_index do |post, index| %>
-      <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
-        <%= render partial: "card", locals: {post: post} %>
-      </div>
+        <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
+          <%= render partial: "card", locals: {post: post} %>
+        </div>
       <% end %>
     </div>
 </div>

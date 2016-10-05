@@ -23,7 +23,7 @@ class ProfileController < ApplicationController
   # GET /users/:id
   def show
     set_user
-    @posts = Post.where(author_uid: @user.uid).limit(30).order('created_at desc')
+    @posts = Post.where(author_uid: @user.uid).limit(5).order('created_at desc')
   end
 
   def new
@@ -33,6 +33,11 @@ class ProfileController < ApplicationController
   # GET /me
   def edit
     render :edit, layout: "user_area"
+  end
+
+  def all_posts
+    set_user
+    @posts = Post.where(author_uid: @user.uid).order('created_at desc')
   end
 
   # POST /users

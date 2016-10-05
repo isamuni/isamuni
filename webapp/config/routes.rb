@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/typeahead(/query/:query)', to:'profile#typeahead'
   get 'users(/query/:query)', to: 'profile#index', as: 'users'
   get 'users/:id', to: 'profile#show', as: 'user'
+  get 'users/:id/all_posts', to: 'profile#all_posts', as: 'all_posts'
   get 'profile/delete'
   
   #get 'me/new', to: 'profile#new', as: 'new_user'

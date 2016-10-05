@@ -56,7 +56,7 @@
 		        </li>
 		      <% else %>
 		        <li class="nav-item">
-		          <%= link_to login_path, id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+		          <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
 		            <i class="fa fa-facebook"></i> Login
 		          <% end %>
 		        </li>
