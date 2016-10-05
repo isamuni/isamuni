@@ -1,97 +1,73 @@
-<div class='post card-block'>
+<%= content_tag(:div, class: 'post card-block', data: {toggle: "modal", target: '#' + post.uid} ) do %>
 	<blockquote class="card-blockquote custom-overflow">
 		<% if post.content != nil %>
 			<p><%= post.content[0, 20] %> ...</p>
 		<% end %>
 	</blockquote>
-	<div class="row">
-		<div class="col-xs-6">
-			<% if post.link.present? and (post.post_type.eql? 'link' or post.post_type.eql? 'event') %>
-				<%= link_to post.link, :target => "_blank" do %>
-					<% if post.post_type.eql? 'link' %>
-						<i class="fa fa-link"></i>
-					<% else %>
-						<i class="fa fa-calendar"></i>
-					<% end %>
-				<% end %>
-			<% else %>
-				<% if post.post_type.eql? 'photo' %>
-					<i class="fa fa-photo"></i>
-				<% else %>
-					<i class="fa fa-sticky-note-o"></i>
-				<% end %>
-			<% end %>
-
-			<% unless post.post_type.eql? 'event' %>
-				<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-					<i class="fa fa-facebook" ></i>
-				<% end %>
-			<% end %>
-		</div>
-		<div class="col-xs-6 text-xs-right">
-			<small style="color:black;"><%= post.author_name[0..0] + ". " + post.author_name.split.last %></small>
+	<div class="row ">
+		<div class="col-md-12 text-right">
+			<i class="fa <%= post_icon post.post_type %>"></i>
+			
+			<small style="color:black;"> - <%= post.author_name[0..0] + ". " + 
+											post.author_name.split.last %> 
+											<%= post.created_at.strftime("%d-%m-%y") %>
+			</small>
 		</div>
 	</div>
-	<div class="row">
-	  <div class="col-xs-6">
-	  	<%= link_to "#", data: {toggle: "modal", target: '#' + post.uid} do %>
-	  		<i class="fa fa-expand" ></i>
-		<% end %>
-	  </div>
-	  <div class="col-xs-6 text-xs-right">
-	  	<small style="color:black;"><%= post.created_at.strftime("%d-%m-%y") %></small>
-	  </div>
-	</div>
+<% end %>
 
-	<div class="modal fade" id=<%= post.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	      	<div class="col-xs-6 text-xs-left">
-	      	<% if post.link.present? and (post.post_type.eql? 'link' or post.post_type.eql? 'event') %>
-				<%= link_to post.link, :target => "_blank" do %>
-					<% if post.post_type.eql? 'link' %>
-						<i class="fa fa-link"></i>
-					<% else %>
-						<i class="fa fa-calendar"></i>
+<div class="modal fade" id=<%= post.uid %> tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="col-xs-6 text-xs-left">
+					<% if post.link.present? and (post.post_type.eql? 'link' or post.post_type.eql? 'event') %>
+					<%= link_to post.link, :target => "_blank" do %>
+						<% if post.post_type.eql? 'link' %>
+							<i class="fa fa-link"></i>
+						<% else %>
+							<i class="fa fa-calendar"></i>
+						<% end %>
 					<% end %>
-				<% end %>
-			<% else %>
-				<% if post.post_type.eql? 'photo' %>
-					<i class="fa fa-photo"></i>
-				<% else %>
-					<i class="fa fa-sticky-note-o"></i>
-				<% end %>
-			<% end %>
-			<% unless post.post_type.eql? 'event' %>
-		      	<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
-					<i class="fa fa-facebook" ></i>
-				<% end %>
-			<% end %>
-			</div>
-			<div class="col-xs-6 text-xs-right">
-				<small style="color:black;"><%= l post.created_at, format: :long %></small>
-			</div>
-	      </div>
-	      <div class="modal-body">
-	        <%= markdown(post.content) %>
+					<% else %>
+						<% if post.post_type.eql? 'photo' %>
+							<i class="fa fa-photo"></i>
+						<% else %>
+							<i class="fa fa-sticky-note-o"></i>
+						<% end %>
+					<% end %>
+				</div>
+				<div class="col-xs-6 text-xs-right">
+					<% unless post.post_type.eql? 'event' %>
+						<%= link_to 'https://www.facebook.com/' + post.uid, :target => "_blank" do %>
+							<small style="color:black;"><u><%= l post.created_at, format: :long %></u></small>
+						<% end %>
+					<% end %>
 
-	        <% if post.link != nil && post.picture != nil %>
-	        	<a href=<%= post.link %> target="_blank">
-	        		<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
-	        	</a>
-	        <% elsif post.picture != nil %>
-	        	<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
-	        <% end %>
-
-	      </div>
-	      <div class="modal-footer">
-	      	<div class="col-xs-6 text-xs-left">
-				<small style="color:black;">Posted by: <strong><%= post.author_name %></strong></small>
+					<% if post.post_type.eql? 'event' %>
+						<small style="color:black;"><%= l post.created_at, format: :long %></small>
+					<% end %>
+					
+				</div>
 			</div>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
+  			<div class="modal-body">
+				<%= markdown(post.content) %>
+
+				<% if post.link != nil && post.picture != nil %>
+					<a href=<%= post.link %> target="_blank">
+						<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+					</a>
+				<% elsif post.picture != nil %>
+					<img src=<%= post.picture %> class="center-block img-responsive img-rounded">
+				<% end %>
+
+			</div>
+			<div class="modal-footer">
+				<div class="col-xs-6 text-xs-left">
+				<small style="color:black;">Postato da: <strong><%= post.author_name %></strong></small>
+			</div>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
 </div>
