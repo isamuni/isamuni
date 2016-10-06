@@ -13,7 +13,7 @@
           pageid: pageid
         }
       }).done(function () {
-        $this.text("Activate").removeClass("btn-warning-outline deactivate-page-btn").addClass("btn-success-outline activate-page-btn");
+        $this.text("Activate").removeClass("btn-outline-warning deactivate-page-btn").addClass("btn-outline-success activate-page-btn");
       }).fail(function (e) {
         console.log("errore" + e);
       })
@@ -30,7 +30,7 @@
           pageid: pageid
         }
       }).done(function () {
-        $this.text("Deactivate").removeClass("btn-success-outline activate-page-btn").addClass("btn-warning-outline deactivate-page-btn");
+        $this.text("Deactivate").removeClass("btn-outline-success activate-page-btn").addClass("btn-outline-warning deactivate-page-btn");
       }).fail(function (e) {
         console.log("Error: " + e);
       })
@@ -92,13 +92,13 @@ Questa pagina e' accessibile solo agli admin e puo' essere usata per:
       <td><%= link_to 'Show', page %></td>
       <td>
         <% if page.active %>
-        <button data-page-id="<%= page.id %>" class="btn btn-warning-outline deactivate-page-btn">Deactivate</button>
+        <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn">Deactivate</button>
       <% else %>
-        <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-success-outline activate-page-btn">Activate</button>
+        <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn">Activate</button>
         <% end %>
       </td>
       <td>
-        <button id="delete-page" data-page-id="<%= page.id %>" class="btn btn-danger-outline delete-page-btn">Delete</button>
+        <button id="delete-page" data-page-id="<%= page.id %>" class="btn btn-outline-danger delete-page-btn">Delete</button>
       </td>
     </tr>
     <% end %>
