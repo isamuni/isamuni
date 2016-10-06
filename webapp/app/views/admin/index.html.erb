@@ -89,12 +89,22 @@ Questa pagina e' accessibile solo agli admin e puo' essere usata per:
     <tr>
       <td><%= page.name %></td>
       <td><%= page.kind %></td>
-      <td><%= link_to 'Show', page %></td>
+      <td>
+        <!-- This is a dirty hack to get the page path correctly. Please FIX -->
+        <% if page.community? %>
+          <% kind = 'communities' %>
+        <% else %>
+          <% kind = 'companies' %>
+        <% end %>
+        <%= link_to kind + '/' + page.slug, class: "btn btn-primary btn-md" do %>
+          <i class="fa fa-eye"></i>
+        <% end %>
+      </td>
       <td>
         <% if page.active %>
-        <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn">Deactivate</button>
-      <% else %>
-        <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn">Activate</button>
+          <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn">Deactivate</button>
+        <% else %>
+          <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn">Activate</button>
         <% end %>
       </td>
       <td>
