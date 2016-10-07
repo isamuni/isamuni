@@ -67,63 +67,26 @@
 
 Questa pagina e' accessibile solo agli admin e puo' essere usata per:
 <ul>
-  <li>Attivare/Deattivare e Cancellare le pagine</li>
-  <li>Cancellare eventi</li>
-  <li>Cancellare posts e cambiare le categoria dei posts (e.g. se un post non e' un annuncio di lavoro)</li>
-  <li>Cancellare/Bannare utenti</li>
+  <li>Attivare/Deattivare e Cancellare le <a href='#pages'>pagine</a></li>
+  <li>Cancellare <a href='#events'>eventi</a></li>
+  <li>Cancellare <a href='#posts'>posts</a> e cambiare le categoria dei posts (e.g. se un post non e' un annuncio di lavoro)</li>
+  <li>Cancellare/Bannare <a href='#users'>utenti</a></li>
 </ul>
 
-<h3>Pages</h3>
+<h3 id='pages'>Pages</h3>
+<%= render partial: "pagestable", locals: {pages: @pages} %>
+<%= will_paginate @pages, param_name: :page_page %>
 
-<table class="table table-hover table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Kind</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
+<h3 id='users'>Users</h3>
+<%= render partial: "userstable", locals: {users: @users} %>
+<%= will_paginate @users, param_name: :user_page %>
 
-  <tbody id="pages-table">
-    <% @pages.each do |page| %>
-    <tr>
-      <td><%= page.name %></td>
-      <td><%= page.kind %></td>
-      <td>
-        <!-- This is a dirty hack to get the page path correctly. Please FIX -->
-        <% if page.community? %>
-          <% kind = 'communities' %>
-        <% else %>
-          <% kind = 'companies' %>
-        <% end %>
-        <%= link_to kind + '/' + page.slug, class: "btn btn-primary btn-md" do %>
-          <i class="fa fa-eye"></i>
-        <% end %>
-      </td>
-      <td>
-        <% if page.active %>
-          <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn">Deactivate</button>
-        <% else %>
-          <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn">Activate</button>
-        <% end %>
-      </td>
-      <td>
-        <button id="delete-page" data-page-id="<%= page.id %>" class="btn btn-outline-danger delete-page-btn">Delete</button>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<h3 id='events'>Events</h3>
+<%= render partial: "eventstable", locals: {events: @events} %>
+<%= will_paginate @events, param_name: :event_page %>
 
-<h3>Events</h3>
+<h3 id='posts'>Posts</h3>
+<%= render partial: "poststable", locals: {posts: @posts} %>
+<%= will_paginate @posts, param_name: :post_page %>
 
-TODO
-
-<h3>Posts</h3>
-
-TODO
-
-<h3>Users</h3>
-
-TODO
-
+<br>

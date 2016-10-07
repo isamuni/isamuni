@@ -1,0 +1,58 @@
+<table id="table-events" class="table table-hover table-condensed">
+  <thead class="thead-inverse">
+    <tr>
+      <th class="col-xs">Evento</th>
+      <th class="col-xs">Quando</th>
+      <th class="col-xs">Chi</th>
+      <th class="col-xs">Link</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <div class="event">
+      <% events.each do |event| %>
+        <td class="col-xs"><%= event.name %></td>
+        <td class="col-xs"><%= l event.starts_at, format: :short %></td>
+        <td class="col-xs"><%= event.organiser %></td>
+        <td class="col-xs">
+          <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid}, class: "btn btn-primary btn-xs" do %>
+          <i class="fa fa-eye"></i>
+        <% end %>
+        </td>
+        <td>N/A</td>
+        <td>N/A</td>
+      </tr>
+
+      <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="col-xs-6 text-xs-left">
+                <strong><%= event.name %></strong>
+              </div>
+              <div class="col-xs-6 text-xs-right">
+                <small style="color:black;"><%= l event.starts_at, format: :long %></small>
+                <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
+                  <i class="fa fa-calendar"></i>
+                <% end %>
+              </div>
+            </div>
+            <div class="modal-body">
+              <%= markdown(event.content) %>
+            </div>
+
+            <div class="modal-footer">
+              <div class="col-xs-6 text-xs-left">
+                  <small style="color:black;">Organizzato da: <strong><%= event.organiser %></strong></small>
+              </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </tbody>
+</table>

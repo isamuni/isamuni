@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
 
   def index
-    @future = Event.future.page(params[:future_page]).order('starts_at ASC')
-    @old = Event.page(params[:old_page]).order('starts_at desc')
+    @future = Event.future.page(params[:future_page]).order('starts_at DESC')
+    @old = Event.page(params[:old_page]).order('starts_at DESC')
 
     if params[:start] and params[:end]
       start_time = Time.at(params[:start].to_i / 1000.0)
@@ -16,7 +16,6 @@ class EventsController < ApplicationController
     @old = @old.name_like(params[:query]) if params[:query]
 
     respond_to do |format|
-        #events = {future: @future, old: @old}
         format.html { render :index }
         format.json { render json: @future | @old }
     end
@@ -40,7 +39,7 @@ class EventsController < ApplicationController
   def all_locations
     events = Event.select("date(starts_at) as starts_at")
                   .group("date(starts_at)")
-                  .order('starts_at desc')
+                  .order('starts_at DESC')
                   .distinct.count(:uid)
     
     events = events.map do |event| 
