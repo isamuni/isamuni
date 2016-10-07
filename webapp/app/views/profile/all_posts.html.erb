@@ -1,5 +1,14 @@
-<h2>Tutti i post di <%= link_to @user.name, @user %></h2>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Post di <%= link_to @user.name, @user %></h1>
+  </div>
+  <div class="col-md-6">
+  	SEARCH POSTS HERE
+  </div>
+</div>
 
+<hr>
 <div id="posts-view" class="card-columns">
 	<%= render partial: "posts", locals: {posts: @posts} %>
 </div>
