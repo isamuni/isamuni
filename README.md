@@ -15,7 +15,7 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * [Open Data](#open-data)
 * [Showcase](#showcase)
 
-More info and roadmap in the [wiki](/wiki)
+More info and roadmap in the [wiki](https://github.com/sic2/isamuni/wiki)
 
 ## Configuring and Running the App
 
