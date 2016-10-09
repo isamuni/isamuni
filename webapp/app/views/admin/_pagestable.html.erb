@@ -19,19 +19,19 @@
         <% else %>
           <% kind = 'companies' %>
         <% end %>
-        <%= link_to kind + '/' + page.slug, class: "btn btn-primary btn-xs" do %>
+        <%= link_to kind + '/' + page.slug, class: "btn btn-primary btn-sm" do %>
           <i class="fa fa-eye"></i>
         <% end %>
       </td>
       <td>
         <% if page.active %>
-          <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn">Deactivate</button>
+          <button data-page-id="<%= page.id %>" class="btn btn-outline-warning deactivate-page-btn btn-sm">Deactivate</button>
         <% else %>
-          <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn">Activate</button>
+          <button id="state-page" data-page-id="<%= page.id %>" class="btn btn-outline-success activate-page-btn btn-sm">Activate</button>
         <% end %>
       </td>
       <td>
-        <button id="delete-page" data-page-id="<%= page.id %>" class="btn btn-outline-danger delete-page-btn">Delete</button>
+        <button id="delete-page" data-page-id="<%= page.id %>" class="btn btn-outline-danger delete-page-btn btn-sm">Delete</button>
       </td>
     </tr>
     <% end %>

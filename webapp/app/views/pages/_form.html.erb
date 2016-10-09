@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.select :kind, Page.kinds.keys.to_a %>
+    <%= f.select :kind, Page.kinds.keys.to_a, {}, {class: "form-control"} %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name , class: "form-control"%>
+    <%= f.text_field :name , class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label "posizione" %><br>
@@ -47,7 +47,9 @@
     <%= f.text_area :lookingfor, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+      <i class="fa fa-save"></i> Save
+    <% end %>
   </div>
 <% end %>
 
