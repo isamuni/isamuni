@@ -13,13 +13,7 @@
       <td><%= page.name %></td>
       <td><%= page.kind %></td>
       <td>
-        <!-- This is a dirty hack to get the page path correctly. Please FIX -->
-        <% if page.community? %>
-          <% kind = 'communities' %>
-        <% else %>
-          <% kind = 'companies' %>
-        <% end %>
-        <%= link_to kind + '/' + page.slug, class: "btn btn-primary btn-sm" do %>
+        <%= link_to page, class: "btn btn-primary btn-sm" do %>
           <i class="fa fa-eye"></i>
         <% end %>
       </td>

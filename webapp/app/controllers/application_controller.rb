@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   WillPaginate.per_page = 10
-  
-private
+
+protected 
 
   def current_user
     if @current_user
@@ -23,12 +23,29 @@ private
     end
   end
 
-protected 
-
   def check_logged_in
     redirect_to login_path, notice: "You need to be logged in to perform that action" unless current_user
   end
 
-
   helper_method :current_user
+
+  def page_url(page, options = {})
+    if page.community?
+      community_url page
+    else
+      company_url page
+    end
+  end
+
+  def page_path(page, options = {})
+    if page.community?
+      community_path page
+    else
+      company_path page
+    end
+  end
+
+  helper_method :page_url
+  helper_method :page_path
+
 end

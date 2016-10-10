@@ -73,24 +73,6 @@ class PagesController < ApplicationController
   end
 
   private
-    def page_url(page, options = {})
-      if page.community?
-        community_url page
-      else
-        company_url page
-      end
-    end
-
-    def page_path(page, options = {})
-      if page.community?
-        community_path page
-      else
-        company_path page
-      end
-    end
-
-    helper_method :page_url
-    helper_method :page_path
 
     def check_page_owner
       redirect_to "/", notice: 'Only a page owner can edit a page' unless current_user.id == @page.owner_id
