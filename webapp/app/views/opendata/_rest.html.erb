@@ -1,17 +1,6 @@
----
+The following documentation is **==work in progress==**. Please report any problems or suggestions to the administrators of the project (via email programmatori.a.catania@gmail.com or submit an issue on the [github project](https://github.com/sic2/isamuni)).
 
-## REST API
-
-The following documentation is ==work in progress==. Please report any problems to the administrators of the project (via email programmatori.a.catania@gmail.com or submit an issue on the [github project](https://github.com/sic2/isamuni)).
-
-You can click the **Test** buttons to see live examples of the REST APIs. The output is truncated to avoid large amount of data populating this page.
-
-### Index
-
-- [Users](#users)
-- [Pages](#pages)
-- [Events](#events)
-- [Communities Feed](#communities-feed)
+You can click the <button class="btn btn-primary btn-sm">Test</button> buttons to see live examples of the REST APIs. The output is truncated to avoid large amount of data populating this page.
 
 ---
 
@@ -27,15 +16,18 @@ HTTP/1.1 200 OK
 Content-type: application/json
 
 [
-	{
-		"name" : "name of user",
-		""
-	}
+  {
+    "name" : "Valentino Rossi",
+    "occupation" : "student, engineer, etc",
+    "description" : "Hello, I really like C++",
+    "projects" : "isamuni",
+    "links" : "http://www.example.com"
+  }
 ]
 ```
 
 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseUsersTest" aria-expanded="false" aria-controls="collapseUsersTest">
+  <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseUsersTest" aria-expanded="false" aria-controls="collapseUsersTest">
     Test
   </button>
 </p>
@@ -59,16 +51,25 @@ $('#collapseUsersTest').on('show.bs.collapse', function () {
 Pages are of two categories: **community** pages and **company** pages.
 
 
-**Get all community pages**
+#### Communities
 
 ```
 GET /communities.json
+
+RESPONSE
+HTTP/1.1 200 OK
+Content-type: application/json
+[
+  {
+
+  }
+]
 
 ...
 ```
 
 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCommunitiesTest" aria-expanded="false" aria-controls="collapseCommunitiesTest">
+  <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseCommunitiesTest" aria-expanded="false" aria-controls="collapseCommunitiesTest">
     Test
   </button>
 </p>
@@ -85,7 +86,7 @@ $('#collapseCommunitiesTest').on('show.bs.collapse', function () {
 })
 </script>
 
-**Get all company pages**
+#### Companies
 
 ```
 GET /companies.json
@@ -94,7 +95,7 @@ GET /companies.json
 ```
 
 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCompaniesTest" aria-expanded="false" aria-controls="collapseCompaniesTest">
+  <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseCompaniesTest" aria-expanded="false" aria-controls="collapseCompaniesTest">
     Test
   </button>
 </p>
@@ -138,7 +139,7 @@ Content-type: application/json
 ```
 
 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseEventsTest" aria-expanded="false" aria-controls="collapseEventsTest">
+  <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseEventsTest" aria-expanded="false" aria-controls="collapseEventsTest">
     Test
   </button>
 </p>
@@ -158,7 +159,7 @@ $('#collapseEventsTest').on('show.bs.collapse', function () {
 
 ---
 
-### Communities Feed
+### Feed
 
 ```
 GET /feed.json
