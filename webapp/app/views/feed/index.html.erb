@@ -44,7 +44,7 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-    var jsonData = $.ajax({url: "/home/data", dataType: "json", async: false}).responseText;
+    var jsonData = $.ajax({url: "/feed/data", dataType: "json", async: false}).responseText;
 
     // Create the data table.
     var data = new google.visualization.DataTable(jsonData);
@@ -134,7 +134,7 @@
     function reloadPosts(start, end) {
       $.ajax({
         type: 'GET',
-        url: '/home/posts',
+        url: '/feed/posts',
         data: {
           'start': start,
           'end': end

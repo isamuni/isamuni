@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   get 'home/index'
-  get 'home/data', to: 'home#data', defaults: { format: 'json' }
-  get 'home/posts(/query/:query)', to: 'home#posts'
 
   # User routing
   get 'me', to: 'profile#edit', as: 'edit_user'
@@ -62,7 +60,9 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'session#auth_failure'
   get 'signout', to: 'session#destroy', as: 'signout'
 
-  get "community_feed", to: 'home#community_feed', as: "community_feed"
+  get "feed", to: 'feed#index', as: "feed"
+  get 'feed/data', to: 'feed#data', defaults: { format: 'json' }
+  get 'feed/posts(/query/:query)', to: 'feed#posts'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
