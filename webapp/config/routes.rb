@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+  # Home page
   get 'home/index'
+  root 'home#index'
 
   # User routing
   get 'me', to: 'profile#edit', as: 'edit_user'
@@ -24,14 +26,17 @@ Rails.application.routes.draw do
   resources :communities
   resources :companies
 
+  # Events
   get 'events', to: 'events#index', defaults: { format: 'html' }
   get 'events/typeahead', to:'events#typeahead'
   get 'events/locations', to:'events#locations', defaults: { format: 'json' }
   get 'events/all_locations', to:'events#all_locations', defaults: { format: 'json' }
   get 'events/range_events(/query/:query)', to: 'events#range_events'
 
+  # Opendata
   get 'opendata', to: 'opendata#index'
 
+  # Admin
   get 'admin', to: 'admin#index'
   put 'admin/make_page_active', to: 'admin#make_page_active'
   put 'admin/make_page_inactive', to: 'admin#make_page_inactive'
@@ -60,15 +65,13 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'session#auth_failure'
   get 'signout', to: 'session#destroy', as: 'signout'
 
+  # Feed
   get "feed", to: 'feed#index', as: "feed"
   get 'feed/data', to: 'feed#data', defaults: { format: 'json' }
   get 'feed/posts(/query/:query)', to: 'feed#posts'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

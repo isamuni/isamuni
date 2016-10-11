@@ -4,8 +4,6 @@ class FeedController < ApplicationController
 	MAX_NUMBER_OF_JOB_POSTS = 20
 
 	def index
-		puts 'SIMONEOEMEIJFENWF'
-
 	  	@posts = Post.limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
 	  	@posts_jobs = Post.where(tags: 'job').limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
   	end
