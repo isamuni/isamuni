@@ -181,9 +181,3 @@ $ docker-compose up crawler
 You can get data in json format by appending `.json` to the web pages. For example, you can get data about events by making a **GET** request to `/events.json`
 
 Once you run **isamuni** you can go to the opendata page and checkout all the documentation for getting data from the platform.
-
-# Showcase
-
-## Community Feed
-
-![Community Feed](/media/feed.gif)
