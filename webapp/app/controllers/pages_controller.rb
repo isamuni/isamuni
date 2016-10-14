@@ -15,19 +15,9 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET /pages/1
-  # GET /pages/1.json
-  # TODO still used?
-  def show
-  end
-
   # GET /pages/new
   def new
     @page = Page.new
-  end
-
-  # GET /pages/1/edit
-  def edit
   end
 
   # POST /pages
@@ -85,6 +75,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :links, :description, :contacts, :coordinates, :kind)
+      params.require(:page).permit(:name, :links, :description, :contacts, :coordinates, :kind, :fbpage)
     end
 end

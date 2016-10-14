@@ -1,9 +1,17 @@
 
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <%= @page.name %>
-</h2>
+<div class="row">
+  <div class="col-lg-1">
+    <img src="<%= @page.page_pic %>" class="img-fluid img-rounded">  
+  </div>
+  <div class="col-lg-11">
+    <h2>
+      <%= @page.name %>
+    </h2>    
+  </div>
+</div>
+<br>
 
 <div class="row">
   <div class="col-lg-8">
@@ -15,7 +23,6 @@
       <%= markdown(@page.contacts) %>
     </p>
     <hr>
-
   </div>
 
   <div class="col-lg-4">

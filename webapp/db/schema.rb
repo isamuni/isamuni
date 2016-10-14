@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.string   "coordinates"
     t.string   "location"
     t.string   "lookingfor"
+    t.string   "fbpage"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug",        null: false

@@ -95,6 +95,7 @@ Seguiteci anche su Twitter - [@DevsCT](https://twitter.com/DevsCT )"
     kind: Page::kinds[:company],
     location: "Catania, via cactus 3",
     lookingfor: "Linux cactuses and humans!",
+    fbpage: "https://www.facebook.com/leadingbyexample/",
     links: "fbpage: http://facebook.com",
     contacts: "cactuscorps@gmail.com",
     user: users.first,

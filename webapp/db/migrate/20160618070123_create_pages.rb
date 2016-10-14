@@ -12,6 +12,7 @@ class CreatePages < ActiveRecord::Migration
       t.string :coordinates
       t.string :location
       t.string :lookingfor
+      t.string :fbpage
 
       t.timestamps null: false
       t.string :slug, null: false
