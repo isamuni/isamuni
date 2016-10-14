@@ -19,6 +19,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string :slug, null:false
 
+      t.boolean :banned, default: false 
+
     end
 
     add_index :users, :slug, :unique => true

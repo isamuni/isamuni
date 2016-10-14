@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   delete 'admin/delete_page', to: 'admin#delete_page'
   put 'admin/make_post_active', to: 'admin#make_post_active'
   put 'admin/make_post_inactive', to: 'admin#make_post_inactive'
+  put 'admin/ban_user', to: 'admin#ban_user'
+  put 'admin/unban_user', to: 'admin#unban_user'
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'

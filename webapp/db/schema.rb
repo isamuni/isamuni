@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20160624213850) do
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
-    t.string   "name",             null: false
+    t.string   "name",                             null: false
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "occupation"
@@ -84,9 +84,10 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.text     "projects"
     t.text     "links"
     t.text     "tags"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "slug",             null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "slug",                             null: false
+    t.boolean  "banned",           default: false
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 

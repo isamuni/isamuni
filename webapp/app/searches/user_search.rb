@@ -11,10 +11,10 @@ class UserSearch < Searchlight::Search
   end
 
   def search_name_like
-  	query.where(User.arel_table[:name].matches("%#{name_like}%"))
+  	query.where(:banned => false).where(User.arel_table[:name].matches("%#{name_like}%"))
   end
 
   def search_typeahead
-  	query.where(User.arel_table[:name].matches("%#{typeahead}%"))
+  	query.where(:banned => false).where(User.arel_table[:name].matches("%#{typeahead}%"))
   end
 end

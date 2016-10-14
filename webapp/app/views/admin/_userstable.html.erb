@@ -1,4 +1,4 @@
-<table class="table table-hover table-condensed" id="user-table">
+<table class="table table-hover table-condensed" id="users-table">
   <thead>
     <tr>
       <th></th>
@@ -17,12 +17,51 @@
         </td>
         <td><%= link_to user.name, user %></td>
         <td>
-          <button data-user-id="<%= user.id %>" class="btn btn-outline-warning ban-page-btn btn-sm">BAN</button>
-        </td>
-        <td>
-          <button id="delete-user" data-user-id="<%= user.id %>" class="btn btn-outline-danger delete-user-btn btn-sm">Delete</button>
+          <% if user.banned %>
+            <button id="state-user" data-user-id="<%= user.id %>" class="btn btn-outline-success activate-user-btn btn-sm">Un-Ban</button>
+          <% else %>
+            <button data-user-id="<%= user.id %>" class="btn btn-outline-warning deactivate-user-btn btn-sm">Ban</button>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $(document).on('ready', function(){
+    $("#users-table").on("click", ".deactivate-user-btn", function () {
+      var $this = $(this);
+      var userid = $this.attr("data-user-id");
+
+      $.ajax({
+        url: "/admin/ban_user",
+        type: 'PUT',
+        data: {
+          userid: userid
+        }
+      }).done(function () {
+        $this.text("Un-Ban").removeClass("btn-outline-warning deactivate-user-btn").addClass("btn-outline-success activate-user-btn");
+      }).fail(function (e) {
+        console.log("errore" + e);
+      })
+    });
+
+    $("#users-table").on("click", ".activate-user-btn", function () {
+      var $this = $(this);
+      var userid = $this.attr("data-user-id");
+
+      $.ajax({
+        url: "/admin/unban_user",
+        type: 'PUT',
+        data: {
+          userid: userid
+        }
+      }).done(function () {
+        $this.text("Ban").removeClass("btn-outline-success activate-user-btn").addClass("btn-outline-warning deactivate-user-btn");
+      }).fail(function (e) {
+        console.log("Error: " + e);
+      })
+    });
+  });
+</script>

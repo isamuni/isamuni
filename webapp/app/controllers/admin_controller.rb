@@ -21,6 +21,10 @@ class AdminController < ApplicationController
     page.save
   end
 
+  def delete_page
+    Page.delete(params[:pageid])
+  end
+
   def make_post_inactive
     post = Post.find(params[:postid])
     post.show = false
@@ -33,8 +37,16 @@ class AdminController < ApplicationController
     post.save
   end
 
-  def delete_page
-    Page.delete(params[:pageid])
+  def ban_user
+    user = User.find(params[:userid])
+    user.banned = true
+    user.save
+  end
+
+  def unban_user
+    user = User.find(params[:userid])
+    user.banned = false
+    user.save
   end
 
   def require_admin
