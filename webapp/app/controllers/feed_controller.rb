@@ -5,7 +5,12 @@ class FeedController < ApplicationController
 
 	def index
 	  	@posts = Post.where(:show => true).limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
-	  	@posts_jobs = Post.where(tags: 'job').limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
+	  	@posts_jobs = Post.where(:tags => 'job', :show => true).limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
+
+	  	respond_to do |format|
+	        format.html { render :index }
+	        format.json { render json: @posts }
+    	end
   	end
 
 	def posts

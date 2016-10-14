@@ -53,4 +53,9 @@ class Post < ApplicationRecord
     end
   end
 
+  def as_json(options={})
+    super(only: [:name, :content, :uid, :author_name, 
+                 :author_uid, :post_type, :created_at])
+  end
+
 end

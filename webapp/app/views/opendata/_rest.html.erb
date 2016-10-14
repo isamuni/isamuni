@@ -177,3 +177,21 @@ Content-type: application/json
 	}
 ]
 ```
+
+<p>
+  <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseFeedTest" aria-expanded="false" aria-controls="collapseFeedTest">
+    Test
+  </button>
+</p>
+<div class="collapse" id="collapseFeedTest">
+  <p class="card card-block" style="font-family:monospace; white-space:pre" id="feedJSON" />
+</div>
+
+<script>
+$('#collapseFeedTest').on('show.bs.collapse', function () {
+  $.get("/feed.json", function(data) {
+    var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+    $("#feedJSON").html(json);
+  });
+})
+</script>
