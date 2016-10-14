@@ -38,7 +38,7 @@ Content-type: application/json
 <script>
 $('#collapseUsersTest').on('show.bs.collapse', function () {
   $.get("/users.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 500);
+  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);
   	$("#usersJSON").html(json);
   });
 })
@@ -50,23 +50,25 @@ $('#collapseUsersTest').on('show.bs.collapse', function () {
 
 Pages are of two categories: **community** pages and **company** pages.
 
-
-#### Communities
-
 ```
-GET /communities.json
+GET /communities.json # OR: GET /companies.json 
 
 RESPONSE
 HTTP/1.1 200 OK
 Content-type: application/json
 [
   {
-
+    "id" : id,
+    "name" : "name",
+    "links" : "links",
+    "description" : "page description"
   }
 ]
 
 ...
 ```
+
+**Communities**
 
 <p>
   <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseCommunitiesTest" aria-expanded="false" aria-controls="collapseCommunitiesTest">
@@ -80,20 +82,13 @@ Content-type: application/json
 <script>
 $('#collapseCommunitiesTest').on('show.bs.collapse', function () {
   $.get("/communities.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
   	$("#communitiesJSON").html(json);
   });
 })
 </script>
 
-#### Companies
-
-```
-GET /companies.json
-
-...
-```
-
+**Companies**
 <p>
   <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseCompaniesTest" aria-expanded="false" aria-controls="collapseCompaniesTest">
     Test
@@ -106,7 +101,7 @@ GET /companies.json
 <script>
 $('#collapseCompaniesTest').on('show.bs.collapse', function () {
   $.get("/companies.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
   	$("#companiesJSON").html(json);
   });
 })
@@ -150,7 +145,7 @@ Content-type: application/json
 <script>
 $('#collapseEventsTest').on('show.bs.collapse', function () {
   $.get("/events.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
   	$("#eventsJSON").html(json);
   });
 })
@@ -190,7 +185,7 @@ Content-type: application/json
 <script>
 $('#collapseFeedTest').on('show.bs.collapse', function () {
   $.get("/feed.json", function(data) {
-    var json = JSON.stringify(data, null, '\t').substring(0, 500);;
+    var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
     $("#feedJSON").html(json);
   });
 })
