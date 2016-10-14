@@ -12,8 +12,8 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * [Configuring and Running the App](#configuring-and-running-the-app)
 * [How to deploy](#how-to-deploy)
  * [Via Docker](#docker)
-* [Open Data](#open-data)
-* [Showcase](#showcase)
+
+Checkout our [Showcase](https://github.com/sic2/isamuni/wiki/Showcase)
 
 More info and roadmap in the [wiki](https://github.com/sic2/isamuni/wiki)
 
@@ -175,9 +175,3 @@ You can also run a single components (eg. the crawler)
 ```
 $ docker-compose up crawler
 ```
-
-## Open Data
-
-You can get data in json format by appending `.json` to the web pages. For example, you can get data about events by making a **GET** request to `/events.json`
-
-Once you run **isamuni** you can go to the opendata page and checkout all the documentation for getting data from the platform.
