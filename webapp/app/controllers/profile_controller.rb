@@ -21,10 +21,11 @@ class ProfileController < ApplicationController
   end
 
   # GET /users/:id
+  # FIXME - do not show if user is banned
   def show
     set_user
-    @posts = Post.where(author_uid: @user.uid).limit(5).order('created_at desc')
-    @count = Post.where(author_uid: @user.uid).count()
+    @posts = Post.where(author_uid: @user.uid, show: true).limit(5).order('created_at desc')
+    @count = Post.where(author_uid: @user.uid, show: true).count()
   end
 
   def new
@@ -39,7 +40,7 @@ class ProfileController < ApplicationController
   # GET /users/:id/all_posts
   def all_posts
     set_user
-    @posts = Post.where(author_uid: @user.uid).order('created_at desc')
+    @posts = Post.where(author_uid: @user.uid, show: true).order('created_at desc')
   end
 
   # POST /users
