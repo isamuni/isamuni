@@ -31,3 +31,64 @@
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $(document).on('ready', function(){
+    $("#pages-table").on("click", ".deactivate-page-btn", function () {
+      var $this = $(this);
+      var pageid = $this.attr("data-page-id");
+
+      $.ajax({
+        url: "/admin/make_page_inactive",
+        type: 'PUT',
+        data: {
+          pageid: pageid
+        }
+      }).done(function () {
+        $this.text("Activate").removeClass("btn-outline-warning deactivate-page-btn").addClass("btn-outline-success activate-page-btn");
+      }).fail(function (e) {
+        console.log("errore" + e);
+      })
+    });
+
+    $("#pages-table").on("click", ".activate-page-btn", function () {
+      var $this = $(this);
+      var pageid = $this.attr("data-page-id");
+
+      $.ajax({
+        url: "/admin/make_page_active",
+        type: 'PUT',
+        data: {
+          pageid: pageid
+        }
+      }).done(function () {
+        $this.text("Deactivate").removeClass("btn-outline-success activate-page-btn").addClass("btn-outline-warning deactivate-page-btn");
+      }).fail(function (e) {
+        console.log("Error: " + e);
+      })
+    });
+
+    $("#pages-table").on("click", ".delete-page-btn", function () {
+      var $this = $(this);
+      var pageid = $this.attr("data-page-id");
+
+      $.ajax({
+        beforeSend: function (request) {
+          if (!confirm('Are you sure?')) {
+            return false;
+          }
+        },
+
+        url: '/admin/delete_page?' + $.param({pageid: pageid}),
+        type: 'DELETE'
+      }).done(function () {
+        var $row = $this.parent().parent();
+        $row.fadeOut(1000, function () {
+          $row.remove();
+        });
+      }).fail(function (e) {
+        console.log("Error: " + e);
+      });
+    });
+  });
+</script>

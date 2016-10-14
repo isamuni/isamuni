@@ -1,9 +1,9 @@
-<table class="table table-hover table-condensed" id="post-table">
+<table class="table table-hover table-condensed" id="posts-table">
   <thead>
     <tr>
       <th>Author</th>
       <th>Content</th>
-      <th colspan="3">Actions</th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -12,10 +12,53 @@
       <tr>
         <td><%= post.author_name %></td>
         <td><%= truncate(post.content) if post.content %></td>
-        <td>modal</td>
-        <td>N/A</td>
-        <td>N/A</td>
+        <td>SHOW</td>
+        <td>
+          <% if post.show %>
+            <button data-post-id="<%= post.id %>" class="btn btn-outline-warning deactivate-post-btn btn-sm">Hide</button>
+          <% else %>
+            <button id="state-post" data-post-id="<%= post.id %>" class="btn btn-outline-success activate-post-btn btn-sm">Show</button>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $(document).on('ready', function(){
+    $("#posts-table").on("click", ".deactivate-post-btn", function () {
+      var $this = $(this);
+      var postid = $this.attr("data-post-id");
+
+      $.ajax({
+        url: "/admin/make_post_inactive",
+        type: 'PUT',
+        data: {
+          postid: postid
+        }
+      }).done(function () {
+        $this.text("Show").removeClass("btn-outline-warning deactivate-post-btn").addClass("btn-outline-success activate-post-btn");
+      }).fail(function (e) {
+        console.log("errore" + e);
+      })
+    });
+
+    $("#posts-table").on("click", ".activate-post-btn", function () {
+      var $this = $(this);
+      var postid = $this.attr("data-post-id");
+
+      $.ajax({
+        url: "/admin/make_post_active",
+        type: 'PUT',
+        data: {
+          postid: postid
+        }
+      }).done(function () {
+        $this.text("Hide").removeClass("btn-outline-success activate-post-btn").addClass("btn-outline-warning deactivate-post-btn");
+      }).fail(function (e) {
+        console.log("Error: " + e);
+      })
+    });
+  });
+</script>

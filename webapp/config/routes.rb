@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   put 'admin/make_page_active', to: 'admin#make_page_active'
   put 'admin/make_page_inactive', to: 'admin#make_page_inactive'
   delete 'admin/delete_page', to: 'admin#delete_page'
+  put 'admin/make_post_active', to: 'admin#make_post_active'
+  put 'admin/make_post_inactive', to: 'admin#make_post_inactive'
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'

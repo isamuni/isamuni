@@ -6,12 +6,14 @@ class CreatePosts < ActiveRecord::Migration
       t.string :author_uid
       t.string :link
       t.string :picture
-      t.text :content
+      t.text   :content
       t.string :post_type
       t.string :tags
       t.string :caption
       t.string :description
       t.string :name
+
+      t.boolean :show
 
       t.timestamps null: false
     end

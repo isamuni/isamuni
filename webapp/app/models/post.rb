@@ -29,6 +29,9 @@ class Post < ApplicationRecord
       end
     end
 
+    # Show post by default
+    post.show = true
+
     post
   end
 

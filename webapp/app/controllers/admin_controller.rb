@@ -21,6 +21,18 @@ class AdminController < ApplicationController
     page.save
   end
 
+  def make_post_inactive
+    post = Post.find(params[:postid])
+    post.show = false
+    post.save
+  end
+
+  def make_post_active
+    post = Post.find(params[:postid])
+    post.show = true
+    post.save
+  end
+
   def delete_page
     Page.delete(params[:pageid])
   end
