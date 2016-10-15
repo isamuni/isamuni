@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   delete 'admin/delete_page', to: 'admin#delete_page'
   put 'admin/make_post_active', to: 'admin#make_post_active'
   put 'admin/make_post_inactive', to: 'admin#make_post_inactive'
+  put 'admin/make_post_job', to: 'admin#make_post_job'
+  put 'admin/make_post_unjob', to: 'admin#make_post_unjob'
   put 'admin/ban_user', to: 'admin#ban_user'
   put 'admin/unban_user', to: 'admin#unban_user'
 

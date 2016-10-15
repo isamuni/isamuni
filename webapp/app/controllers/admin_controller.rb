@@ -37,6 +37,18 @@ class AdminController < ApplicationController
     post.save
   end
 
+  def make_post_unjob
+    post = Post.find(params[:postid])
+    post.tags = ''
+    post.save
+  end
+
+  def make_post_job
+    post = Post.find(params[:postid])
+    post.tags = 'job'
+    post.save
+  end
+
   def ban_user
     user = User.find(params[:userid])
     user.banned = true

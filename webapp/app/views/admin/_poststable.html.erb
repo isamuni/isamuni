@@ -1,15 +1,17 @@
 <table class="table table-hover table-condensed" id="posts-table">
   <thead>
     <tr>
+      <th></th>
       <th>Author</th>
       <th>Content</th>
-      <th colspan="2">Actions</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% posts.each do |post| %>
       <tr>
+        <td><i class="fa <%= post_icon post.post_type %>"></i></td>
         <td><%= post.author_name %></td>
         <td><%= truncate(post.content) if post.content %></td>
         <td>SHOW</td>
@@ -18,6 +20,12 @@
             <button data-post-id="<%= post.id %>" class="btn btn-outline-warning deactivate-post-btn btn-sm">Hide</button>
           <% else %>
             <button id="state-post" data-post-id="<%= post.id %>" class="btn btn-outline-success activate-post-btn btn-sm">Show</button>
+          <% end %>
+
+          <% if post.tags == 'job' %>
+            <button data-post-job-id="<%= post.id %>" class="btn btn-outline-warning deactivate-post-job-btn btn-sm">Un-Job</button>
+          <% else %>
+            <button id="state-post" data-post-job-id="<%= post.id %>" class="btn btn-outline-primary activate-post-job-btn btn-sm">Job</button>
           <% end %>
         </td>
       </tr>
@@ -60,5 +68,40 @@
         console.log("Error: " + e);
       })
     });
+
+    $("#posts-table").on("click", ".deactivate-post-job-btn", function () {
+      var $this = $(this);
+      var postid = $this.attr("data-post-job-id");
+
+      $.ajax({
+        url: "/admin/make_post_unjob",
+        type: 'PUT',
+        data: {
+          postid: postid
+        }
+      }).done(function () {
+        $this.text("Job").removeClass("btn-outline-warning deactivate-post-job-btn").addClass("btn-outline-primary activate-post-job-btn");
+      }).fail(function (e) {
+        console.log("errore" + e);
+      })
+    });
+
+    $("#posts-table").on("click", ".activate-post-job-btn", function () {
+      var $this = $(this);
+      var postid = $this.attr("data-post-job-id");
+
+      $.ajax({
+        url: "/admin/make_post_job",
+        type: 'PUT',
+        data: {
+          postid: postid
+        }
+      }).done(function () {
+        $this.text("Un-Job").removeClass("btn-outline-primary activate-post-job-btn").addClass("btn-outline-warning deactivate-post-job-btn");
+      }).fail(function (e) {
+        console.log("Error: " + e);
+      })
+    });
   });
 </script>
+
