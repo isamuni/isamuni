@@ -5,10 +5,17 @@
   <div class="col-lg-1">
     <img src="<%= @page.page_pic %>" class="img-fluid img-rounded">  
   </div>
-  <div class="col-lg-11">
+  <div class="col-lg-10">
     <h2>
       <%= @page.name %>
     </h2>    
+  </div>
+  <div class="col-lg-1">
+    <% if @page.community? == true %>
+      <i class="fa fa-institution fa-lg"></i>
+    <% else %> 
+      <i class="fa fa-industry fa-lg"></i>
+    <% end %>
   </div>
 </div>
 <br>
