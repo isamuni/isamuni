@@ -49,10 +49,4 @@ class AdminController < ApplicationController
     user.save
   end
 
-  def require_admin
-    unless current_user != nil && current_user.is_admin?
-      render :file => "public/401.html", :status => :unauthorized
-    end
-  end
-
 end

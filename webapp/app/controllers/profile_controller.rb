@@ -1,5 +1,5 @@
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:show, :update, :all_posts]
   before_action :check_logged_in, only: [:edit, :update]
 
   # GET /users/typeahead?query=text
@@ -23,7 +23,6 @@ class ProfileController < ApplicationController
   # GET /users/:id
   # FIXME - do not show if user is banned
   def show
-    set_user
     @posts = Post.where(author_uid: @user.uid, show: true).limit(5).order('created_at desc')
     @count = Post.where(author_uid: @user.uid, show: true).count()
   end
@@ -39,7 +38,6 @@ class ProfileController < ApplicationController
 
   # GET /users/:id/all_posts
   def all_posts
-    set_user
     @posts = Post.where(author_uid: @user.uid, show: true).order('created_at desc')
   end
 
@@ -77,6 +75,9 @@ class ProfileController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.friendly.find(params[:id])
+      unless @user.banned?
+        require_admin
+      end
     end
 
     # FIXME - Remove private params before deploying the application - These are here only for test purposes

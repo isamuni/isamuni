@@ -45,6 +45,18 @@ protected
     end
   end
 
+  def not_found
+    render :file => "#{Rails.root}/public/404.html",  :status => 404
+  end
+
+  # Call this function to stop users from accessing admins functionalities and/or
+  # pages that have been blocked
+  def require_admin
+    unless current_user != nil && current_user.is_admin?
+      render :file => "public/401.html", :status => :unauthorized
+    end
+  end
+
   helper_method :page_url
   helper_method :page_path
 

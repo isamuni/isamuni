@@ -19,6 +19,4 @@ class CommunitiesController < PagesController
     render json: @search
   end
 
-  def show
-  end
 end

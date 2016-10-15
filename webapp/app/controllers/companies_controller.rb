@@ -19,7 +19,4 @@ class CompaniesController < PagesController
     render json: @search
   end
 
-  def show
-  end
-
 end
