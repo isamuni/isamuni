@@ -11,25 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.select :kind, Page.kinds.keys.to_a, {}, {class: "form-control"} %>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="field">
+        <%= f.select :kind, Page.kinds.keys.to_a, {}, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="field">
+        <%= f.text_field :name , class: "form-control", placeholder: 'Nome' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="field">
+        <%= f.text_field :location , class: "form-control", placeholder: 'Località' %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      Dipendenti
+    </div>
+    <div class="col-md-2">
+      <div class="field">        
+          <%= f.select :no_employees, ['1-10', '11-25', '26-50', '51-100', '101-1000', '1000+'], {}, {class: "form-control"} %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name , class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label "posizione" %><br>
-    <%= f.text_field :location , class: "form-control"%>
-  </div>
+  
   <div class="field">
     <%= f.label :coordinates %><br>
     <%= f.text_field :coordinates, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active, disabled: true %>
-  </div>
+
   <div class="field">
     <%= f.label :links %><br>
     <%= f.text_field :links, class: "form-control" %>
@@ -39,6 +51,10 @@
     <%= f.text_field :fbpage, class: "form-control" %>
   </div>
   <div class="field">
+    <%= f.label :sector %><br>
+    <%= f.text_field  :sector, class: "form-control" %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area  :description, class: "form-control" %>
   </div>
@@ -46,6 +62,7 @@
     <%= f.label :contacts %><br>
     <%= f.text_area :contacts , class: "form-control"%>
   </div>
+  
   <div class="field">
     <%= f.label "In cerca di" %><br>
     <%= f.text_area :lookingfor, class: "form-control" %>
@@ -58,9 +75,9 @@
 <% end %>
 
 <script>
-var fields = document.querySelectorAll('textarea');
-for (var i = 0; i < fields.length; ++i) {
-  var item = fields[i];
-  var simplemde = new SimpleMDE({ element: item });
-}
+  var fields = document.querySelectorAll('textarea');
+  for (var i = 0; i < fields.length; ++i) {
+    var item = fields[i];
+    var simplemde = new SimpleMDE({ element: item });
+  }
 </script>
