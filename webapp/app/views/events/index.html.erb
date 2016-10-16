@@ -1,3 +1,69 @@
+<style>
+    #mapid {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+
+<h3>Prossimi eventi</h3>
+<div class="row">
+    <div class="col-md-8">
+        <div id="future">
+            <%= render partial: "table", locals: {events: @future, event_type: :future} %>
+            <%= will_paginate @future, param_name: :future_page %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue). You can click on the markers to see more about an event"></div>
+    </div>
+</div>
+<hr/>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Eventi passati</h3>
+    <p>Puoi usare la form sulla destra per filtrare gli eventi</p>
+  </div>
+  <div class="col-md-6">
+  <div id="dashboard_div" class="row">
+    <div class="row" style="display: none;">
+        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
+    </div>
+    <div class="row">
+        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
+    </div>
+    <p>
+    <div class="form-group">
+      <%= form_tag events_path, :method => "get" do |f| %>
+        <div class="input-group">
+          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
+
+          <input type="hidden" id="start_input" name="start" value="0">
+          <input type="hidden" id="end_input" name="end" value="0">
+
+          <span class="input-group-btn">
+            <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
+                <i class="fa fa-search"></i>
+            <% end %>
+            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
+              <i class="fa fa-refresh"></i>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    </p>
+  </div>
+</div>
+
+<br>
+
+<div id="old">
+    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
+    <%= will_paginate @old, param_name: :old_page %>
+</div>
+
 <% content_for :head do %>
 <script type="text/javascript">
     var mymap = null;
@@ -130,7 +196,11 @@
     }
 
     function onGoogleChartsLoaded() {
-        $.get("/events/locations", drawMap);
+        $('#spinner').show();
+        $.get("/events/locations", drawMap)
+              .done(function() {
+                $('#spinner').hide();
+              });
 
         // FIXME here literals starting with 0 are interpreted as octals
         var jsonData = $.ajax({url: "/events/all_locations", dataType: "json", async: false}).responseText;
@@ -151,68 +221,3 @@
     });
 </script>
 <% end %>
-
-<style>
-    #mapid {
-        height: 400px;
-        width: 100%;
-    }
-</style>
-
-<h3>Prossimi eventi</h3>
-<div class="row">
-    <div class="col-md-8">
-        <div id="future">
-            <%= render partial: "table", locals: {events: @future, event_type: :future} %>
-            <%= will_paginate @future, param_name: :future_page %>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div id="mapid" class="map" data-intro="This map shows you the events of today (in red) and all future events (blue). You can click on the markers to see more about an event"></div>
-    </div>
-</div>
-<hr/>
-
-<div class="row">
-  <div class="col-md-6">
-    <h3>Eventi passati</h3>
-    <p>Puoi usare la form sulla destra per filtrare gli eventi</p>
-  </div>
-  <div class="col-md-6">
-  <div id="dashboard_div" class="row">
-    <div class="row" style="display: none;">
-        <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
-    </div>
-    <div class="row">
-        <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
-    </div>
-    <p>
-    <div class="form-group">
-      <%= form_tag events_path, :method => "get" do |f| %>
-        <div class="input-group">
-          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
-
-          <input type="hidden" id="start_input" name="start" value="0">
-          <input type="hidden" id="end_input" name="end" value="0">
-
-          <span class="input-group-btn">
-            <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
-                <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-              <i class="fa fa-refresh"></i>
-            <% end %>
-          </span>
-        </div>
-      <% end %>
-    </div>
-    </p>
-  </div>
-</div>
-
-<br>
-
-<div id="old">
-    <%= render partial: "table", locals: {events: @old, event_type: :old} %>
-    <%= will_paginate @old, param_name: :old_page %>
-</div>
