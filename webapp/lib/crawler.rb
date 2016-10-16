@@ -29,6 +29,11 @@ class Crawler
     @graph.get_connection(groupid, 'feed', options)
   end
 
+  def group_members groupid, limit
+    options = { limit: limit }
+    @graph.get_connection(groupid, 'members', options)
+  end    
+
   def page_events pages, since=nil
     options = { fields: Event_fields, since: since }
     pages.flat_map {|id| @graph.get_connection(id, 'events', options)}

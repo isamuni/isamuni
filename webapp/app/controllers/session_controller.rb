@@ -7,10 +7,12 @@ class SessionController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
 
-    # TODO - check if user is in the PAC group (see issue #15 on github)
-
-    session[:user_id] = user.id
-    redirect_to root_url
+    if Alloweduser.exists?(user_uid: user.uid) && Alloweduser.where(updated_at: 1.days.ago..DateTime.now)
+      session[:user_id] = user.id
+      redirect_to root_url
+    else
+      redirect_to root_url
+    end
   end
 
   def destroy

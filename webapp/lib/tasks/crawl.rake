@@ -6,7 +6,8 @@ config = YAML.load_file('crawler_config.yml')
 Group_to_track = config['group'] # Track posts of this group. This is the id for the group Programmatori a Catania
 Pages_to_track = config['pages'] # track events only
 
-Feed_limit = 1000 # No need to have this very high, except for the first time
+Feed_limit = 10000 # No need to have this very high, except for the first time
+Members_limit = 10000
 
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 
@@ -24,6 +25,11 @@ task :crawl => :environment do
   crawler = crawler = Crawler.new(token)
 
   puts "Crawling - give me some time please!"
+
+  allowed_users = crawler.group_members(Group_to_track, Members_limit)
+  allowed_users.each do |user|
+    Alloweduser.from_fb_users(Group_to_track, user).save
+  end
 
   time_started = Time.now
   feed = nil
