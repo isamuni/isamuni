@@ -101,22 +101,7 @@
       }
     });
 
-    google.visualization.events.addListener(chart, 'select', pickHandler);
     google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
-
-    function pickHandler() {
-      var selection = chart.getChart().getSelection();
-      if (selection.length > 0) {
-        var datePicked = data.getValue(selection[0].row, 0);
-        var nextDay = new Date(datePicked.getTime() + (1 * 60 * 24 * 60 * 1000));
-
-        // FIXME - date is not picked correctly if slider is used
-        reloadPosts(datePicked.getTime(), nextDay.getTime());
-      } else {
-        applySlider();
-      }
-
-    }
 
     var timeout = null;
     function selectHandler(e) {
