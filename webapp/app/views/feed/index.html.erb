@@ -2,18 +2,20 @@
 <hr>
 <div id="dashboard_div" class="row">
   <div class="col-md-3">
-    <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
+    <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, 
+    clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
     </p>
     <p>
       Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
     </p>
   </div>
   <div class="col-md-9">
+    <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     <div class="row">
       <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
     </div>
     <div class="row">
-      <div id="filter_div" data-intro="Use the slider to navigate older posts (we will never show you more than 50 posts at a time)"></div>
+      <div id="filter_div" data-intro="Use the slider to navigate older posts"></div>
     </div>
   </div>
 </div>
@@ -32,7 +34,8 @@
     <div class="col-lg-3">
       <h4>Offerte di lavoro</h4>
       <% @posts_jobs.each_with_index do |post, index| %>
-        <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
+        <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> 
+        data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
           <%= render partial: "card", locals: {post: post} %>
         </div>
       <% end %>
@@ -44,6 +47,7 @@
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
+    $('#spinner').show();
     var jsonData = $.ajax({url: "/feed/data", dataType: "json", async: false}).responseText;
 
     // Create the data table.
@@ -149,6 +153,7 @@
 
     dashboard.bind(timeSlider, chart);
     dashboard.draw(data);
+    $('#spinner').hide();
   }
 
   $(window).resize(function () {

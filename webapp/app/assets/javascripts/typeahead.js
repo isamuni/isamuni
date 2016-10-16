@@ -3,7 +3,8 @@ function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
 
   function defaultSuggestionClickHandler(event, datum, name){
     var identifier = datum.slug || datum.uid || datum.id;
-    window.location.href = itemUrl + identifier;
+    // Enable line of code below to allow clickable suggestions to redirect to itemUrl
+    // window.location.href = itemUrl + identifier;
   }
 
   suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;

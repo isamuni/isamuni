@@ -34,25 +34,7 @@
         <div id="filter_div" data-intro="Use the slider to navigate events over the map above"></div>
     </div>
     <p>
-    <div class="form-group">
-      <%= form_tag events_path, :method => "get" do |f| %>
-        <div class="input-group">
-          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
-
-          <input type="hidden" id="start_input" name="start" value="0">
-          <input type="hidden" id="end_input" name="end" value="0">
-
-          <span class="input-group-btn">
-            <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
-                <i class="fa fa-search"></i>
-            <% end %>
-            <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-              <i class="fa fa-refresh"></i>
-            <% end %>
-          </span>
-        </div>
-      <% end %>
-    </div>
+        <%= render partial: "search_form", locals: {res_path: events_path, placeholder: "Ricerca eventi"}  %>
     </p>
   </div>
 </div>
@@ -214,7 +196,6 @@
 
     $(document).ready(function () {
         initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
-
 
         //wait for gcharts to be loaded before loading the rest of the page
         google.charts.setOnLoadCallback(onGoogleChartsLoaded);
