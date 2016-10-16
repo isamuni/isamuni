@@ -39,10 +39,12 @@ ActiveRecord::Schema.define(version: 20160624213850) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.integer  "kind",        null: false
-    t.integer  "owner_id",    null: false
+    t.string   "name",         null: false
+    t.integer  "kind",         null: false
+    t.integer  "owner_id",     null: false
     t.boolean  "active"
+    t.string   "sector"
+    t.string   "no_employees"
     t.string   "links"
     t.string   "description"
     t.string   "contacts"
@@ -50,9 +52,9 @@ ActiveRecord::Schema.define(version: 20160624213850) do
     t.string   "location"
     t.string   "lookingfor"
     t.string   "fbpage"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "slug",        null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "slug",         null: false
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

@@ -75,7 +75,7 @@ class ProfileController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.friendly.find(params[:id])
-      unless @user.banned?
+      if @user.banned
         require_admin
       end
     end

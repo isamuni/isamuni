@@ -94,9 +94,32 @@ Seguiteci anche su Twitter - [@DevsCT](https://twitter.com/DevsCT )"
     name: "CactusCorp",
     kind: Page::kinds[:company],
     location: "Catania, via cactus 3",
-    lookingfor: "Linux cactuses and humans!",
+    lookingfor: "Sviluppatori C++ e C# , Project Managers e Designers",
+    description: "CactusCorp nasce nel 2009 dall'esperienza pluriennale di un gruppo di professionisti 
+    che operano da anni in Sicilia nel settore dell'Information Tecnology.
+
+CactusCorp si propone come azienda qualificata nella consulenza, progettazione e realizzazione di progetti informatici 
+legati all'infrastruttura tecnologica e all'integrazione di sistemi e tecnologie, 
+mettendo a disposizione risorse, esperienza, entusiasmo, know-how tecnico e commerciale.
+
+### La nostra missione
+
+Fornire alle aziende consulenza, servizi e soluzioni integrate per la gestione dell'infrastruttura e dei contenuti informatici. 
+Portare le nostre esperienze, ottenute in anni di lavoro sul campo, presso realtà differenti e complesse, al servizio dei clienti, 
+per fornire non solo i prodotti migliori, ma anche per affiancare e supportare le aziende nelle loro scelte.
+
+### I nostri clienti
+
+Il parco clienti di CactusCorp è piuttosto eterogeneo, sia come tipologia, sia come settore merceologico.
+Fra i propri clienti CactusCorp annovera numerose piccole e medie imprese e alcune grandi aziende dei più svariati settori merceologici, 
+dall'artigianato all'industria, dal commercio ai servizi.
+CactusCorp segue inoltre diversi enti pubblici, università e ordini professionali, nonché strutture sanitarie e ospedaliere, 
+del pubblico servizio e private.
+",
+    sector: "Consulenza",
+    no_employees: "10-20",
     fbpage: "https://www.facebook.com/leadingbyexample/",
-    links: "fbpage: http://facebook.com",
+    links: "https://www.cactuscorp.com",
     contacts: "cactuscorps@gmail.com",
     user: users.first,
     active: true

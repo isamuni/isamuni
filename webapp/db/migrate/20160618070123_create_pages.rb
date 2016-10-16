@@ -6,6 +6,8 @@ class CreatePages < ActiveRecord::Migration
       t.integer :owner_id, null:false
       t.boolean :active
 
+      t.string :sector
+      t.string :no_employees
       t.string :links
       t.string :description
       t.string :contacts
