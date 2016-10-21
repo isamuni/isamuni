@@ -1,17 +1,36 @@
 version: '2'
 
 services:
-  web:
+
+  db:
+    image: postgres
+    volumes: 
+      - ./pgdata:/var/lib/postgresql/data
+  webapp:
     env_file: .env
     build: ./webapp
-    command: bash -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command:  bash -c "rm /app/tmp/pids/server.pid && bundle exec rails s webrick -p 3000 -b '0.0.0.0'" #bash -c "bundle exec thin start -p 3000"
     volumes:
       - ./webapp:/app
     ports:
-      - "3000:3000"
-  crawler:
-    env_file: .env
-    build: ./webapp
+      - "3000:3000" #only bind the rails app to localhost, so it is only reachable through nginx
+    depends_on:
+      - db
+  nginx:
+    image: nginx:alpine
     volumes:
-      - ./webapp:/app
-    command: clockwork crawler_clock.rb
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx_users.txt:/etc/nginx/nginx_users:ro #for http auth
+      - ./webapp/public:/usr/share/nginx/html/:ro #use nginx to serve public files
+    ports:
+      - "80:80"
+    depends_on:
+      - webapp
+ # crawler:
+ #   env_file: .env
+ #   build: ./webapp
+ #   volumes:
+ #     - ./webapp:/app
+ #   command: clockwork crawler_clock.rb
+ #   depends_on: 
+ #     - db

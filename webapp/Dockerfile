@@ -3,6 +3,7 @@ FROM ruby:2.3
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         postgresql-client \
+        libpq-dev \
         sqlite3 \
         nodejs \
     && rm -rf /var/lib/apt/lists/*
