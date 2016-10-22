@@ -12,13 +12,21 @@ class Page < ApplicationRecord
     where(kind: Page::kinds[:community])
   end
 
-  def fb_id
+  def fb_id    
     /www.facebook.com\/(\w+)/.match(fbpage)&.[](1)
   end
 
   def pic
     if fb_id
       "http://graph.facebook.com/#{fb_id}/picture"
+    else
+      nil
+    end
+  end
+
+  def fb_url
+    if fb_id
+      "https://www.facebook.com/#{fb_id}/"
     else
       nil
     end
