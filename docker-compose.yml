@@ -21,7 +21,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx_users.txt:/etc/nginx/nginx_users:ro #for http auth
-      - ./webapp/public:/usr/share/nginx/html/:ro #use nginx to serve public files
+      - ./webapp:/app:ro #use nginx to serve public files
     ports:
       - "80:80"
     depends_on:
