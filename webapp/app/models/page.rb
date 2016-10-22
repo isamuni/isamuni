@@ -12,7 +12,7 @@ class Page < ApplicationRecord
     where(kind: Page::kinds[:community])
   end
 
-  def fb_id    
+  def fb_id
     /www.facebook.com\/(\w+)/.match(fbpage)&.[](1)
   end
 
