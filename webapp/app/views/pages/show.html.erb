@@ -1,3 +1,11 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v2.8&appId=<%= ENV['ISAMUNI_APP_ID'] %>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <p id="notice"><%= notice %></p>
 
@@ -24,12 +32,16 @@
   </div>
 
   <div class="col-lg-4">
-      <style>
-        #mapid {
-            height: 225px;
-            width: 100%px;
-        }
-      </style>
+    <% if @page.fb_url # Display the fb page if available %>
+      <div class="fb-page" 
+           data-href="<%= @page.fb_url %>" 
+           data-tabs="timeline, events, messages" 
+           data-small-header="true" 
+           data-adapt-container-width="true" 
+           data-hide-cover="false" 
+           data-show-facepile="true">
+      </div>
+    <% end %>
       <p>
       <h4>Contatti</h4>
       <p><%= markdown(@page.contacts) %></p>
@@ -38,28 +50,5 @@
       <h4>Sede</h4>
       <p><%= @page.location %></p>
       <p><%= @page.coordinates %></p>
-      <!-- Disable location for v0.1
-      <div id="mapid" class="map"></div>
-       -->
   </div>
 </div>
-
-<script type="text/javascript">
-    var mymap = null;
-
-    function drawMap() {
-        var sicily_coords = [37.5579, 14.1368];
-        var zoom = 8;
-        if (mymap){
-          mymap.remove();
-        }
-        mymap = L.map('mapid').setView(sicily_coords, zoom);
-
-        var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(mymap);
-    }
-
-    drawMap();
-</script>
