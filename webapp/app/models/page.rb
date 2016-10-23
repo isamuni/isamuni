@@ -24,6 +24,14 @@ class Page < ApplicationRecord
     end
   end
 
+  def fb_url
+    if fb_id
+      "https://www.facebook.com/#{fb_id}/"
+    else
+      nil
+    end
+  end
+
   def as_json(options={})
     super(only: [:id, :name, :description, :contacts, :links])
   end
