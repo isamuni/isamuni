@@ -1,12 +1,30 @@
 <h4>Benvenuti su <strong>Isamuni</strong>!</h4>
 
 <p>
-  Isamuni è un progetto che mira a supportare il panorama IT in Sicilia in due modi:
-  <ul>
-    <li>dando una panoramica delle aziende e community siciliane nell'ambito IT</li>
-    <li>aggregando eventi e discussioni dalle varie community</li>
-  </ul>
+  Una panoramica sull'ambiente tech in Sicilia
 </p>
+
+<hr>
+Su <strong>isamuni</strong> puoi trovare (clicca i link ed esplora!):
+<ul style="list-style-type:none">
+  <li>
+    <a href="/companies"><i class="fa fa-industry"></i></a> <%= @companies_count %> <a href="/companies">aziende</a> che si occupano di informatica 
+  </li>
+  <li>
+    <a href="/communities"><i class="fa fa-institution"></i></a> <%= @communities_count %> <a href="/communities">comunità</a>
+  </li>
+  <li>
+    <a href="/users"><i class="fa fa-users"></i></a> <%= @users_count %> <a href="/companies">studenti o professionisti</a>
+  </li>
+  <li>
+    <a href="/feed"><i class="fa fa-rss-square"></i></a> la scorsa settimana ci sono stati <%= @posts_count %> <a href="/feed">post</a> nelle varie comunità tecniche (PAC - Facebook only)
+  </li>
+  <li>
+    <a href="/events"><i class="fa fa-calendar"></i></a> <%= @upcoming_events_count %> <a href="/events">eventi</a> organizzati per le prossime tre settimane
+  </li>
+</ul>
+Iscriviti e aggiungi le tue informazioni cliccando <a href="/me">qui</a>
+<hr>
 
 <p>
   Perchè <strong>isamuni</strong>? Isamuni è una parola Siciliana che significa <i>alziamoci</i>.
@@ -19,38 +37,15 @@
   </blockquote>
 </div>
 
-<p>
-  Già con <strong>awesome-sicily</strong> abbiamo provato e stiamo tuttora provando a portare molte realtà Siciliane insieme e a conoscenza di altri. Con isamuni è giunto il momento di <i>alzarsi</i> e far conoscere ancor meglio le realtà legate alla tecnologia e l'innovazione.
-</p>
-
-<hr>
-Su <strong>isamuni</strong> ci sono:
-<ul style="list-style-type:none">
-  <li>
-    <a href="/companies"><i class="fa fa-industry"></i></a> <%= @companies_count %> aziende che si occupano di informatica
-  </li>
-  <li>
-    <a href="/communities"><i class="fa fa-institution"></i></a> <%= @communities_count %> comunità
-  </li>
-  <li>
-    <a href="/users"><i class="fa fa-users"></i></a> <%= @users_count %> studenti o professionisti nel campo
-  </li>
-  <li>
-    <a href="/feed"><i class="fa fa-rss-square"></i></a> la scorsa settimana ci sono stati <%= @posts_count %> post nelle varie comunità tecniche (PAC - Facebook only)
-  </li>
-  <li>
-    <a href="/events"><i class="fa fa-calendar"></i></a> <%= @upcoming_events_count %> eventi organizzati per le prossime tre settimane
-  </li>
-</ul>
-
 <hr>
 
-<p>Isamuni è attualmente mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania (PAC)</a> ed un progetto <a href="https://github.com/sic2/isamuni">open-source (MIT)</a>, che può essere usato per iniziative simili.</p>
+<p>Isamuni è un progetto no-profit mantenuto dalla community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania (PAC)</a>. Il codice della piattaforma di Isamuni è <a href="https://github.com/sic2/isamuni">open-source (licenza MIT)</a></p>
 <strong>Come contribuire:</strong>
 <ul>
-  <li>Scrivendo del codice per la piattaforma</li>
-  <li>Scoprendo dei bug</li>
-  <li>Condividendo la piattaforma</li>
-  <li>Donando dei soldi per supportare i server su cui viene eseguita la piattaforma</li>
+  <li>Scrivi del codice per questa piattaforma</li>
+  <li>Segnalaci eventuali bug e suggerimenti</li>
+  <li>Spargi la voce!</li>
+  <li>Usa i dati di isamuni (abbiamo le API!) per realizzare app ancora più fighe</li>
+  <li>Oppure (se proprio ti senti) facendo una donazione per coprire il costo dei server :)</li>
 </ul>
 Ulteriori info <a href="https://github.com/sic2/isamuni/blob/master/CONTRIBUTING.md" target="_blank">qui</a> oppure via <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">email</a>.

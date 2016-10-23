@@ -60,7 +60,7 @@
 
 <br>
 
-<div id="old">
+<div id="old" class="col-md-12">
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>
     <%= will_paginate @old, param_name: :old_page %>
 </div>

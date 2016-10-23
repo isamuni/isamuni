@@ -52,6 +52,6 @@
 var fields = document.querySelectorAll('textarea');
 for (var i = 0; i < fields.length; ++i) {
   var item = fields[i];
-  var simplemde = new SimpleMDE({ element: item });
+  var simplemde = new SimpleMDE({ element: item, spellChecker: false });
 }
 </script>

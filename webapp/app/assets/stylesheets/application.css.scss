@@ -1,14 +1,18 @@
+/*
+*= require simplemde.min.css
+*= require typeaheadjs.css
+*/
+
 @import "bootstrap";
 @import "font-awesome";
 @import "introjs";
 @import "home";
 @import "profile";
-@import "editing";
 @import "leaflet";
 
-/*
-*= require "typeaheadjs.css";
-*/
+.CodeMirror, .CodeMirror-scroll {
+    min-height: 150px;
+}
 
 .navbar .nav > li > a {
     line-height: 19px;

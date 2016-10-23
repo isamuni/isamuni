@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   def index
-    @future = Event.future.page(params[:future_page]).order('starts_at DESC')
+    @future = Event.future.page(params[:future_page]).order('starts_at ASC')
     @old = Event.page(params[:old_page]).order('starts_at DESC')
 
     if params[:start] and params[:end]

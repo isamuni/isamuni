@@ -41,11 +41,11 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (7.1.2)
-    autoprefixer-rails (6.5.0.1)
+    autoprefixer-rails (6.5.1)
       execjs
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.0.0.alpha4)
+    bootstrap (4.0.0.alpha5)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
     builder (3.2.2)
@@ -207,7 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap (~> 4.0.0.alpha4)
+  bootstrap (~> 4.0.0.alpha5)
   byebug
   clockwork (~> 2.0)
   coffee-rails (~> 4.1.0)
