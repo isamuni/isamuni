@@ -9,3 +9,6 @@
 
 ## Issues
 Use Github **issues** to propose features, ask for clarifications, file a bug and/or misbehaviour of the application, and any other related matter to the **isamuni** project.
+
+## Telegram
+Join out telegram group: https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA 
