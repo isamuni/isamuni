@@ -1,8 +1,8 @@
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
+<h1><%= @user.name %></h1>
 <div class="row">
 	<div class="col-lg-3">
-		<h2><%= @user.name %></h2>
 		<p>
 			<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-fluid img-rounded" height="250">
 		</p>
@@ -15,26 +15,7 @@
 		<p><%= @user.occupation %></p>
 		<h4>Tags</h4>
 		<p><%= @user.tags %></p>
-		<div id="user posts">
-		<h4>Post in community</h4>
-		<% @posts.each do |post| %>
-		   <div class="card"
-		   		<% if post.tags == 'job' %>
-		   			style="background-color: #90CAF9; border-color: #64B5F6;"
-				<% elsif post.post_type == 'link' %>
-					style="background-color: #FFEE58; border-color: #FDD835;"
-				<% elsif post.post_type == 'photo' %>
-					style="background-color: #FFCA28; border-color: #FFB300;"
-				<% else %>
-					style="background-color: #C5E1A5; border-color: #AED581;"
-				<% end %>
-			>
-				<%= render partial: "card", locals: {post: post} %>
-			</div>
-
-		<% end %>
-		</div>
-		<% if @count > 5 %>
+		<% if @count > 9 %>
 		<div class="col-md-4 text-center"> 
 		<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
 			<i class="fa fa-eye"></i> Vedi tutti i post
@@ -55,3 +36,21 @@
 	</div>
 </div>
 <br>
+<div id="user posts" class="card-columns">
+<% @posts.each do |post| %>
+   <div class="card"
+   		<% if post.tags == 'job' %>
+   			style="background-color: #90CAF9; border-color: #64B5F6;"
+		<% elsif post.post_type == 'link' %>
+			style="background-color: #FFEE58; border-color: #FDD835;"
+		<% elsif post.post_type == 'photo' %>
+			style="background-color: #FFCA28; border-color: #FFB300;"
+		<% else %>
+			style="background-color: #C5E1A5; border-color: #AED581;"
+		<% end %>
+	>
+		<%= render partial: "card", locals: {post: post} %>
+	</div>
+
+<% end %>
+</div>
