@@ -23,5 +23,3 @@ Questa pagina e' accessibile solo agli admin e puo' essere usata per:
 <h3 id='posts'>Posts</h3>
 <%= render partial: "poststable", locals: {posts: @posts} %>
 <%= will_paginate @posts, param_name: :post_page %>
-
-<br>

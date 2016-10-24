@@ -83,8 +83,7 @@ class ProfileController < ApplicationController
     # FIXME - Remove private params before deploying the application - These are here only for test purposes
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:user).permit(:provider, :uid, :name, :oauth_token, 
-                                    :oauth_expires_at, :occupation, 
+      params.require(:user).permit( :name, :occupation, :tags,
                                     :description, :projects, :links)
     end
 
