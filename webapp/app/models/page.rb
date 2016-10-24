@@ -33,7 +33,7 @@ class Page < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:id, :name, :description, :contacts, :links])
+    super(only: [:name, :description, :contacts, :links, :slug])
   end
 
   enum kind: [ :company, :community ]

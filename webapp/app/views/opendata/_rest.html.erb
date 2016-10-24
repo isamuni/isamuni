@@ -1,3 +1,11 @@
+## Isamuni's APIs
+
+If you are reading this, then you are probably interested in ISAMUNI and want to get some data out of it.
+
+Isamuni is an information aggregator for Facebook groups. The word **isamuni** comes from the Sicilian dialect and means: let's stand up.
+
+We collect two types of data: **passive data** and **user active data**. Passive data is all data crawled from Facebook (e.g. posts, events, user names, etc). User active data, instead, is all data manually entered by the users of the platform.
+
 The following documentation is **==work in progress==**. Please report any problems or suggestions to the administrators of the project (via email programmatori.a.catania@gmail.com or submit an issue on the [github project](https://github.com/sic2/isamuni)).
 
 You can click the <button class="btn btn-primary btn-sm">Test</button> buttons to see live examples of the REST APIs. The output is truncated to avoid large amount of data populating this page.
@@ -21,7 +29,8 @@ Content-type: application/json
     "occupation" : "student, engineer, etc",
     "description" : "Hello, I really like C++",
     "projects" : "isamuni",
-    "links" : "http://www.example.com"
+    "links" : "http://www.example.com",
+    "slug" : "valentino-rossi"
   }
 ]
 ```
@@ -60,10 +69,11 @@ HTTP/1.1 200 OK
 Content-type: application/json
 [
   {
-    "id" : id,
     "name" : "name",
     "links" : "links",
-    "description" : "page description"
+    "description" : "page description",
+    "contacts" : "page contacts",
+    "slug" : "page slug"
   }
 ]
 
@@ -128,13 +138,11 @@ Content-type: application/json
 
 [
 	{
-		"title" : "title of the event",
+        "name" : "name of the event",
         "content" : "Content of the event",
-        "coordinates" : "long, lat",
         "location" : LOC,
         "location_name" : LOC_NAME,
-        "starts_at" : YYYY-MM-DD ..,
-        "fb_uid" : "facebook event uid"
+        "starts_at" : YYYY-MM-DD ..
 	}
 ]
 ```
@@ -173,10 +181,12 @@ Content-type: application/json
 
 [
 	{
-		"content" : "content of the post",
-		"type" : "type of post: status, photo, link, video, event",
-		"submitted_by" : "submitter",
-		"data_submitted" : day and time
+        "name" : "post name",
+        "post_type" : "type of post: status, photo, link, video, event",
+        "content" : "content of the post",
+        "link" : "link contained in post",
+        "author_name" : "author",
+        "created_at" : day and time
 	}
 ]
 ```

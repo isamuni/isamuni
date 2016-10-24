@@ -39,8 +39,7 @@ class Event < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:name, :starts_at, :uid, :content, :location, :location_name, :coordinates])
+    super(only: [:name, :starts_at, :content, :location, :location_name])
   end
-
 
 end
