@@ -37,23 +37,17 @@ class EventsController < ApplicationController
   end
 
   def all_locations
-    events = Event.select("date(starts_at) as starts_at")
-                  .group("date(starts_at)")
-                  .order('starts_at DESC')
+    
+    # warning, date() in sqlite returns a string, but in postgres it returns a Date
+    events = Event.group("date(starts_at)")
+                  .order('date(starts_at) DESC')
                   .distinct.count(:uid)
     
-    events = events.map do |event| 
-      
-      year = event[0][0..3]
-      month = (event[0][5..6].to_i - 1).to_s
-      day = event[0][8..9]
-      datestr = "Date(#{year},#{month},#{day})"
-      
+    events = events.map do |date, count|      
       {c:[
-        {v: datestr},
-        {v: event[1]}
+        {v: to_js_date(date)},
+        {v: count}
       ]}
-
     end
 
     datatable = {

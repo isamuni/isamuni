@@ -57,6 +57,11 @@ protected
     end
   end
 
+  def to_js_date(date)
+    d = if date.is_a?(String) then Date.parse(date) else date end
+    "Date(#{d.year},#{d.month - 1},#{d.day})"
+  end
+
   helper_method :page_url
   helper_method :page_path
 

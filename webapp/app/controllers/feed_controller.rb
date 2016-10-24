@@ -24,27 +24,20 @@ class FeedController < ApplicationController
 	    render partial: "posts", :posts => @posts
   	end
 
+
+
   	def data
-	    posts = Post.select("date(created_at) as created_at")
-	                .group("date(created_at)")
-	                .order('created_at desc')
-	                .distinct.count(:uid)
 
-	    # String are concatenated using .concat which is magnitute of times faster than +
-	    posts = posts.map { |post| {:c => [
-	      {:v =>
-	        'Date('
-	        .concat(
-	          post[0][0..3] # year
-	          .concat(', ')
-	          .concat((post[0][5..6].to_i - 1).to_s) # month (0-based)
-	          .concat(', ')
-	          .concat(post[0][8..9])
-	          )
-	        .concat(')')},
-	      {:v => post[1]}
-	      ]} }
+  		# warning, date() in sqlite returns a string, but in postgres it returns a Date
+	    date_count = Post.group("date(created_at)")
+	    	.order('date(created_at) desc')
+	    	.distinct.count(:uid)
 
+	    posts = date_count.map do |date,count|    	
+	     {:c => [
+	      {:v => to_js_date(date) },
+	      {:v => count}]}
+	  	end
 
 	    datatable = {
 	      "cols":
