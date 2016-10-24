@@ -87,7 +87,7 @@ In your bash *.profile* file, add:
 ```
 export ISAMUNI_APP_ID=appid
 export ISAMUNI_APP_SECRET=secret
-export ISAMUNI_ADMINS=<list of user uids divided by comma ','> # This is required only if you want to be an admin
+export ISAMUNI_ADMINS=<list of user uids divided by space ' '> # This is required only if you want to be an admin
 ```
 
 #### Test end-point

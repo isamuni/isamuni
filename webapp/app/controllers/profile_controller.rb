@@ -62,7 +62,7 @@ class ProfileController < ApplicationController
   def update
     respond_to do |format|
       if current_user.update(post_params)
-        format.html { redirect_to current_user, notice: 'Post was successfully updated.' }
+        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
