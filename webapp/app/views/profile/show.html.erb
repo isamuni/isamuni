@@ -6,36 +6,40 @@
 		<p>
 			<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-fluid img-rounded" height="250">
 		</p>
-		<% if current_user && @user.id == current_user.id %>
-			<%= link_to edit_user_path(@user), class: "btn btn-success btn-sm" do %>
-				Modifica profilo
-			<% end %>
-		<% end %>
+
 		<h4>Occupazione</h4>
 		<p><%= @user.occupation %></p>
 		<h4>Tags</h4>
 		<p><%= @user.tags %></p>
-		<% if @count > 9 %>
-		<div class="col-md-4 text-center"> 
-		<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
-			<i class="fa fa-eye"></i> Vedi tutti i post
+		<% if current_user && @user.id == current_user.id %>
+			<div class="col-md-4 text-center"> 
+			<%= link_to edit_user_path(@user), class: "btn btn-success btn-md" do %>
+				<i class="fa fa-pencil"></i> Modifica profilo
+			<% end %>
+			</div>
 		<% end %>
-		</div>
+		<% if @count > 9 %>
+			<br><br>
+			<div class="col-md-4 text-center"> 
+				<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
+					<i class="fa fa-eye"></i> Vedi tutti i post
+				<% end %>
+			</div>
 		<% end %>
 	</div>
 	<div class="col-lg-9">
 		<div id="user-data">
-			<p><%= markdown(@user.description) %></p>
+			<%= markdown(@user.description) %>
 			<hr>
 			<h4>Progetti</h4>
-			<p><%= markdown(@user.projects) %></p>
+			<%= markdown(@user.projects) %>
 			<hr>
 			<h4>Collegamenti</h4>
-			<p><%= markdown(@user.links) %></p>
+			<%= markdown(@user.links) %>
 		</div>
 	</div>
 </div>
-<br>
+<hr>
 <div id="user posts" class="card-columns">
 <% @posts.each do |post| %>
    <div class="card"
