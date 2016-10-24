@@ -5,7 +5,7 @@
       <th class="col-xs">Quando</th>
       <th class="col-xs">Dove</th>
       <th class="col-xs">Chi</th>
-      <th class="col-xs">Link</th>
+      <th class="col-xs"></th>
     </tr>
   </thead>
 
@@ -14,12 +14,17 @@
       <% events.each do |event| %>
         <% if event_type == :future %>
           <tr id="future" class="table-success">
-        <% elsif event_type == :old%>
+        <% elsif event_type == :old %>
           <tr id="old" class="table-warning">
         <% end %>
 
         <td class="col-xs"><%= event.name %></td>
-        <td class="col-xs"><%= l event.starts_at, format: :short %></td>
+        <% if event_type == :future %>
+          <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %></td>
+        <% elsif event_type == :old %>
+          <td class="col-xs"><%= l event.starts_at, format: :rfc822 %></td>
+        <% end %>
+
         <td class="col-xs"><%= event.location_name %></td>
         <td class="col-xs"><%= event.organiser %></td>
         <td class="col-xs">

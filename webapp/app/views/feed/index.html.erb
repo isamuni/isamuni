@@ -36,6 +36,9 @@
       <% @posts_jobs.each_with_index do |post, index| %>
         <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> 
         data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
+          <% if post.picture %>
+            <img src=<%= post.picture %> class="card-img-top img-fluid">
+          <% end %>
           <%= render partial: "card", locals: {post: post} %>
         </div>
       <% end %>

@@ -12,6 +12,9 @@
 		data-intro="This is a post of the PAC group. Yellow posts are links. Orange posts are photos." data-position='right'
 	<% end %>
 >
+	<% if post.picture %>
+		<img src=<%= post.picture %> class="card-img-top img-fluid">
+	<% end %>
 	<%= render partial: "card", locals: {post: post} %>
 </div>
 <% end %>
