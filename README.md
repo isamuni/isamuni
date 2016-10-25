@@ -7,6 +7,14 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * Type II : Incubators, accellerators, universities, and communities
 * Type III : Students, professionals, and enthusiasts
 
+**DEMO**
+
+Ask Simone or Gabriele for access to the demo, via email: programmatori.a.catania+isamuni@gmail.com
+
+Per avere accesso alla demo contattare Simone o Gabriele via email: programmatori.a.catania+isamuni@gmail.com
+
+---
+
 ## Index
 
 * [Configuring and Running the App](#configuring-and-running-the-app)
@@ -16,64 +24,6 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 Checkout our [Showcase](https://github.com/sic2/isamuni/wiki/Showcase)
 
 More info and roadmap in the [wiki](https://github.com/sic2/isamuni/wiki)
-
-## Configuring and Running the App
-
-You can skip this section if you do not need to deploy **isamuni** in a cloud service.
-In the following section, we show all the steps to deploy **isamuni** on Digital Ocean's droplets. The app, however, can be easily deployed on any server.
-
-### Connecting to the droplet
-
-The first step to connect to the droplet is to generate a valid pair of ssh keys.
-
-For Mac/Linux
-```
-$ ssh-keygen -f ~/.ssh/YOURID -C "YOURID" # YOURID is just a readable string (e.g. pacid)
-
-Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /Users/MACHINENAME/.ssh/YOURID.
-Your public key has been saved in /Users/MACHINENAME/.ssh/YOURID.pub.
-The key fingerprint is:
-7a:9c:b2:9c:8e:4e:f4:af:de:70:77:b9:52:fd:44:97 YOURID
-The key's randomart image is:
-+--[ RSA 2048]----+
-|         |
-|         |
-|        .|
-|        Eo|
-|  .  S  . ..|
-|  . . o . ... .|
-|  . = = ..o o |
-|  . o X ... . .|
-|  .ooB.o ..  |
-+-----------------+
-
-```
-
-Then add your public key to the droplet (one of the admins can do it). Do not worry, you can share your public key without having to worry that someone will steal your identity. But, **NEVER EVER** share your private key.
-
-If you want to manage multiple keys, you can create an `SSH config file`.
-
-```
-$ touch ~/.ssh/config
-$ emacs ~/.ssh/config # use any editor you like
-
-
-# Manage your keys in ~/.ssh/config as below
-
-Host workid
- HostName bitbucket.org
- IdentityFile ~/.ssh/workid
-
-Host squirrels.vii.ovh
- HostName squirrels.vii.ovh
- IdentityFile ~/.ssh/pacid
-```
-
-
-Useful resource: [SSH Identified in Atlassian](https://confluence.atlassian.com/bitbucket/configure-multiple-ssh-identities-for-gitbash-mac-osx-linux-271943168.html)
 
 ### How to deploy
 
