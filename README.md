@@ -1,4 +1,5 @@
-# Isamuni
+# Isamuni 
+[![Build Status](https://travis-ci.org/sic2/isamuni.svg?branch=master)](https://travis-ci.org/sic2/isamuni)
 
 The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**.
 
