@@ -36,10 +36,11 @@ class EventsController < ApplicationController
     render json: all_events
   end
 
-  def all_locations
+  def all_events
     
     # warning, date() in sqlite returns a string, but in postgres it returns a Date
-    events = Event.group("date(starts_at)")
+    events = Event.where("date(starts_at) < ?", Date.today)
+                  .group("date(starts_at)")
                   .order('date(starts_at) DESC')
                   .distinct.count(:uid)
     
@@ -62,16 +63,6 @@ class EventsController < ApplicationController
       format.json { render json: datatable }
     end
   end
-
-  # def range_events
-  #   start_time = Time.at(params[:start].to_i / 1000.0)
-  #   end_time = Time.at(params[:end].to_i / 1000.0)
-
-  #   events = Event.where(starts_at: start_time..end_time)
-  #                .order('starts_at desc')
-
-  #   render partial: "table", :events => @events
-  # end
 
   def map_events events, is_today
     events = events.map{ |event| {:uid => event.uid,

@@ -204,7 +204,7 @@
               });
 
         // FIXME here literals starting with 0 are interpreted as octals
-        var jsonData = $.ajax({url: "/events/all_locations", dataType: "json", async: false}).responseText;
+        var jsonData = $.ajax({url: "/events/all_events", dataType: "json", async: false}).responseText;
 
         drawChart(jsonData);
 

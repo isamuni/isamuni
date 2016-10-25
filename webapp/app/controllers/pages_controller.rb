@@ -71,7 +71,7 @@ class PagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_page
       @page = Page.friendly.find(params[:id])
-      unless @page.active?
+      unless @page.active? || @page.owner_id == current_user.id
         require_admin
       end
     end

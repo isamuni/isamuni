@@ -42,20 +42,20 @@
     <%= f.text_field :links, class: "form-control" %>
   </div>
   <div class="field">
-    Facebook page<br>
+    Facebook Page (e.g. https://www.facebook.com/example/)<br>
     <%= f.text_field :fbpage, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :sector %><br>
+    <%= f.label "Settore/Area" %><br>
     <%= f.text_field  :sector, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label "Descrizione" %><br>
     <%= f.text_area  :description, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :contacts %><br>
-    <%= f.text_area :contacts , class: "form-control"%>
+    <%= f.label "Contatti" %><br>
+    <%= f.text_area :contacts , class: "form-control" %>
   </div>
   
   <div class="field">
@@ -68,6 +68,7 @@
     <% end %>
   </div>
 <% end %>
+<br>
 
 <script>
   var fields = document.querySelectorAll('textarea');

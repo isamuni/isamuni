@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'events', to: 'events#index', defaults: { format: 'html' }
   get 'events/typeahead', to:'events#typeahead'
   get 'events/locations', to:'events#locations', defaults: { format: 'json' }
-  get 'events/all_locations', to:'events#all_locations', defaults: { format: 'json' }
+  get 'events/all_events', to:'events#all_events', defaults: { format: 'json' }
   get 'events/range_events(/query/:query)', to: 'events#range_events'
 
   # Opendata
