@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   scope :only_with_coordinates, -> { where "coordinates IS NOT NULL" }
 
   def self.name_like query
-    where "name LIKE ?", "%#{query}%"
+    ilike :name, query
   end
 
   def self.from_fb_event fb_event
