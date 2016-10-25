@@ -23,7 +23,7 @@ class ProfileController < ApplicationController
   # GET /users/:id
   # FIXME - do not show if user is banned
   def show
-    @posts = Post.where(author_uid: @user.uid, show: true).limit(5).order('created_at desc')
+    @posts = Post.where(author_uid: @user.uid, show: true).limit(9).order('created_at desc')
     @count = Post.where(author_uid: @user.uid, show: true).count()
   end
 
@@ -62,7 +62,7 @@ class ProfileController < ApplicationController
   def update
     respond_to do |format|
       if current_user.update(post_params)
-        format.html { redirect_to current_user, notice: 'Post was successfully updated.' }
+        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
@@ -83,8 +83,7 @@ class ProfileController < ApplicationController
     # FIXME - Remove private params before deploying the application - These are here only for test purposes
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:user).permit(:provider, :uid, :name, :oauth_token, 
-                                    :oauth_expires_at, :occupation, 
+      params.require(:user).permit( :name, :occupation, :tags,
                                     :description, :projects, :links)
     end
 
