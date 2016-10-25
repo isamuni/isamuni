@@ -59,4 +59,10 @@ module ApplicationHelper
 
     @markdown.render(text).html_safe
   end
+
+  def wrap_string(text,max_width = 24)
+    (text.length < max_width) ? 
+      text : 
+      text.scan(/.{1,#{max_width}}/).join(" ")
+  end
 end

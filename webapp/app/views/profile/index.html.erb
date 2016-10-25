@@ -6,7 +6,6 @@
   </script>
 <% end %>
 
-<p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col-md-6">
     <h1>Utenti</h1>
@@ -49,13 +48,9 @@
           <% end %>
         </td>
         <td><%= link_to user.name, user %></td>
-        <td><%= user.occupation %></td>
-        <td><%= user.tags %></td>
+        <td><%= truncate(user.occupation, length: 40) if user.occupation %></td>
+        <td><%= truncate(user.tags, length: 40) if user.tags %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<!-- link_to 'New User', new_user_path, class: 'btn btn-success-outline' -->
