@@ -10,13 +10,12 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 **DEMO (ITA)**
 
 Una versione di isamuni è online per la community di PAC e gestita da Simone e Gabriele (email: programmatori.a.catania+isamuni@gmail.com), ma temporanemanete in beta. Per accederci:
-- url: http://www.isamuni.vii.ovh
+- url: http://isamuni.vii.ovh
 - utente: isamunibeta 
 - password: isamunibeta
 
 Il feedback è graditissimo!
 
----
 
 ## Index
 
