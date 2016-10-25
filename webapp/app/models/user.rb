@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def self.safe_fields
-    select(:id, :name, :uid, :slug, :occupation)
+    select(:id, :name, :uid, :slug, :occupation, :tags)
   end
   
   def first_name
