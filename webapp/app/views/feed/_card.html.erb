@@ -2,13 +2,13 @@
 	<% if post.picture %>
 		<img src=<%= post.picture %> class="card-img-top img-fluid">
 	<% end %>
-	<blockquote class="card-blockquote">
+	<blockquote class="card-blockquote" style="word-wrap: break-word;">
 		<p>
 			<%= truncate(post.name, length: 40) if post.name %>
 			<% if post.name %>
 				<hr>
 			<% end %>
-			<%= truncate(post.content) if post.content %>
+			<%= truncate(post.content, length: 140) if post.content %>
 		</p>
 	</blockquote>
 	<div class="row ">
