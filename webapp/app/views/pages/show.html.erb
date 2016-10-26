@@ -9,6 +9,10 @@
 
 <p id="notice"><%= notice %></p>
 
+<% unless @page.active? %>
+  <p class="text-danger">Questa pagina non è ancora attiva ed è visibile solo a te e gli admin della piattaforma. La pagina sarà attivata appena possibile.</p>
+<% end %>
+
 <div class="row">
   <% if @page.pic # Display the picture if available %>
     <div class="col-lg-1"><img src="<%= @page.pic %>" class="img-fluid img-rounded"></div>
