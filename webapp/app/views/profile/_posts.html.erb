@@ -7,10 +7,6 @@
 	<% else %>
 		style="background-color: #C5E1A5; border-color: #AED581;"
 	<% end %>
-	
-	<% if index==0 %>
-		data-intro="This is a post of the PAC group. Yellow posts are links. Orange posts are photos." data-position='right'
-	<% end %>
 >
 	<%= render partial: "card", locals: {post: post} %>
 </div>

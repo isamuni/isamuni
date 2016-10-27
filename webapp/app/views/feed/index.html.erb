@@ -1,4 +1,5 @@
-<h2>Post dalla community di PAC</h2>
+<h2 data-intro="Scopri i posts dei membri di PAC. A presto ci saranno posts anche da altre communities.">
+    Post dalla community di PAC</h2>
 <hr>
 <div id="dashboard_div" class="row">
   <div class="col-md-3">
@@ -12,10 +13,10 @@
   <div class="col-md-9">
     <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     <div class="row">
-      <div id="chart_div" data-intro="This graph shows you all groups' posts over time"></div>
+      <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
     </div>
     <div class="row">
-      <div id="filter_div" data-intro="Use the slider to navigate older posts"></div>
+      <div id="filter_div" data-intro="Usa lo slider per trovare i post più vecchi."></div>
     </div>
   </div>
 </div>
@@ -35,7 +36,7 @@
       <h4>Offerte di lavoro</h4>
       <% @posts_jobs.each_with_index do |post, index| %>
         <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> 
-        data-intro="This is a post about a job advertisement recently posted on the group PAC" data-position='left' <% end %>>
+        data-intro="Questo è un post di tipo 'Lavoro' che è stato postato di recente su PAC." data-position='left' <% end %>>
           <%= render partial: "card", locals: {post: post} %>
         </div>
       <% end %>

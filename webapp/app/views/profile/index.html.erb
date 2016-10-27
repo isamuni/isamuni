@@ -8,10 +8,11 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h1>Utenti</h1>
+    <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni. 
+                  Registrati su isamuni per creare un tuo profilo e farti conoscere.">Utenti</h1>
   </div>
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="form-group" data-intro="Scopri gli utenti di isamuni (ricerca per nome solamente)">
       <%= form_for @search, url:users_path, :method => "get" do |f| %>
         <div class="input-group">
           <%= f.search_field :name_like, class: 'typeahead form-control', autocomplete: 'off', placeholder: 'Ricerca utenti' %>

@@ -2,15 +2,15 @@
 
 <h1><%= @user.name %></h1>
 <div class="row">
-	<div class="col-lg-3">
+	<div class="col-lg-3" data-intro="Scopri velocemente le info su questo utente.">
 		<p>
 			<img src="<%= 'http://graph.facebook.com/' + @user.uid + '/picture?height=250' %>" class="img-fluid img-rounded" height="250">
 		</p>
 
 		<h4>Occupazione</h4>
-		<p><%= @user.occupation %></p>
+		<p style="word-wrap: break-word;"><%= @user.occupation %></p>
 		<h4>Tags</h4>
-		<p><%= wrap_string(@user.tags) %></p>
+		<p style="word-wrap: break-word;"><%= @user.tags %></p>
 		<% if current_user && @user.id == current_user.id %>
 			<div class="col-md-4 text-center"> 
 			<%= link_to edit_user_path(@user), class: "btn btn-success btn-md" do %>
@@ -27,7 +27,7 @@
 			</div>
 		<% end %>
 	</div>
-	<div class="col-lg-9">
+	<div class="col-lg-9" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
 		<div id="user-data">
 			<%= markdown(@user.description) %>
 			<hr>
@@ -40,7 +40,7 @@
 	</div>
 </div>
 <hr>
-<div id="user posts" class="card-columns">
+<div id="user posts" class="card-columns" data-intro="Esplora gli ultimi post di questo utente nel gruppo PAC.">
 <% @posts.each do |post| %>
    <div class="card"
    		<% if post.tags == 'job' %>
