@@ -5,10 +5,10 @@ class EventsController < ApplicationController
     @old = Event.page(params[:old_page]).order('starts_at DESC')
 
     if params[:start] and params[:end]
-      start_time = Time.at(params[:start].to_i / 1000.0)
-      end_time = Time.at(params[:end].to_i / 1000.0)
+      @start_time = Time.at(params[:start].to_i / 1000.0)
+      @end_time = Time.at(params[:end].to_i / 1000.0)
       
-      @old = @old.where(starts_at: start_time..end_time)
+      @old = @old.where(starts_at: @start_time..@end_time)
     else
       @old = @old.past
     end

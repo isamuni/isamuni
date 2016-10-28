@@ -61,6 +61,9 @@
 <br>
 
 <div id="old" class="col-md-12">
+    <% if @start_time && @end_time %>
+    <small>Eventi da <%= l @start_time, format: :long   %> a <%= l @end_time, format: :long %></small>
+    <% end %>
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>
     <%= will_paginate @old, param_name: :old_page %>
 </div>
@@ -182,7 +185,7 @@
             clearTimeout(timeout);
             timeout = null;
           }
-          timeout = setTimeout(applySlider, 1000);
+          timeout = setTimeout(applySlider, 50); // 10ms 
         }
 
         function applySlider() {
@@ -192,6 +195,7 @@
 
           $('#start_input').val(start);
           $('#end_input').val(end);
+          console.log("start:"+start +" end:"+end)
         }
 
         dashboard.bind(timeSlider, chart);
