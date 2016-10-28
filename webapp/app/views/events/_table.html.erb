@@ -5,7 +5,6 @@
       <th class="col-xs">Quando</th>
       <th class="col-xs">Dove</th>
       <th class="col-xs">Chi</th>
-      <th class="col-xs"></th>
     </tr>
   </thead>
 
@@ -18,7 +17,10 @@
           <tr id="old" class="table-warning">
         <% end %>
 
-        <td class="col-xs"><%= event.name %></td>
+        <td class="col-xs">
+          <%= link_to event.name, "#", data: {toggle: "modal", target: '#' + event.uid} %>
+          <%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %>
+        </td>
         <% if event_type == :future %>
           <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %></td>
         <% elsif event_type == :old %>
@@ -27,14 +29,6 @@
 
         <td class="col-xs"><%= event.location_name %></td>
         <td class="col-xs"><%= event.organiser %></td>
-        <td class="col-xs">
-          <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
-            <i class="fa fa-calendar" ></i>
-          <% end %>
-          <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid} do %>
-            <i class="fa fa-expand" ></i>
-          <% end %>
-        </td>
       </tr>
 
       <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
@@ -42,13 +36,12 @@
           <div class="modal-content">
             <div class="modal-header">
               <div class="col-xs-6 text-xs-left">
-                <strong><%= event.name %></strong>
+                <%= link_to event.external_link, :target => "_blank" do %>
+                  <strong><i class="fa fa-calendar"></i>&nbsp;<%= event.name %></strong>
+                <% end %>
               </div>
               <div class="col-xs-6 text-xs-right">
                 <small style="color:black;"><%= l event.starts_at, format: :long %></small>
-                <%= link_to 'https://www.facebook.com/events/' + event.uid, :target => "_blank" do %>
-                  <i class="fa fa-calendar"></i>
-                <% end %>
               </div>
             </div>
             <div class="modal-body">
@@ -61,11 +54,10 @@
               </div>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-
           </div>
         </div>
       </div>
-      <% end %>
+      <% end #events each %>
     </div>
   </tbody>
 </table>

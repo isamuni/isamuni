@@ -115,9 +115,12 @@
         }).addTo(mymap);
 
         //draw markers
+        var markers = L.markerClusterGroup();
         locations.map(markerForEvent).forEach(function (marker) {
-            marker.addTo(mymap);
+            markers.addLayer(marker);
         })
+
+        mymap.addLayer(markers);
 
     }
 

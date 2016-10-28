@@ -217,7 +217,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   koala
-  leaflet-rails
+  leaflet-rails (~> 0.7.7)
   omniauth-facebook
   pg
   rails (= 5.0.0)

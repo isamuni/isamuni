@@ -49,8 +49,8 @@
           <% end %>
         </td>
         <td><%= link_to user.name, user %></td>
-        <td><%= truncate(user.occupation, length: 40) if user.occupation %></td>
-        <td><%= truncate(user.tags, length: 40) if user.tags %></td>
+        <td><%= truncate(user.occupation, length: 40) %></td>
+        <td><%= truncate(user.tags, length: 40) %></td>
       </tr>
     <% end %>
   </tbody>
