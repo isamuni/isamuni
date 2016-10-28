@@ -13,6 +13,7 @@ class ProfileController < ApplicationController
   def index
     @search = UserSearch.new(search_params)
     @users = search_params.present? ? @search.results : User.where(:banned => false)
+    @users = @users.order(:name)
 
     respond_to do |format|
         format.html { render :index}

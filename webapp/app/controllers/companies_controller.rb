@@ -8,6 +8,8 @@ class CompaniesController < PagesController
       @pages = Page.companies.where("active = ?", true)
     end
 
+    @pages = @pages.order(:name)
+    
     respond_to do |format|
         format.html { render :index}
         format.json { render json: @pages }
