@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-2">
       <div class="field">        
-          <%= f.select :no_employees, ['1-10', '11-25', '26-50', '51-100', '101-1000', '1000+'], {}, {class: "form-control"} %>
+          <%= f.select :no_employees, ['n/a', '1-10', '11-25', '26-50', '51-100', '101-1000', '1000+'], {}, {class: "form-control"} %>
       </div>
     </div>
   </div>
@@ -76,4 +76,17 @@
     var item = fields[i];
     var simplemde = new SimpleMDE({ element: item, spellChecker: false });
   }
+
+  $( "#page_kind" )
+    .change(function () {
+      var page_kind = $('#page_kind').find(":selected").text();
+      if (page_kind === 'community') {
+        $("#page_no_employees").prop("disabled", true);
+        $("#page_no_employees").val($("#page_no_employees option:first").val());
+      } else {
+        $("#page_no_employees").prop("disabled", false);
+      }
+    })
+    .change();
+
 </script>
