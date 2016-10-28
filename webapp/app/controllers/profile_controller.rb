@@ -66,7 +66,7 @@ class ProfileController < ApplicationController
         format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: current_user }
       else
-        format.html { render :edit }
+        format.html { render :edit, layout: "user_area"}
         format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end

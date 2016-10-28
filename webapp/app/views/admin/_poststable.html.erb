@@ -13,7 +13,7 @@
       <tr>
         <td><i class="fa <%= post_icon post.post_type %>"></i></td>
         <td><%= post.author_name %></td>
-        <td><%= truncate(post.content) if post.content %></td>
+        <td><%= truncate(post.content) %></td>
         <td>SHOW</td>
         <td>
           <% if post.show %>

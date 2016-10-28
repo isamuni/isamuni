@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :pages, foreign_key: "owner_id"
+  validate :valid_tags
 
   extend FriendlyId
   friendly_id :name, :use => :slugged
@@ -35,6 +36,14 @@ class User < ApplicationRecord
   def is_admin?
     admins = ENV['ISAMUNI_ADMINS'].split(" ")
     return self.uid != nil && admins.include?(self.uid)
+  end
+
+private
+
+  def valid_tags
+    unless tags.nil? or tags.split(" ").all? {|tag| tag.length < 24}
+      errors.add(:tags, "includes some tag longer than 24 chars")   
+    end
   end
 
 end

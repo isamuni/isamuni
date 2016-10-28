@@ -38,6 +38,10 @@ class Event < ApplicationRecord
     event
   end
 
+  def external_link
+    'https://www.facebook.com/events/' + uid
+  end
+
   def as_json(options={})
     super(only: [:name, :starts_at, :content, :location, :location_name])
   end
