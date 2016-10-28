@@ -5,6 +5,7 @@
       <th class="col-xs">Quando</th>
       <th class="col-xs">Dove</th>
       <th class="col-xs">Chi</th>
+      <th class="col-xs"></th>
     </tr>
   </thead>
 
@@ -19,7 +20,6 @@
 
         <td class="col-xs">
           <%= link_to event.name, "#", data: {toggle: "modal", target: '#' + event.uid} %>
-          <%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %>
         </td>
         <% if event_type == :future %>
           <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %></td>
@@ -29,6 +29,7 @@
 
         <td class="col-xs"><%= event.location_name %></td>
         <td class="col-xs"><%= event.organiser %></td>
+        <td class="col-xs"><%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %></td>
       </tr>
 
       <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
