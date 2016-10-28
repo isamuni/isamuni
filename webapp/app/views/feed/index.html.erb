@@ -36,7 +36,8 @@
       <h4>Offerte di lavoro</h4>
       <% @posts_jobs.each_with_index do |post, index| %>
         <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> 
-        data-intro="Questo è un post di tipo 'Lavoro' che è stato postato di recente su PAC." data-position='left' <% end %>>
+        data-intro="Questo è un post di tipo 'Lavoro' che è stato postato di recente su PAC. Tutti i post contententi gli hashtag #lavoro, #jobs, #job e #cercosocio sono automaticamente classificati come post di 'Lavoro'. Nota che gli admin possono aggiungere o rimuovere manualmente i post da questa categoria." 
+        data-position='left' <% end %>>
           <%= render partial: "card", locals: {post: post} %>
         </div>
       <% end %>
