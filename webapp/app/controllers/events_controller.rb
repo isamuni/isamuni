@@ -26,8 +26,8 @@ class EventsController < ApplicationController
   end
 
   def locations
-    today_events = Event.where('DATE(starts_at) = ? AND coordinates IS NOT NULL', Date.today)
-    future_events = Event.where('starts_at > ? AND coordinates IS NOT NULL', (Date.today + 1))
+    today_events = Event.where('DATE(ends_at) >= ? AND DATE(starts_at) <= ? AND coordinates IS NOT NULL', Date.today, Date.today)
+    future_events = Event.where('ends_at > ? AND coordinates IS NOT NULL', (Date.today + 1))
     
     today_events = map_events(today_events, true)
     future_events = map_events(future_events, false)
