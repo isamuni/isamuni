@@ -50,7 +50,7 @@ gem 'redcarpet'
 gem "introjs-rails"
 
 # Leaflet is a small and nice js library that will help with showing maps
-gem 'leaflet-rails'
+gem 'leaflet-rails', '~> 0.7.7'
 
 gem 'will_paginate', '~> 3.1.0'
 
