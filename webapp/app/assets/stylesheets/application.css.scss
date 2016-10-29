@@ -5,6 +5,8 @@
 *= require MarkerCluster.Default.css
 */
 
+// Colors from: https://www.materialui.co/colors
+
 @import "bootstrap";
 @import "font-awesome";
 @import "introjs";
@@ -14,6 +16,14 @@
 
 .CodeMirror, .CodeMirror-scroll {
     min-height: 150px;
+}
+
+.navbar {
+    background-color: #F50057;
+    // Reds ff5252 ff1744
+    // Pinks FF4081 F50057
+    // Blues 3D5AFE
+    // Oranges FF3D00
 }
 
 .navbar .nav > li > a {
@@ -29,8 +39,8 @@
 }
 
 .navbar-brand {
-    color: #b71c1c;
-    margin-right: 2rem;
+    color: #EEEEEE;
+    font-weight: bold;
 }
 
 .custom-overflow {
