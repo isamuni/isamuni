@@ -1,14 +1,14 @@
 class EventsController < ApplicationController
 
   def index
-    @future = Event.future.page(params[:future_page]).order('starts_at ASC')
-    @old = Event.page(params[:old_page]).order('starts_at DESC')
+    @future = Event.future.page(params[:future_page]).order('ends_at ASC')
+    @old = Event.page(params[:old_page]).order('ends_at DESC')
 
     if params[:start] and params[:end]
       @start_time = Time.at(params[:start].to_i / 1000.0)
       @end_time = Time.at(params[:end].to_i / 1000.0)
       
-      @old = @old.where(starts_at: @start_time..@end_time)
+      @old = @old.where(ends_at: @start_time..@end_time)
     else
       @old = @old.past
     end
@@ -39,9 +39,9 @@ class EventsController < ApplicationController
   def all_events
     
     # warning, date() in sqlite returns a string, but in postgres it returns a Date
-    events = Event.where("date(starts_at) < ?", Date.today)
-                  .group("date(starts_at)")
-                  .order('date(starts_at) DESC')
+    events = Event.where("date(ends_at) < ?", Date.today)
+                  .group("date(ends_at)")
+                  .order('date(ends_at) DESC')
                   .distinct.count(:uid)
     
     events = events.map do |date, count|      
