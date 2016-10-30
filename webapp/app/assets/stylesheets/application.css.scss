@@ -5,7 +5,11 @@
 *= require MarkerCluster.Default.css
 */
 
-// Colors from: https://www.materialui.co/colors
+// Some colors from: https://www.materialui.co/colors
+// Reds ff5252 ff1744
+// Pinks FF4081 F50057
+// Blues 3D5AFE
+// Oranges FF3D00
 
 @import "bootstrap";
 @import "font-awesome";
@@ -18,12 +22,11 @@
     min-height: 150px;
 }
 
+$navbar-bg: #4DB6AC;
+$navbar-brand: #b71c1c;
+
 .navbar {
-    background-color: #F50057;
-    // Reds ff5252 ff1744
-    // Pinks FF4081 F50057
-    // Blues 3D5AFE
-    // Oranges FF3D00
+    background-color: $navbar-bg;
 }
 
 .navbar .nav > li > a {
@@ -39,8 +42,8 @@
 }
 
 .navbar-brand {
-    color: #EEEEEE;
-    font-weight: bold;
+    color: $navbar-brand;
+    /*font-weight: bold;*/
 }
 
 .custom-overflow {
