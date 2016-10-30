@@ -66,7 +66,7 @@
 
 <div id="old" class="col-md-12">
     <% if @start_time && @end_time %>
-    <small>Eventi da <%= l @start_time, format: :long   %> a <%= l @end_time, format: :long %></small>
+        <small>Eventi dal <%= l @start_time, format: :long %> al <%= l @end_time, format: :long %></small>
     <% end %>
     <%= render partial: "table", locals: {events: @old, event_type: :old} %>
     <%= will_paginate @old, param_name: :old_page %>
