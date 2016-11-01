@@ -8,16 +8,6 @@ Isamuni is an aggregator of information for Facebook groups. The goal is to faci
 * Type II : Incubators, accellerators, universities, and communities
 * Type III : Students, professionals, and enthusiasts
 
-**DEMO (ITA)**
-
-Una versione di isamuni è online per la community di PAC e gestita da Simone e Gabriele (email: programmatori.a.catania+isamuni@gmail.com), ma temporanemanete in beta. Per accederci:
-- url: http://isamuni.vii.ovh
-- utente: isamunibeta 
-- password: isamunibeta
-
-Il feedback è graditissimo!
-
-
 ## Index
 
 * [Configuring and Running the App](#configuring-and-running-the-app)
