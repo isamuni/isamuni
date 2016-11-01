@@ -19,7 +19,7 @@
         <% end %>
 
         <td class="col-xs">
-          <%= link_to event.name, "#", data: {toggle: "modal", target: '#' + event.uid} %>
+          <%= link_to event.name, "#", { title: event.name, data: {toggle: "modal", target: '#' + event.uid}} %>
         </td>
         <% if event_type == :future %>
           <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %> <br> <%= l event.ends_at, format: :rfc822_short %></td>
