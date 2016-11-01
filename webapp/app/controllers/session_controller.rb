@@ -6,13 +6,9 @@ class SessionController < ApplicationController
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
-
-    if Alloweduser.exists?(user_uid: user.uid) && Alloweduser.where(updated_at: 1.days.ago..DateTime.now)
-      session[:user_id] = user.id
-      redirect_to edit_user_url
-    else
-      redirect_to root_url, alert: "Not allowed to login"
-    end
+    session[:user_id] = user.id
+    redirect_to edit_user_url
+    
   end
 
   def destroy
