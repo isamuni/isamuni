@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   def self.from_fb_post feed_post
     post = Post.new()
     post.uid = feed_post['id']
+    post.fb_group = post.uid.split('_')[0]
     post.content = feed_post['message']
     post.author_name = feed_post['from']['name']
     post.author_uid = feed_post['from']['id']

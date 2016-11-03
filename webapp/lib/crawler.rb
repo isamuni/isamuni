@@ -19,14 +19,9 @@ class Crawler
     @graph = Koala::Facebook::API.new(token)
   end
 
-  # Get a feed of posts from a given Facebook group
-  # Params:
-  # +id+:: of the group
-  # +limit+:: number of maximum posts to query for
-  # +since+:: (optional) query all the posts since this date (yyyy-mm-dd)
-  def group_raw_feed groupid, limit, since=nil
+  def groups_raw_feed groups, limit, since=nil
     options = { limit: limit, fields: Feed_fields, since: since }
-    @graph.get_connection(groupid, 'feed', options)
+    groups.flat_map {|id| @graph.get_connection(id, 'feed', options) }
   end
 
   def group_members groupid, limit
@@ -44,8 +39,8 @@ class Crawler
     @graph.get_object(event_id, { fields: Event_fields })
   end
 
-  def group_feed groupid, limit, since
-    feed = group_raw_feed(groupid, limit, since)
+  def groups_feed groups, limit, since
+    feed = groups_raw_feed(groups, limit, since)
 
     posts = feed.select { |fe|
           ['status', 'link', 'photo', 'event'].include? fe['type'] }

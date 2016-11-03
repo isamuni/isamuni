@@ -1,4 +1,6 @@
-group: 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
+groups: 
+  - 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
+  - 110929722279430 # Informatici a Palermo
 pages: 
   - 116505148430596  # YoutHub
   - 371576386279313  # EESTEC Catania
