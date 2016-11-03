@@ -29,7 +29,12 @@
 
         <td class="col-xs"><%= event.location_name %></td>
         <td class="col-xs"><%= event.organiser %></td>
-        <td class="col-xs"><%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %></td>
+        <td class="col-xs">
+          <%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %>
+          <% if event_type == :future and event.coord %>
+            <button coordinates-id=<%= event.coord %> style="border:none; background: none; padding: 0;"><i class="fa fa-map-marker"></i></button>
+          <% end %>
+        </td>
       </tr>
 
       <div class="modal fade" id=<%= event.uid %> tabindex="-1" role="dialog" aria-hidden="true">
@@ -62,3 +67,12 @@
     </div>
   </tbody>
 </table>
+
+<script>
+  $( "button[coordinates-id]" ).click(function() {
+    var coordinates = $(this).attr('coordinates-id');
+    coordinates = coordinates.split(',');
+    
+    mymap.setView(new L.LatLng(coordinates[0], coordinates[1]), 13);
+  });
+</script>

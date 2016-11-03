@@ -20,6 +20,8 @@
                             Gli eventi in rosso sono quelli di oggi. 
                             Clicca sull'evento per saperne di più.">
         </div>
+        <br>
+        <button id="resetmap" class="btn btn-success btn-sm"><i class="fa fa-refresh"> Reset Map</i></button>
     </div>
 </div>
 <hr/>
@@ -75,6 +77,8 @@
 <% content_for :head do %>
 <script type="text/javascript">
     var mymap = null;
+    var sicily_coords = [37.5579, 14.1368];
+    var zoom = 7;
 
     function iconForEvent(ev) {
         if (ev.isToday) {
@@ -109,8 +113,6 @@
     }
 
     function drawMap(locations) {
-        var sicily_coords = [37.5579, 14.1368];
-        var zoom = 7;
         if (mymap){
           mymap.remove();
         }
@@ -199,7 +201,6 @@
 
           $('#start_input').val(start);
           $('#end_input').val(end);
-          console.log("start:"+start +" end:"+end)
         }
 
         dashboard.bind(timeSlider, chart);
@@ -232,3 +233,9 @@
     });
 </script>
 <% end %>
+
+<script>
+    $('#resetmap').click(function() {
+        mymap.setView(sicily_coords, zoom);
+    });
+</script>

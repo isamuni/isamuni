@@ -42,8 +42,17 @@ class Event < ApplicationRecord
     'https://www.facebook.com/events/' + uid
   end
 
+  def coord
+    if coordinates
+      coordinates.gsub(/\s+/, "")
+    else
+      nil
+    end
+  end
+
+
   def as_json(options={})
-    super(only: [:name, :starts_at, :ends_at, :content, :location, :location_name])
+    super(only: [:name, :starts_at, :ends_at, :content, :location, :location_name, :coordinates])
   end
 
 end
