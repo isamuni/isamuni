@@ -21,7 +21,17 @@ class Crawler
 
   def groups_raw_feed groups, limit, since=nil
     options = { limit: limit, fields: Feed_fields, since: since }
-    groups.flat_map {|id| @graph.get_connection(id, 'feed', options) }
+
+    puts options
+
+    # Not needed - using it for debugging
+    groups.each do |group|
+      puts group['id']
+      res = @graph.get_connection(group['id'], 'feed', options)
+      puts res.size
+    end
+
+    groups.flat_map {|group| @graph.get_connection(group['id'], 'feed', options) }
   end
 
   def group_members groupid, limit
@@ -31,7 +41,7 @@ class Crawler
 
   def page_events pages, since=nil
     options = { fields: Event_fields, since: since }
-    pages.flat_map {|id| @graph.get_connection(id, 'events', options)}
+    pages.flat_map {|page| @graph.get_connection(page['id'], 'events', options)}
   end
 
   # Get info about an event
