@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20161105180400) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "slug",         null: false
-    t.string   "twitter_page"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
