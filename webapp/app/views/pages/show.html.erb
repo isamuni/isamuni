@@ -37,11 +37,20 @@
   <% if @page.fb_url or @page.twitter_url %>
     <ul class="nav nav-tabs">
       <% if @page.fb_url %>
-        <li class=" nav-item"><a class="nav-link active" data-toggle="tab" href="#fb">Facebook</a></li>
+        <li class=" nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#fb">Facebook</a>
+        </li>
       <% end %>
 
       <% if @page.twitter_url %>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a></li>
+        <li class="nav-item">
+          <% if !@page.fb_url %>
+            <a class="nav-link active" data-toggle="tab" href="#twitter">Twitter</a>
+          <% else %>
+            <a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a>
+          <% end %>
+          
+        </li>
       <% end %>
     </ul>
 
@@ -58,12 +67,17 @@
           </div>
         <% end %>
       </div>
-      <div id="twitter" class="tab-pane">
+      <% if !@page.fb_url %>
+        <div id="twitter" class="tab-pane active">
+      <% else %>
+        <div id="twitter" class="tab-pane">
+      <% end %>
         <% if @page.twitter_url %>
           <a class="twitter-timeline" 
               data-lang="it" 
               href="<%= @page.twitter_url %>"
               data-height="600"
+              data-chrome="noheader nofooter noborders"
               data-aria-polite="assertive">
           </a> 
         <% end %>
