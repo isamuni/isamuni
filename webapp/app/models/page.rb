@@ -32,6 +32,15 @@ class Page < ApplicationRecord
     end
   end
 
+  def twitter_url
+    if twitter_page
+      page = twitter_page.split("@")[1]
+      "https://twitter.com/#{page}"
+    else
+      nil
+    end
+  end
+
   def as_json(options={})
     super(only: [:name, :description, :contacts, :links, :slug])
   end
