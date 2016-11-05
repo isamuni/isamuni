@@ -10,22 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105180329) do
+ActiveRecord::Schema.define(version: 20161105180400) do
 
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"
     t.string   "user_uid"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "crawler_sources", force: :cascade do |t|
-    t.string   "uid"
-    t.string   "stype"
-    t.string   "source"
-    t.string   "name"
-    t.string   "privacy"
-    t.string   "icon_link"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
@@ -91,7 +80,6 @@ ActiveRecord::Schema.define(version: 20161105180329) do
     t.boolean  "show"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "fb_group"
   end
 
   create_table "users", force: :cascade do |t|
