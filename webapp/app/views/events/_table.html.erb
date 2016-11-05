@@ -32,7 +32,7 @@
         <td class="col-xs">
           <%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %>
           <% if event_type == :future and event.coord %>
-            <button coordinates-id=<%= event.coord %> style="border:none; background: none; padding: 0;"><i class="fa fa-map-marker"></i></button>
+            <button coordinates-id="<%= event.coord %>" class="center_map_link"><i class="fa fa-map-marker"></i></button>
           <% end %>
         </td>
       </tr>

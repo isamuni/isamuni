@@ -9,7 +9,6 @@ Pages_to_track = config['fb']['pages'] # track events only
 Feed_limit = 10000 # No need to have this very high, except for the first time
 Members_limit = 10000
 
-# TODO - change for production
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 
 desc "Crawls events and posts from the given set of pages and insert the result into the database"
@@ -35,7 +34,8 @@ task :crawl => :environment do
   since = Post.last_post_date
 
   feed = crawl_groups(crawler, Groups_to_track, Feed_limit, since)
-  events = feed[:events] + crawl_pages(crawler, Pages_to_track, Feed_limit)
+  page_events = crawl_pages(crawler, Pages_to_track, Feed_limit)
+  events = feed[:events] + page_events
   posts = feed[:posts]
 
   insert_events(events)
@@ -64,26 +64,26 @@ end
 
 def insert_events events
   log "inserting events into the database"
-  number_events = 0
-  events.each do |event|
-    unless Event.exists?(uid: event['id'])
-      Event.from_fb_event(event).save
-      number_events += 1
-    end
+  
+  event_uids_in_db = Event.pluck(:uid).to_set
+  new_events = events.reject { |e| event_uids_in_db.include? e['id'] } 
+  new_events.each do |e|
+    Event.from_fb_event(e).save 
   end
-  log "just inserted " + number_events.to_s + " events"
+
+  log "crawled #{events.count} events, inserted #{new_events.count} new ones"
 end
 
 def insert_posts posts
   log "inserting posts into the database"
-  number_posts = 0
-  posts.each do |post|
-    unless Post.exists?(uid: post['id'])
-      Post.from_fb_post(post).save!
-      number_posts += 1
-    end
+
+  post_uids_in_db = Post.pluck(:uid).to_set
+  new_posts = posts.reject { |post| post_uids_in_db.include? post['id']}
+  new_posts.each do |post|
+    Post.from_fb_post(post).save!
   end
-  log "just inserted " + number_posts.to_s + " posts"
+  
+  log "crawled #{posts.count} posts, inserted #{new_posts.count} new ones"
 end
 
 def log message
