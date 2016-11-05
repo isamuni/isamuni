@@ -15,7 +15,7 @@ Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 desc "Crawls events and posts from the given set of pages and insert the result into the database"
 task :crawl => :environment do
 
-  puts "Crawler started, initializing"
+  log "Crawler started, initializing"
 
   unless ENV['ISAMUNI_APP_ID'] && ENV['ISAMUNI_APP_SECRET']
     raise "Application id and/or secret are not specified in the environment"
@@ -26,7 +26,7 @@ task :crawl => :environment do
   puts token
   crawler = crawler = Crawler.new(token)
 
-  puts "Crawling - give me some time please!"
+  log "Crawling - give me some time please!"
 
   time_started = Time.now
   feed = nil
@@ -42,28 +42,28 @@ task :crawl => :environment do
   insert_posts(posts)
 
   crawling_duration = Time.now - time_started
-  puts "Crawling finished in #{crawling_duration}s :)"
+  log "Crawling finished in #{crawling_duration}s :)"
 
 end
 
 def crawl_groups crawler, groups_to_track, feed_limit, since
-  puts "-downloading group feed"
+  log "downloading group feed"
   feed = crawler.groups_feed(groups_to_track, feed_limit, since)
-  puts "-downloaded " + feed.size.to_s + " posts"
+  log "downloaded " + feed.size.to_s + " posts"
 
   feed
 end
 
 def crawl_pages crawler, pages_to_track, feed_limit
-  puts "-downloading page events"
+  log "downloading page events"
   events = crawler.page_events(pages_to_track, feed_limit)
-  puts "-downloaded " + events.size.to_s + " events"
+  log "downloaded " + events.size.to_s + " events"
 
   events
 end
 
 def insert_events events
-  puts "-inserting events into the database"
+  log "inserting events into the database"
   number_events = 0
   events.each do |event|
     unless Event.exists?(uid: event['id'])
@@ -71,11 +71,11 @@ def insert_events events
       number_events += 1
     end
   end
-  puts "-just inserted " + number_events.to_s + " events"
+  log "just inserted " + number_events.to_s + " events"
 end
 
 def insert_posts posts
-  puts "-inserting posts into the database"
+  log "inserting posts into the database"
   number_posts = 0
   posts.each do |post|
     unless Post.exists?(uid: post['id'])
@@ -83,5 +83,9 @@ def insert_posts posts
       number_posts += 1
     end
   end
-  puts "-just inserted " + number_posts.to_s + " posts"
+  log "just inserted " + number_posts.to_s + " posts"
+end
+
+def log message
+  puts "[ " + Time.now.strftime("%d/%m/%Y %H:%M:%S:%L") + " ] - " + message
 end
