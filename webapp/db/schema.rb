@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103172027) do
+ActiveRecord::Schema.define(version: 20161105155254) do
 
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"
@@ -18,9 +18,14 @@ ActiveRecord::Schema.define(version: 20161103172027) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "crawledsources", force: :cascade do |t|
+  create_table "crawler_sources", force: :cascade do |t|
     t.string   "uid"
+    t.string   "stype"
+    t.string   "source"
     t.string   "name"
+    t.string   "privacy"
+    t.string   "icon_link"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 

@@ -22,7 +22,6 @@ task :crawl => :environment do
 
   oauth = Koala::Facebook::OAuth.new(ENV['ISAMUNI_APP_ID'], ENV['ISAMUNI_APP_SECRET'], Callback_url)
   token = oauth.get_app_access_token
-  puts token
   crawler = crawler = Crawler.new(token)
 
   log "Crawling - give me some time please!"
@@ -30,8 +29,10 @@ task :crawl => :environment do
   time_started = Time.now
   feed = nil
   page_events = nil
+  since = Post.last_post_date # Must be custom for each group/page
 
-  since = Post.last_post_date
+  groups_info = crawl_groups_info(crawler, Groups_to_track)
+  insert_groups_info(groups_info)
 
   feed = crawl_groups(crawler, Groups_to_track, Feed_limit, since)
   page_events = crawl_pages(crawler, Pages_to_track, Feed_limit)
@@ -43,7 +44,13 @@ task :crawl => :environment do
 
   crawling_duration = Time.now - time_started
   log "Crawling finished in #{crawling_duration}s :)"
+end
 
+def crawl_groups_info crawler, groups_to_track
+  log "crawling info about groups"
+  groups_info = crawler.groups_info(groups_to_track)
+
+  groups_info
 end
 
 def crawl_groups crawler, groups_to_track, feed_limit, since
@@ -62,13 +69,24 @@ def crawl_pages crawler, pages_to_track, feed_limit
   events
 end
 
+def insert_groups_info groups
+  log "inserting info about groups"
+
+  groups.each do |group|
+    CrawlerSource.from_fb_source(group).save
+  end
+
+  log "all info added/updated"
+end
+
+
 def insert_events events
   log "inserting events into the database"
   
   event_uids_in_db = Event.pluck(:uid).to_set
   new_events = events.reject { |e| event_uids_in_db.include? e['id'] } 
-  new_events.each do |e|
-    Event.from_fb_event(e).save 
+  new_events.each do |event|
+    Event.from_fb_event(event).save 
   end
 
   log "crawled #{events.count} events, inserted #{new_events.count} new ones"

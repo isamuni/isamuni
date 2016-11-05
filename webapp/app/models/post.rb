@@ -36,6 +36,11 @@ class Post < ApplicationRecord
     post
   end
 
+  def fb_group_info
+    group = CrawlerSource.where(uid: fb_group).first
+    group
+  end
+
   def self.only_jobs
     where(:tags => 'job')
   end

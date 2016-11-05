@@ -1,7 +1,7 @@
 <%= content_tag(:div, class: 'post card-block', data: {toggle: "modal", target: '#' + post.uid} ) do %>
-		<% if post.picture %>
-			<%= image_tag(post.picture, alt: post.alt, class: "card-img-top img-fluid") %>
-		<% end %>
+	<% if post.picture %>
+		<%= image_tag(post.picture, alt: post.alt, class: "card-img-top img-fluid") %>
+	<% end %>
 	<blockquote class="card-blockquote" style="word-wrap: break-word;">
 		<p>
 			<%= truncate(post.name, length: 40) if post.name %>
@@ -18,6 +18,14 @@
 			<small style="color:black;"> - <%= post.author_name[0..0] + ". " + 
 											post.author_name.split.last %> 
 											<%= post.created_at.strftime("%d-%m-%y") %>
+			</small>
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col-md-12 text-right">
+			<% post_info = post.fb_group_info %>
+			<img src=<%= post_info.icon_link %> />
+			<small style="color:black;"><%= post_info.name %>
 			</small>
 		</div>
 	</div>
