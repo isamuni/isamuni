@@ -26,14 +26,14 @@ class EventsController < ApplicationController
   end
 
   def locations
-    today_events = Event.where('DATE(ends_at) >= ? AND DATE(starts_at) <= ? AND coordinates IS NOT NULL', Date.today, Date.today)
-    future_events = Event.where('ends_at > ? AND coordinates IS NOT NULL', (Date.today + 1))
-    
-    today_events = map_events(today_events, true)
-    future_events = map_events(future_events, false)
+    today_events = Event.future.where('coordinates IS NOT NULL')
 
-    all_events = today_events + future_events
-    render json: all_events
+    event_data = today_events.map{ |event| {:uid => event.uid,
+                                  :name => event.name,
+                                  :coordinates => event.coordinates,
+                                  :isToday => event.current? } }
+                                  
+    render json: event_data
   end
 
   def all_events
@@ -62,14 +62,6 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.json { render json: datatable }
     end
-  end
-
-  def map_events events, is_today
-    events = events.map{ |event| {:uid => event.uid,
-                                  :name => event.name,
-                                  :coordinates => event.coordinates,
-                                  :isToday => is_today } }
-    return events
   end
 
 end

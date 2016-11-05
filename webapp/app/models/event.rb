@@ -38,6 +38,10 @@ class Event < ApplicationRecord
     event
   end
 
+  def current?
+    ends_at > Time.zone.now.beginning_of_day and starts_at < Time.zone.now.end_of_day
+  end
+
   def external_link
     'https://www.facebook.com/events/' + uid
   end

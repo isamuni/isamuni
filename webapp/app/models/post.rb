@@ -35,6 +35,10 @@ class Post < ApplicationRecord
     post
   end
 
+  def self.only_jobs
+    where(:tags => 'job')
+  end
+
   # Get date (yyyy-mm-dd) of the latest post in the db
   def self.last_post_date
     last_post_date = Post.maximum(:created_at)

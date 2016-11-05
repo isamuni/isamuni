@@ -24,41 +24,56 @@ task :crawl => :environment do
   token = oauth.get_app_access_token
   crawler = crawler = Crawler.new(token)
 
+
+  # Downloading
+
+  time_started = Time.now
+
   puts "Crawling - give me some time please!"
 
+  puts "downloading and saving allowed users"
   allowed_users = crawler.group_members(Group_to_track, Members_limit)
   allowed_users.each do |user|
     Alloweduser.from_fb_users(Group_to_track, user).save
   end
-
-  time_started = Time.now
-  feed = nil
-  page_events = nil
-
-  since = Post.last_post_date
+  puts "saved #{allowed_users.count} allowed users"
 
   puts "downloading group feed"
+  since = Post.last_post_date
   feed = crawler.group_feed(Group_to_track, Feed_limit, since)
 
   puts "downloading page events"
-  events = feed[:events] + crawler.page_events(Pages_to_track, Feed_limit)
+  page_events = crawler.page_events(Pages_to_track, Feed_limit)
+
+  # Saving
+
+  puts "saving events"
+  events = feed[:events] + page_events
+
+  event_uids_in_db = Event.pluck(:uid).to_set
+  new_events = events.reject { |e| event_uids_in_db.include? e['id'] } 
+  
+  new_events.each do |e|
+    Event.from_fb_event(e).save 
+  end
+
+  puts "crawled #{events.count} events, inserted #{new_events.count} new ones"
+
+
+  puts "saving posts"
+  
   posts = feed[:posts]
 
-  puts "inserting events into the database"
-  events.each do |event|
-    unless Event.exists?(uid: event['id'])
-      Event.from_fb_event(event).save
-    end
+  post_uids_in_db = Post.pluck(:uid).to_set
+  new_posts = posts.reject { |post| post_uids_in_db.include? post['id']}
+
+  new_posts.each do |post|
+    Post.from_fb_post(post).save!
   end
 
-  puts "inserting posts into the database"
-  posts.each do |post|
-    unless Post.exists?(uid: post['id'])
-      Post.from_fb_post(post).save!
-    end
-  end
+  puts "crawled #{posts.count} posts, inserted #{new_posts.count} new ones"
 
-  crawling_duration = Time.now - time_started
-  puts "Crawling finished in #{crawling_duration}s :)"
+
+  puts "Crawling finished in #{Time.now - time_started}s :)"
 
 end
