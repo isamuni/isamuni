@@ -33,6 +33,7 @@
   </tbody>
 </table>
 
+<% content_for :scripts do %>
 <script type="text/javascript">
   $(document).on('ready', function(){
     $("#posts-table").on("click", ".deactivate-post-btn", function () {
@@ -104,4 +105,4 @@
     });
   });
 </script>
-
+<% end %>

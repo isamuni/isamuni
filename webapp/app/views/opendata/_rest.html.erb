@@ -46,15 +46,6 @@ Content-type: application/json
   </div>
 </div>
 
-<script>
-$('#collapseUsersTest').on('show.bs.collapse', function () {
-  $.get("/users.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);
-  	$("#usersJSON").html(json);
-  });
-})
-</script>
-
 ---
 
 ### Pages
@@ -93,15 +84,6 @@ Content-type: application/json
   </div>
 </div>
 
-<script>
-$('#collapseCommunitiesTest').on('show.bs.collapse', function () {
-  $.get("/communities.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
-  	$("#communitiesJSON").html(json);
-  });
-})
-</script>
-
 **Companies**
 <p>
   <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseCompaniesTest" aria-expanded="false" aria-controls="collapseCompaniesTest">
@@ -113,15 +95,6 @@ $('#collapseCommunitiesTest').on('show.bs.collapse', function () {
     <p class="card-text" style="font-family:monospace; white-space:pre-wrap " id="companiesJSON" />
   </div>
 </div>
-
-<script>
-$('#collapseCompaniesTest').on('show.bs.collapse', function () {
-  $.get("/companies.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
-  	$("#companiesJSON").html(json);
-  });
-})
-</script>
 
 ---
 
@@ -160,16 +133,6 @@ Content-type: application/json
   </div>
 </div>
 
-<script>
-$('#collapseEventsTest').on('show.bs.collapse', function () {
-  $.get("/events.json", function(data) {
-  	var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
-  	$("#eventsJSON").html(json);
-  });
-})
-</script>
-
-
 ---
 
 ### Feed
@@ -204,11 +167,43 @@ Content-type: application/json
   </div>
 </div>
 
+<% content_for :scripts do %>
 <script>
+
+$('#collapseUsersTest').on('show.bs.collapse', function () {
+  $.get("/users.json", function(data) {
+    var json = JSON.stringify(data, null, '\t').substring(0, 1500);
+    $("#usersJSON").html(json);
+  });
+})
+
+$('#collapseCommunitiesTest').on('show.bs.collapse', function () {
+  $.get("/communities.json", function(data) {
+    var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
+    $("#communitiesJSON").html(json);
+  });
+})
+
+$('#collapseCompaniesTest').on('show.bs.collapse', function () {
+  $.get("/companies.json", function(data) {
+    var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
+    $("#companiesJSON").html(json);
+  });
+})
+
+$('#collapseEventsTest').on('show.bs.collapse', function () {
+  $.get("/events.json", function(data) {
+    var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
+    $("#eventsJSON").html(json);
+  });
+})
+
 $('#collapseFeedTest').on('show.bs.collapse', function () {
   $.get("/feed.json", function(data) {
     var json = JSON.stringify(data, null, '\t').substring(0, 1500);;
     $("#feedJSON").html(json);
   });
 })
+
 </script>
+<% end %>

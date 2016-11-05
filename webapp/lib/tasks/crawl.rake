@@ -15,6 +15,7 @@ desc "Crawls events and posts from the given set of pages and insert the result 
 task :crawl => :environment do
 
   puts "Crawler started, initializing"
+  Koala::Utils.level = Logger::DEBUG
 
   unless ENV['ISAMUNI_APP_ID'] && ENV['ISAMUNI_APP_SECRET']
     raise "Application id and/or secret are not specified in the environment"

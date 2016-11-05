@@ -32,6 +32,7 @@
   </tbody>
 </table>
 
+<% content_for :scripts do %>
 <script type="text/javascript">
   $(document).on('ready', function(){
     $("#pages-table").on("click", ".deactivate-page-btn", function () {
@@ -92,3 +93,4 @@
     });
   });
 </script>
+<% end %>
