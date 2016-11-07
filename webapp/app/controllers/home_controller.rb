@@ -7,8 +7,8 @@ class HomeController < ApplicationController
     @companies_count = Page.companies.where('active = ?', true).count
 
     three_weeks = Time.now + (3*7*24*60*60) 
-    @upcoming_events_count = Event.where(:starts_at => Time.zone.now.beginning_of_day..three_weeks)
-                            .order('starts_at desc')
+    @upcoming_events_count = Event.where(:ends_at => Time.zone.now.beginning_of_day..three_weeks)
+                            .order('ends_at desc')
                             .count
   end
 
