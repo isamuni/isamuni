@@ -15,7 +15,7 @@
 		<div class="col-md-12 text-right">
 			<i class="fa <%= post_icon post.post_type %>"></i>
 			
-			<small style="color:black;"> - <%= post.author_name[0..0] + ". " + 
+			<small style="color:black;"> <%= post.author_name[0..0] + ". " + 
 											post.author_name.split.last %> 
 											<%= post.created_at.strftime("%d-%m-%y") %>
 			</small>
@@ -79,8 +79,8 @@
 			</div>
 			<div class="modal-footer">
 				<div class="col-xs-10 text-xs-left">
-					<small style="color:black;">Postato da <strong><%= post.author_name %>
-					</strong> sul gruppo <strong><%= post.fb_group_info.name %></strong></small>
+					<small style="color:black;"><strong><%= post.author_name %> @
+					</strong><i><%= post.fb_group_info.name %></i></small>
 				</div>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>

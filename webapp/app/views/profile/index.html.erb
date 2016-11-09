@@ -33,27 +33,10 @@
   </div>
 </div>
 
-<script>
-  $("[name='users-checkbox']").bootstrapSwitch();
-
-  $('input[name="users-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-    console.log(this); // DOM element
-    console.log(event); // jQuery event
-    console.log(state); // true | false
-    if (state==true) {
-      $('#list-users').hide();
-      $('#cards-users').show();
-    } else {
-      $('#cards-users').hide();
-      $('#list-users').show();
-    }
-  });
-</script>
-
 <div id="cards-users">
   <div class="card-columns">
     <% @users.each do |user| %>
-    <div class="card">
+    <div class="card" id="card-<%= user_path(user) %>">
       <div class="card-block">
         <div class="row">
           <div class="col-md-5">
@@ -100,3 +83,26 @@
     </tbody>
 </table>
 </div>
+
+
+<script>
+  $("[name='users-checkbox']").bootstrapSwitch();
+
+  $('input[name="users-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    console.log(this); // DOM element
+    console.log(event); // jQuery event
+    console.log(state); // true | false
+    if (state==true) {
+      $('#list-users').hide();
+      $('#cards-users').show();
+    } else {
+      $('#cards-users').hide();
+      $('#list-users').show();
+    }
+  });
+
+  $("div[id^=card-]").click(function() {
+    id = $(this).attr('id').split('card-')[1];
+    window.location.href = window.location.protocol + "//" + window.location.host + id;
+  });
+</script>

@@ -8,20 +8,18 @@ class CrawlerSource < ApplicationRecord
 
     if CrawlerSource.exists?(uid: group_uid)
 		group = CrawlerSource.where(uid: group_uid).first
-		group.name = group_name
-		group.privacy = group_privacy
-		group.icon_link = group_icon
 		group.touch
     else
 		group = CrawlerSource.new()
-	    group.uid = group_uid
-	    group.name = group_name
-	    group.privacy = group_privacy
-	    group.icon_link = group_icon
 
 	    group.stype = 'group'
 	    group.source = 'fb'
     end
+
+    group.uid = group_uid
+    group.name = group_name
+    group.privacy = group_privacy
+    group.icon_link = group_icon
 
     group
   end

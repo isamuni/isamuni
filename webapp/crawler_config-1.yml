@@ -8,6 +8,10 @@ fb:
       name: Informatici a Palermo
       post: true
       event: true
+    - id: 231818570316519
+      name: StartupItalia! Sicilia
+      post: true
+      event: true
   pages:
     - id: 116505148430596
       name: YoutHub

@@ -12,16 +12,24 @@ class Event < ApplicationRecord
 
   def self.from_fb_event fb_event
 
-    #handle optional content
+    uid = fb_event['id']
+    name = Sanitize.encode(fb_event['name'])
     content = if fb_event['description'] then Sanitize.encode(fb_event['description']) else nil end
+    starts_at = fb_event['start_time']
+    ends_at = fb_event['end_time']
 
-    event = Event.new({
-      uid: fb_event['id'],
-      name: Sanitize.encode(fb_event['name']),
-      content: content,
-      starts_at: fb_event['start_time'],
-      ends_at: fb_event['end_time']
-    })
+    if Event.exists?(uid: uid)
+      event = Event.where(uid: uid).first
+    else
+      event = Event.new()
+    end
+
+    event.uid = uid
+    event.name = name
+    event.content = content
+    event.starts_at = starts_at
+    event.ends_at = ends_at
+
     event.location_name = fb_event['place'] ? Sanitize.encode(fb_event['place']['name']) : nil
     event.location = fb_event['place'] ? Sanitize.encode(fb_event['place']['location'].to_json) : nil
 
