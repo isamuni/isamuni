@@ -1,19 +1,66 @@
-groups: 
-  - 281460675321367 # Track posts of this group. This is the id for the group Programmatori a Catania
-  - 110929722279430 # Informatici a Palermo
-pages: 
-  - 116505148430596  # YoutHub
-  - 371576386279313  # EESTEC Catania
-  - 1486797638277248 # CoderDojo Etneo
-  - 887171771350676  # ATFactory
-  - 1457341927813814 # Hackspacee Catania
-  - 859949567453237  # MPS Catania
-  - 1380906508817529 # Startup Messina
-  - 146290095529300  # Consorzio Arca
-  - 444735402236013  # GDG Catania
-  - 262803503885964  # GDG Gela
-  - 875340082514949  # Vulcanic
-  - 150423961659353  # Impact Hub Siracusa
-  - 189873531201389  # Fablab CT
-  - 173047699475869  # Startupweekendcatania
-  - 616175095199243  # WordPressMeetupCatania
+fb:
+  groups:
+    - id: 281460675321367
+      name: PAC - Programmatori a Catania
+      post: true
+      event: true
+    - id: 110929722279430
+      name: Informatici a Palermo
+      post: true
+      event: true
+    - id: 231818570316519
+      name: StartupItalia! Sicilia
+      post: true
+      event: true
+  pages:
+    - id: 116505148430596
+      name: YoutHub
+      event: true
+    - id: 371576386279313
+      name: EESTEC Catania
+      event: true
+    - id: 1486797638277248
+      name: CoderDojo Etneo
+      event: true
+    - id: 887171771350676
+      name: ATFactory
+      event: true
+    - id: 1457341927813814
+      name: Hackspacee Catania
+      event: true
+    - id: 859949567453237
+      name: MPS Catania
+      event: true
+    - id: 1380906508817529
+      name: Startup Messina
+      event: true
+    - id: 146290095529300
+      name: Consorzio Arca
+      event: true
+    - id: 444735402236013
+      name: GDG Catania
+      event: true
+    - id: 262803503885964
+      name: GDG Gela
+      event: true
+    - id: 181446755362089
+      name: GDG Nebrodi
+      event: true
+    - id: 875340082514949
+      name: Vulcanic
+      event: true
+    - id: 150423961659353
+      name: Impact Hub Siracusa
+      event: true
+    - id: 189873531201389
+      name: Fablab CT
+      event: true
+    - id: 173047699475869
+      name: Startupweekendcatania
+      event: true
+    - id: 616175095199243
+      name: WordPressMeetupCatania
+      event: true
+    - id: 243410375604
+      name: Orange Dot Net
+      event: true

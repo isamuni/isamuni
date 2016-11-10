@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
+  belongs_to :source, optional: true
+
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 
   def self.from_fb_post feed_post
     post = Post.new()
     post.uid = feed_post['id']
-    post.fb_group = post.uid.split('_')[0]
     post.content = feed_post['message']
     post.author_name = feed_post['from']['name']
     post.author_uid = feed_post['from']['id']
@@ -36,18 +37,13 @@ class Post < ApplicationRecord
     post
   end
 
-  def fb_group_info
-    group = CrawlerSource.where(uid: fb_group).first
-    group
-  end
-
   def self.only_jobs
     where(:tags => 'job')
   end
 
   # Get date (yyyy-mm-dd) of the latest post in the db
   def self.last_post_date 
-    last_post_date = Post.maximum(:created_at)
+    last_post_date = maximum(:created_at)
     if last_post_date
       last_post_date.strftime("%Y-%m-%d")
     else

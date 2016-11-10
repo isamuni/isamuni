@@ -1,6 +1,7 @@
 require_relative "sanitize"
 
 class Event < ApplicationRecord
+  belongs_to :source, optional: true
 
   scope :future, -> { where "ends_at >= ?", Time.zone.now.beginning_of_day }
   scope :past, -> { where "ends_at < ?", Time.zone.now.beginning_of_day }

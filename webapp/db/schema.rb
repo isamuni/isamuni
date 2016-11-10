@@ -18,17 +18,6 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "crawler_sources", force: :cascade do |t|
-    t.string   "uid"
-    t.string   "stype"
-    t.string   "source"
-    t.string   "name"
-    t.string   "privacy"
-    t.string   "icon_link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string   "uid"
     t.string   "name"
@@ -41,6 +30,8 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.string   "location_name"
     t.string   "location"
     t.string   "coordinates"
+    t.integer  "source_id"
+    t.index ["source_id"], name: "index_events_on_source_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -91,7 +82,19 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.boolean  "show"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "fb_group"
+    t.integer  "source_id"
+    t.index ["source_id"], name: "index_posts_on_source_id"
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "stype"
+    t.string   "source"
+    t.string   "name"
+    t.string   "privacy"
+    t.string   "icon_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

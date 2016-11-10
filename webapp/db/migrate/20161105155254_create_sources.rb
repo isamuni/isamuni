@@ -1,7 +1,7 @@
-class CreateCrawlerSources < ActiveRecord::Migration[5.0]
+class CreateSources < ActiveRecord::Migration[5.0]
  
   def change
-    create_table :crawler_sources do |t|
+    create_table :sources do |t|
       t.string :uid
       t.string :stype
       t.string :source
@@ -11,5 +11,7 @@ class CreateCrawlerSources < ActiveRecord::Migration[5.0]
       
       t.timestamps
     end
+
+    add_index :sources, :uid
   end
 end

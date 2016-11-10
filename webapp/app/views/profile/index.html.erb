@@ -84,7 +84,7 @@
 </table>
 </div>
 
-
+<% content_for :scripts do %>
 <script>
   $("[name='users-checkbox']").bootstrapSwitch();
 
@@ -106,3 +106,4 @@
     window.location.href = window.location.protocol + "//" + window.location.host + id;
   });
 </script>
+<% end %>

@@ -23,7 +23,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-right">
-			<% post_info = post.fb_group_info %>
+			<% post_info = post.source %>
 			<img src=<%= post_info.icon_link %> />
 			<small style="color:black;"><%= post_info.name %>
 			</small>
@@ -80,7 +80,7 @@
 			<div class="modal-footer">
 				<div class="col-xs-10 text-xs-left">
 					<small style="color:black;"><strong><%= post.author_name %> @
-					</strong><i><%= post.fb_group_info.name %></i></small>
+					</strong><i><%= post.source.name %></i></small>
 				</div>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>

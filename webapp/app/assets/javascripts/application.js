@@ -20,4 +20,5 @@
 //= require moment.min.js
 //= require leaflet
 //= require leaflet.markercluster.js
+//= require bootstrap-switch.min.js
 //= require_tree .

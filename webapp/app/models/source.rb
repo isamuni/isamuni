@@ -1,4 +1,6 @@
-class CrawlerSource < ApplicationRecord
+class Source < ApplicationRecord
+  has_many :posts
+  has_many :events
 
   def self.from_fb_source fb_group
     group_uid = fb_group['id']
@@ -6,11 +8,11 @@ class CrawlerSource < ApplicationRecord
     group_privacy = fb_group['privacy']
     group_icon = fb_group['icon']
 
-    if CrawlerSource.exists?(uid: group_uid)
-		group = CrawlerSource.where(uid: group_uid).first
+    if exists?(uid: group_uid)
+		group = where(uid: group_uid).first
 		group.touch
     else
-		group = CrawlerSource.new()
+		group = Source.new()
 
 	    group.stype = 'group'
 	    group.source = 'fb'

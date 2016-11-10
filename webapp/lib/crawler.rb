@@ -21,19 +21,9 @@ class Crawler
     @graph = Koala::Facebook::API.new(token)
   end
 
-  def groups_raw_feed groups, limit, since=nil
+  def group_raw_feed group, limit, since=nil
     options = { limit: limit, fields: Feed_fields, since: since }
-
-    puts options
-
-    # Not needed - using it for debugging
-    groups.each do |group|
-      puts group['id']
-      res = @graph.get_connection(group['id'], 'feed', options)
-      puts res.size
-    end
-
-    groups.flat_map {|group| @graph.get_connection(group['id'], 'feed', options) }
+    @graph.get_connection(group['id'], 'feed', options)
   end
 
   def group_members groupid, limit
@@ -41,9 +31,9 @@ class Crawler
     @graph.get_connection(groupid, 'members', options)
   end    
 
-  def page_events pages, since=nil
+  def page_events page, since=nil
     options = { fields: Event_fields, since: since }
-    pages.flat_map {|page| @graph.get_connection(page['id'], 'events', options)}
+    @graph.get_connection(page['id'], 'events', options)
   end
 
   # Get info about an event
@@ -51,9 +41,8 @@ class Crawler
     @graph.get_object(event_id, { fields: Event_fields })
   end
 
-  def groups_feed groups, limit, since
-    feed = groups_raw_feed(groups, limit, since)
-
+  def group_feed group, limit, since
+    feed = group_raw_feed(group, limit, since)
     posts = feed.select { |fe|
           ['status', 'link', 'photo', 'event'].include? fe['type'] }
 
@@ -65,7 +54,7 @@ class Crawler
         event_info(event_id)
       end
 
-    return {posts: posts, events: events}
+    {posts: posts, events: events}
   end
 
   def groups_info groups
