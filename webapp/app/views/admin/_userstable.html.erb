@@ -28,6 +28,7 @@
   </tbody>
 </table>
 
+<% content_for :scripts do %>
 <script type="text/javascript">
   $(document).on('ready', function(){
     $("#users-table").on("click", ".deactivate-user-btn", function () {
@@ -65,3 +66,4 @@
     });
   });
 </script>
+<% end %>

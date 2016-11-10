@@ -34,23 +34,68 @@
   </div>
 
   <div class="col-lg-4">
-    <% if @page.fb_url # Display the fb page if available %>
-      <div class="fb-page" 
-           data-href="<%= @page.fb_url %>" 
-           data-tabs="timeline, events, messages" 
-           data-small-header="true" 
-           data-adapt-container-width="true" 
-           data-hide-cover="false" 
-           data-show-facepile="true">
+  <% if @page.fb_url or @page.twitter_url %>
+    <ul class="nav nav-tabs">
+      <% if @page.fb_url %>
+        <li class=" nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#fb">Facebook</a>
+        </li>
+      <% end %>
+
+      <% if @page.twitter_url %>
+        <li class="nav-item">
+          <% if !@page.fb_url %>
+            <a class="nav-link active" data-toggle="tab" href="#twitter">Twitter</a>
+          <% else %>
+            <a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a>
+          <% end %>
+          
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content">
+      <div id="fb" class="tab-pane active">
+        <% if @page.fb_url %>
+          <div class="fb-page" 
+               data-href="<%= @page.fb_url %>" 
+               data-tabs="timeline, events, messages" 
+               data-small-header="true" 
+               data-adapt-container-width="true" 
+               data-hide-cover="false" 
+               data-show-facepile="true">
+          </div>
+        <% end %>
       </div>
-    <% end %>
-      <p>
-      <h4>Contatti</h4>
-      <p><%= markdown(@page.contacts) %></p>
-      <h4>Links</h4>
-      <p><%= markdown(@page.links) %></p>
-      <h4>Sede</h4>
-      <p style="word-wrap: break-word;"><%= @page.location %></p>
-      <p style="word-wrap: break-word;"><%= @page.coordinates %></p>
+      <% if !@page.fb_url %>
+        <div id="twitter" class="tab-pane active">
+      <% else %>
+        <div id="twitter" class="tab-pane">
+      <% end %>
+        <% if @page.twitter_url %>
+          <a class="twitter-timeline" 
+              data-lang="it" 
+              href="<%= @page.twitter_url %>"
+              data-height="600"
+              data-chrome="noheader nofooter noborders"
+              data-aria-polite="assertive">
+          </a> 
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+    <p>
+    <h4>Contatti</h4>
+    <p><%= markdown(@page.contacts) %></p>
+    <h4>Links</h4>
+    <p><%= markdown(@page.links) %></p>
+    <h4>Sede</h4>
+    <p style="word-wrap: break-word;"><%= @page.location %></p>
+    <p style="word-wrap: break-word;"><%= @page.coordinates %></p>
   </div>
 </div>
+
+<% content_for :scripts do %>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<% end %>

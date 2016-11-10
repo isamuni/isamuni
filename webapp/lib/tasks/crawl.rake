@@ -14,7 +14,8 @@ Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 desc "Crawls events and posts from the given set of pages and insert the result into the database"
 task :crawl => :environment do
 
-  log "Crawler started, initializing"
+  puts "Crawler started, initializing"
+  Koala::Utils.level = Logger::DEBUG
 
   unless ENV['ISAMUNI_APP_ID'] && ENV['ISAMUNI_APP_SECRET']
     raise "Application id and/or secret are not specified in the environment"

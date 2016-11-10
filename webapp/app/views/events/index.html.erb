@@ -75,7 +75,7 @@
     <%= will_paginate @old, param_name: :old_page %>
 </div>
 
-<% content_for :head do %>
+<% content_for :scripts do %>
 <script type="text/javascript">
     var mymap = null;
     var sicily_coords = [37.5579, 14.1368];
@@ -211,16 +211,23 @@
 
     function onGoogleChartsLoaded() {
         $('#spinner').show();
-        $.get("/events/locations", drawMap)
-              .done(function() {
-                $('#spinner').hide();
-              });
 
-        // FIXME here literals starting with 0 are interpreted as octals
-        var jsonData = $.ajax({url: "/events/all_events", dataType: "json", async: false}).responseText;
+        var locationsRequest = $.get("/events/locations", drawMap);
 
-        drawChart(jsonData);
+        locationsRequest.done(function() {
+          $('#spinner').hide();
+        });
 
+        var allEventsRequest = $.ajax({url: "/events/all_events", dataType: "json"});
+
+        allEventsRequest.fail(function(error){
+            console.error(error);
+        })
+
+        allEventsRequest.done(function(jsonData){
+            drawChart(jsonData);
+        })
+        
         $(window).resize(function () {
             drawChart(jsonData);
         });
@@ -229,14 +236,18 @@
     $(document).ready(function () {
         initTypeahead('/events/typeahead', 'https://www.facebook.com/events/');
 
-        //wait for gcharts to be loaded before loading the rest of the page
+        $('#resetmap').click(function() {
+            mymap.setView(sicily_coords, zoom);
+        });
+
+          $( "button[coordinates-id]" ).click(function() {
+            var coordinates = $(this).attr('coordinates-id');
+            coordinates = coordinates.split(',');
+            
+            mymap.setView(new L.LatLng(coordinates[0], coordinates[1]), 13);
+          });
+
         google.charts.setOnLoadCallback(onGoogleChartsLoaded);
     });
 </script>
 <% end %>
-
-<script>
-    $('#resetmap').click(function() {
-        mymap.setView(sicily_coords, zoom);
-    });
-</script>

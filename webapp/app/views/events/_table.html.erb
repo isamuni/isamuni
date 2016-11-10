@@ -67,12 +67,3 @@
     </div>
   </tbody>
 </table>
-
-<script>
-  $( "button[coordinates-id]" ).click(function() {
-    var coordinates = $(this).attr('coordinates-id');
-    coordinates = coordinates.split(',');
-    
-    mymap.setView(new L.LatLng(coordinates[0], coordinates[1]), 13);
-  });
-</script>

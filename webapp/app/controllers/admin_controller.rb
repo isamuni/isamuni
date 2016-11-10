@@ -3,11 +3,11 @@ class AdminController < ApplicationController
   before_action :require_admin
 
   def index
-  		@pages = Page.page(params[:page_page])
-      @users = User.page(params[:user_page])
+      @pages = Page.page(params[:page_page]).order('created_at DESC')
+      @users = User.page(params[:user_page]).order('created_at DESC')
       @events = Event.page(params[:event_page]).order('starts_at DESC')
       @posts = Post.page(params[:post_page]).order('created_at DESC')
-	end
+  end
 
   def make_page_inactive
     page = Page.find(params[:pageid])
