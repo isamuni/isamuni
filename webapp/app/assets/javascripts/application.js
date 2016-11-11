@@ -21,4 +21,6 @@
 //= require leaflet
 //= require leaflet.markercluster.js
 //= require bootstrap-switch.min.js
+//= require vue
+//= require vue-waterfall.min.js
 //= require_tree .

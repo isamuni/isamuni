@@ -13,18 +13,55 @@ class FeedController < ApplicationController
     	end
   	end
 
+  	def sources
+  		counts = Post.group(:source_id).count
+  		sources_w_count = Source.all.map do |s|
+  			ns = s.as_json
+  			ns['count'] = counts[ns["id"]]
+  			ns
+  		end
+  		render json: sources_w_count
+  	end
+
 	def posts
 	    start_time = Time.at(params[:start].to_i / 1000.0)
 	    end_time = Time.at(params[:end].to_i / 1000.0)
 
-	    @posts = Post.where(:created_at => start_time..end_time)
-	                 .limit(MAX_NUMBER_OF_POSTS)
+	    @posts = Post.limit(MAX_NUMBER_OF_POSTS)
 	                 .order('created_at desc')
+	                 .includes(:source)
 
-	    render partial: "posts", :posts => @posts
+	    if params[:start] and params[:end]
+	    	@posts = @posts.where(:created_at => start_time..end_time)
+	    end
+
+	    if params[:sources]
+	    	source_ids = params[:sources].split(",").map(&:to_i)
+	    	@posts = @posts.where(source_id: source_ids)
+	    end          
+
+	  	respond_to do |format|
+	        format.html { render partial: "posts", :posts => @posts }
+	        format.json {
+	        	posts_data = @posts.map do |post|
+		    		{
+					    author_name: post.author_name,
+					    link: post.link,
+					    content: post.content,
+					    post_type: post.post_type,
+					    name: post.name,
+					    created_at: post.created_at,
+					    source_id: post.source_id,
+					    picture: post.picture,
+					    caption: post.caption,
+					    description: post.description
+					}
+	        	end 
+	        	render json: posts_data
+	        }
+    	end
+	    
   	end
-
-
 
   	def data
 

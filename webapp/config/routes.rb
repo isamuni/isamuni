@@ -74,7 +74,8 @@ Rails.application.routes.draw do
   # Feed
   get "feed", to: 'feed#index', as: "feed"
   get 'feed/data', to: 'feed#data', defaults: { format: 'json' }
-  get 'feed/posts(/query/:query)', to: 'feed#posts'
+  get 'feed/posts', to: 'feed#posts'
+  get 'feed/sources', to: 'feed#sources'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

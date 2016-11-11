@@ -1,50 +1,123 @@
 <h2 data-intro="Scopri i posts dei membri di PAC. A presto ci saranno posts anche da altre communities.">
     Post dalla community di PAC</h2>
 <hr>
-<div id="dashboard_div" class="row">
-  <div class="col-md-3">
-    <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, 
-    clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
-    </p>
-    <p>
-      Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
-    </p>
-  </div>
-  <div class="col-md-9">
-    <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-    <div class="row">
-      <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
+<div id="feedapp">
+  <div id="dashboard_div" class="row">
+    <div class="col-md-3">
+      <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, 
+      clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
+      </p>
+      <p>
+        Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
+      </p>
     </div>
-    <div class="row">
-      <div id="filter_div" data-intro="Usa lo slider per trovare i post più vecchi."></div>
-    </div>
-  </div>
-</div>
-
-<br>
-<hr>
-
-<div class="row">
-    <div class="col-lg-9">
-      <h4> Post </h4>
-      <div id="posts-view" class="card-columns">
-        <%= render partial: "posts", locals: {posts: @posts} %>
+    <div class="col-md-9">
+      <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <div class="row">
+        <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
+      </div>
+      <div class="row">
+        <div id="filter_div" data-intro="Usa lo slider per trovare i post più vecchi."></div>
       </div>
     </div>
+  </div>
 
-    <div class="col-lg-3">
-      <h4>Offerte di lavoro</h4>
-      <% @posts_jobs.each_with_index do |post, index| %>
-        <div class="card" style="background-color: #90CAF9; border-color: #64B5F6;" <% if index==0 %> 
-        data-intro="Questo è un post di tipo 'Lavoro' che è stato postato di recente su PAC. Tutti i post contententi gli hashtag #lavoro, #jobs, #job e #cercosocio sono automaticamente classificati come post di 'Lavoro'. Nota che gli admin possono aggiungere o rimuovere manualmente i post da questa categoria." 
-        data-position='left' <% end %>>
-          <%= render partial: "card", locals: {post: post} %>
+  <br>
+  <hr>
+
+  <div class="row">
+      <div class="col-lg-12">
+        <h4> Post </h4>
+          <post-display :filter="{}"></post-display>
         </div>
-      <% end %>
-    </div>
+      </div>
+  </div>
 </div>
-
 <% content_for :scripts do %>
+
+<script type="text/x-template" id="post">
+  <div class="card post">
+    <img v-if="post.picture"
+         v-bind:src="post.picture" 
+         v-bind:alt="post.alt"
+         style="width:100%; height:auto; overflow:hidden"
+         class="card-img-top"></img>
+    <div class="card-block">
+      <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
+    </div>
+    <div class="card-footer text-muted text-right">
+      {{post.author_name}} - {{post.created_at}}
+    </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="postDisplay">
+  <div class="card-columns">
+    <post v-for="p in posts" :post="p"></post>
+  </div>
+</script>
+
+<script type="text/javascript">
+
+  /* Renders the filters
+     emits filtersChanged event
+   */
+  Vue.component('filters', {
+
+  })
+
+  /* Fetches and displays the posts
+     given some filters
+  */
+  Vue.component('postDisplay', {
+    template: '#postDisplay',
+    props: {
+      filter: Object
+    },
+    components: {
+      'waterfall': Waterfall.waterfall,
+      'waterfall-slot': Waterfall.waterfallSlot
+    },
+    data: function () {
+      return { posts: []}
+    },
+    mounted: function() {
+      var that = this;
+      $.ajax({
+        url: '/feed/posts.json',
+        success: function(res) {
+          that.posts = res;
+        }
+      });
+    }
+  })
+
+  /* Renders a single post*/
+  Vue.component('post', {
+    template: '#post',
+    props: {
+      post: Object
+    },
+    computed: {
+      text: function(){
+        content = this.post.content || "";
+        name = this.post.name ? this.post.name + " - " : "";
+        return name + content;
+      }
+    }
+  });
+
+  /* Main app 
+     Contains both filters and postDisplay
+     listens to events from filters, and stores the last version in data
+     the filters are then passed to postDisplay as props
+  */
+  var feed_app = new Vue({
+    el: '#feedapp'
+  });
+
+</script>
+
 <script type="text/javascript">
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(loadChart);
