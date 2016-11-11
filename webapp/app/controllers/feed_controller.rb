@@ -15,12 +15,14 @@ class FeedController < ApplicationController
 
   	def sources
   		counts = Post.group(:source_id).count
-  		sources_w_count = Source.all.map do |s|
-  			ns = s.as_json
-  			ns['count'] = counts[ns["id"]]
-  			ns
+  		s_hash = {}
+  		
+  		Source.all.each do |s|
+  			s_hash[s.id] = s.as_json
+  			s_hash[s.id]['count'] = counts[s.id]
   		end
-  		render json: sources_w_count
+
+  		render json: s_hash
   	end
 
 	def posts
@@ -50,7 +52,7 @@ class FeedController < ApplicationController
 					    content: post.content,
 					    post_type: post.post_type,
 					    name: post.name,
-					    created_at: post.created_at,
+					    created_at: post.created_at.to_f * 1000,
 					    source_id: post.source_id,
 					    picture: post.picture,
 					    caption: post.caption,
