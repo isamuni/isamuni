@@ -4,17 +4,12 @@
 <div id="feedapp">
   <div id="dashboard_div" class="row">
     <div class="col-md-3">
-      <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, 
-      clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
-      </p>
-      <p>
-        Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
-      </p>
+      <p>FILTRI</p>
     </div>
     <div class="col-md-9">
       <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-      <div class="row">
-        <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
+      <div class="row" style="display: none;">
+        <div id="chart_div"></div>
       </div>
       <div class="row">
         <div id="filter_div" data-intro="Usa lo slider per trovare i post più vecchi."></div>
@@ -47,8 +42,11 @@
       <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
     </div>
     <div class="card-footer text-muted text-right">
-      {{author_name}} - {{ time }} - 
-      {{post.source.name}} <img v-bind:src="post.source.icon_link" />
+      {{author_name}}
+      <br>
+      <img v-bind:src="post.source.icon_link" /> {{post.source.name}} 
+      <br>
+      {{ time }}
     </div>
   </div>
 </script>
@@ -70,6 +68,7 @@
 
 .card-footer {
   height: 80px;
+  width:100%;
   position:absolute;
   bottom:0;
   font-size: 13px;
