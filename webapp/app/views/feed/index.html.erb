@@ -4,12 +4,7 @@
 <div id="feedapp">
   <div id="dashboard_div" class="row">
     <div class="col-md-3">
-      <p>Usa lo slider sulla destra per filtrare i post. Alternativamente, 
-      clicca su dei giorni specifici nel grafico per mostare tutti i post del giorno.
-      </p>
-      <p>
-        Il sistema mostra 50 post alla volta e gli ultimi 20 annunci di lavoro.
-      </p>
+      <p>FILTRI</p>
     </div>
     <div class="col-md-9">
       <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -25,13 +20,8 @@
   <br>
   <hr>
 
-  <div class="row">
-      <div class="col-lg-12">
-        <h4> Post </h4>
-          <post-display v-if="sources_ready" :filter="{}" :sources="sources"></post-display>
-        </div>
-      </div>
-  </div>
+  <post-display v-if="sources_ready" :filter="{}" :sources="sources"></post-display>
+
 </div>
 
 
@@ -48,6 +38,7 @@
 
 .card-footer {
   height: 80px;
+  width:100%;
   position:absolute;
   bottom:0;
   font-size: 13px;
@@ -75,7 +66,7 @@
 </style>
 
 <script type="text/x-template" id="post">
-  <div class="card post" @click="clicked">
+  <div class="card post" @click="$emit('click')">
     <img v-if="post.picture"
          v-bind:src="post.picture" 
          v-bind:alt="post.alt"
@@ -92,7 +83,7 @@
 
 <script type="text/x-template" id="postDisplay">
   <div class="post-display">
-    <post v-for="p in posts" :post="p" @selected="selected(p)" ></post>
+    <post v-for="p in posts" :post="p" @click="selected(p)" ></post>
     <post-modal v-if="currentPost" :post="currentPost" ref="postModal">
   </div>
 </script>
@@ -103,14 +94,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <i :class="icon"></i>
-          <a :href="post.link" target="_blank">{{ post.created_at }}</a>
+          <a :href="post.link" target="_blank">{{ time }}</a>
           {{post.author_name}} @ {{post.source.name}}
         </div>
         <div class="modal-body">
         {{post.content}}
+        <p>
         <a :href="post.link" target="_blank">
           <img v-if="post.picture" :src="post.picture" :alt="post.alt" class="center-block img-fluid img-rounded"/>
         </a>
+        </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -148,11 +141,14 @@
     computed: {
       icon : function(){
         return postIcon(this.post.post_type);
+      },
+      time : function(){
+        return moment(this.post.created_at).format("L LT");
       }
     },
     methods: {
       show: function(){
-        this.$el.modal('show');
+        $(this.$el).modal('show');
       }
     }
   })
@@ -176,11 +172,6 @@
         var name = this.post.author_name.split(" ");
         var first_name = name.shift();
         return first_name[0] + ". " + name.join(" ");
-      }
-    },
-    methods: {
-      clicked: function(){
-        this.$emit("selected", this.post);
       }
     }
   });
@@ -212,11 +203,10 @@
       });
       },
       selected: function(post){
-        console.log("clicked" + post);
         this.currentPost = post;
         var _this = this;
         Vue.nextTick(function () {
-          $(_this.$refs.postModal.$el).modal({});
+          _this.$refs.postModal.show();
         });
       }
     }

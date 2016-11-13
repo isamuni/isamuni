@@ -34,6 +34,7 @@ task :crawl => :environment do
   # Insert sources into DB
   groups_info = crawl_groups_info(crawler, Groups_to_track)
   insert_sources(groups_info)
+  # TODO - crawl pages info too! 
 
   # Download feed from each group
   Groups_to_track.each do |group|
@@ -65,7 +66,7 @@ def crawl_groups_info crawler, groups_to_track
 end
 
 def crawl_group crawler, group, feed_limit, since
-  log "downloading group feed"
+  log "downloading feed for group: #{group['name']}"
   feed = crawler.group_feed(group, feed_limit, since)
   log "downloaded " + feed.size.to_s + " posts"
 
@@ -73,7 +74,7 @@ def crawl_group crawler, group, feed_limit, since
 end
 
 def crawl_page crawler, page, feed_limit
-  log "downloading page events"
+  log "downloading events from page: #{page['name']}"
   events = crawler.page_events(page, feed_limit)
   log "downloaded " + events.size.to_s + " events"
 
@@ -89,7 +90,6 @@ def insert_sources groups
 
   log "all info added/updated"
 end
-
 
 def insert_events events, source=nil
   log "inserting events into the database"
