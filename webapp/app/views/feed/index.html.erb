@@ -1,5 +1,5 @@
-<h2 data-intro="Scopri i posts dei membri di PAC. A presto ci saranno posts anche da altre communities.">
-    Post dalla community di PAC</h2>
+<h2 data-intro="Scopri cosa accade nel lato web delle communità tech Siciliane.">
+    Post dalle communità tech Siciliane</h2>
 <hr>
 <div id="feedapp">
   <div id="dashboard_div" class="row">
@@ -20,15 +20,9 @@
   <br>
   <hr>
 
-  <div class="row">
-      <div class="col-lg-12">
-        <h4> Post </h4>
-          <post-display v-if="sources_ready" :filter="{}" :sources="sources"></post-display>
-        </div>
-      </div>
-  </div>
-</div>
+  <post-display v-if="sources_ready" :filter="{}" :sources="sources"></post-display>
 
+</div>
 
 <% content_for :scripts do %>
 
