@@ -37,28 +37,6 @@
 
 <% content_for :scripts do %>
 
-<script type="text/x-template" id="post">
-  <div class="card post">
-    <img v-if="post.picture"
-         v-bind:src="post.picture" 
-         v-bind:alt="post.alt"
-         class="card-img-top"></img>
-    <div class="card-block">
-      <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
-    </div>
-    <div class="card-footer text-muted text-right">
-      {{author_name}} - {{ time }} - 
-      {{post.source.name}} <img v-bind:src="post.source.icon_link" />
-    </div>
-  </div>
-</script>
-
-<script type="text/x-template" id="postDisplay">
-  <div class="cont">
-    <post v-for="p in posts" :post="p"></post>
-  </div>
-</script>
-
 <style>
 .card {
   width: 250px;
@@ -80,15 +58,103 @@
    height:100px;
    object-fit: cover;
 }
+
+.modal {
+    overflow-y: auto;
+}
+
+.modal-open {
+    overflow: auto;
+}
+
+.modal-open[style] {
+    padding-right: 0px !important;
+}
+
+
 </style>
 
+<script type="text/x-template" id="post">
+  <div class="card post" @click="clicked">
+    <img v-if="post.picture"
+         v-bind:src="post.picture" 
+         v-bind:alt="post.alt"
+         class="card-img-top"></img>
+    <div class="card-block">
+      <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
+    </div>
+    <div class="card-footer text-muted text-right">
+      {{author_name}} - {{ time }} - 
+      {{post.source.name}} <img v-bind:src="post.source.icon_link" />
+    </div>
+  </div>
+</script>
+
+<script type="text/x-template" id="postDisplay">
+  <div class="post-display">
+    <post v-for="p in posts" :post="p" @selected="selected(p)" ></post>
+    <post-modal v-if="currentPost" :post="currentPost" ref="postModal">
+  </div>
+</script>
+
+<script type="text/x-template" id="postModal" >
+ <div id="post-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i :class="icon"></i>
+          <a :href="post.link" target="_blank">{{ post.created_at }}</a>
+          {{post.author_name}} @ {{post.source.name}}
+        </div>
+        <div class="modal-body">
+        {{post.content}}
+        <a :href="post.link" target="_blank">
+          <img v-if="post.picture" :src="post.picture" :alt="post.alt" class="center-block img-fluid img-rounded"/>
+        </a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
 <script type="text/javascript">
+
+  function postIcon(postType){
+    if (postType == 'link')
+      return 'fa fa-link';
+    if (postType == 'event')
+      return 'fa fa-calendar';
+    if (postType == 'photo')
+      return  "fa fa-photo"
+    return "fa fa-sticky-note-o";
+  }
 
   /* Renders the filters
      emits filtersChanged event
    */
   Vue.component('filters', {
 
+  })
+
+  Vue.component('postModal', {
+    template: '#postModal',
+    props: {
+      post: Object
+    },
+    computed: {
+      icon : function(){
+        return postIcon(this.post.post_type);
+      }
+    },
+    methods: {
+      show: function(){
+        this.$el.modal('show');
+      }
+    }
   })
 
   /* Renders a single post*/
@@ -111,6 +177,11 @@
         var first_name = name.shift();
         return first_name[0] + ". " + name.join(" ");
       }
+    },
+    methods: {
+      clicked: function(){
+        this.$emit("selected", this.post);
+      }
     }
   });
 
@@ -123,12 +194,8 @@
       filter: Object,
       sources: Object
     },
-    components: {
-      'waterfall': Waterfall.waterfall,
-      'waterfall-slot': Waterfall.waterfallSlot
-    },
     data: function () {
-      return { posts: []}
+      return { posts: [], currentPost: null}
     },
     mounted: function() {
       this.getPosts(this.filter);
@@ -143,6 +210,14 @@
           that.posts = res;
         }
       });
+      },
+      selected: function(post){
+        console.log("clicked" + post);
+        this.currentPost = post;
+        var _this = this;
+        Vue.nextTick(function () {
+          $(_this.$refs.postModal.$el).modal({});
+        });
       }
     }
   })
