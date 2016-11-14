@@ -1,32 +1,44 @@
-<h4>Benvenuti su <strong>Isamuni</strong>!</h4>
-
-<p>
-  Una panoramica sull'ambiente tech in Sicilia
-</p>
-
+<div class="row">
+  <div class="col-md-6">
+    <h1>Isamuni</h1>
+    <h4>
+      Una panoramica sull'ambiente tech in Sicilia
+    </h4>
+    <hr>
+    <h3>LOGIN BUTTON</h3>
+  </div>
+  <div class="col-md-6">
+    What a wonderful logo
+    <i class="fa fa-long-arrow-up fa-5x" aria-hidden="true"></i>
+  </div>
+</div>
 <hr>
-Su <strong>Isamuni</strong> puoi trovare (clicca i link ed esplora!):
-<ul style="list-style-type:none" data-intro="Scopri velocemente qualche statistica su isamuni.">
-  <li>
-    <a href="/companies"><i class="fa fa-industry"></i></a> <%= @companies_count %> <a href="/companies">aziende</a> che si occupano di informatica 
-  </li>
-  <li>
-    <a href="/communities"><i class="fa fa-institution"></i></a> <%= @communities_count %> <a href="/communities">comunità</a>
-  </li>
-  <li>
-    <a href="/users"><i class="fa fa-users"></i></a> <%= @users_count %> <a href="/users">studenti o professionisti</a>
-  </li>
-  <li>
-    <a href="/feed"><i class="fa fa-rss-square"></i></a> la scorsa settimana ci sono stati <%= @posts_count %> <a href="/feed">post</a> nelle varie comunità tecniche (attualmente solo Programmatori a Catania)
-  </li>
-  <li>
-    <a href="/events"><i class="fa fa-calendar"></i></a> <%= @upcoming_events_count %> <a href="/events">eventi</a> organizzati per le prossime tre settimane
-  </li>
-</ul>
-
-<p data-intro="Non ti sei ancora registrato? Che aspetti?">
-  Iscriviti e aggiungi le tue informazioni cliccando <a href="/me">qui</a>
-</p>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-2">
+    <h3><%= @companies_count %></h3>
+    <a href="/companies"><i class="fa fa-industry fa-3x"></i></a>
+  </div>
+  <div class="col-md-2">
+    <h3><%= @communities_count %></h3>
+    <a href="/communities"><i class="fa fa-institution fa-3x"></i></a>
+  </div>
+  <div class="col-md-2">
+    <h3><%= @users_count %></h3>
+    <a href="/users"><i class="fa fa-users fa-3x"></i></a>
+  </div>
+  <div class="col-md-2">
+    <h3><%= @posts_count %></h3>
+    <a href="/feed"><i class="fa fa-rss-square fa-3x"></i></a>
+  </div>
+  <div class="col-md-2">
+    <h3><%= @upcoming_events_count %></h3>
+    <a href="/events"><i class="fa fa-calendar fa-3x"></i></a>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
 
 <hr>
 
@@ -54,14 +66,3 @@ Su <strong>Isamuni</strong> puoi trovare (clicca i link ed esplora!):
 <p>
 Isamuni è un progetto no-profit mantenuto da <a href="https://github.com/sic2">sic2</a> e <a href="https://github.com/vigliag">vigliag</a> (della community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania - PAC</a>). Il codice della piattaforma di Isamuni è open-source (licenza MIT) e <a href="https://github.com/sic2/isamuni">disponibile su github</a>. Puoi contattarci tramite il gruppo Programmatori a Catania oppure via <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">mail</a>.
 </p>
-
-<h5>Come contribuire:</h5>
-<ul>
-  <li>Scrivi del codice per questa piattaforma</li>
-  <li>Segnalaci eventuali bug e suggerimenti</li>
-  <li>Spargi la voce!</li>
-  <li>Usa i dati di isamuni (abbiamo le API!) per realizzare app ancora più fighe</li>
-  <li>Oppure (se proprio ti senti) facendo una donazione per coprire il costo dei server :)</li>
-</ul>
-Per altri dettagli puoi fare riferimento al <a href="https://github.com/sic2/isamuni/blob/master/CONTRIBUTING.md" target="_blank">contributing su github</a> oppure puoi scriverci una <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">mail</a>.
-</div>
