@@ -51,8 +51,8 @@ Change the file `/etc/hosts` (you must be root) to include the following line:
 **Setup**
 ```
 $ cd isamuni/webapp/
-$ rails db::create # if necessary
-$ rails db::migrate
+$ rails db:create # if necessary
+$ rails db:migrate
 ```
 
 To populate the database run:
@@ -64,7 +64,7 @@ This will populate your database with some default entries. Otherwise use the cr
 **Running the App**
 ```
 $ bundle install
-$ rails server
+$ rails server webrick
 Connect to squirrels.vii.ovh:3000  
 ```
 
