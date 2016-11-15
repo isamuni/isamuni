@@ -1,5 +1,5 @@
-<h2 data-intro="Scopri i posts dei membri di PAC. A presto ci saranno posts anche da altre communities.">
-    Post dalla community di PAC</h2>
+<h2 data-intro="Sfogiali post delle varie community siciliane A presto ci saranno posts anche da altre communities.">
+    Post dalle communities</h2>
     <div id="feed-app">
     </div>
 <hr>
@@ -96,23 +96,8 @@
       var start = range.start.getTime();
       var end = range.end.getTime();
 
-      reloadPosts(start, end);
-    }
-
-    function reloadPosts(start, end) {
-      $.ajax({
-        type: 'GET',
-        url: '/feed/posts',
-        data: {
-          'start': start,
-          'end': end
-        }
-      }).done(function (data) {
-        $('#posts-view').html(data);
-      }).fail(function (error) {
-        console.error("reloadPosts failed");
-        console.error(error);
-      })
+      Feed.filter.start = start;
+      Feed.filter.end = end;
     }
 
     dashboard.bind(timeSlider, chart);
@@ -120,8 +105,5 @@
     $('#spinner').hide();
   }
 
-  $(window).resize(function () {
-    drawChart();
-  });
 </script>
 <% end %>

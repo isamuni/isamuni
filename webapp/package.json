@@ -8,7 +8,8 @@
     "watch": "NODE_ENV=development webpack --progress --watch"
   },
   "dependencies": {
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "vue-multiselect": "^2.0.0-beta.10"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

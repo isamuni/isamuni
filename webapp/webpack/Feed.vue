@@ -2,7 +2,16 @@
 <div id="feedapp">
   <div id="dashboard_div" class="row">
     <div class="col-md-3">
-      <p>FILTRI</p>
+      <multiselect
+        :options="sources"
+        :multiple="true"
+        :close-on-select="true"
+        @input="updateFilter"
+        placeholder="Scegli fonti"
+        label="name" />
+        <p>
+          <label for="jobs_only">Solo annunci di lavoro</label> <input id="jobs_only" type="checkbox" value="false" v-model="filter.jobs_only"></input>
+        </p>
     </div>
     <div class="col-md-9">
       <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -15,13 +24,15 @@
     </div>
   </div>
   <hr>
-  <PostDisplay v-if="sources_ready" :filter="{}" :sources="sources"></PostDisplay>
+  <PostDisplay v-if="sources_ready" :filter="{}" :posts="posts"></PostDisplay>
 </div>
 </template>
 
 <script>
 
 import PostDisplay from './PostDisplay.vue';
+import Multiselect from 'vue-multiselect';
+
 
 /* Main app 
    Contains both filters and postDisplay
@@ -30,12 +41,18 @@ import PostDisplay from './PostDisplay.vue';
 
 var Feed = {
   data: function(){
-    return {sources: {}};
+    return {
+      sources: [],
+      filter: {sources: "", start: null, end:null, jobs_only:0},
+      posts: []
+    };
   },
   mounted: function(){
-    $.ajax({
-      url: '/feed/sources.json',
-      success: (res) => this.sources = res,
+    let sources = $.getJSON('/feed/sources.json');
+
+    sources.then((sources) => {
+      this.sources = sources;
+      this.updatePosts();
     });
   },
   computed: {
@@ -43,7 +60,35 @@ var Feed = {
       return Object.keys(this.sources).length > 0;
     }
   },
-  components: { PostDisplay }
+  watch: {
+    filter: {
+      handler: function(filter){
+        console.log("filterChanged");
+        this.updatePosts();
+      },
+      deep: true
+    }
+  },
+  methods: {
+    updateFilter(selectedElems){
+      let selectedIDs = selectedElems.map((e) => e.id);
+      selectedIDs.sort();
+      this.filter.sources = selectedIDs.join(",");
+      console.log(this.filter.sources);
+    },
+    updatePosts(){
+      let _this = this;
+      let result = $.getJSON('/feed/posts.json', this.filter);
+
+      result.then(function(posts) {    
+        posts.forEach(function(post){
+          post['source'] = _this.sources.find((s) => s.id == post['source_id'] || {})
+        });
+        _this.posts = posts;
+      });
+    }
+  },
+  components: { PostDisplay, Multiselect }
 };
 
 export default Feed;

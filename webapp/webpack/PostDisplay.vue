@@ -1,6 +1,6 @@
 <template>
   <div class="post-display">
-    <PostCard v-for="p in posts" :post="p" @click="selected(p)" ></PostCard>
+    <PostCard v-for="p in posts" :post="p" @click="showModal(p)" ></PostCard>
     <PostModal v-if="currentPost" :post="currentPost" ref="postModal"></PostModal>
   </div>
 </template>
@@ -9,31 +9,16 @@
 
 import PostCard from './PostCard.vue';
 import PostModal from './PostModal.vue';
-/* Fetches and displays the posts
- * given some filters */
+
 let PostDisplay = {
 	props: {
-	  filter: Object,
-	  sources: Object
+	  posts: Array
 	},
 	data: function () {
-	  return { posts: [], currentPost: null}
-	},
-	mounted: function() {
-	  this.getPosts(this.filter);
+	  return { currentPost: null}
 	},
 	methods: {
-	  getPosts: function(filter){
-	    var that = this;
-	    $.ajax({
-	    url: '/feed/posts.json',
-	    success: function(res) {    
-	      res = res.map(function(a){a['source'] = that.sources[a['source_id']]; return a;});
-	      that.posts = res;
-	    }
-	  });
-	  },
-	  selected: function(post){
+	  showModal: function(post){
 	    this.currentPost = post;
 	    var _this = this;
 	    Vue.nextTick(function () {
