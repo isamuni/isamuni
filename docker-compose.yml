@@ -9,7 +9,7 @@ services:
     volumes:
       - ./webapp:/app
     ports:
-      - "3000:3000" #only bind the rails app to localhost, so it is only reachable through nginx
+      - "3000:3000"
 
 
 
