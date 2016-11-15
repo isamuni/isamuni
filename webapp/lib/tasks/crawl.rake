@@ -33,27 +33,31 @@ task :crawl => :environment do
 
   # Insert sources into DB
   groups_info = crawl_groups_info(crawler, Groups_to_track)
-  insert_sources(groups_info)
-  # TODO - crawl pages info too! 
+  insert_groups_sources(groups_info)
+
+  pages_info = crawl_pages_info(crawler, Pages_to_track)
+  insert_pages_sources(pages_info)
 
   # Download feed from each group
   Groups_to_track.each do |group|
-    source = Source.find_by uid: group['id']
-    since = source.posts.last_post_date
-    feed = crawl_group(crawler, group, Feed_limit, since)
+    source = Source.find_by uid: group['id'], stype: "group"
 
-    insert_events(feed[:events], source)
-    insert_posts(feed[:posts], source)
+    if source.isOPEN
+      since = source.posts.last_post_date
+      feed = crawl_group(crawler, group, Feed_limit, since)
+
+      insert_events(feed[:events], source)
+      insert_posts(feed[:posts], source)
+    end
   end
 
   # Download events from each page
   Pages_to_track.each do |page|
+    source = Source.find_by uid: page['id'], stype: "page"
 
-    # TODO  
-    # source = Source.find_by uid: page['id']
-    # since = source.posts.last_post_date
-    
-    page_events = crawl_page(crawler, page, Feed_limit)
+    since = source.posts.last_post_date
+    page_events = crawl_page(crawler, page, since)
+
     insert_events(page_events)
   end
 
@@ -65,6 +69,11 @@ def crawl_groups_info crawler, groups_to_track
   crawler.groups_info(groups_to_track)
 end
 
+def crawl_pages_info crawler, pages_to_track
+  log "crawling info about pages"
+  crawler.pages_info(pages_to_track)
+end
+
 def crawl_group crawler, group, feed_limit, since
   log "downloading feed for group: #{group['name']}"
   feed = crawler.group_feed(group, feed_limit, since)
@@ -73,19 +82,29 @@ def crawl_group crawler, group, feed_limit, since
   feed
 end
 
-def crawl_page crawler, page, feed_limit
+def crawl_page crawler, page, since
   log "downloading events from page: #{page['name']}"
-  events = crawler.page_events(page, feed_limit)
+  events = crawler.page_events(page, since)
   log "downloaded " + events.size.to_s + " events"
 
   events
 end
 
-def insert_sources groups
+def insert_groups_sources groups
   log "inserting info about groups"
 
   groups.each do |group|
-    Source.from_fb_source(group).save
+    Source.from_fb_group(group).save
+  end
+
+  log "all info added/updated"
+end
+
+def insert_pages_sources pages
+  log "inserting info about pages"
+
+  pages.each do |page|
+    Source.from_fb_page(page).save
   end
 
   log "all info added/updated"

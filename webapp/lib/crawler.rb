@@ -17,6 +17,8 @@ class Crawler
 
   Group_fields = ['id', 'name', 'privacy', 'icon']
 
+  Page_fields = ['id', 'name']
+
   def initialize(token)
     @graph = Koala::Facebook::API.new(token)
   end
@@ -59,6 +61,10 @@ class Crawler
 
   def groups_info groups
     groups.flat_map {|group| @graph.get_object(group['id'], {fields: Group_fields}) }
+  end
+
+  def pages_info pages
+    pages.flat_map {|page| @graph.get_object(page['id'], {fields: Page_fields}) }
   end
 
 end
