@@ -5,7 +5,7 @@ module.exports = {
   entry: './webpack/App.js',
   output: {
     path: path.resolve(__dirname, './app/assets/javascripts/'),
-    publicPath: '/public/',
+    publicPath: '/assets/',
     filename: 'App.js',
     libraryTarget: "var",
     library: "App"
@@ -40,8 +40,21 @@ module.exports = {
     }
   },
   devServer: {
-    historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    proxy: {
+      '/': {
+        target: 'http://squirrels.vii.ovh:3000/',
+        secure: false,
+        port: 3000,
+        bypass: function(req, res, proxyOptions) {
+          if(req.url.startsWith("/assets/App.")){
+            console.log("Bypassing proxy for " + req.url);
+            return "/assets/App.js"
+          }
+          return false;
+        }
+      }
+    }
   },
   devtool: '#eval-source-map'
 }
