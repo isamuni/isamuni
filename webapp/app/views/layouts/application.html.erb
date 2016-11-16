@@ -22,7 +22,7 @@
 
 <% #Javascript on the bottom for the time being, since turbolinks is disabled %>
 
-<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag :application, integrity: true %>
 
 <% #Leaflet (main source file is included in application js) %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
