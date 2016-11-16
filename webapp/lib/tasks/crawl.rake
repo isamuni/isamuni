@@ -1,13 +1,13 @@
-require 'crawler'
+require 'facebook_crawler'
 require 'yaml'
 
 config = YAML.load_file('crawler_config.yml')
 
+# TODO - rename constants to have FB_*
 Groups_to_track = config['fb']['groups']
 Pages_to_track = config['fb']['pages'] # we'll only track events
 
-Feed_limit = 10000 # No need to have this very high, except for the first time
-Members_limit = 10000
+Feed_limit = 2000 # No need to have this very high, except for the first time
 
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 
@@ -24,12 +24,20 @@ task :crawl => :environment do
     raise "Application id and/or secret are not specified in the environment"
   end
 
-  oauth = Koala::Facebook::OAuth.new(ENV['ISAMUNI_APP_ID'], ENV['ISAMUNI_APP_SECRET'], Callback_url)
-  token = oauth.get_app_access_token
-  crawler = crawler = Crawler.new(token)
-
   log "Crawling - give me some time please!"
   time_started = Time.now
+  
+  fb_crawling
+
+  log "Crawling finished in #{Time.now - time_started}s :)"
+
+end
+
+def fb_crawling
+
+  oauth = Koala::Facebook::OAuth.new(ENV['ISAMUNI_APP_ID'], ENV['ISAMUNI_APP_SECRET'], Callback_url)
+  token = oauth.get_app_access_token
+  crawler = FacebookCrawler.new(token)
 
   # Insert sources into DB
   groups_info = crawl_groups_info(crawler, Groups_to_track)
@@ -60,8 +68,7 @@ task :crawl => :environment do
 
     insert_events(page_events)
   end
-
-  log "Crawling finished in #{Time.now - time_started}s :)"
+  
 end
 
 def crawl_groups_info crawler, groups_to_track

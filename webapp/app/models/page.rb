@@ -18,7 +18,7 @@ class Page < ApplicationRecord
 
   def pic
     if fb_id
-      "http://graph.facebook.com/#{fb_id}/picture"
+      "http://graph.facebook.com/#{fb_id}/picture?height=70"
     else
       nil
     end

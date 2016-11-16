@@ -1,7 +1,7 @@
 require 'koala'
 require 'json'
 
-class Crawler
+class FacebookCrawler
 
   Feed_fields = ['id', 'message', 'from', 'type',
                   'picture', 'link', 'created_time', 

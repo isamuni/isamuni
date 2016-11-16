@@ -34,6 +34,28 @@
 </div>
 
 <div id="cards-users">
+  <h2>Ultimi iscritti</h2>
+  <div class="card-columns">
+    <% @latest_users.each do |user| %>
+    <div class="card" id="card-<%= user_path(user) %>">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-5">
+            <%= image_tag('http://graph.facebook.com/' + user.uid + '/picture?height=70', alt: user.name, class: "card-img-top img-fluid") %>  
+          </div>
+          <div class="col-md-7">
+            <strong><%= user.name %></strong>
+            <br>
+            <%= truncate(user.occupation, length: 40) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <hr>
+  <h2>Tutti gli utenti</h2>
   <div class="card-columns">
     <% @users.each do |user| %>
     <div class="card" id="card-<%= user_path(user) %>">
