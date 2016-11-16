@@ -25,33 +25,35 @@
 
 <script>
 
-function postIcon(postType){
-    if (postType == 'link')
-      return 'fa fa-link';
-    if (postType == 'event')
-      return 'fa fa-calendar';
-    if (postType == 'photo')
-      return  "fa fa-photo"
-    return "fa fa-sticky-note-o";
+/* global moment, $ */
+
+function postIcon(postType) {
+  if (postType == 'link')
+    return 'fa fa-link';
+  if (postType == 'event')
+    return 'fa fa-calendar';
+  if (postType == 'photo')
+    return "fa fa-photo";
+  return "fa fa-sticky-note-o";
 }
 
 var PostModal = {
-	props: {
-	  post: Object
-	},
-	computed: {
-	  icon : function(){
-	    return postIcon(this.post.post_type);
-	  },
-	  time : function(){
-	    return moment(this.post.created_at).format("L LT");
-	  }
-	},
-	methods: {
-	  show: function(){
-	    $(this.$el).modal('show');
-	  }
-	}
+  props: {
+    post: Object
+  },
+  computed: {
+    icon: function() {
+      return postIcon(this.post.post_type);
+    },
+    time: function() {
+      return moment(this.post.created_at).format("L LT");
+    }
+  },
+  methods: {
+    show: function() {
+      $(this.$el).modal('show');
+    }
+  }
 };
 
 export default PostModal;

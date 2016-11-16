@@ -16,26 +16,28 @@
 
 <script>
 
+/* global moment */
+
 let PostCard = {
-    props: {
-      post: Object
+  props: {
+    post: Object
+  },
+  computed: {
+    text: function() {
+      var content = this.post.content || "";
+      var name = this.post.name ? this.post.name + " - " : "";
+      return name + content;
     },
-    computed: {
-      text: function(){
-        var content = this.post.content || "";
-        var name = this.post.name ? this.post.name + " - " : "";
-        return name + content;
-      },
-      time: function(){
-        return moment(this.post.created_at).format("L LT");
-      },
-      author_name: function(){
-        var name = this.post.author_name.split(" ");
-        var first_name = name.shift();
-        return first_name[0] + ". " + name.join(" ");
-      }
+    time: function() {
+      return moment(this.post.created_at).format("L LT");
+    },
+    author_name: function() {
+      var name = this.post.author_name.split(" ");
+      var first_name = name.shift();
+      return first_name[0] + ". " + name.join(" ");
     }
-}
+  }
+};
 
 export default PostCard;
 

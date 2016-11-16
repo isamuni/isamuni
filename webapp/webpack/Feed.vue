@@ -39,15 +39,22 @@ import Multiselect from 'vue-multiselect';
    listens to events from filters, and stores the last version in data
    the filters are then passed to postDisplay as props */
 
+/* global $, console */
+
 var Feed = {
-  data: function(){
+  data: function() {
     return {
       sources: [],
-      filter: {sources: "", start: null, end:null, jobs_only:0},
+      filter: {
+        sources: "",
+        start: null,
+        end: null,
+        jobs_only: 0
+      },
       posts: []
     };
   },
-  mounted: function(){
+  mounted: function() {
     let sources = $.getJSON('/feed/sources.json');
 
     sources.then((sources) => {
@@ -56,39 +63,40 @@ var Feed = {
     });
   },
   computed: {
-    sources_ready: function(){
+    sources_ready: function() {
       return Object.keys(this.sources).length > 0;
     }
   },
   watch: {
     filter: {
-      handler: function(filter){
-        console.log("filterChanged");
+      handler: function() {
         this.updatePosts();
       },
       deep: true
     }
   },
   methods: {
-    updateFilter(selectedElems){
+    updateFilter(selectedElems) {
       let selectedIDs = selectedElems.map((e) => e.id);
       selectedIDs.sort();
       this.filter.sources = selectedIDs.join(",");
-      console.log(this.filter.sources);
     },
-    updatePosts(){
+    updatePosts() {
       let _this = this;
       let result = $.getJSON('/feed/posts.json', this.filter);
 
-      result.then(function(posts) {    
-        posts.forEach(function(post){
-          post['source'] = _this.sources.find((s) => s.id == post['source_id'] || {})
+      result.then(function(posts) {
+        posts.forEach(function(post) {
+          post['source'] = _this.sources.find((s) => s.id == post['source_id'] || {});
         });
         _this.posts = posts;
       });
     }
   },
-  components: { PostDisplay, Multiselect }
+  components: {
+    PostDisplay,
+    Multiselect
+  }
 };
 
 export default Feed;

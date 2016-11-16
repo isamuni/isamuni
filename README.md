@@ -113,6 +113,21 @@ Webpack is configured like this:
 * `npm run dev` starts a development server that will only serve `App.js` and proxies all the other requests to `squirrels.vii.ovh:3000`. It will provide hot reloading, but it will not touch the `App.js` file on disk. Please use `build` or `watch` to rebuild `App.js` when you are done testing. 
 * a procfile is provided to start both `rails server` and `npm run watch`. You can run it with `foreman start`.
 
+#### Configuring your editor
+
+If using SublimeText, you may want to install the following packages through PackageControl:
+
+```
+"BeautifyRuby",
+"Boxy Theme",
+"HTML-CSS-JS Prettify",
+"JsFormat",
+"Package Control",
+"SublimeLinter",
+"SublimeLinter-contrib-eslint",
+"Vue Syntax Highlight"
+```
+
 ### Docker
 
 #### Installation
