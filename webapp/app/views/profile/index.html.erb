@@ -41,7 +41,7 @@
       <div class="card-block">
         <div class="row">
           <div class="col-md-5">
-            <%= image_tag('http://graph.facebook.com/' + user.uid + '/picture?height=70', alt: user.name, class: "card-img-top img-fluid") %>  
+            <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>  
           </div>
           <div class="col-md-7">
             <strong><%= user.name %></strong>
@@ -62,7 +62,7 @@
       <div class="card-block">
         <div class="row">
           <div class="col-md-5">
-            <%= image_tag('http://graph.facebook.com/' + user.uid + '/picture?height=250', alt: user.name, class: "card-img-top img-fluid") %>  
+            <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>  
           </div>
           <div class="col-md-7">
             <strong><%= user.name %></strong>
