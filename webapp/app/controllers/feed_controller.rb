@@ -15,14 +15,12 @@ class FeedController < ApplicationController
 
   	def sources
   		counts = Post.group(:source_id).count
-  		s_hash = {}
-  		
-  		Source.all.each do |s|
-  			s_hash[s.id] = s.as_json
-  			s_hash[s.id]['count'] = counts[s.id]
-  		end
 
-  		render json: s_hash
+  		sources = Source.all.map { |e|
+  			e.as_json.merge({count: counts[e.id]})
+  		}
+
+  		render json: sources
   	end
 
 	def posts
@@ -33,11 +31,15 @@ class FeedController < ApplicationController
 	                 .order('created_at desc')
 	                 .includes(:source)
 
-	    if params[:start] and params[:end]
+	    if params[:jobs_only] == "true"
+	    	@posts = @posts.only_jobs
+	    end
+
+	    unless params[:start].blank? or params[:end].blank?
 	    	@posts = @posts.where(:created_at => start_time..end_time)
 	    end
 
-	    if params[:sources]
+	    unless params[:sources].blank?
 	    	source_ids = params[:sources].split(",").map(&:to_i)
 	    	@posts = @posts.where(source_id: source_ids)
 	    end          
@@ -82,8 +84,7 @@ class FeedController < ApplicationController
 	      "cols":
 	        [{'id': '', 'label': 'day', 'type': 'date'},
 	        {'id': '', 'label': 'posts', 'type': 'number'}],
-	      "rows":
-	      posts
+	      "rows": posts
 	    }
 
 	  	respond_to do |format|

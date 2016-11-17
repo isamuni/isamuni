@@ -1,243 +1,14 @@
-<h2 data-intro="Scopri i posts dei membri di PAC. A presto ci saranno posts anche da altre communities.">
-    Post dalla community di PAC</h2>
+<h2 data-intro="Sfogiali post delle varie community siciliane A presto ci saranno posts anche da altre communities.">
+    Post dalle communities</h2>
+    <div id="feed-app">
+    </div>
 <hr>
-<div id="feedapp">
-  <div id="dashboard_div" class="row">
-    <div class="col-md-3">
-      <p>FILTRI</p>
-    </div>
-    <div class="col-md-9">
-      <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-      <div class="row">
-        <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
-      </div>
-      <div class="row">
-        <div id="filter_div" data-intro="Usa lo slider per trovare i post più vecchi."></div>
-      </div>
-    </div>
-  </div>
-
-  <br>
-  <hr>
-
-  <post-display v-if="sources_ready" :filter="{}" :sources="sources"></post-display>
-
-</div>
-
 
 <% content_for :scripts do %>
 
-<style>
-.card {
-  width: 250px;
-  display: inline-block;
-  height: 400px;
-  overflow: hidden;
-  margin-right: 10px;
-}
-
-.card-footer {
-  height: 80px;
-  width:100%;
-  position:absolute;
-  bottom:0;
-  font-size: 13px;
-}
-
-.card-img-top{
-   width:100%;
-   height:100px;
-   object-fit: cover;
-}
-
-.modal {
-    overflow-y: auto;
-}
-
-.modal-open {
-    overflow: auto;
-}
-
-.modal-open[style] {
-    padding-right: 0px !important;
-}
-
-
-</style>
-
-<script type="text/x-template" id="post">
-  <div class="card post" @click="$emit('click')">
-    <img v-if="post.picture"
-         v-bind:src="post.picture" 
-         v-bind:alt="post.alt"
-         class="card-img-top"></img>
-    <div class="card-block">
-      <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
-    </div>
-    <div class="card-footer text-muted text-right">
-      {{author_name}} - {{ time }} - 
-      {{post.source.name}} <img v-bind:src="post.source.icon_link" />
-    </div>
-  </div>
-</script>
-
-<script type="text/x-template" id="postDisplay">
-  <div class="post-display">
-    <post v-for="p in posts" :post="p" @click="selected(p)" ></post>
-    <post-modal v-if="currentPost" :post="currentPost" ref="postModal">
-  </div>
-</script>
-
-<script type="text/x-template" id="postModal" >
- <div id="post-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <i :class="icon"></i>
-          <a :href="post.link" target="_blank">{{ time }}</a>
-          {{post.author_name}} @ {{post.source.name}}
-        </div>
-        <div class="modal-body">
-        {{post.content}}
-        <p>
-        <a :href="post.link" target="_blank">
-          <img v-if="post.picture" :src="post.picture" :alt="post.alt" class="center-block img-fluid img-rounded"/>
-        </a>
-        </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</script>
-
-
 <script type="text/javascript">
-
-  function postIcon(postType){
-    if (postType == 'link')
-      return 'fa fa-link';
-    if (postType == 'event')
-      return 'fa fa-calendar';
-    if (postType == 'photo')
-      return  "fa fa-photo"
-    return "fa fa-sticky-note-o";
-  }
-
-  /* Renders the filters
-     emits filtersChanged event
-   */
-  Vue.component('filters', {
-
-  })
-
-  Vue.component('postModal', {
-    template: '#postModal',
-    props: {
-      post: Object
-    },
-    computed: {
-      icon : function(){
-        return postIcon(this.post.post_type);
-      },
-      time : function(){
-        return moment(this.post.created_at).format("L LT");
-      }
-    },
-    methods: {
-      show: function(){
-        $(this.$el).modal('show');
-      }
-    }
-  })
-
-  /* Renders a single post*/
-  Vue.component('post', {
-    template: '#post',
-    props: {
-      post: Object
-    },
-    computed: {
-      text: function(){
-        var content = this.post.content || "";
-        var name = this.post.name ? this.post.name + " - " : "";
-        return name + content;
-      },
-      time: function(){
-        return moment(this.post.created_at).format("L LT");
-      },
-      author_name: function(){
-        var name = this.post.author_name.split(" ");
-        var first_name = name.shift();
-        return first_name[0] + ". " + name.join(" ");
-      }
-    }
-  });
-
-  /* Fetches and displays the posts
-     given some filters
-  */
-  Vue.component('postDisplay', {
-    template: '#postDisplay',
-    props: {
-      filter: Object,
-      sources: Object
-    },
-    data: function () {
-      return { posts: [], currentPost: null}
-    },
-    mounted: function() {
-      this.getPosts(this.filter);
-    },
-    methods: {
-      getPosts: function(filter){
-        var that = this;
-        $.ajax({
-        url: '/feed/posts.json',
-        success: function(res) {    
-          res = res.map(function(a){a['source'] = that.sources[a['source_id']]; return a;});
-          that.posts = res;
-        }
-      });
-      },
-      selected: function(post){
-        this.currentPost = post;
-        var _this = this;
-        Vue.nextTick(function () {
-          _this.$refs.postModal.show();
-        });
-      }
-    }
-  })
-
-  /* Main app 
-     Contains both filters and postDisplay
-     listens to events from filters, and stores the last version in data
-     the filters are then passed to postDisplay as props
-  */
-  var feed_app = new Vue({
-    el: '#feedapp',
-    data: {
-      sources: {}
-    },
-    mounted: function(){
-      var that = this;
-      $.ajax({
-        url: '/feed/sources.json',
-        success: function(res) {
-          that.sources = res;
-        }
-      });
-    },
-    computed: {
-      sources_ready: function(){
-        return Object.keys(this.sources).length > 0;
-      }
-    }
-  });
-
+  var Feed = new Vue(App.default.Feed);
+  Feed.$mount('#feed-app');
 </script>
 
 <script type="text/javascript">
@@ -325,23 +96,8 @@
       var start = range.start.getTime();
       var end = range.end.getTime();
 
-      reloadPosts(start, end);
-    }
-
-    function reloadPosts(start, end) {
-      $.ajax({
-        type: 'GET',
-        url: '/feed/posts',
-        data: {
-          'start': start,
-          'end': end
-        }
-      }).done(function (data) {
-        $('#posts-view').html(data);
-      }).fail(function (error) {
-        console.error("reloadPosts failed");
-        console.error(error);
-      })
+      Feed.filter.start = start;
+      Feed.filter.end = end;
     }
 
     dashboard.bind(timeSlider, chart);
@@ -349,8 +105,5 @@
     $('#spinner').hide();
   }
 
-  $(window).resize(function () {
-    drawChart();
-  });
 </script>
 <% end %>

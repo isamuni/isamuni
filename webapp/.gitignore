@@ -40,3 +40,9 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+
+node_modules/
+public/assets
+npm-debug.log
+lib/assets/*
