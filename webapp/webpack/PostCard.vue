@@ -1,14 +1,14 @@
 <template>
-  <div class="card post" @click="$emit('click')">
+  <div class="post-card card post" @click="$emit('click')">
     <img v-if="post.picture"
-         v-bind:src="post.picture" 
+         v-bind:src="post.picture"
          v-bind:alt="post.alt"
          class="card-img-top"></img>
     <div class="card-block">
       <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
     </div>
     <div class="card-footer text-muted text-right">
-      {{author_name}} - {{ time }} - 
+      {{author_name}} - {{ time }} -
       {{post.source.name}} <img v-bind:src="post.source.icon_link" />
     </div>
   </div>
@@ -45,7 +45,7 @@ export default PostCard;
 
 <style>
 
-.card {
+.post-card {
   width: 250px;
   display: inline-block;
   height: 400px;
@@ -53,7 +53,7 @@ export default PostCard;
   margin-right: 10px;
 }
 
-.card-footer {
+.post-card .card-footer {
   height: 80px;
   width:100%;
   position:absolute;
@@ -61,7 +61,7 @@ export default PostCard;
   font-size: 13px;
 }
 
-.card-img-top{
+.post-card .card-img-top {
    width:100%;
    height:100px;
    object-fit: cover;
