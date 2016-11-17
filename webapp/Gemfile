@@ -80,5 +80,5 @@ group :development do
   gem 'spring'
 
   gem 'htmlbeautifier'
+  gem 'rubocop'
 end
-

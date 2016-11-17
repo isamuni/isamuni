@@ -1,4 +1,4 @@
-# Isamuni 
+# Isamuni
 [![Build Status](https://travis-ci.org/sic2/isamuni.svg?branch=master)](https://travis-ci.org/sic2/isamuni)
 
 The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**.
@@ -48,7 +48,7 @@ you'll need recent versions of ruby (2.3+), nodejs and rubygem. You can find som
 ```bash
 # Install some required tools
 $ (sudo) gem install foreman
-$ (sudo) npm install -g webpack 
+$ (sudo) npm install -g webpack
 
 # Install isamuni's dependences
 # (you'll need to repeat this step every time some dependences are updated)
@@ -110,16 +110,26 @@ Webpack is configured like this:
 * `/app/assets/javascripts/App.js` is included in the sprockets bundle like any other library, that will handle fingerprinting and caching for us
 * `npm run build` compiles and minifies the webpack-managed assets
 * `npm run watch` recompiles the files on save
-* `npm run dev` starts a development server that will only serve `App.js` and proxies all the other requests to `squirrels.vii.ovh:3000`. It will provide hot reloading, but it will not touch the `App.js` file on disk. Please use `build` or `watch` to rebuild `App.js` when you are done testing. 
+* `npm run dev` starts a development server that will only serve `App.js` and proxies all the other requests to `squirrels.vii.ovh:3000`. It will provide hot reloading, but it will not touch the `App.js` file on disk. Please use `build` or `watch` to rebuild `App.js` when you are done testing.
 * a procfile is provided to start both `rails server` and `npm run watch`. You can run it with `foreman start`.
 
 #### Configuring your editor
 
-If using SublimeText, you may want to install the following packages through PackageControl:
+You may want to install the following packages:
 
+Atom (Best):
+```
+atom-beautify
+base16-syntax
+file-icons
+language-vue
+linter
+linter-eslint
+```
+
+SublimeText:
 ```
 "BeautifyRuby",
-"Boxy Theme",
 "HTML-CSS-JS Prettify",
 "JsFormat",
 "Package Control",
@@ -160,7 +170,7 @@ $ docker-compose build
 $ docker-compose up
 
 # When you finish testing
-$ docker-compose down 
+$ docker-compose down
 ```
 
 You can also run a single components (eg. the crawler)
