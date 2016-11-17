@@ -16,9 +16,9 @@ class Page < ApplicationRecord
     /www.facebook.com\/(\w+)/.match(fbpage)&.[](1)
   end
 
-  def pic
+  def pic height=100
     if fb_id
-      "http://graph.facebook.com/#{fb_id}/picture?height=70"
+      "http://graph.facebook.com/#{fb_id}/picture?height=#{height}"
     else
       nil
     end

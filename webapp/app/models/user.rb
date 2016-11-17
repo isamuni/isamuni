@@ -25,8 +25,11 @@ class User < ApplicationRecord
     name.partition(" ").first
   end
 
-  def profile_pic
-    'http://graph.facebook.com/' + uid + '/picture'
+  def profile_pic height=''
+    unless height == ''
+      height = "?height=" + height.to_s
+    end
+    'http://graph.facebook.com/' + uid + '/picture' + height
   end
   
   def as_json(options={})
