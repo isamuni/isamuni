@@ -16,7 +16,7 @@ class FeedController < ApplicationController
   	def sources
   		counts = Post.group(:source_id).count
 
-  		sources = Source.all.map { |e|
+  		sources = Source.find(counts.keys).map { |e|
   			e.as_json.merge({count: counts[e.id]})
   		}
 
@@ -42,7 +42,7 @@ class FeedController < ApplicationController
 	    unless params[:sources].blank?
 	    	source_ids = params[:sources].split(",").map(&:to_i)
 	    	@posts = @posts.where(source_id: source_ids)
-	    end          
+	    end
 
 	  	respond_to do |format|
 	        format.html { render partial: "posts", :posts => @posts }
@@ -60,11 +60,11 @@ class FeedController < ApplicationController
 					    caption: post.caption,
 					    description: post.description
 					}
-	        	end 
+	        	end
 	        	render json: posts_data
 	        }
     	end
-	    
+
   	end
 
   	def data
@@ -74,7 +74,7 @@ class FeedController < ApplicationController
 	    	.order('date(created_at) desc')
 	    	.distinct.count(:uid)
 
-	    posts = date_count.map do |date,count|    	
+	    posts = date_count.map do |date,count|
 	     {:c => [
 	      {:v => to_js_date(date) },
 	      {:v => count}]}

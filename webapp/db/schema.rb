@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161105185042) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"
     t.string   "user_uid"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.string   "location"
     t.string   "coordinates"
     t.integer  "source_id"
-    t.index ["source_id"], name: "index_events_on_source_id"
+    t.index ["source_id"], name: "index_events_on_source_id", using: :btree
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -40,10 +43,10 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "pages", force: :cascade do |t|
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.datetime "updated_at",   null: false
     t.string   "slug",         null: false
     t.string   "twitterpage"
-    t.index ["slug"], name: "index_pages_on_slug", unique: true
+    t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "source_id"
-    t.index ["source_id"], name: "index_posts_on_source_id"
+    t.index ["source_id"], name: "index_posts_on_source_id", using: :btree
   end
 
   create_table "sources", force: :cascade do |t|
@@ -95,6 +98,7 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.string   "icon_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["uid"], name: "index_sources_on_uid", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -112,7 +116,7 @@ ActiveRecord::Schema.define(version: 20161105185042) do
     t.datetime "updated_at",                       null: false
     t.string   "slug",                             null: false
     t.boolean  "banned",           default: false
-    t.index ["slug"], name: "index_users_on_slug", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   end
 
 end

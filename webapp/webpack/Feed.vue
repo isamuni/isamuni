@@ -34,7 +34,7 @@ import PostDisplay from './PostDisplay.vue';
 import Multiselect from 'vue-multiselect';
 
 
-/* Main app 
+/* Main app
    Contains both filters and postDisplay
    listens to events from filters, and stores the last version in data
    the filters are then passed to postDisplay as props */
@@ -87,7 +87,7 @@ var Feed = {
 
       result.then(function(posts) {
         posts.forEach(function(post) {
-          post['source'] = _this.sources.find((s) => s.id == post['source_id'] || {});
+          post['source'] = _this.sources.find((s) => s.id == post['source_id']) || {};
         });
         _this.posts = posts;
       });
