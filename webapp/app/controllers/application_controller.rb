@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :set_csp
+  before_action :set_csp
 
   WillPaginate.per_page = 10
 
-protected 
+protected
 
   def current_user
     if @current_user
@@ -77,4 +77,3 @@ private
   end
 
 end
-  

@@ -83,7 +83,7 @@ $ rails db:migrate
 
 To populate the database with some default/test entries run:
 ```
-$ rails db:seed
+$ rails db:fixtures:load
 ```
 
 Use the crawler to get posts and events (see below).
