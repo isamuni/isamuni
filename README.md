@@ -37,6 +37,7 @@ To make the facebook login work, your browser needs to access the website with t
 
 ```
 127.0.0.1	squirrels.vii.ovh
+127.0.0.1   devdb
 ```
 
 ### Setup rails
@@ -59,13 +60,23 @@ $ npm install
 
 **Database setup**
 
-We are currently using sqlite for development and postgres in production.
+We are using postgres on development and production mode.
+
+First, make sure that you have postgres installed and configure it as following:
+```
+$ sudo -u <YOUR USERNAME> psql postgres
+
+# Entering psql interactive mode
+$ CREATE USER postgres SUPERUSER;
+$ CREATE DATABASE postgres WITH OWNER postgres;
+```
+
 To setup the development database, these steps will suffice
 
 ```
 $ cd isamuni/webapp/
-$ rails db::create # if necessary
-$ rails db::migrate
+$ rails db:create # if necessary
+$ rails db:migrate
 ```
 
 To populate the database with some default/test entries run:
