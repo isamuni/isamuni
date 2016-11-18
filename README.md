@@ -1,4 +1,4 @@
-# Isamuni 
+# Isamuni
 [![Build Status](https://travis-ci.org/sic2/isamuni.svg?branch=master)](https://travis-ci.org/sic2/isamuni)
 
 The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**.
@@ -37,7 +37,6 @@ To make the facebook login work, your browser needs to access the website with t
 
 ```
 127.0.0.1	squirrels.vii.ovh
-127.0.0.1   devdb
 ```
 
 ### Setup rails
@@ -62,16 +61,19 @@ $ npm install
 
 We are using postgres on development and production mode.
 
+NOTE: you can also use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:create` on the first usage.
+
 First, make sure that you have postgres installed and configure it as following:
+
 ```
 $ sudo -u <YOUR USERNAME> psql postgres
 
-# Entering psql interactive mode
-$ CREATE USER postgres SUPERUSER;
-$ CREATE DATABASE postgres WITH OWNER postgres;
+# Entering psql interactive mode and create a user for isamuni
+# we'll then let the app create the databases with `rails db:create`
+> CREATE USER isamuni WITH CREATEDB PASSWORD isamuni;
 ```
 
-To setup the development database, these steps will suffice
+Then ask webapp to create the database and bring it to the last version of the schema
 
 ```
 $ cd isamuni/webapp/
@@ -124,6 +126,11 @@ Webpack is configured like this:
 * `npm run dev` starts a development server that will only serve `App.js` and proxies all the other requests to `squirrels.vii.ovh:3000`. It will provide hot reloading, but it will not touch the `App.js` file on disk. Please use `build` or `watch` to rebuild `App.js` when you are done testing.
 * a procfile is provided to start both `rails server` and `npm run watch`. You can run it with `foreman start`.
 
+While using `foreman start` is simple and perfectly fine, the best workflow for editing the webpack-managed assets is:
+* `rails s webrick -p 3000` in the first console
+* `npm run dev` in a second console
+* `npm run build` when you finish working with the assets
+
 #### Configuring your editor
 
 You may want to install the following packages:
@@ -173,6 +180,7 @@ SublimeText:
 ISAMUNI_APP_ID=appid
 ISAMUNI_APP_SECRET=secret
 ISAMUNI_ADMINS=<list of user uids divided by space ' '>
+ISAMUNI_DATABASE_HOST=devdb
 ```
 
 Then build and run the containers:
