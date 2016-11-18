@@ -2,17 +2,18 @@ version: '2'
 
 services:
   webapp:
-    env_file: .env
     build: ./webapp
     command: bash -c "rm /app/tmp/pids/server.pid; bundle exec rails s webrick -p 3000 -b '0.0.0.0'"
+    user: "1000"
     volumes:
       - ./webapp:/app
     ports:
       - "3000:3000"
     depends_on:
       - devdb
+    env_file: .env
   devdb:
-    image: postgres
+    build: ./database
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:

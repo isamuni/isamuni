@@ -1,26 +1,19 @@
-development:
+development: &default
   adapter: postgresql
   encoding: unicode
-  database: postgres
   pool: 5
-  username: postgres
-  password:
-  host: devdb
+  username: isamuni
+  password: isamuni
+  host: <%= ENV['ISAMUNI_DATABASE_HOST'] || "localhost" %>
+  database: isamuni_dev
+
+production:
+  <<: *default
+  database: isamuni_prod
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-  database: db/test.sqlite3
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: postgres
-  pool: 5
-  username: postgres
-  password:
-  host: db
+  <<: *default
+  database: isamuni_test

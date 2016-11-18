@@ -8,6 +8,9 @@ RUN apt-get update \
         nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+#installing some gems manually (either because they shouldn't be in bundler or for caching purposes)
+RUN gem install foreman rails
+
 WORKDIR /app
 COPY Gemfile* ./
 RUN bundle install
