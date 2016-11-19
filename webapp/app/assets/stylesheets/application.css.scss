@@ -36,10 +36,12 @@ $navbar-brand: #EEEEEE;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color:  #eee;
     cursor: pointer;
+    transition:text-shadow .5s;
 }
 
 .navbar .nav > li > a:hover{
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    text-shadow:0 0 .2em #014c8c;
 }
 
 .navbar-brand {

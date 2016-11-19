@@ -17,4 +17,8 @@ class UserSearch < Searchlight::Search
   def search_typeahead
   	query.where(:banned => false).ilike(:name, typeahead)
   end
+
+  #def search_tags
+  #  query.where(:banned => false).ilike(:tags, tags)
+  #end
 end
