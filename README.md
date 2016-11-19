@@ -70,7 +70,9 @@ $ sudo -u <YOUR USERNAME> psql postgres
 
 # Entering psql interactive mode and create a user for isamuni
 # we'll then let the app create the databases with `rails db:create`
-> CREATE USER isamuni WITH CREATEDB PASSWORD isamuni;
+
+$ CREATE USER isamuni SUPERUSER;
+$ CREATE DATABASE isamuni_dev WITH OWNER isamuni;
 ```
 
 Then ask webapp to create the database and bring it to the last version of the schema
