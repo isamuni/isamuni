@@ -4,14 +4,11 @@ require 'json'
 class FacebookCrawler
 
   Feed_fields = ['id', 'message', 'from', 'type',
-                  'picture', 'link', 'created_time', 
-                  'updated_time', 'name', 'caption', 
-                  'description']
-                  # Use the fields below to get info on number of:
-                  # likes, shares, comments
-                  # 'shares', 'likes.summary(true)', 'comments.summary(true)'
+                  'picture', 'link', 'created_time',
+                  'updated_time', 'name', 'caption', 'description',
+                  'shares', 'likes.summary(true)', 'comments.summary(true)']
 
-  Event_fields = ['id', 'name', 'description', 
+  Event_fields = ['id', 'name', 'description',
                   'start_time', 'end_time', 'updated_time',
                   'place', 'parent_group', 'owner']
 
@@ -23,18 +20,18 @@ class FacebookCrawler
     @graph = Koala::Facebook::API.new(token)
   end
 
-  def group_raw_feed group, limit, since=nil
-    options = { limit: limit, fields: Feed_fields, since: since }
+  def group_raw_feed group, limit
+    options = { limit: limit, fields: Feed_fields }
     @graph.get_connection(group['id'], 'feed', options)
   end
 
   def group_members groupid, limit
     options = { limit: limit }
     @graph.get_connection(groupid, 'members', options)
-  end    
+  end
 
-  def page_events page, since=nil
-    options = { fields: Event_fields, since: since }
+  def page_events page
+    options = { fields: Event_fields }
     @graph.get_connection(page['id'], 'events', options)
   end
 
@@ -43,7 +40,7 @@ class FacebookCrawler
     @graph.get_object(event_id, { fields: Event_fields })
   end
 
-  def group_feed group, limit, since
+  def group_feed group, limit
     feed = group_raw_feed(group, limit)
     prepare_feed feed
   end

@@ -4,9 +4,8 @@ require 'date'
 
 config = YAML.load_file('crawler_config.yml')
 
-# TODO - rename constants to have FB_*
-Groups_to_track = config['fb']['groups']
-Pages_to_track = config['fb']['pages'] # we'll only track events
+FB_groups_to_track = config['fb']['groups']
+FB_pages_to_track = config['fb']['pages'] # we'll only track events
 
 Feed_limit = 50 # No need to have this very high, except for the first time
 
@@ -27,7 +26,7 @@ task :crawl => :environment do
 
   log "Crawling - give me some time please!"
   time_started = Time.now
-  
+
   fb_crawling
 
   log "Crawling finished in #{Time.now - time_started}s :)"
@@ -35,7 +34,6 @@ task :crawl => :environment do
 end
 
 def fb_crawling
-
   oauth = Koala::Facebook::OAuth.new(ENV['ISAMUNI_APP_ID'], ENV['ISAMUNI_APP_SECRET'], Callback_url)
   token = oauth.get_app_access_token
   crawler = FacebookCrawler.new(token)
@@ -52,17 +50,13 @@ def fb_crawling
 end
 
 def crawl_groups_and_update crawler
+  is_night_time = is_night Time.now
 
-  time = Time.now
-  is_night_time = is_night(time)
-
-  # Download feed from sources
-  Groups_to_track.each do |group|
+  FB_groups_to_track.each do |group|
     source = Source.find_by uid: group['id'], stype: "group"
 
     if source.isOPEN
-      since = source.posts.last_post_date
-      feed, next_page = crawl_group(crawler, group, Feed_limit, since)
+      feed, next_page = crawl_group(crawler, group, Feed_limit)
 
       while true do
         insert_events(feed[:events], source)
@@ -71,21 +65,18 @@ def crawl_groups_and_update crawler
         break if next_page.empty? || !is_night_time
 
         feed, next_page = crawler.prepare_feed next_page
-      end
-
-    end
+      end # while
+    end # if
   end
 
 end
 
 def crawl_pages_and_update crawler
-  # Download events from each page
-  Pages_to_track.each do |page|
+
+  FB_pages_to_track.each do |page|
     source = Source.find_by uid: page['id'], stype: "page"
 
-    since = source.posts.last_post_date
-    page_events = crawl_page(crawler, page, since)
-
+    page_events = crawl_page(crawler, page)
     insert_events(page_events)
   end
 
@@ -101,17 +92,17 @@ def crawl_pages_info crawler, pages_to_track
   crawler.pages_info(pages_to_track)
 end
 
-def crawl_group crawler, group, feed_limit, since
+def crawl_group crawler, group, feed_limit
   log "downloading feed for group: #{group['name']}"
-  feed = crawler.group_feed(group, feed_limit, since)
+  feed = crawler.group_feed(group, feed_limit)
   log "downloaded " + feed.size.to_s + " posts"
 
   feed
 end
 
-def crawl_page crawler, page, since
+def crawl_page crawler, page
   log "downloading events from page: #{page['name']}"
-  events = crawler.page_events(page, since)
+  events = crawler.page_events(page)
   log "downloaded " + events.size.to_s + " events"
 
   events
@@ -139,12 +130,12 @@ end
 
 def insert_events events, source=nil
   log "inserting events into the database"
-  
+
   event_uids_in_db = Event.pluck(:uid).to_set
-  new_events = events.reject { |e| event_uids_in_db.include? e['id'] } 
+  new_events = events.reject { |e| event_uids_in_db.include? e['id'] }
 
   new_events.each do |event_data|
-    e = Event.from_fb_event(event_data)
+    e = Event.from_fb_event(event_data) # TODO - insert or update
     e.source = source
     e.save
   end
@@ -160,11 +151,11 @@ def insert_posts posts, source=nil
   new_posts = posts.reject { |post| post_uids_in_db.include? post['id']}
 
   new_posts.each do |post_data|
-    post = Post.from_fb_post(post_data)
+    post = Post.from_fb_post(post_data) # TODO - insert or update
     post.source = source
     post.save
   end
-  
+
   log "crawled #{posts.count} posts, inserted #{new_posts.count} new ones"
 end
 

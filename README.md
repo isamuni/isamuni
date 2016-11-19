@@ -145,6 +145,7 @@ file-icons
 language-vue
 linter
 linter-eslint
+git-time-machine
 ```
 
 SublimeText:

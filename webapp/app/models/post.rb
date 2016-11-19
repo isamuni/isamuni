@@ -16,6 +16,11 @@ class Post < ApplicationRecord
     post.description = feed_post['description']
     post.name = feed_post['name']
 
+    # TODO - insert/update shares, likes and comments counts
+    # feed_post['shares']['count']
+    # feed_post['likes']['summary']['total_count']
+    # feed_post['comments']['summary']['total_count']
+
     if feed_post['link'] != nil
       post.link = feed_post['link']
     end
@@ -39,16 +44,6 @@ class Post < ApplicationRecord
 
   def self.only_jobs
     where(:tags => 'job')
-  end
-
-  # Get date (yyyy-mm-dd) of the latest post in the db
-  def self.last_post_date 
-    last_post_date = maximum(:created_at)
-    if last_post_date
-      last_post_date.strftime("%Y-%m-%d")
-    else
-      nil
-    end
   end
 
   def facebook_link
