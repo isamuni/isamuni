@@ -1,5 +1,6 @@
 require 'facebook_crawler'
 require 'yaml'
+require 'date'
 
 config = YAML.load_file('crawler_config.yml')
 
@@ -7,7 +8,7 @@ config = YAML.load_file('crawler_config.yml')
 Groups_to_track = config['fb']['groups']
 Pages_to_track = config['fb']['pages'] # we'll only track events
 
-Feed_limit = 2000 # No need to have this very high, except for the first time
+Feed_limit = 50 # No need to have this very high, except for the first time
 
 Callback_url = "http://squirrels.vii.ovh/auth/facebook/callback"
 
@@ -46,19 +47,38 @@ def fb_crawling
   pages_info = crawl_pages_info(crawler, Pages_to_track)
   insert_pages_sources(pages_info)
 
-  # Download feed from each group
+  crawl_groups_and_update(crawler)
+  crawl_pages_and_update(crawler)
+end
+
+def crawl_groups_and_update crawler
+
+  time = Time.now
+  is_night_time = is_night(time)
+
+  # Download feed from sources
   Groups_to_track.each do |group|
     source = Source.find_by uid: group['id'], stype: "group"
 
     if source.isOPEN
       since = source.posts.last_post_date
-      feed = crawl_group(crawler, group, Feed_limit, since)
+      feed, next_page = crawl_group(crawler, group, Feed_limit, since)
 
-      insert_events(feed[:events], source)
-      insert_posts(feed[:posts], source)
+      while true do
+        insert_events(feed[:events], source)
+        insert_posts(feed[:posts], source)
+
+        break if next_page.empty? || !is_night_time
+
+        feed, next_page = crawler.prepare_feed next_page
+      end
+
     end
   end
 
+end
+
+def crawl_pages_and_update crawler
   # Download events from each page
   Pages_to_track.each do |page|
     source = Source.find_by uid: page['id'], stype: "page"
@@ -68,7 +88,7 @@ def fb_crawling
 
     insert_events(page_events)
   end
-  
+
 end
 
 def crawl_groups_info crawler, groups_to_track
@@ -150,4 +170,8 @@ end
 
 def log message
   puts "[ #{Time.now.strftime '%d/%m/%Y %H:%M:%S:%L'} ] - #{message}"
+end
+
+def is_night(date)
+    !((5...23).include? date.hour)
 end

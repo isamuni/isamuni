@@ -9,7 +9,7 @@ class FacebookCrawler
                   'description']
                   # Use the fields below to get info on number of:
                   # likes, shares, comments
-                  # 'shares', 'likes.summary(true)', 'likes.summary(true)'
+                  # 'shares', 'likes.summary(true)', 'comments.summary(true)'
 
   Event_fields = ['id', 'name', 'description', 
                   'start_time', 'end_time', 'updated_time',
@@ -44,7 +44,12 @@ class FacebookCrawler
   end
 
   def group_feed group, limit, since
-    feed = group_raw_feed(group, limit, since)
+    feed = group_raw_feed(group, limit)
+    prepare_feed feed
+  end
+
+  def prepare_feed feed
+
     posts = feed.select { |fe|
           ['status', 'link', 'photo', 'event'].include? fe['type'] }
 
@@ -56,7 +61,7 @@ class FacebookCrawler
         event_info(event_id)
       end
 
-    {posts: posts, events: events}
+    return {posts: posts, events: events}, feed.next_page
   end
 
   def groups_info groups
