@@ -92,10 +92,16 @@ Use the crawler to get posts and events (see below).
 
 **Running the App**
 ```
-$ bundle install
-$ rails server
+$ bundle install # Execute this only when dependencies change
+$ rails server webrick
+```
 
-Point your browser to squirrels.vii.ovh:3000  
+Then, in another terminal, run the following:
+```
+$ npm install # Execute this only when dependencies change
+$ npm run dev
+
+Point your browser to squirrels.vii.ovh:8080
 ```
 
 **Running the Crawler**
@@ -132,6 +138,9 @@ While using `foreman start` is simple and perfectly fine, the best workflow for 
 * `rails s webrick -p 3000` in the first console
 * `npm run dev` in a second console
 * `npm run build` when you finish working with the assets
+
+
+If you get errors that look like `ERROR in Cannot find module '../modules/web.dom.iterable'....` then try to run the following command `rm -rf node_modules && npm install`. This will re-install the node dependencies from scratch.
 
 #### Configuring your editor
 

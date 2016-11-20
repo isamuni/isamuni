@@ -10,6 +10,10 @@
     <div class="card-footer text-muted text-right">
       {{author_name}} - {{ time }} -
       {{post.source.name}} <img v-bind:src="post.source.icon_link" />
+      <hr>
+      {{post.likes}} <i class="fa fa-thumbs-up"></i>
+      {{post.comments}} <i class="fa fa-comments"></i>
+      {{post.shares}} <i class="fa fa-share-alt"></i>
     </div>
   </div>
 </template>
@@ -54,7 +58,7 @@ export default PostCard;
 }
 
 .post-card .card-footer {
-  height: 80px;
+
   width:100%;
   position:absolute;
   bottom:0;
