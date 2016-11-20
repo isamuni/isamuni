@@ -58,7 +58,10 @@ class FeedController < ApplicationController
 					    source_id: post.source_id,
 					    picture: post.picture,
 					    caption: post.caption,
-					    description: post.description
+					    description: post.description,
+							likes: post.likes_count,
+							comments: post.comments_count,
+							shares: post.shares_count
 					}
 	        	end
 	        	render json: posts_data

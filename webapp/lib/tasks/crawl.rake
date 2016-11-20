@@ -39,10 +39,10 @@ def fb_crawling
   crawler = FacebookCrawler.new(token)
 
   # Insert sources into DB
-  groups_info = crawl_groups_info(crawler, Groups_to_track)
+  groups_info = crawl_groups_info(crawler, FB_groups_to_track)
   insert_groups_sources(groups_info)
 
-  pages_info = crawl_pages_info(crawler, Pages_to_track)
+  pages_info = crawl_pages_info(crawler, FB_pages_to_track)
   insert_pages_sources(pages_info)
 
   crawl_groups_and_update(crawler)
