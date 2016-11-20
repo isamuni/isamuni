@@ -14,6 +14,7 @@ class Post < ApplicationRecord
     post.content = feed_post['message']
     post.author_name = feed_post['from']['name']
     post.author_uid = feed_post['from']['id']
+    #post.author_link = query.select(post.author_uid)
     post.created_at = feed_post['created_time']
     post.updated_at = feed_post['updated_time']
     post.post_type = feed_post['type']
@@ -28,6 +29,10 @@ class Post < ApplicationRecord
     if feed_post['picture'] != nil
       post.picture = feed_post['picture']
     end
+
+    #if query.select(post.author_uid)!=nil
+    #    post.author_link=query.select(post.author_uid)
+    #end
 
     if post.content != nil
       jobs = Job_tags.any? { |word| post.content.downcase.include?(word) }

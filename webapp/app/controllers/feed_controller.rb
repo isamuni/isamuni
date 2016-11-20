@@ -50,6 +50,7 @@ class FeedController < ApplicationController
 	        	posts_data = @posts.map do |post|
 		    		{
 					    author_name: post.author_name,
+							#author_link: post.author_link,
 					    link: post.link,
 					    content: post.content,
 					    post_type: post.post_type,

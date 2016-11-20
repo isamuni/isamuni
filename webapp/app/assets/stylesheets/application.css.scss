@@ -37,22 +37,31 @@ $navbar-brand: #EEEEEE;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color:  #eee;
     cursor: pointer;
-    transition:text-shadow .5s;
+    transition:text-shadow .25s;
 }
 
 .navbar .nav > li > a:hover{
-    /*text-decoration: underline;*/
-    text-shadow:0 0 .2em $navbar-text-shadow;
+    text-shadow:0 0 .2rem $navbar-text-shadow;
+}
+
+.navbar .nav > li > a:active{
+    text-shadow:0 0 .2rem $navbar-text-shadow,
+                0 0 1.5rem $navbar-text-shadow;
 }
 
 .navbar-brand {
     color: $navbar-brand;
-    transition: text-shadow .5s;
-    /*font-weight: bold;*/
+    transition: text-shadow .25s;
 }
 
 .navbar-brand:hover {
     text-shadow:0 0 .2em $navbar-text-shadow;
+    color:$navbar-brand;
+}
+
+.navbar-brand:active {
+    text-shadow:0 0 .2rem $navbar-text-shadow,
+                0 0 1.5rem $navbar-text-shadow;
     color:$navbar-brand;
 }
 
