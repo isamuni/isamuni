@@ -24,6 +24,7 @@
 }
 
 $navbar-bg: #4DB6AC;
+$navbar-text-shadow:rgb(0,0,30);
 $navbar-brand: #EEEEEE;
 
 .navbar {
@@ -41,12 +42,18 @@ $navbar-brand: #EEEEEE;
 
 .navbar .nav > li > a:hover{
     /*text-decoration: underline;*/
-    text-shadow:0 0 .2em #014c8c;
+    text-shadow:0 0 .2em $navbar-text-shadow;
 }
 
 .navbar-brand {
     color: $navbar-brand;
+    transition: text-shadow .5s;
     /*font-weight: bold;*/
+}
+
+.navbar-brand:hover {
+    text-shadow:0 0 .2em $navbar-text-shadow;
+    color:$navbar-brand;
 }
 
 .custom-overflow {
