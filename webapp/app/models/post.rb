@@ -1,5 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :source, optional: true
+  belongs_to :author,
+   class_name: "User",
+   optional: true,
+   foreign_key: 'author_uid',
+   primary_key: 'uid' 
 
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 
@@ -16,11 +21,6 @@ class Post < ApplicationRecord
     post.description = feed_post['description']
     post.name = feed_post['name']
 
-    # TODO - insert/update shares, likes and comments counts
-    # feed_post['shares']['count']
-    # feed_post['likes']['summary']['total_count']
-    # feed_post['comments']['summary']['total_count']
-
     if feed_post['link'] != nil
       post.link = feed_post['link']
     end
@@ -34,6 +34,15 @@ class Post < ApplicationRecord
       if jobs
         post.tags = 'job' # Improve?
       end
+    end
+
+    post.likes_count = feed_post['likes']['summary']['total_count']
+    post.comments_count = feed_post['comments']['summary']['total_count']
+
+    if feed_post['shares'] != nil
+      post.shares_count = feed_post['shares']['count']
+    else
+      post.shares_count = 0
     end
 
     # Show post by default

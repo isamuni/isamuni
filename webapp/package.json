@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --open --inline --hot",
+    "dev": "NODE_ENV=development webpack-dev-server --inline --hot",
     "build": "NODE_ENV=production webpack --progress --hide-modules",
     "watch": "NODE_ENV=development webpack --progress --watch"
   },
