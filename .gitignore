@@ -1,2 +1,4 @@
 .env
 pgdata/
+.swp
+npm-debug.log

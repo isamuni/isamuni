@@ -1,5 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :source, optional: true
+  belongs_to :author,
+   class_name: "User",
+   optional: true,
+   foreign_key: 'author_uid',
+   primary_key: 'uid' 
 
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 

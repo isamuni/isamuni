@@ -172,7 +172,7 @@ SublimeText:
 - Install Virtual Box
 - Install Docker for Mac
 - Run `docker run hello-world` to check your installation
- - If a timout error is given, change your DNS to Google's DNS
+ - If a timeout error is given, change your DNS to Google's DNS
 
 
 #### Building the Image and Running the App
@@ -198,4 +198,9 @@ $ docker-compose down
 You can also run a single components (eg. the crawler)
 ```
 $ docker-compose up crawler
+```
+
+To run both the rails server and webpack dev server
+```
+$ docker-compose run --rm -p 8080:8080 webapp tmuxinator
 ```
