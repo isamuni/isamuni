@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni. 
                   Registrati su isamuni per creare un tuo profilo e farti conoscere.">Utenti</h1>
   </div>
@@ -28,30 +28,104 @@
       <% end %>
     </div>
   </div>
+  <div class="col-md-2">
+    <input type="checkbox" name="users-checkbox" data-off-text="<i class='fa fa-list'></i>" data-on-text="<i class='fa fa-list-alt'></i>" data-size="large" checked>
+  </div>
 </div>
 
-<table class="table table-hover table-condensed" id="user-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Nome</th>
-      <th>Occupazione</th>
-      <th>Tags</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td>
-          <%= link_to user_path(user) do %>
-          <img src="<%= user.profile_pic %>" class="img-fluid img-rounded">
-          <% end %>
-        </td>
-        <td><%= link_to user.name, user %></td>
-        <td><%= truncate(user.occupation, length: 40) %></td>
-        <td><%= truncate(user.tags, length: 40) %></td>
-      </tr>
+<div id="cards-users">
+  <h2>Ultimi iscritti</h2>
+  <div class="card-columns">
+    <% @latest_users.each do |user| %>
+    <div class="card" id="card-<%= user_path(user) %>">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-5">
+            <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>  
+          </div>
+          <div class="col-md-7">
+            <strong><%= user.name %></strong>
+            <br>
+            <%= truncate(user.occupation, length: 40) %>
+          </div>
+        </div>
+      </div>
+    </div>
     <% end %>
-  </tbody>
+  </div>
+
+  <hr>
+  <h2>Tutti gli utenti</h2>
+  <div class="card-columns">
+    <% @users.each do |user| %>
+    <div class="card" id="card-<%= user_path(user) %>">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-5">
+            <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>  
+          </div>
+          <div class="col-md-7">
+            <strong><%= user.name %></strong>
+            <br>
+            <%= truncate(user.occupation, length: 40) %>
+          </div>
+        </div>
+        <br>
+        <strong>Tags:</strong> <%= truncate(user.tags, length: 40) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="list-users" style="display:none">
+  <table class="table table-hover table-condensed" id="user-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nome</th>
+        <th>Occupazione</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+            <img src="<%= user.profile_pic %>" class="img-fluid img-rounded">
+            <% end %>
+          </td>
+          <td><%= link_to user.name, user %></td>
+          <td><%= truncate(user.occupation, length: 40) %></td>
+          <td><%= truncate(user.tags, length: 40) %></td>
+        </tr>
+      <% end %>
+    </tbody>
 </table>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  $("[name='users-checkbox']").bootstrapSwitch();
+
+  $('input[name="users-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    console.log(this); // DOM element
+    console.log(event); // jQuery event
+    console.log(state); // true | false
+    if (state==true) {
+      $('#list-users').hide();
+      $('#cards-users').show();
+    } else {
+      $('#cards-users').hide();
+      $('#list-users').show();
+    }
+  });
+
+  $("div[id^=card-]").click(function() {
+    id = $(this).attr('id').split('card-')[1];
+    window.location.href = window.location.protocol + "//" + window.location.host + id;
+  });
+</script>
+<% end %>

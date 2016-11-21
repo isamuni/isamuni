@@ -1,21 +1,59 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  provider: MyString
-  uid: MyString
-  name: MyString
-  oauth_token: MyString
-  oauth_expires_at: 2016-06-18 09:00:52
-  description: MyText
-  projects: MyText
-  links: MyText
+  id: 1
+  provider:
+  uid: '123'
+  name: Cactus1
+  oauth_token:
+  oauth_expires_at:
+  occupation: student at succulents school
+  description: hey, I can code in C++
+  projects: watering++
+  links: 'my website: http://www.example.com'
+  tags: c++, c, java
+  slug: cactus1
+  banned: false
 
 two:
-  provider: MyString
-  uid: MyString
-  name: MyString
-  oauth_token: MyString
-  oauth_expires_at: 2016-06-18 09:00:52
-  description: MyText
-  projects: MyText
-  links: MyText
+  id: 4
+  provider:
+  uid: '1097'
+  name: Simone Ivan Conte
+  oauth_token:
+  oauth_expires_at:
+  occupation: Dottorando, Programmatore
+  description: |-
+    #### Educazione e Ricerca
+    Sono un dottorando (secondo anno) in informatica alla University of St Andrews, sotto la supervisione del Prof. Alan Dearle e il Dr. Graham Kirby. La mia ricerca consiste nello studiare e sviluppare nuove tecniche per la gestione e distribuzione di dati in quello da noi chiamato: Sea Of Stuff. La mia ricerca è sponsorizzata da EPSRC e Adobe Systems Inc.
+
+    Ho una laurea in Informatica sempre presso la University of St Andrews (2010-2014), e un diploma IB presso lo United World College in Mostar (2008-2010).
+
+    My research interests include distributed systems, data models, data science, open data, provenance, storage and software engineering.
+
+    Sono stato membro del gruppo di ricerca SACHI (2012-2014).
+
+    #### Altro
+    Nel 2014 sono diventato sviluppatore di NOMAD, una spin-off che si occupa della gestione di dati generati da spettrometri NMR. Sono poi diventato lead developer del progetto. Nel 2016 mi sono brevemente distaccato da NOMAD per ritornare come consultant nel team. Da Maggio sono temporaneamente il CTO di NOMAD.
+
+    Nel 2013 ho creato PAC - Programmatori a Catania - una community digitale si programmatori, designers e appassionati e professionisti del settore tech a Catania e dintorni.
+
+    Sono stato a capo dell'organizzazione di [PAC15](http://pac15.github.io/).
+
+    Nel 2016 la comunità di PAC ha lanciato il primo progetto satellite: [awesome-sicily](https://github.com/sic2/awesome-sicily)
+
+    #### Altro ancora
+    Mi piace leggere, scrivere, fare [foto](https://500px.com/sic2), cucinare e tantissimo altro ancora :)
+  projects: |-
+    #### Open Source
+    - [awesome-sicily](https://github.com/sic2/awesome-sicily)
+    - [isamuni](https://github.com/sic2/isamuni)
+
+    #### Altro
+    - NOMAD
+  links: |-
+    - https://sic2.host.cs.st-andrews.ac.uk/
+    - https://uk.linkedin.com/in/simoneivanconte
+  tags:
+  slug: simone-ivan-conte
+  banned: false

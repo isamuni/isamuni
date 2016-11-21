@@ -1,13 +1,38 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  author_name: MyString
-  author_uid: MyString
-  link: MyString
-  content: MyText
+  id: 1
+  uid: '281460675321367_886221154845313'
+  author_name: Lorenzo Enrico Gigliotti
+  author_uid: '360016601000587'
+  link: https://techcrunch.com/2016/11/16/the-5-poisontap-quickly-completely-hijacks-even-a-locked-computers-internet/?ncid=rss&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+Techcrunch+%28TechCrunch%29&utm_content=FaceBook&sr_share=facebook
+  picture: https://external.xx.fbcdn.net/safe_image.php?d=AQBXyQXczmo04o0Y&w=130&h=130&url=https%3A%2F%2Ftctechcrunch2011.files.wordpress.com%2F2016%2F11%2Fptplug.jpg%3Fw%3D674%26h%3D400%26crop%3D1&cfs=1
+  content:
+  post_type: link
+  tags:
+  caption: social.techcrunch.com
+  description: 'After I learned of this clever exploit from Samy Kamkar, my poor 2012
+    MacBook Air looks more vulnerable than venerable: Asleep on the table, its USB ports..'
+  name: The $5 PoisonTap quickly, completely hijacks even a locked computer’s internet
+  show: true
+  created_at: 2016-11-18 08:10:44.000000000
+  updated_at: 2016-11-18 08:10:44.000000000
+  source_id: 1
 
 two:
-  author_name: MyString
-  author_uid: MyString
-  link: MyString
-  content: MyText
+  id: 3208
+  uid: ghi
+  author_name: LonelyCat2
+  author_uid: '1097'
+  link: 'fbpost: http://facebook.com'
+  picture:
+  content: This is an event post
+  post_type: event
+  tags:
+  caption:
+  description:
+  name:
+  show:
+  created_at: 2010-06-12 17:16:24.000000000
+  updated_at: 2016-11-18 10:01:28.636790000
+  source_id:

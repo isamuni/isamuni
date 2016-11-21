@@ -1,4 +1,11 @@
 class Post < ApplicationRecord
+  belongs_to :source, optional: true
+  belongs_to :author,
+   class_name: "User",
+   optional: true,
+   foreign_key: 'author_uid',
+   primary_key: 'uid' 
+
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 
   def self.from_fb_post feed_post
@@ -29,6 +36,15 @@ class Post < ApplicationRecord
       end
     end
 
+    post.likes_count = feed_post['likes']['summary']['total_count']
+    post.comments_count = feed_post['comments']['summary']['total_count']
+
+    if feed_post['shares'] != nil
+      post.shares_count = feed_post['shares']['count']
+    else
+      post.shares_count = 0
+    end
+
     # Show post by default
     post.show = true
 
@@ -37,16 +53,6 @@ class Post < ApplicationRecord
 
   def self.only_jobs
     where(:tags => 'job')
-  end
-
-  # Get date (yyyy-mm-dd) of the latest post in the db
-  def self.last_post_date
-    last_post_date = Post.maximum(:created_at)
-    if last_post_date
-      last_post_date.strftime("%Y-%m-%d")
-    else
-      nil
-    end
   end
 
   def facebook_link

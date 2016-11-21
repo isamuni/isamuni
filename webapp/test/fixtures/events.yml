@@ -1,0 +1,62 @@
+one:
+  id: 1
+  uid: '143981662733499'
+  name: 7° WordPress Meetup Catania - Novembre 2016
+  content: |-
+    Giovedì 3 Novembre dalle 18.00 alle 20.30 presso Vulcanìc (Viale Africa, 31) settimo incontro della community per appassionati di WordPress.
+
+    Durante l'evento di questo mese affronteremo dei temi +++HOT+++ :
+    1. Cool Devs to follow: i nomi dietro WordPress
+    2. Come migrare WordPress senza fare danni
+
+    In più, piccolo spazio per parlare anche di:
+    1. WordCamp: from Milan with Love
+    2. Global Translation Day: prepariamoci!
+
+    Pizza e drink per tutti gentilmente offerti da YIThemes: temi e plugin free per WordPress (https://yithemes.com/).
+
+    WordPress Meetup Catania è un evento mensile gratuito a tema WordPress aperto a tutti: esperti, principianti, developers, marketer, blogger, appassionati o semplicemente curiosi.
+
+    Maggiori informazioni e registrazione a questo link: http://www.meetup.com/it-IT/Meetup-WordPress-Catania/events/231792559/
+  organiser: WordPress Meetup Catania
+  created_at: 2016-11-18 08:34:06.541638000
+  updated_at: 2016-11-18 08:34:06.541638000
+  starts_at: 2016-11-03 17:00:00.000000000
+  ends_at: 2016-11-03 19:30:00.000000000
+  location_name: Vulcanìc
+  location: '{"city":"Catania","country":"Italy","latitude":37.5119514,"longitude":15.1031799,"street":"Viale
+    Africa 31","zip":"95129"}'
+  coordinates: 37.5119514, 15.1031799
+  source_id: 1
+
+multiday-current:
+  id: 2
+  uid: '143981662733499'
+  name: This should be multiday and current
+  content: stuff
+  organiser: WordPress Meetup Catania
+  created_at: 2016-11-18 08:34:06.541638000
+  updated_at: 2016-11-18 08:34:06.541638000
+  starts_at: <%= 1.days.ago %>
+  ends_at: <%= 1.days.from_now %>
+  location_name: Vulcanìc
+  location: '{"city":"Catania","country":"Italy","latitude":37.5119514,"longitude":15.1031799,"street":"Viale
+    Africa 31","zip":"95129"}'
+  coordinates: 37.5119517, 15.1031799
+  source_id: 1
+
+future-one:
+  id: 3
+  uid: '143981662733499'
+  name: This should be future
+  content: stuff
+  organiser: Future events
+  created_at: 2016-11-18 08:34:06.541638000
+  updated_at: 2016-11-18 08:34:06.541638000
+  starts_at: <%= 1.days.from_now %>
+  ends_at: <%= 2.days.from_now %>
+  location_name: Vulcanìc
+  location: '{"city":"Catania","country":"Italy","latitude":37.5119514,"longitude":15.1031799,"street":"Viale
+    Africa 31","zip":"95129"}'
+  coordinates: 37.5119517, 15.1031799
+  source_id: 1

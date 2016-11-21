@@ -15,6 +15,8 @@ class ProfileController < ApplicationController
     @users = search_params.present? ? @search.results : User.where(:banned => false)
     @users = @users.order(:name)
 
+    @latest_users = User.where(:banned => false).limit(3).order('created_at desc')
+
     respond_to do |format|
         format.html { render :index}
         format.json { render json: @users }

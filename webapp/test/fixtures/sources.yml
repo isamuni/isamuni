@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  uid: "281460675321367"
+  stype: "group"
+  source: "fb"
+  name: "Programmatori a Catania"
+  privacy: "OPEN"
+  icon_link: "https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/acYYPJhPLR0.png"
+
+two:
+  id: 20
+  uid: '243410375604'
+  stype: page
+  source: fb
+  name: OrangeDotNet
+  privacy:
+  icon_link:

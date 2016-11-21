@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :set_csp
+
   WillPaginate.per_page = 10
 
-protected 
+protected
 
   def current_user
     if @current_user
@@ -64,5 +66,14 @@ protected
 
   helper_method :page_url
   helper_method :page_path
+
+private
+
+  # Alternatively use secure_headers gem
+  def set_csp
+    if Rails.env.production?
+      response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'"
+    end
+  end
 
 end

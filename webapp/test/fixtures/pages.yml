@@ -1,21 +1,61 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  id: 1
+  name: PAC - Programmatori a Catania
+  kind: community
   owner_id: 1
-  active: false
-  name: MyString
-  links: MyString
-  description: MyString
-  contacts: MyString
-  coordinates: MyString
+  active: true
+  sector:
+  no_employees:
+  links: https://www.facebook.com/groups/programmatoriCatania/
+  description: "PAC - Programmatori a Catania - é un gruppo Facebook no-profit nato
+    nel 2013 da un gruppo di amici appassionati d'Informatica e ora conta piú di 900
+    membri che ogni giorno promuovono idee e discutono problemi informatici. \n\nNell'Ottobre
+    2015 abbiamo organizzato PAC15, il primo evento PAC per PAC. Tutte le info sull'evento
+    sul sito: http://pac15.github.io/\n\nNel 2016 abbiamo deciso di concentrare le nostre
+    forze nella creazione di progetti Open Source rivolti alla comunita' Siciliana.
+    **Isamuni** è uno di questi progetti, ma non l'unico: https://sic2.github.io/pac/\n\nSeguiteci
+    anche su Twitter - [@DevsCT](https://twitter.com/DevsCT )"
+  contacts: "\n* Simone Iva Conte\n* Gabriele Viglianisi\n* Giuseppe Parasiliti\n    "
+  coordinates:
+  location: Catania
+  lookingfor:
+  fbpage:
+  created_at: 2016-11-18 10:01:28.543053000
+  updated_at: 2016-11-18 10:01:28.543053000
+  slug: pac-programmatori-a-catania
+  twitterpage:
 
 two:
-  name: MyString
+  id: 2
+  name: CactusCorp
+  kind: company
   owner_id: 1
-  active: false
-  name: MyString
-  links: MyString
-  description: MyString
-  contacts: MyString
-  coordinates: MyString
+  active: true
+  sector: Consulenza
+  no_employees: 10-20
+  links: https://www.cactuscorp.com
+  description: "CactusCorp nasce nel 2009 dall'esperienza pluriennale di un gruppo di
+    professionisti \n    che operano da anni in Sicilia nel settore dell'Information
+    Tecnology.\n\nCactusCorp si propone come azienda qualificata nella consulenza, progettazione
+    e realizzazione di progetti informatici \nlegati all'infrastruttura tecnologica
+    e all'integrazione di sistemi e tecnologie, \nmettendo a disposizione risorse, esperienza,
+    entusiasmo, know-how tecnico e commerciale.\n\n### La nostra missione\n\nFornire
+    alle aziende consulenza, servizi e soluzioni integrate per la gestione dell'infrastruttura
+    e dei contenuti informatici. \nPortare le nostre esperienze, ottenute in anni di
+    lavoro sul campo, presso realtà differenti e complesse, al servizio dei clienti,
+    \nper fornire non solo i prodotti migliori, ma anche per affiancare e supportare
+    le aziende nelle loro scelte.\n\n### I nostri clienti\n\nIl parco clienti di CactusCorp
+    è piuttosto eterogeneo, sia come tipologia, sia come settore merceologico.\nFra
+    i propri clienti CactusCorp annovera numerose piccole e medie imprese e alcune grandi
+    aziende dei più svariati settori merceologici, \ndall'artigianato all'industria,
+    dal commercio ai servizi.\nCactusCorp segue inoltre diversi enti pubblici, università
+    e ordini professionali, nonché strutture sanitarie e ospedaliere, \ndel pubblico
+    servizio e private.\n"
+  contacts: cactuscorps@gmail.com
+  coordinates:
+  location: Catania, via cactus 3
+  lookingfor: Sviluppatori C++ e C# , Project Managers e Designers
+  fbpage: https://www.facebook.com/leadingbyexample/
+  slug: cactuscorp

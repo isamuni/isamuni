@@ -7,9 +7,16 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <h1 data-intro="Scopri le aziende tech Siciliane. Qui troverai solo le aziende registrate tu isamuni. 
                   Hai un'azienda? Crea la tua pagina dal tuo profilo.">Aziende</h1>
+  </div>
+  <div class="col-md-2">
+    <% if current_user %>
+      <%= link_to new_page_path, class: "btn btn-success btn-sm" do %>
+        <i class="fa fa-plus"></i> Nuova Pagina
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-6">
     <%= render partial: "search_form", locals: {res_path: companies_path, placeholder: "Ricerca aziende"}  %>
@@ -32,7 +39,7 @@
     <% @pages.each do |page| %>
       <tr>
         <td>
-          <img src="<%= page.pic %>" class="img-fluid img-rounded">
+          <img src="<%= page.pic 70 %>" class="img-fluid img-rounded">
         </td>
         <td><%= link_to page.name, page %></td>
         <td><%= page.location %></td>

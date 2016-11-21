@@ -1,0 +1,2 @@
+web: rails s webrick -p 3000
+webpack: npm run watch

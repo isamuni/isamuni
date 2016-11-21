@@ -1,3 +1,4 @@
 .env
 pgdata/
-webapp/public/assets
+.swp
+npm-debug.log
