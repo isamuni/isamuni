@@ -41,7 +41,8 @@ $navbar-brand: #EEEEEE;
     transition:text-shadow .25s;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    line-height: 30px;
 }
 
 .navbar-brand {
@@ -49,6 +50,7 @@ $navbar-brand: #EEEEEE;
   background-color: #308C83;
   padding-left: 12px;
   padding-right: 12px;
+  font-size: 1.25rem;
 }
 
 .navbar .nav > li > a:hover{
