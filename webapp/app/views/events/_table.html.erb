@@ -12,7 +12,9 @@
   <tbody>
     <div class="event">
       <% events.each do |event| %>
-        <% if event_type == :future %>
+        <% if event.current? %>
+          <tr id="future" bgcolor="#FF8A65">
+        <% elsif event_type == :future %>
           <tr id="future" class="table-success">
         <% elsif event_type == :old %>
           <tr id="old" class="table-warning">

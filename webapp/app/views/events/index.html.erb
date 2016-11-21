@@ -16,13 +16,13 @@
     <div class="col-md-4">
         <h5>Mappa&nbsp;<button id="resetmap" class="btn btn-success btn-sm"><i class="fa fa-refresh">&nbsp;Ricentra</i></button></h5>
         <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-        <div id="mapid" class="map" 
-                data-intro="Scopri gli eventi correnti e  prossimi usando la mappa. 
-                            Gli eventi in rosso sono quelli di oggi. 
+        <div id="mapid" class="map"
+                data-intro="Scopri gli eventi correnti e  prossimi usando la mappa.
+                            Gli eventi in rosso sono quelli di oggi.
                             Clicca sull'evento per saperne di più.">
         </div>
         <br>
-        
+
     </div>
 </div>
 <hr/>
@@ -192,7 +192,7 @@
             clearTimeout(timeout);
             timeout = null;
           }
-          timeout = setTimeout(applySlider, 50); // 10ms 
+          timeout = setTimeout(applySlider, 50); // 10ms
         }
 
         function applySlider() {
@@ -227,7 +227,7 @@
         allEventsRequest.done(function(jsonData){
             drawChart(jsonData);
         })
-        
+
         $(window).resize(function () {
             drawChart(jsonData);
         });
@@ -243,7 +243,7 @@
           $( "button[coordinates-id]" ).click(function() {
             var coordinates = $(this).attr('coordinates-id');
             coordinates = coordinates.split(',');
-            
+
             mymap.setView(new L.LatLng(coordinates[0], coordinates[1]), 13);
           });
 
