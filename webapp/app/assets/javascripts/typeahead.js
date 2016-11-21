@@ -1,4 +1,4 @@
-function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
+function initTypeahead(remoteUrl, itemUrl, showPicture = false, suggestionClickHandler) {
     "use strict";
 
     function defaultSuggestionClickHandler(event, datum, name) {
@@ -25,8 +25,12 @@ function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
         templates: {
             empty: '', //optional
             suggestion: function(data) {
-                return '<p><img src="' + data.profile_pic + '"/>' +
-                    ' ' + data.name + '</p>';
+                if (showPicture) {
+                    return '<div><img src="' + data.thumbnail + '"/>' +
+                        ' ' + data.name + '</div>';
+                } else {
+                    return '<div>' + data.name + '</div>';
+                }
             }
         }
     });

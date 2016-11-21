@@ -1,14 +1,14 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     $(document).on('ready',function(){
-      initTypeahead('/users/typeahead', '/users/');
+      initTypeahead('/users/typeahead', '/users/', true);
     });
   </script>
 <% end %>
 
 <div class="row">
   <div class="col-md-4">
-    <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni. 
+    <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni.
                   Registrati su isamuni per creare un tuo profilo e farti conoscere.">Utenti</h1>
   </div>
   <div class="col-md-6">
@@ -41,7 +41,7 @@
       <div class="card-block">
         <div class="row">
           <div class="col-md-5">
-            <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>  
+            <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>
           </div>
           <div class="col-md-7">
             <strong><%= user.name %></strong>
@@ -62,7 +62,7 @@
       <div class="card-block">
         <div class="row">
           <div class="col-md-5">
-            <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>  
+            <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>
           </div>
           <div class="col-md-7">
             <strong><%= user.name %></strong>

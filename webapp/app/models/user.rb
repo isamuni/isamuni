@@ -30,9 +30,13 @@ class User < ApplicationRecord
         'http://graph.facebook.com/' + uid + '/picture' + height
     end
 
+    def thumbnail
+        profile_pic 50
+    end
+
     def as_json(_options = {})
         super(only: [:name, :slug, :occupation, :projects, :description, :links],
-              methods: [:profile_pic])
+              methods: [:thumbnail])
     end
 
     def is_admin?
