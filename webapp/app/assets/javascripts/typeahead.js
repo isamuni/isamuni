@@ -1,29 +1,36 @@
 function initTypeahead(remoteUrl, itemUrl, suggestionClickHandler) {
-  "use strict";
+    "use strict";
 
-  function defaultSuggestionClickHandler(event, datum, name){
-    var identifier = datum.slug || datum.uid || datum.id;
-    // Enable line of code below to allow clickable suggestions to redirect to itemUrl
-    // window.location.href = itemUrl + identifier;
-  }
-
-  suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;
-
-  // instantiate the typeahead UI
-  var searchSelector = 'input.typeahead';
-  $(searchSelector).typeahead('destroy');
-  $(searchSelector).typeahead({
-    minLength: 0,
-    highlight: true
-  }, {
-    displayKey: 'name',
-    source: function(query, syncResults, asyncResults) {
-      $.get(remoteUrl + '?query=' + query, function(data) {
-        asyncResults(data);
-      });
+    function defaultSuggestionClickHandler(event, datum, name) {
+        var identifier = datum.slug || datum.uid || datum.id;
+        // Enable line of code below to allow clickable suggestions to redirect to itemUrl
+        // window.location.href = itemUrl + identifier;
     }
-  });
 
-  // this is the event that is fired when a user clicks on a suggestion
-  $(searchSelector).bind('typeahead:selected', suggestionClickHandler);
+    suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;
+
+    // instantiate the typeahead UI
+    var searchSelector = 'input.typeahead';
+    $(searchSelector).typeahead('destroy');
+    $(searchSelector).typeahead({
+        minLength: 0,
+        highlight: true
+    }, {
+        displayKey: 'name',
+        source: function(query, syncResults, asyncResults) {
+            $.get(remoteUrl + '?query=' + query, function(data) {
+                asyncResults(data);
+            });
+        },
+        templates: {
+            empty: '', //optional
+            suggestion: function(data) {
+                return '<p><img src="' + data.profile_pic + '"/>' +
+                    ' ' + data.name + '</p>';
+            }
+        }
+    });
+
+    // this is the event that is fired when a user clicks on a suggestion
+    $(searchSelector).bind('typeahead:selected', suggestionClickHandler);
 }
