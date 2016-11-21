@@ -4,37 +4,44 @@
     <h4>
       Una panoramica sull'ambiente tech in Sicilia
     </h4>
-    <hr>
-    <h3>LOGIN BUTTON</h3>
   </div>
   <div class="col-md-6">
-    What a wonderful logo
-    <i class="fa fa-long-arrow-up fa-5x" aria-hidden="true"></i>
+    <p>Logo qui</p>
   </div>
 </div>
 <hr>
 <div class="row">
   <div class="col-md-1">
   </div>
-  <div class="col-md-2">
-    <h3><%= @companies_count %></h3>
-    <a href="/companies"><i class="fa fa-industry fa-3x"></i></a>
+  <div class="col-md-2 home-section-link">
+    <a href="/companies">
+      <i class="fa fa-industry fa-3x"></i><br>
+      <big><%= @companies_count %></big> Aziende
+    </a>
   </div>
-  <div class="col-md-2">
-    <h3><%= @communities_count %></h3>
-    <a href="/communities"><i class="fa fa-institution fa-3x"></i></a>
+  <div class="col-md-2 home-section-link">
+    <a href="/communities">
+      <i class="fa fa-institution fa-3x"></i><br>
+      <big><%= @communities_count %></big> Community
+    </a>
   </div>
-  <div class="col-md-2">
-    <h3><%= @users_count %></h3>
-    <a href="/users"><i class="fa fa-users fa-3x"></i></a>
+  <div class="col-md-2 home-section-link">
+    <a href="/users">
+      <i class="fa fa-users fa-3x"></i><br>
+      <big><%= @users_count %></big> Utenti
+    </a>
   </div>
-  <div class="col-md-2">
-    <h3><%= @posts_count %></h3>
-    <a href="/feed"><i class="fa fa-rss-square fa-3x"></i></a>
+  <div class="col-md-2 home-section-link">
+    <a href="/feed">
+      <i class="fa fa-rss-square fa-3x"></i><br>
+      <big><%= @posts_count %></big> Post
+    </a>
   </div>
-  <div class="col-md-2">
-    <h3><%= @upcoming_events_count %></h3>
-    <a href="/events"><i class="fa fa-calendar fa-3x"></i></a>
+  <div class="col-md-2 home-section-link">
+    <a href="/events">
+      <i class="fa fa-calendar fa-3x"></i><br>
+      <big><%= @upcoming_events_count %></big> Prossimi eventi
+    </a>
   </div>
   <div class="col-md-1">
   </div>
