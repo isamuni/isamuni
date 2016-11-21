@@ -51,6 +51,7 @@ class FeedController < ApplicationController
 		    		{
 					    author_name: post.author_name,
 					    link: post.link,
+							author_link: (post.author==nil) ? nil : user_path(post.author),
 					    content: post.content,
 					    post_type: post.post_type,
 					    name: post.name,
