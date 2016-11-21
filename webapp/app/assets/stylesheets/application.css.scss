@@ -27,51 +27,67 @@ $navbar-bg: #4DB6AC;
 $navbar-text-shadow:rgb(0,0,30);
 $navbar-brand: #EEEEEE;
 
-.navbar {
+#main-nav {
+
     background-color: $navbar-bg;
     border-bottom: 2px solid #E6E6E6;
     padding: 0;
+
+    .nav-link,
+    .navbar-toggler,
+    .navbar-brand {
+        text-decoration: none;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        color: #eee;
+        cursor: pointer;
+        transition: text-shadow 0.25s;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 1.1rem;
+        line-height: 30px;
+    }
+
+    /* NOTE
+    * This creates problems when the navbar is expanded, then the window is resized
+    * I'm not sure how to make it work right, as the navbar examples for
+    * bootstrap4 haven't been released yet
+    */
+    #collapsingNavbar.in,
+    #collapsingNavbar.collapsing {
+        clear: both;
+    }
+
+    .navbar-toggler {
+        float: right;
+    }
+
+    .navbar-brand {
+        color: $navbar-brand;
+        background-color: #308C83;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 1.25rem;
+    }
+
+    .nav-link:hover {
+        text-shadow: 0 0 0.2rem $navbar-text-shadow;
+    }
+
+    .nav-link:active {
+        text-shadow: 0 0 0.2rem $navbar-text-shadow, 0 0 1.5rem $navbar-text-shadow;
+    }
+
+    .navbar-brand:hover {
+        text-shadow: 0 0 0.2em $navbar-text-shadow;
+        color: $navbar-brand;
+    }
+
+    .navbar-brand:active {
+        text-shadow: 0 0 0.2rem $navbar-text-shadow, 0 0 1.5rem $navbar-text-shadow;
+        color: $navbar-brand;
+    }
 }
 
-.navbar a {
-    text-decoration: none;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    color:  #eee;
-    cursor: pointer;
-    transition:text-shadow .25s;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-size: 1.1rem;
-    line-height: 30px;
-}
-
-.navbar-brand {
-  color: $navbar-brand;
-  background-color: #308C83;
-  padding-left: 12px;
-  padding-right: 12px;
-  font-size: 1.25rem;
-}
-
-.navbar .nav > li > a:hover{
-    text-shadow:0 0 .2rem $navbar-text-shadow;
-}
-
-.navbar .nav > li > a:active{
-    text-shadow:0 0 .2rem $navbar-text-shadow,
-                0 0 1.5rem $navbar-text-shadow;
-}
-
-.navbar-brand:hover {
-    text-shadow:0 0 .2em $navbar-text-shadow;
-    color:$navbar-brand;
-}
-
-.navbar-brand:active {
-    text-shadow:0 0 .2rem $navbar-text-shadow,
-                0 0 1.5rem $navbar-text-shadow;
-    color:$navbar-brand;
-}
 
 .home-section-link {
   text-align: center;
