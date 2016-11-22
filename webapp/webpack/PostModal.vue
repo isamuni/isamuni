@@ -5,7 +5,8 @@
         <div class="modal-header">
           <i :class="icon"></i>
           <a :href="post.link" target="_blank">{{ time }}</a>
-          {{post.author_name}} @ {{post.source.name}}
+          <a v-if="post.author_link" :href="post.author_link">{{ post.author_name }}</a>
+          <span v-else> {{ post.author_name }}</span> @ {{post.source.name}}
         </div>
         <div class="modal-body">
         {{post.content}}
