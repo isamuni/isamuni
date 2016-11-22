@@ -30,6 +30,7 @@ class FeedController < ApplicationController
 	    @posts = Post.limit(MAX_NUMBER_OF_POSTS)
 	                 .order('created_at desc')
 	                 .includes(:source)
+									 .includes(:author)
 
 	    if params[:jobs_only] == "true"
 	    	@posts = @posts.only_jobs
@@ -51,7 +52,7 @@ class FeedController < ApplicationController
 		    		{
 					    author_name: post.author_name,
 					    link: post.link,
-							author_link: (post.author==nil) ? nil : user_path(post.author),
+              author_link: post.author == nil ? nil : user_path(post.author),
 					    content: post.content,
 					    post_type: post.post_type,
 					    name: post.name,
