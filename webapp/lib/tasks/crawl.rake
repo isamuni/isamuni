@@ -15,7 +15,7 @@ task :crawl, [:complete] => :environment do |t,args|
     args.with_defaults(complete: false)
 
     complete_crawling = args[:complete]
-    feed_limit = complete_crawling ? 500 : FB_FEED_PAGE_SIZE
+    feed_limit = complete_crawling ? 2000 : FB_FEED_PAGE_SIZE
 
     # Setting logger level, so we have a log of both rest queries to facebook and queries to our db
     Koala::Utils.level = Logger::DEBUG
@@ -53,10 +53,13 @@ def fb_crawling feed_limit
         source = Source.find_by uid: group['id'], stype: 'group'
 
         next unless source.isOPEN
-        feed = crawl_group(crawler, group, feed_limit)
+        log "downloading feed for group: #{group['name']}"
+        result_pages = crawler.group_feed(group['id'], feed_limit)
 
-        insert_events(feed[:events], source)
-        insert_posts(feed[:posts], source)
+        result_pages.each do |feed|
+          insert_events(feed[:events], source)
+          insert_posts(feed[:posts], source)
+        end
     end
 
     FB_pages_to_track.each do |page|
@@ -64,14 +67,6 @@ def fb_crawling feed_limit
         page_events = crawl_page(crawler, page)
         insert_events(page_events)
     end
-end
-
-def crawl_group(crawler, group, feed_limit)
-    log "downloading feed for group: #{group['name']}"
-    feed = crawler.group_feed(group['id'], feed_limit)
-    log "downloaded #{feed.size} posts"
-
-    feed
 end
 
 def crawl_page(crawler, page)

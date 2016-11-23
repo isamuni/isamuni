@@ -43,24 +43,20 @@ class FacebookCrawler
   end
 
   # gets and processes 'limit' elements from a group with a given group_id
+  # returns an enumerator, with each page of results
   def group_feed group_id, limit
-    processed = 0
-    retrieved_data = {posts: [], events: []}
+    Enumerator.new do |y|
+      processed = 0
+      feed_page = group_raw_feed(group_id, @page_size)
 
-    feed_page = group_raw_feed(group_id, @page_size)
+      until feed_page.empty? or processed >= limit
+        y << extract_feed_data(feed_page)
 
-    until feed_page.empty? or processed >= limit
+        processed += feed_page.length
+        feed_page = feed_page.next_page
+      end
 
-      new_feed_data = extract_feed_data feed_page
-
-      retrieved_data[:posts] += new_feed_data[:posts]
-      retrieved_data[:events] += new_feed_data[:events]
-
-      processed += feed_page.length
-      feed_page = feed_page.next_page
     end
-
-    retrieved_data
   end
 
   # Takes a raw feed, as obtained from a group or a page
