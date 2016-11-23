@@ -5,17 +5,15 @@ def is_night?
 end
 
 module Clockwork
-
-  handler do |job, time|
-    if job == "crawl"
-      if is_night?
-        system "rake crawl[true]"
-      else
-        system "rake crawl[false]"
-      end
+    handler do |job, _time|
+        if job == 'crawl'
+            if is_night?
+                system 'rake crawl[true]'
+            else
+                system 'rake crawl[false]'
+            end
+        end
     end
-  end
 
-  every(15.minutes, 'crawl')
-
+    every(15.minutes, 'crawl')
 end

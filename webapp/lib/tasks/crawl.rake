@@ -11,11 +11,10 @@ FB_FEED_PAGE_SIZE = 50
 Callback_url = 'http://squirrels.vii.ovh/auth/facebook/callback'.freeze
 
 desc 'Crawls events and posts from the given set of pages and insert the result into the database'
-task :crawl, [:complete] => :environment do |t,args|
+task :crawl, [:complete] => :environment do |_t, args|
     args.with_defaults(complete: false)
 
     complete_crawling = args[:complete]
-    feed_limit = complete_crawling ? 2000 : FB_FEED_PAGE_SIZE
 
     # Setting logger level, so we have a log of both rest queries to facebook and queries to our db
     Koala::Utils.level = Logger::DEBUG
@@ -30,12 +29,12 @@ task :crawl, [:complete] => :environment do |t,args|
     log 'Crawling - give me some time please!'
     time_started = Time.now
 
-    fb_crawling feed_limit
+    fb_crawling FB_FEED_PAGE_SIZE
 
     log "Crawling finished in #{Time.now - time_started}s :)"
 end
 
-def fb_crawling feed_limit
+def fb_crawling(feed_limit)
     oauth = Koala::Facebook::OAuth.new(ENV['ISAMUNI_APP_ID'], ENV['ISAMUNI_APP_SECRET'], Callback_url)
     token = oauth.get_app_access_token
     crawler = FacebookCrawler.new(token, FB_FEED_PAGE_SIZE)
@@ -57,13 +56,13 @@ def fb_crawling feed_limit
         result_pages = crawler.group_feed(group['id'], feed_limit)
 
         result_pages.each do |feed|
-          insert_events(feed[:events], source)
-          insert_posts(feed[:posts], source)
+            insert_events(feed[:events], source)
+            insert_posts(feed[:posts], source)
         end
     end
 
     FB_pages_to_track.each do |page|
-        #source = Source.find_by uid: page['id'], stype: 'page'
+        # source = Source.find_by uid: page['id'], stype: 'page'
         page_events = crawl_page(crawler, page)
         insert_events(page_events)
     end
