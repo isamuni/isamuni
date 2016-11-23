@@ -58,7 +58,7 @@ class FeedController < ApplicationController
 					    name: post.name,
 					    created_at: post.created_at.to_f * 1000,
 					    source_id: post.source_id,
-					    picture: post.picture,
+					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
 					    caption: post.caption,
 					    description: post.description,
 							likes: post.likes_count,
