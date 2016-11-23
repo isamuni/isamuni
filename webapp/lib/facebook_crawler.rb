@@ -16,18 +16,20 @@ class FacebookCrawler
 
   Page_fields = ['id', 'name']
 
-  def initialize(token)
+  def initialize(token, page_size)
     @graph = Koala::Facebook::API.new(token)
+    @page_size = page_size
   end
 
-  def group_raw_feed group, limit
+  def group_raw_feed group_id, limit
     options = { limit: limit, fields: Feed_fields }
-    @graph.get_connection(group['id'], 'feed', options)
+    @graph.get_connection(group_id, 'feed', options)
   end
 
-  def group_members groupid, limit
+  # unused
+  def group_members group_id, limit
     options = { limit: limit }
-    @graph.get_connection(groupid, 'members', options)
+    @graph.get_connection(group_id, 'members', options)
   end
 
   def page_events page
@@ -40,25 +42,43 @@ class FacebookCrawler
     @graph.get_object(event_id, { fields: Event_fields })
   end
 
-  def group_feed group, limit
-    feed = group_raw_feed(group, limit)
-    prepare_feed feed
+  # gets and processes 'limit' elements from a group with a given group_id
+  def group_feed group_id, limit
+    processed = 0
+    retrieved_data = {posts: [], events: []}
+
+    feed_page = group_raw_feed(group_id, @page_size)
+
+    until feed_page.empty? or processed >= limit
+
+      new_feed_data = extract_feed_data feed_page
+
+      retrieved_data[:posts] += new_feed_data[:posts]
+      retrieved_data[:events] += new_feed_data[:events]
+
+      processed += feed_page.length
+      feed_page = feed_page.next_page
+    end
+
+    retrieved_data
   end
 
-  def prepare_feed feed
+  # Takes a raw feed, as obtained from a group or a page
+  # partitions it in posts and events, also enriching each event with its details
+  def extract_feed_data feed
 
-    posts = feed.select { |fe|
-          ['status', 'link', 'photo', 'event'].include? fe['type'] }
+      posts = feed.select { |fe|
+            ['status', 'link', 'photo', 'event'].include? fe['type'] }
 
-    events = feed.select{ |fe| fe['type'] == 'event'}.map do |event|
-        # This is a dirty way to get the id of the event
-        # It is not possible to have /events call on the group
-        # unless we have a user token (not for app tokens)
-        event_id = event['link'][/events\/(.?)*\//][7..-2]
-        event_info(event_id)
+      events = feed.select{ |fe| fe['type'] == 'event'}.map do |event|
+          # This is a dirty way to get the id of the event
+          # It is not possible to have /events call on the group
+          # unless we have a user token (not for app tokens)
+          event_id = event['link'][/events\/(.?)*\//][7..-2]
+          event_info(event_id)
       end
 
-    return {posts: posts, events: events}, feed.next_page
+      {posts: posts, events: events}
   end
 
   def groups_info groups
