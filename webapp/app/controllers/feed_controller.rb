@@ -73,8 +73,6 @@ class FeedController < ApplicationController
   	end
 
   	def data
-
-  		# warning, date() in sqlite returns a string, but in postgres it returns a Date
 	    date_count = Post.group("date(created_at)")
 	    	.order('date(created_at) desc')
 	    	.distinct.count(:uid)
