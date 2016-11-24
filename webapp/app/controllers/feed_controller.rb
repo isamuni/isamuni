@@ -51,6 +51,7 @@ class FeedController < ApplicationController
 	        	posts_data = @posts.map do |post|
 		    		{
 					    author_name: post.author_name,
+							post_link: post.facebook_link,
 					    link: post.link,
               author_link: post.author == nil ? nil : user_path(post.author),
 					    content: post.content,

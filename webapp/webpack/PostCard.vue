@@ -5,14 +5,33 @@
         <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
     </div>
     <div class="card-footer text-muted text-right">
-        {{author_name}} - {{ time }} - {{post.source.name}} <img v-bind:src="post.source.icon_link" />
-        <hr> {{post.likes}} <i class="fa fa-thumbs-up"></i> {{post.comments}} <i class="fa fa-comments"></i> {{post.shares}} <i class="fa fa-share-alt"></i>
+        {{author_name}} - {{ time }}
+        <br> <img v-bind:src="post.source.icon_link" /> {{post.source.name}}
+        <hr>
+        <div class="row">
+            <div class="col-xs-6 text-xs-left">
+                {{post.likes}} <i class="fa fa-thumbs-up"></i> {{post.comments}} <i class="fa fa-comments"></i> {{post.shares}} <i class="fa fa-share-alt"></i>
+            </div>
+            <div class="col-xs-6 text-xs-right">
+                <i :class="icon">
+            </div>
+        </div>
     </div>
 </div>
 </template>
 
 <script>
 /* global moment */
+
+function postIcon(postType) {
+    if (postType == 'link')
+        return 'fa fa-link';
+    if (postType == 'event')
+        return 'fa fa-calendar';
+    if (postType == 'photo')
+        return "fa fa-photo";
+    return "fa fa-sticky-note-o";
+}
 
 let PostCard = {
     props: {
@@ -31,7 +50,10 @@ let PostCard = {
             var name = this.post.author_name.split(" ");
             var first_name = name.shift();
             return first_name[0] + ". " + name.join(" ");
-        }
+        },
+        icon: function() {
+            return postIcon(this.post.post_type);
+        },
     }
 };
 

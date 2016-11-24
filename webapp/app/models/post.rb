@@ -4,7 +4,7 @@ class Post < ApplicationRecord
    class_name: "User",
    optional: true,
    foreign_key: 'author_uid',
-   primary_key: 'uid' 
+   primary_key: 'uid'
 
   Job_tags = ['#lavoro', '#jobs', '#job', '#cercosocio', '[job]', '[jobs]']
 
