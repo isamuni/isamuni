@@ -15,6 +15,7 @@ task :crawl, [:complete] => :environment do |_t, args|
     args.with_defaults(complete: false)
 
     complete_crawling = args[:complete]
+    feed_limit = complete_crawling ? 2000 : FB_FEED_PAGE_SIZE
 
     # Setting logger level, so we have a log of both rest queries to facebook and queries to our db
     Koala::Utils.level = Logger::DEBUG
@@ -29,7 +30,7 @@ task :crawl, [:complete] => :environment do |_t, args|
     log 'Crawling - give me some time please!'
     time_started = Time.now
 
-    fb_crawling FB_FEED_PAGE_SIZE
+    fb_crawling feed_limit
 
     log "Crawling finished in #{Time.now - time_started}s :)"
 end
