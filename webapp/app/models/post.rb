@@ -69,7 +69,7 @@ class Post < ApplicationRecord
     elsif content
       content[0..40]
     else
-      nil
+      ""
     end
   end
 
