@@ -18,8 +18,8 @@ task :crawl, [:complete] => :environment do |_t, args|
     feed_limit = complete_crawling ? 2000 : FB_FEED_PAGE_SIZE
 
     # Setting logger level, so we have a log of both rest queries to facebook and queries to our db
-    Koala::Utils.level = Logger::DEBUG
-    Rails.logger.level = Logger::DEBUG
+    Koala::Utils.level = Logger::DEBUG if Koala
+    Rails.logger.level = Logger::DEBUG if Rails
 
     log 'Crawler started, initializing'
 
@@ -63,9 +63,9 @@ def fb_crawling(feed_limit)
     end
 
     FB_pages_to_track.each do |page|
-        # source = Source.find_by uid: page['id'], stype: 'page'
+        source = Source.find_by uid: page['id'], stype: 'page'
         page_events = crawl_page(crawler, page)
-        insert_events(page_events)
+        insert_events(page_events, source)
     end
 end
 
@@ -97,35 +97,38 @@ def insert_pages_sources(pages)
     log 'all info added/updated'
 end
 
-def insert_events(events, source = nil)
-    log 'inserting events into the database'
+def insert_events(events, source = nil, skip_existing = false)
+    log "crawled #{events.count} events, inserting them into db"
 
-    event_uids_in_db = Event.pluck(:uid).to_set
-    new_events = events.reject { |e| event_uids_in_db.include? e['id'] }
+    if skip_existing
+      event_uids_in_db = Event.pluck(:uid).to_set
+      events = events.reject { |e| event_uids_in_db.include? e['id'] }
+    end
 
-    new_events.each do |event_data|
-        e = Event.from_fb_event(event_data) # TODO: - insert or update
+    events.each do |event_data|
+        e = Event.from_fb_event(event_data)
         e.source = source
         e.save
     end
 
-    log "crawled #{events.count} events, inserted #{new_events.count} new ones"
+     log "inserted/updated #{events.count} events"
 end
 
-def insert_posts(posts, source = nil)
-    log 'inserting posts into the database'
+def insert_posts(posts, source = nil, skip_existing = false)
+    log "crawled #{posts.count} posts"
 
-    # filter out existing posts
-    post_uids_in_db = Post.pluck(:uid).to_set
-    new_posts = posts.reject { |post| post_uids_in_db.include? post['id'] }
+    if skip_existing
+      post_uids_in_db = Post.pluck(:uid).to_set
+      posts = posts.reject { |post| post_uids_in_db.include? post['id'] }
+    end
 
-    new_posts.each do |post_data|
-        post = Post.from_fb_post(post_data) # TODO: - insert or update
+    posts.each do |post_data|
+        post = Post.from_fb_post(post_data)
         post.source = source
         post.save
     end
 
-    log "crawled #{posts.count} posts, inserted #{new_posts.count} new ones"
+    log "inserted/updated #{posts.count} posts"
 end
 
 def log(message)

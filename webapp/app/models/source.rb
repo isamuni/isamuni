@@ -3,45 +3,23 @@ class Source < ApplicationRecord
   has_many :events
 
   def self.from_fb_group fb_group
-    group_uid = fb_group['id']
-    group_name = fb_group['name']
-    group_privacy = fb_group['privacy']
-    group_icon = fb_group['icon']
+    group = find_or_initialize_by(uid: fb_group['id'])
 
-    if exists?(uid: group_uid)
-  		group = where(uid: group_uid).first
-  		group.touch
-    else
-		  group = Source.new()
-
-	    group.stype = 'group'
-	    group.source = 'fb'
-    end
-
-    group.uid = group_uid
-    group.name = group_name
-    group.privacy = group_privacy
-    group.icon_link = group_icon
+    group.stype = 'group'
+    group.source = 'fb'
+    group.name = fb_group['name']
+    group.privacy = fb_group['privacy']
+    group.icon_link = fb_group['icon']
 
     group
   end
 
   def self.from_fb_page fb_page
-    page_uid = fb_page['id']
-    page_name = fb_page['name']
+    page = find_or_initialize_by(uid: fb_page['id'])
 
-    if exists?(uid: page_uid)
-      page = where(uid: page_uid).first
-      page.touch
-    else
-      page = Source.new()
-
-      page.stype = 'page'
-      page.source = 'fb'
-    end
-
-    page.uid = page_uid
-    page.name = page_name
+    page.stype = 'page'
+    page.source = 'fb'
+    page.name = fb_page['name']
 
     page
   end
