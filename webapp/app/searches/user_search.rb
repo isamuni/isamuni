@@ -3,18 +3,20 @@
 # http://stackoverflow.com/questions/28654125/searchkick-bloodhound-typeahead-for-autocomplete
 
 class UserSearch < Searchlight::Search
-	extend ActiveModel::Naming
-  include ActiveModel::Conversion
+    extend ActiveModel::Naming
+    include ActiveModel::Conversion
 
-  def base_query
-  	User.safe_fields
-  end
+    def base_query
+        User.safe_fields
+    end
 
-  def search_name_like
-  	query.where(:banned => false).ilike(:name, name_like)
-  end
+    def search_name_like
+        User.where(banned: false).fuzzy_search(name_like)
+        # query.where(:banned => false).ilike(:name, name_like)
+    end
 
-  def search_typeahead
-  	query.where(:banned => false).ilike(:name, typeahead)
-  end
+    def search_typeahead
+        User.where(banned: false).fuzzy_search(typeahead)
+        # query.where(:banned => false).ilike(:name, typeahead)
+    end
 end
