@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123102408) do
+ActiveRecord::Schema.define(version: 20161129174110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"
@@ -48,6 +47,21 @@ ActiveRecord::Schema.define(version: 20161123102408) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  end
+
+  create_table "owners_pages", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.index ["page_id"], name: "index_owners_pages_on_page_id", using: :btree
+    t.index ["user_id"], name: "index_owners_pages_on_user_id", using: :btree
+  end
+
+  create_table "ownership_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.string  "message"
+    t.index ["page_id"], name: "index_ownership_requests_on_page_id", using: :btree
+    t.index ["user_id"], name: "index_ownership_requests_on_user_id", using: :btree
   end
 
   create_table "pages", force: :cascade do |t|

@@ -11,12 +11,12 @@ class UserSearch < Searchlight::Search
     end
 
     def search_name_like
-        User.where(banned: false).fuzzy_search(name_like)
+        query.where(banned: false).basic_search(name_like)
         # query.where(:banned => false).ilike(:name, name_like)
     end
 
     def search_typeahead
-        User.where(banned: false).fuzzy_search(typeahead)
+        query.where(banned: false).basic_search(typeahead)
         # query.where(:banned => false).ilike(:name, typeahead)
     end
 end

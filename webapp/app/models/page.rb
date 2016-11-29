@@ -2,7 +2,7 @@ class Page < ApplicationRecord
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
-  belongs_to :user, foreign_key: "owner_id"
+  has_and_belongs_to_many :owners, :class_name=>"User", :join_table => :owners_pages
 
   def self.companies
     where(kind: Page::kinds[:company])
