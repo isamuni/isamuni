@@ -1,5 +1,6 @@
 require 'koala'
 require 'json'
+require 'logger'
 
 class FacebookCrawler
     Feed_fields = ['id', 'message', 'from', 'type',
@@ -14,10 +15,35 @@ class FacebookCrawler
     Group_fields = %w(id name privacy icon).freeze
 
     Page_fields = %w(id name).freeze
+    DEFAULT_PAGE_SIZE = 50
 
-    def initialize(token, page_size)
+    # takes an options hash
+    # :token => the facebook app token to use
+    # :app_id, :app_secret => the app id and secret to use to get the token, if token is not given
+    # :page_size => how many results to get with each call, defaults to 50
+    # :logger => the logger to use (defaults to stderr)
+    def initialize(options={})
+        # Obtain a facebook app token if not given
+        if options[:token]
+          token = options[:token]
+        elsif options[:app_id] && options[:app_secret]
+          oauth = Koala::Facebook::OAuth.new(options[:app_id], options[:app_secret], "")
+          token = oauth.get_app_access_token
+        else
+          raise "either token or app_id and app_secret should be defined"
+        end
+
+        if options[:logger]
+          @logger = options[:logger]
+        else
+          @logger = Logger.new(STDERR)
+        end
+
+        # Change Koala logger to our same logger
+        Koala::Utils.logger = @logger
+
         @graph = Koala::Facebook::API.new(token)
-        @page_size = page_size
+        @page_size = options[:page_size] || DEFAULT_PAGE_SIZE
     end
 
     def group_raw_feed(group_id, limit)
@@ -31,9 +57,12 @@ class FacebookCrawler
         @graph.get_connection(group_id, 'members', options)
     end
 
-    def page_events(page)
+    def page_events(page_id)
         options = { fields: Event_fields }
-        @graph.get_connection(page['id'], 'events', options)
+        @logger.info "downloading events from page: #{page_id}"
+        events = @graph.get_connection(page_id, 'events', options)
+        @logger.info "downloaded #{events.size} events"
+        events
     end
 
     # Get info about an event
@@ -75,11 +104,11 @@ class FacebookCrawler
         { posts: posts, events: events }
     end
 
-    def groups_info(groups)
-        groups.flat_map { |group| @graph.get_object(group['id'], fields: Group_fields) }
+    def group_info(group_id)
+        @graph.get_object(group_id, fields: Group_fields)
     end
 
-    def pages_info(pages)
-        pages.flat_map { |page| @graph.get_object(page['id'], fields: Page_fields) }
+    def page_info(page_id)
+        @graph.get_object(page_id, fields: Page_fields)
     end
 end
