@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   # Home page
   get 'home/index'
   root 'home#index'
@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'profile#show', as: 'user'
   get 'users/:id/all_posts', to: 'profile#all_posts', as: 'all_posts'
   get 'profile/delete'
-  
+
   #get 'me/new', to: 'profile#new', as: 'new_user'
   #post 'me', to: 'profile#create', as: 'create_user'
-  
+
   patch 'users/:id', to: 'profile#update', as: 'update_user'
 
   get 'communities/typeahead', to:'communities#typeahead'
