@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   get 'communities/typeahead', to:'communities#typeahead'
   get 'companies/typeahead', to:'companies#typeahead'
 
+  put 'me/pages/request_ownership', to: 'pages#request_ownership'
+  get 'pages', to: 'pages#index_all_names'
   resources :pages, path: '/me/pages'
+
   resources :communities
   resources :companies
 
@@ -48,6 +51,8 @@ Rails.application.routes.draw do
   put 'admin/make_post_unjob', to: 'admin#make_post_unjob'
   put 'admin/ban_user', to: 'admin#ban_user'
   put 'admin/unban_user', to: 'admin#unban_user'
+
+
 
   # get 'me/pages/new', to: 'pages#new', as: 'new_page'
   # get 'me/pages', to: 'pages#my_pages', as: 'pages'

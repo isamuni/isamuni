@@ -42,7 +42,11 @@ class Page < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:name, :description, :contacts, :links, :slug])
+    if options
+      super(options)
+    else
+      super(only: [:name, :description, :contacts, :links, :slug])
+    end
   end
 
   enum kind: [ :company, :community ]
