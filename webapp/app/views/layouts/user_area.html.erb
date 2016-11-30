@@ -45,7 +45,7 @@
 		            <%= link_to "Modifica Profilo", edit_user_path, class: "nav-link" %>
 		        </li>
 		        <li class="nav-item">
-		        	<%= link_to "Le mie pagine", pages_path, class: "nav-link"  %>
+		        	<%= link_to "Le mie pagine", '/me/pages', class: "nav-link"  %>
 		        </li>
 		        <% if current_user != nil && current_user.is_admin? %>
 		        <li class="nav-item">
