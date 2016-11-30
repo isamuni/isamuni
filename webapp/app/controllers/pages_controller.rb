@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   layout "user_area"
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  before_action :check_logged_in, only: [:new, :create, :index, :request_ownership]
+  before_action :check_logged_in, only: [:new, :create, :request_ownership]
   before_action :check_page_owner, only: [:edit, :update, :destroy]
 
   def index_all_names
@@ -22,6 +22,7 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
+    return check_logged_in unless current_user
     @pages = current_user.pages
   end
 
