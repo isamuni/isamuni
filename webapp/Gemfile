@@ -5,12 +5,12 @@ gem 'rails', '5.0.0'
 
 # Database
 group :development do
-  gem 'sqlite3'
+    gem 'sqlite3'
 end
 
 group :production do
-  gem 'pg'
-  gem 'thin'
+    gem 'pg'
+    gem 'thin'
 end
 
 # Bootstrap gem for cool UI
@@ -33,21 +33,23 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Font Awesome icons
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.1.0'
+    gem 'rails-assets-tether', '>= 1.1.0'
 end
 
 # Search gems
 gem 'twitter-typeahead-rails'
 gem 'searchlight'
+gem 'textacular', '~> 4.0'
+
 # Human readable URIs
 gem 'friendly_id', '~> 5.1.0'
 # Markdown renderer
 gem 'redcarpet'
 # Nice and neat Tour cards
-gem "introjs-rails"
+gem 'introjs-rails'
 
 # Leaflet is a small and nice js library that will help with showing maps
 gem 'leaflet-rails', '~> 0.7.7'
@@ -68,17 +70,17 @@ gem 'koala'
 gem 'clockwork', '~> 2.0'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+    gem 'byebug'
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+    # Access an IRB console on exception pages or by using <%= console %> in views
+    gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+    # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+    gem 'spring'
 
-  gem 'htmlbeautifier'
-  gem 'rubocop'
+    gem 'htmlbeautifier'
+    gem 'rubocop'
 end

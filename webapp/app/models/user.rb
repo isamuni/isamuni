@@ -21,6 +21,10 @@ class User < ApplicationRecord
         select(:id, :name, :uid, :slug, :occupation, :tags)
     end
 
+    def self.searchable_columns
+        [:name, :tags, :occupation, :description, :projects]
+    end
+
     def first_name
         name.partition(' ').first
     end

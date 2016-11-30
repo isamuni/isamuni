@@ -1,68 +1,73 @@
 <template>
- <div id="post-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="post-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <i :class="icon"></i>
-          <a :href="post.link" target="_blank">{{ time }}</a>
-          <a v-if="post.author_link" :href="post.author_link">{{ post.author_name }}</a>
-          <span v-else> {{ post.author_name }}</span> @ {{post.source.name}}
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-xs-6 text-xs-left">
+                    <a :href="post.link" target="_blank"><i :class="icon"></i></a>
+                </div>
+                <div class="col-xs-6 text-xs-right">
+                    <a :href="post.post_link" target="_blank">{{ time }}</a>
+                </div>
+            </div>
+            <div class="modal-body">
+                {{post.content}}
+                <p>
+                    <a :href="post.link " target="_blank">
+                        <img v-if="post.picture " :src="post.picture " :alt="post.alt" class="center-block img-fluid img-rounded" />
+                    </a>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <div class="col-xs-6 text-xs-left">
+                    <a v-if="post.author_link " :href="post.author_link ">{{ post.author_name }}</a>
+                    <span v-else> {{ post.author_name }}</span> @ {{post.source.name}}
+                </div>
+                <div class="col-xs-6 text-xs-right">
+                    <button type="button " class="btn btn-secondary " data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-        {{post.content}}
-        <p>
-        <a :href="post.link" target="_blank">
-          <img v-if="post.picture" :src="post.picture" :alt="post.alt" class="center-block img-fluid img-rounded"/>
-        </a>
-        </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
-
 /* global moment, $ */
 
 function postIcon(postType) {
-  if (postType == 'link')
-    return 'fa fa-link';
-  if (postType == 'event')
-    return 'fa fa-calendar';
-  if (postType == 'photo')
-    return "fa fa-photo";
-  return "fa fa-sticky-note-o";
+    if (postType == 'link')
+        return 'fa fa-link';
+    if (postType == 'event')
+        return 'fa fa-calendar';
+    if (postType == 'photo')
+        return "fa fa-photo";
+    return "fa fa-sticky-note-o";
 }
 
 var PostModal = {
-  props: {
-    post: Object
-  },
-  computed: {
-    icon: function() {
-      return postIcon(this.post.post_type);
+    props: {
+        post: Object
     },
-    time: function() {
-      return moment(this.post.created_at).format("L LT");
+    computed: {
+        icon: function() {
+            return postIcon(this.post.post_type);
+        },
+        time: function() {
+            return moment(this.post.created_at).format("L LT");
+        }
+    },
+    methods: {
+        show: function() {
+            $(this.$el).modal('show');
+        }
     }
-  },
-  methods: {
-    show: function() {
-      $(this.$el).modal('show');
-    }
-  }
 };
 
 export default PostModal;
-
 </script>
 
 <style>
-
 .modal {
     overflow-y: auto;
 }
@@ -74,5 +79,4 @@ export default PostModal;
 .modal-open[style] {
     padding-right: 0px !important;
 }
-
 </style>

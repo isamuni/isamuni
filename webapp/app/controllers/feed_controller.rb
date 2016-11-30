@@ -9,9 +9,20 @@ class FeedController < ApplicationController
 
 	  	respond_to do |format|
 	        format.html { render :index }
-	        format.json { render json: @posts }
+
+					@posts = @posts.paginate page: params[:page]
+	        format.json { render json: json(@posts)}
     	end
   	end
+
+		def json posts
+			{
+				current_page: posts.current_page,
+				per_page: posts.per_page,
+				total_entries: posts.total_entries,
+				entries: posts
+			}
+		end
 
   	def sources
   		counts = Post.group(:source_id).count
@@ -51,6 +62,7 @@ class FeedController < ApplicationController
 	        	posts_data = @posts.map do |post|
 		    		{
 					    author_name: post.author_name,
+							post_link: post.facebook_link,
 					    link: post.link,
               author_link: post.author == nil ? nil : user_path(post.author),
 					    content: post.content,
@@ -58,7 +70,7 @@ class FeedController < ApplicationController
 					    name: post.name,
 					    created_at: post.created_at.to_f * 1000,
 					    source_id: post.source_id,
-					    picture: post.picture,
+					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
 					    caption: post.caption,
 					    description: post.description,
 							likes: post.likes_count,
@@ -73,8 +85,6 @@ class FeedController < ApplicationController
   	end
 
   	def data
-
-  		# warning, date() in sqlite returns a string, but in postgres it returns a Date
 	    date_count = Post.group("date(created_at)")
 	    	.order('date(created_at) desc')
 	    	.distinct.count(:uid)
