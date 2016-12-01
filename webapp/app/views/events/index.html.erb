@@ -77,6 +77,8 @@
 
 <% content_for :scripts do %>
 <script type="text/javascript">
+  /* global $, google, L, moment, initTypeahead */
+
     var mymap = null;
     var sicily_coords = [37.5579, 14.1368];
     var zoom = 7;
@@ -106,7 +108,7 @@
         var index = indexForEvent(ev);
         var options = {
             icon: iconForEvent(ev)
-        }
+        };
 
         return L.marker([
             coordinates[0], coordinates[1]
@@ -122,13 +124,14 @@
         var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(mymap);
+        });
+        OpenStreetMap_DE.addTo(mymap);
 
         //draw markers
         var markers = L.markerClusterGroup();
         locations.map(markerForEvent).forEach(function (marker) {
             markers.addLayer(marker);
-        })
+        });
 
         mymap.addLayer(markers);
 
@@ -187,7 +190,7 @@
         google.visualization.events.addListener(timeSlider, 'statechange', selectHandler);
 
         var timeout = null;
-        function selectHandler(e) {
+        function selectHandler() {
           if (timeout) {
             clearTimeout(timeout);
             timeout = null;
@@ -213,6 +216,7 @@
         $('#spinner').show();
 
         var locationsRequest = $.get("/events/locations", drawMap);
+        var storedJsonData;
 
         locationsRequest.done(function() {
           $('#spinner').hide();
@@ -222,14 +226,16 @@
 
         allEventsRequest.fail(function(error){
             console.error(error);
-        })
+        });
 
         allEventsRequest.done(function(jsonData){
+            storedJsonData = jsonData;
             drawChart(jsonData);
-        })
+        });
 
         $(window).resize(function () {
-            drawChart(jsonData);
+            if(storedJsonData)
+                drawChart(storedJsonData);
         });
     }
 
