@@ -1,11 +1,11 @@
 class CommunitiesController < PagesController
   layout "application"
-  
+
   def index
     if params[:query]
-      @pages = Page.communities.where("name LIKE ? and active = ?", "%#{params[:query]}%", true)
+      @pages = Page.communities.ilike(:name, params[:query]).where(active: true)
     else
-      @pages = Page.communities.where("active = ?", true)
+      @pages = Page.communities.where(active: true)
     end
 
     @pages = @pages.order(:name)
@@ -17,7 +17,7 @@ class CommunitiesController < PagesController
   end
 
   def typeahead
-    @search  = Page.communities.where("name LIKE ? and active = ?", "%#{params[:query]}%", true)
+    @search = Page.communities.ilike(:name, params[:query]).where(active: true)
     render json: @search
   end
 

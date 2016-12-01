@@ -11,12 +11,13 @@ class UserSearch < Searchlight::Search
     end
 
     def search_name_like
-        query.where(banned: false).basic_search(name_like)
-        # query.where(:banned => false).ilike(:name, name_like)
+        # NOTE basic_search only looks for whole words, so it's not okay for autocomplete
+        # query.where(banned: false).basic_search(name_like)
+        query.where(:banned => false).ilike(:name, name_like)
     end
 
     def search_typeahead
-        query.where(banned: false).basic_search(typeahead)
-        # query.where(:banned => false).ilike(:name, typeahead)
+        # query.where(banned: false).basic_search(typeahead)
+        query.where(:banned => false).ilike(:name, typeahead)
     end
 end

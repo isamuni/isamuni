@@ -1,12 +1,15 @@
-function initTypeahead(remoteUrl, itemUrl, showPicture = false, suggestionClickHandler) {
+/* global $ */
+
+function initTypeahead(remoteUrl, itemUrl, showPicture, suggestionClickHandler) {
     "use strict";
 
     function defaultSuggestionClickHandler(event, datum, name) {
         var identifier = datum.slug || datum.uid || datum.id;
         // Enable line of code below to allow clickable suggestions to redirect to itemUrl
-        // window.location.href = itemUrl + identifier;
+        window.location.href = itemUrl + identifier;
     }
 
+    showPicture = showPicture || false;
     suggestionClickHandler = suggestionClickHandler || defaultSuggestionClickHandler;
 
     // instantiate the typeahead UI
