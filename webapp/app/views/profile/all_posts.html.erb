@@ -3,8 +3,19 @@
     <h1>Post di <%= link_to @user.name, @user %></h1>
   </div>
 </div>
+<hr>
+<div id="user-feed-app"></div>
 
+<% content_for :scripts do %>
+
+<script type="text/javascript">
+  var UserFeed = new Vue(App.default.UserFeed);
+  UserFeed.$mount('#user-feed-app');
+</script>
+
+<% end %>
+<!--
 <hr>
 <div id="posts-view" class="card-columns card-columns-profile">
 	<%= render partial: "posts", locals: {posts: @posts} %>
-</div>
+</div> -->
