@@ -2,17 +2,28 @@ class PagesController < ApplicationController
   layout "user_area"
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
-  before_action :check_logged_in, only: [:new, :create]
+  before_action :check_logged_in, only: [:new, :create, :request_ownership]
   before_action :check_page_owner, only: [:edit, :update, :destroy]
+
+  def index_all_names
+    render json: Page.all.as_json(only: [:name,:id])
+  end
+
+  def request_ownership
+    p = Page.find(params[:page])
+    if p.owners.include? current_user
+      render text: 'Hai già la ownership per questa pagina', status: 404
+    else
+      OwnershipRequest.create!(page_id: p.id, user_id: current_user.id)
+      render text: 'Richiesta di ownership inviata'
+    end
+  end
 
   # GET /pages
   # GET /pages.json
   def index
-    if !current_user.nil? 
-      @pages = current_user.pages
-    else
-      @pages = {}
-    end
+    return check_logged_in unless current_user
+    @pages = current_user.pages
   end
 
   # GET /pages/new
@@ -24,11 +35,15 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(page_params)
-    @page.owner_id = current_user.id
     @page.active = false
+    correctly_saved = @page.save
+
+    if correctly_saved
+      @page.owners << current_user
+    end
 
     respond_to do |format|
-      if @page.save
+      if correctly_saved
         format.html { redirect_to @page, notice: 'Page was successfully requested. Wait for an admin to approve it' }
         format.json { render :show, status: :created, location: @page }
       else
@@ -65,21 +80,17 @@ class PagesController < ApplicationController
   private
 
     def check_page_owner
-      redirect_to "/", notice: 'Only a page owner can edit a page' unless current_user.id == @page.owner_id
+      redirect_to "/", notice: 'Only a page owner can edit a page' unless (current_user&.is_admin? || @page.owners.include?(current_user))
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_page
       @page = Page.friendly.find(params[:id])
-      unless @page.active? || @page.owner_id == current_user.id
-        require_admin
-      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :links, :description, :contacts, :sector, 
-                                    :kind, :fbpage, :twitterpage, :location, 
+      params.require(:page).permit(:name, :links, :description, :contacts, :sector,
+                                    :kind, :fbpage, :twitterpage, :location,
                                     :lookingfor, :no_employees)
     end
 end

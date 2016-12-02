@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :pages, foreign_key: 'owner_id'
+    has_and_belongs_to_many :pages, :join_table => :owners_pages
     validate :valid_tags
 
     extend FriendlyId

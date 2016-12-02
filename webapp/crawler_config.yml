@@ -12,6 +12,10 @@ fb:
       name: StartupItalia! Sicilia
       post: true
       event: true
+    - id: 312970738738883
+      name: Youth Hubbers! Student Incubator
+      post: true
+      event: true
   pages:
     - id: 116505148430596
       name: YoutHub

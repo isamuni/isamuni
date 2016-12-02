@@ -2,7 +2,7 @@ class Page < ApplicationRecord
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
-  belongs_to :user, foreign_key: "owner_id"
+  has_and_belongs_to_many :owners, :class_name=>"User", :join_table => :owners_pages
 
   def self.companies
     where(kind: Page::kinds[:company])
@@ -42,7 +42,11 @@ class Page < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:name, :description, :contacts, :links, :slug])
+    if options
+      super(options)
+    else
+      super(only: [:name, :description, :contacts, :links, :slug])
+    end
   end
 
   enum kind: [ :company, :community ]

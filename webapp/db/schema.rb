@@ -50,6 +50,21 @@ ActiveRecord::Schema.define(version: 20161130214739) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
+  create_table "owners_pages", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.index ["page_id"], name: "index_owners_pages_on_page_id", using: :btree
+    t.index ["user_id"], name: "index_owners_pages_on_user_id", using: :btree
+  end
+
+  create_table "ownership_requests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.string  "message"
+    t.index ["page_id"], name: "index_ownership_requests_on_page_id", using: :btree
+    t.index ["user_id"], name: "index_ownership_requests_on_user_id", using: :btree
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string   "name",         null: false
     t.integer  "kind",         null: false
