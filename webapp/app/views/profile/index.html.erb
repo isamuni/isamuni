@@ -28,34 +28,56 @@
       <% end %>
     </div>
   </div>
-  <div class="col-md-2">
-    <input type="checkbox" name="users-checkbox" data-off-text="<i class='fa fa-list'></i>" data-on-text="<i class='fa fa-list-alt'></i>" data-size="large" checked>
-  </div>
 </div>
 
-<div id="cards-users">
-  <h2>Ultimi iscritti</h2>
-  <div class="card-columns">
-    <% @latest_users.each do |user| %>
-    <div class="card" id="card-<%= user_path(user) %>">
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-5">
-            <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>
-          </div>
-          <div class="col-md-7">
-            <strong><%= user.name %></strong>
-            <br>
-            <%= truncate(user.occupation, length: 40) %>
-          </div>
+<h3>Ultimi iscritti</h3>
+<div class="card-columns">
+  <% @latest_users.each do |user| %>
+  <div class="card" id="card-<%= user_path(user) %>">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-md-5">
+          <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>
+        </div>
+        <div class="col-md-7">
+          <strong><%= user.name %></strong>
+          <br>
+          <%= truncate(user.occupation, length: 40) %>
         </div>
       </div>
     </div>
-    <% end %>
   </div>
+  <% end %>
+</div>
 
-  <hr>
-  <h2>Tutti gli utenti</h2>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Ricerca avanzata</h3>
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="scope">Campi</label><select name="scope">
+          <option value="all">Tutti</option>
+          <option value="name">Nome</option>
+          <option value="description">Descrizione</option>
+        </select>
+      </div>
+      <div class="form-group">
+      <label for="order">Ordine</label><select name="scope">
+        <option value="alphabetical">Alfabetico</option>
+        <option value="latest">Ultimi Iscritti</option>
+      </select>
+      </div>
+      <div class="form-group">
+        <label for="query">Query</label><input type="search" name="query" class="form-control" placeholder="Ricerca"></input>
+        <input type="submit" value="cerca"></input>
+      </div>
+      <input type="checkbox" name="users-checkbox" data-off-text="<i class='fa fa-list'></i>" data-on-text="<i class='fa fa-list-alt'></i>" data-size="large" checked>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div id="cards-users">
   <div class="card-columns">
     <% @users.each do |user| %>
     <div class="card" id="card-<%= user_path(user) %>">
