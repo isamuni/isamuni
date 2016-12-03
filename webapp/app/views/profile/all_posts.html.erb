@@ -10,6 +10,7 @@
 
 <script type="text/javascript">
   var UserFeed = new Vue(App.default.UserFeed);
+  UserFeed.$data.id = <%=raw @uid %> // TODO - use gem gon
   UserFeed.$mount('#user-feed-app');
 </script>
 

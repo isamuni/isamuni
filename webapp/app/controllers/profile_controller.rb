@@ -40,6 +40,7 @@ class ProfileController < ApplicationController
 
     # GET /users/:id/all_posts
     def all_posts
+        @uid = @user.uid
         @posts = Post.where(author_uid: @user.uid, show: true).order('created_at desc')
     end
 
