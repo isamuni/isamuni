@@ -1,25 +1,33 @@
 <div class="row">
-  <div class="col-md-8">
-    <h1>Isamuni</h1>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-9">
+        <h1>Isamuni</h1>
+      </div>
+      <div class="col-md-2">
+        <% if !current_user %>
+        <%= link_to login_path, id: "sign_in", class: "btn btn-success" do %>
+          <i class="fa fa-sign-in"></i> Login/Registrati
+        <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
     <h4>
       Una panoramica sull'ambiente tech in Sicilia
     </h4>
     <hr>
     <p>
-      Perchè <strong>Isamuni</strong>? Isàmuni è una parola Siciliana che significa <i>alziamoci</i>.
+      Perchè <strong>Isamuni</strong>? <i>Isàmuni</i> è una parola Siciliana che significa <i>alziamoci</i>.
+      Quindi, <strong>alziamoci</strong>!
     </p>
     <blockquote>
       <p class="lead">La Sicilia è anche un insieme di realtà giovani, innovative e vibranti, che spesso hanno difficoltà a farsi conoscere, e non hanno il risalto che meritano. </p>
       <footer><i>da <a href="https://github.com/sic2/awesome-sicily">awesome-sicily</a></i></footer>
     </blockquote>
-    <p>
-      Puoi leggere <a href="https://docs.google.com/presentation/d/11mpmVVwxWYvVaMCGfrpNLSxiUXJTXd-bq7C0OBQFZFw/edit?usp=sharing">qui</a> una presentazione del progetto.
-    </p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <%= image_tag 'logo-300ppi.png', width:"300", alt: "isamuni logo" %> <!-- TODO use css for defining logo size -->
-    <br><br>
-    <button class="btn btn-outline-primary">Login/Register</button>
   </div>
 </div>
 <hr>
@@ -63,6 +71,10 @@
 <hr>
 
 <div data-intro="Aiutaci a far crescere isamuni.">
-<p>
-Isamuni è un progetto no-profit mantenuto da <a href="https://github.com/sic2">sic2</a> e <a href="https://github.com/vigliag">vigliag</a> (della community di <a href="https://www.facebook.com/groups/programmatoriCatania/">Programmatori a Catania - PAC</a>). Il codice della piattaforma di Isamuni è open-source (licenza MIT) e <a href="https://github.com/sic2/isamuni">disponibile su github</a>. Puoi contattarci tramite il gruppo Programmatori a Catania oppure via <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">mail</a>.
-</p>
+  <p>
+    Puoi leggere <a href="https://docs.google.com/presentation/d/11mpmVVwxWYvVaMCGfrpNLSxiUXJTXd-bq7C0OBQFZFw/edit?usp=sharing">qui</a> una presentazione del progetto.
+  </p>
+  <p>
+  Isamuni è un progetto no-profit mantenuto da <a href="https://github.com/sic2">sic2</a> e <a href="https://github.com/vigliag">vigliag</a> (della community di <a href="https://www.facebook.com/groups/programmatoriCatania/">PAC</a>). Isamuni è open-source (MIT) e disponibile su <a href="https://github.com/sic2/isamuni">github</a>. Puoi contattarci tramite il gruppo PAC oppure via <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">e-mail</a>.
+  </p>
+</div>
