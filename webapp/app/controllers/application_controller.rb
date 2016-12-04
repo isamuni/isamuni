@@ -64,6 +64,15 @@ protected
     "Date(#{d.year},#{d.month - 1},#{d.day})"
   end
 
+	def paginated_json page
+		{
+			current_page: page.current_page,
+			per_page: page.per_page,
+			total_entries: page.total_entries,
+			entries: page
+		}
+	end
+
   helper_method :page_url
   helper_method :page_path
 

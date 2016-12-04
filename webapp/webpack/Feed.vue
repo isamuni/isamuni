@@ -32,7 +32,7 @@ import Multiselect from 'vue-multiselect';
    listens to events from filters, and stores the last version in data
    the filters are then passed to postDisplay as props */
 
-/* global $, console */
+/* global console, DataSource */
 
 var Feed = {
     data: function() {
@@ -48,9 +48,7 @@ var Feed = {
         };
     },
     mounted: function() {
-        let sources = $.getJSON('/feed/sources.json');
-
-        sources.then((sources) => {
+        DataSource.getSources().then((sources) => {
             this.sources = sources;
             this.updatePosts();
         });
@@ -75,15 +73,7 @@ var Feed = {
             this.filter.sources = selectedIDs.join(",");
         },
         updatePosts() {
-            let _this = this;
-            let result = $.getJSON('/feed/posts.json', this.filter);
-
-            result.then(function(posts) {
-                posts.forEach(function(post) {
-                    post['source'] = _this.sources.find((s) => s.id == post['source_id']) || {};
-                });
-                _this.posts = posts;
-            });
+            DataSource.getPosts(this.filter).then((posts) => {this.posts = posts;});
         }
     },
     components: {
