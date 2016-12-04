@@ -55,23 +55,17 @@ class FeedController < ApplicationController
 	        format.html { render partial: "posts", :posts => @posts }
 	        format.json {
 	        	posts_data = @posts.map do |post|
-		    		{
-					    author_name: post.author_name,
-							post_link: post.facebook_link,
-					    link: post.link,
-              author_link: post.author == nil ? nil : user_path(post.author),
-					    content: post.content,
-					    post_type: post.post_type,
-					    name: post.name,
-					    created_at: post.created_at.to_f * 1000,
-					    source_id: post.source_id,
-					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
-					    caption: post.caption,
-					    description: post.description,
-							likes: post.likes_count,
-							comments: post.comments_count,
-							shares: post.shares_count
-					}
+              post
+                .as_json(only: [:author_name, :link, :content, :post_type, :name, :source_id, :caption, :description])
+                .merge({
+    							post_link: post.facebook_link,
+                  author_link: post.author == nil ? nil : user_path(post.author),
+    					    created_at: post.created_at.to_f * 1000,
+    					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
+    							likes: post.likes_count,
+    							comments: post.comments_count,
+    							shares: post.shares_count
+					      })
 	        	end
 	        	render json: posts_data
 	        }
