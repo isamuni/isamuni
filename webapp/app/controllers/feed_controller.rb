@@ -11,18 +11,9 @@ class FeedController < ApplicationController
 	        format.html { render :index }
 
 					@posts = @posts.paginate page: params[:page]
-	        format.json { render json: json(@posts)}
+	        format.json { render json: paginated_json(@posts)}
     	end
-  	end
-
-		def json posts
-			{
-				current_page: posts.current_page,
-				per_page: posts.per_page,
-				total_entries: posts.total_entries,
-				entries: posts
-			}
-		end
+  end
 
   	def sources
   		counts = Post.group(:source_id).count
@@ -35,8 +26,6 @@ class FeedController < ApplicationController
   	end
 
 	def posts
-	    start_time = Time.at(params[:start].to_i / 1000.0)
-	    end_time = Time.at(params[:end].to_i / 1000.0)
 
 	    @posts = Post.limit(MAX_NUMBER_OF_POSTS)
 	                 .order('created_at desc')
@@ -48,35 +37,35 @@ class FeedController < ApplicationController
 	    end
 
 	    unless params[:start].blank? or params[:end].blank?
+        start_time = Time.at(params[:start].to_i / 1000.0)
+        end_time = Time.at(params[:end].to_i / 1000.0)
 	    	@posts = @posts.where(:created_at => start_time..end_time)
 	    end
 
 	    unless params[:sources].blank?
 	    	source_ids = params[:sources].split(",").map(&:to_i)
 	    	@posts = @posts.where(source_id: source_ids)
-	    end
+      end
+
+      unless params[:author].blank?
+        @posts = @posts.where(author_uid: params[:author])
+      end
 
 	  	respond_to do |format|
 	        format.html { render partial: "posts", :posts => @posts }
 	        format.json {
 	        	posts_data = @posts.map do |post|
-		    		{
-					    author_name: post.author_name,
-							post_link: post.facebook_link,
-					    link: post.link,
-              author_link: post.author == nil ? nil : user_path(post.author),
-					    content: post.content,
-					    post_type: post.post_type,
-					    name: post.name,
-					    created_at: post.created_at.to_f * 1000,
-					    source_id: post.source_id,
-					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
-					    caption: post.caption,
-					    description: post.description,
-							likes: post.likes_count,
-							comments: post.comments_count,
-							shares: post.shares_count
-					}
+              post
+                .as_json(only: [:author_name, :link, :content, :post_type, :name, :source_id, :caption, :description])
+                .merge({
+    							post_link: post.facebook_link,
+                  author_link: post.author == nil ? nil : user_path(post.author),
+    					    created_at: post.created_at.to_f * 1000,
+    					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
+    							likes: post.likes_count,
+    							comments: post.comments_count,
+    							shares: post.shares_count
+					      })
 	        	end
 	        	render json: posts_data
 	        }

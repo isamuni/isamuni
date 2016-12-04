@@ -54,7 +54,11 @@ class Post < ApplicationRecord
   end
 
   def as_json(options={})
-    super(only: [:name, :content, :link, :author_name, :post_type, :created_at])
+    if options
+      super(options)
+    else
+      super(only: [:name, :content, :link, :author_name, :post_type, :created_at])
+    end
   end
 
 protected
