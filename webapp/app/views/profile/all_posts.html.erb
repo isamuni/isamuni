@@ -10,13 +10,8 @@
 
 <script type="text/javascript">
   var UserFeed = new Vue(App.default.UserFeed);
-  UserFeed.$data.id = <%=raw @uid %> // TODO - use gem gon
+  UserFeed.$data.filter.author = <%=raw @user.uid %>
   UserFeed.$mount('#user-feed-app');
 </script>
 
 <% end %>
-<!--
-<hr>
-<div id="posts-view" class="card-columns card-columns-profile">
-	<%= render partial: "posts", locals: {posts: @posts} %>
-</div> -->

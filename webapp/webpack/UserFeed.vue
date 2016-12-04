@@ -1,6 +1,6 @@
 <template>
 <div id="feedapp">
-    <PostDisplay :posts="posts"></PostDisplay>
+    <PostDisplay v-if="sources_ready" :posts="posts"></PostDisplay>
 </div>
 </template>
 
@@ -17,23 +17,30 @@ import PostDisplay from './PostDisplay.vue';
 var UserFeed = {
     data: function() {
         return {
-            id: 0,
+            sources: [],
+            filter: {
+                sources: "",
+                author: 0,
+                no_limit: true
+            },
             posts: []
         };
     },
-    mounted: function() { // TODO - get only this user feed
-        this.updatePosts();
+    mounted: function() {
+        DataSource.getSources().then((sources) => {
+            this.sources = sources;
+            this.updatePosts();
+        });
+    },
+    computed: {
+        sources_ready: function() {
+            return Object.keys(this.sources).length > 0;
+        }
     },
     methods: {
         updatePosts() {
-            let _this = this;
-            let result = $.getJSON('/feed/posts.json', this.filter);
-
-            result.then(function(posts) {
-                posts.forEach(function(post) {
-                    post['source'] = _this.sources.find((s) => s.id == post['source_id']) || {};
-                });
-                _this.posts = posts;
+            DataSource.getPosts(this.filter).then((posts) => {
+                this.posts = posts;
             });
         }
     },

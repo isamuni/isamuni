@@ -26,7 +26,6 @@
 import PostDisplay from './PostDisplay.vue';
 import Multiselect from 'vue-multiselect';
 
-
 /* Main app
    Contains both filters and postDisplay
    listens to events from filters, and stores the last version in data
@@ -73,7 +72,9 @@ var Feed = {
             this.filter.sources = selectedIDs.join(",");
         },
         updatePosts() {
-            DataSource.getPosts(this.filter).then((posts) => {this.posts = posts;});
+            DataSource.getPosts(this.filter).then((posts) => {
+                this.posts = posts;
+            });
         }
     },
     components: {

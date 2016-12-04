@@ -27,10 +27,14 @@ class FeedController < ApplicationController
 
 	def posts
 
-	    @posts = Post.limit(MAX_NUMBER_OF_POSTS)
-	                 .order('created_at desc')
-	                 .includes(:source)
-									 .includes(:author)
+			@posts = Post
+			unless params[:no_limit] == "true"
+				@posts = @posts.limit(MAX_NUMBER_OF_POSTS)
+			end
+
+			@posts = @posts.order('created_at desc')
+							.includes(:source)
+							.includes(:author)
 
 	    if params[:jobs_only] == "true"
 	    	@posts = @posts.only_jobs
