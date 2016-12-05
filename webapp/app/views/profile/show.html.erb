@@ -18,7 +18,7 @@
 			<% end %>
 			</div>
 		<% end %>
-		<% if @count > 9 %>
+		<% if @count > 12 %>
 			<br><br>
 			<div class="col-md-4 text-center">
 				<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
@@ -56,6 +56,7 @@
 <script type="text/javascript">
   var UserFeed = new Vue(App.default.UserFeed);
   UserFeed.$data.filter.author = "<%=raw @user.uid %>";
+	UserFeed.$data.filter.limit = 12;
   UserFeed.$mount('#user-feed-app');
 </script>
 

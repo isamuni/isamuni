@@ -28,8 +28,8 @@ class FeedController < ApplicationController
 	def posts
 
 			@posts = Post
-			unless params[:no_limit] == "true"
-				@posts = @posts.limit(MAX_NUMBER_OF_POSTS)
+			unless params[:limit].to_i == 0
+				@posts = @posts.limit(params[:limit].to_i)
 			end
 
 			@posts = @posts.order('created_at desc')

@@ -20,13 +20,13 @@ var UserFeed = {
             filter: {
                 sources: "",
                 author: 0,
-                no_limit: true
+                limit: 0
             },
             posts: []
         };
     },
     mounted: function() {
-      this.updatePosts();
+        this.updatePosts();
     },
     methods: {
         updatePosts() {

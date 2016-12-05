@@ -41,7 +41,8 @@ var Feed = {
                 sources: "",
                 start: null,
                 end: null,
-                jobs_only: 0
+                jobs_only: 0,
+                limit: 50
             },
             posts: []
         };

@@ -25,7 +25,6 @@ class ProfileController < ApplicationController
 
     # GET /users/:id
     def show
-        @posts = Post.where(author_uid: @user.uid, show: true).limit(9).order('created_at desc')
         @count = Post.where(author_uid: @user.uid, show: true).count
     end
 
