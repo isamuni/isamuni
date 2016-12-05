@@ -12,7 +12,7 @@
 		<h4>Tags</h4>
 		<p style="word-wrap: break-word;"><%= @user.tags %></p>
 		<% if current_user && @user.id == current_user.id %>
-			<div class="col-md-4 text-center"> 
+			<div class="col-md-4 text-center">
 			<%= link_to edit_user_path(@user), class: "btn btn-success btn-md" do %>
 				<i class="fa fa-pencil"></i> Modifica profilo
 			<% end %>
@@ -20,7 +20,7 @@
 		<% end %>
 		<% if @count > 9 %>
 			<br><br>
-			<div class="col-md-4 text-center"> 
+			<div class="col-md-4 text-center">
 				<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
 					<i class="fa fa-eye"></i> Vedi tutti i post
 				<% end %>
@@ -29,32 +29,32 @@
 	</div>
 	<div class="col-lg-9" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
 		<div id="user-data">
+			<% unless @user.description.blank? %>
 			<%= markdown(@user.description) %>
 			<hr>
+			<% end %>
+
+			<% unless @user.projects.blank? %>
 			<h4>Progetti</h4>
 			<%= markdown(@user.projects) %>
 			<hr>
+			<% end %>
+
+			<% unless @user.links.blank? %>
 			<h4>Collegamenti</h4>
 			<%= markdown(@user.links) %>
+			<% end %>
 		</div>
 	</div>
 </div>
 <hr>
-<div id="user posts" class="card-columns card-columns-profile" data-intro="Esplora gli ultimi post di questo utente nel gruppo PAC.">
-<% @posts.each do |post| %>
-   <div class="card"
-   		<% if post.tags == 'job' %>
-   			style="background-color: #90CAF9; border-color: #64B5F6;"
-		<% elsif post.post_type == 'link' %>
-			style="background-color: #FFEE58; border-color: #FDD835;"
-		<% elsif post.post_type == 'photo' %>
-			style="background-color: #FFCA28; border-color: #FFB300;"
-		<% else %>
-			style="background-color: #C5E1A5; border-color: #AED581;"
-		<% end %>
-	>
-		<%= render partial: "card", locals: {post: post} %>
-	</div>
+
+<% content_for :scripts do %>
+
+<script type="text/javascript">
+  var UserFeed = new Vue(App.default.UserFeed);
+  UserFeed.$data.filter.author = "<%=raw @user.uid %>";
+  UserFeed.$mount('#user-feed-app');
+</script>
 
 <% end %>
-</div>
