@@ -18,7 +18,7 @@
         </div>
     </div>
     <hr>
-    <PostDisplay v-if="sources_ready" :filter="{}" :posts="posts"></PostDisplay>
+    <PostDisplay :posts="posts"></PostDisplay>
 </div>
 </template>
 
@@ -51,11 +51,6 @@ var Feed = {
             this.sources = sources;
             this.updatePosts();
         });
-    },
-    computed: {
-        sources_ready: function() {
-            return Object.keys(this.sources).length > 0;
-        }
     },
     watch: {
         filter: {

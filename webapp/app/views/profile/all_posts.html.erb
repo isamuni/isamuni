@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
   var UserFeed = new Vue(App.default.UserFeed);
-  UserFeed.$data.filter.author = <%=raw @user.uid %>
+  UserFeed.$data.filter.author = "<%=raw @user.uid %>";
   UserFeed.$mount('#user-feed-app');
 </script>
 

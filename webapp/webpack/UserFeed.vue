@@ -1,6 +1,6 @@
 <template>
 <div id="feedapp">
-    <PostDisplay v-if="sources_ready" :posts="posts"></PostDisplay>
+    <PostDisplay :posts="posts"></PostDisplay>
 </div>
 </template>
 
@@ -12,12 +12,11 @@ import PostDisplay from './PostDisplay.vue';
    listens to events from filters, and stores the last version in data
    the filters are then passed to postDisplay as props */
 
-/* global $, console */
+/* global DataSource, console */
 
 var UserFeed = {
     data: function() {
         return {
-            sources: [],
             filter: {
                 sources: "",
                 author: 0,
@@ -27,15 +26,7 @@ var UserFeed = {
         };
     },
     mounted: function() {
-        DataSource.getSources().then((sources) => {
-            this.sources = sources;
-            this.updatePosts();
-        });
-    },
-    computed: {
-        sources_ready: function() {
-            return Object.keys(this.sources).length > 0;
-        }
+      this.updatePosts();
     },
     methods: {
         updatePosts() {
