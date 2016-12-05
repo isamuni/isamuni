@@ -53,6 +53,11 @@ class Post < ApplicationRecord
     end
   end
 
+  def author_pic(height = '')
+      height = '?height=' + height.to_s unless height == ''
+      'http://graph.facebook.com/' + author_uid + '/picture' + height
+  end
+
   def as_json(options={})
     if options
       super(options)

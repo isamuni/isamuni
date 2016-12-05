@@ -65,7 +65,7 @@ class FeedController < ApplicationController
     							post_link: post.facebook_link,
                   author_link: post.author == nil ? nil : user_path(post.author),
     					    created_at: post.created_at.to_f * 1000,
-    					    picture: post.picture == nil ? (post.author == nil ? nil : post.author.thumbnail): post.picture,
+    					    picture: post.picture || post&.author&.profile_pic(90) || post&.author_pic(90) || nil,
     							likes: post.likes_count,
     							comments: post.comments_count,
     							shares: post.shares_count
