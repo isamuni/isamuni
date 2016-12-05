@@ -1,5 +1,6 @@
 # Isamuni
-[![Build Status](https://travis-ci.org/sic2/isamuni.svg?branch=master)](https://travis-ci.org/sic2/isamuni)
+
+[**Telegram Group**](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA)
 
 The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**.
 
