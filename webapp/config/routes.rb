@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     put 'me/pages/request_ownership', to: 'pages#request_ownership'
     get 'pages', to: 'pages#index_all_names'
+    post 'pages', to: 'pages#create'
     resources :pages, path: '/me/pages'
 
     resources :communities
