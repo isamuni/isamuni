@@ -1,40 +1,40 @@
 class FeedController < ApplicationController
 
-	MAX_NUMBER_OF_POSTS = 50
-	MAX_NUMBER_OF_JOB_POSTS = 20
+    MAX_NUMBER_OF_POSTS = 50
+    MAX_NUMBER_OF_JOB_POSTS = 20
 
 	def index
-	  	@posts = Post.where(:show => true).limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
-	  	@posts_jobs = Post.only_jobs.where(:show => true).limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
+        @posts = Post.where(:show => true).limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
+        @posts_jobs = Post.only_jobs.where(:show => true).limit(MAX_NUMBER_OF_JOB_POSTS).order('created_at desc')
 
-	  	respond_to do |format|
-	        format.html { render :index }
+        respond_to do |format|
+            format.html { render :index }
 
-					@posts = @posts.paginate page: params[:page]
-	        format.json { render json: paginated_json(@posts)}
-    	end
+            @posts = @posts.paginate page: params[:page]
+            format.json { render json: paginated_json(@posts)}
+        end
   end
 
-  	def sources
-  		counts = Post.group(:source_id).count
+    def sources
+        counts = Post.group(:source_id).count
 
-  		sources = Source.find(counts.keys).map { |e|
-  			e.as_json.merge({count: counts[e.id]})
-  		}
+        sources = Source.find(counts.keys).map { |e|
+          e.as_json.merge({count: counts[e.id]})
+        }
 
-  		render json: sources
-  	end
+        render json: sources
+    end
 
 	def posts
 
-			@posts = Post
-			unless params[:limit].to_i == 0
-				@posts = @posts.limit(params[:limit].to_i)
-			end
+            @posts = Post
+            unless params[:limit].to_i == 0
+                @posts = @posts.limit(params[:limit].to_i)
+            end
 
 			@posts = @posts.order('created_at desc')
-							.includes(:source)
-							.includes(:author)
+                            .includes(:source)
+                            .includes(:author)
 
 	    if params[:jobs_only] == "true"
 	    	@posts = @posts.only_jobs
@@ -55,27 +55,27 @@ class FeedController < ApplicationController
         @posts = @posts.where(author_uid: params[:author])
       end
 
-	  	respond_to do |format|
-	        format.html { render partial: "posts", :posts => @posts }
-	        format.json {
-	        	posts_data = @posts.map do |post|
+        respond_to do |format|
+            format.html { render partial: "posts", :posts => @posts }
+            format.json {
+              posts_data = @posts.map do |post|
               post
                 .as_json(only: [:author_name, :link, :content, :post_type, :name, :source_id, :caption, :description])
                 .merge({
-    							post_link: post.facebook_link,
-                  author_link: post.author == nil ? nil : user_path(post.author),
-    					    created_at: post.created_at.to_f * 1000,
-    					    picture: post.picture || post&.author&.profile_pic(90) || post&.author_pic(90) || nil,
-    							likes: post.likes_count,
-    							comments: post.comments_count,
-    							shares: post.shares_count
-					      })
-	        	end
-	        	render json: posts_data
-	        }
-    	end
+                    post_link: post.facebook_link,
+                    author_link: post.author == nil ? nil : user_path(post.author),
+                    created_at: post.created_at.to_f * 1000,
+                    picture: post.picture || post&.author&.profile_pic(90) || post&.author_pic(90) || nil,
+                    likes: post.likes_count,
+                    comments: post.comments_count,
+                    shares: post.shares_count
+                    })
+                end
+                render json: posts_data
+            }
+        end
 
-  	end
+    end
 
   	def data
 	    date_count = Post.group("date(created_at)")
