@@ -65,7 +65,7 @@ class ProfileController < ApplicationController
 
     def post_params
         params.require(:user).permit(:name, :occupation, :description, 
-                                        :projects, :links, :tags)
+                                        :projects, :links, :skill_list)
     end
 
     def search_params

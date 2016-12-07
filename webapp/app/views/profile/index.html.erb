@@ -72,9 +72,7 @@
         </div>
         <br>
         <strong>Tags:</strong> 
-          <% user.tag_list.each do |tag| %>
-            <%= tag %> ,
-          <% end %>
+          <%= user.skill_list.join(", ") %>
       </div>
     </div>
     <% end %>
@@ -103,9 +101,7 @@
           <td><%= link_to user.name, user %></td>
           <td><%= truncate(user.occupation, length: 40) %></td>
           <td>         
-            <% user.tag_list.each do |tag| %>
-              <%= tag %> ,
-            <% end %>
+            <%= user.skill_list.join(", ") %>
         </tr>
       <% end %>
     </tbody>

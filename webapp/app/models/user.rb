@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    acts_as_taggable
+    acts_as_taggable_on :skills
     has_and_belongs_to_many :pages, :join_table => :owners_pages
     #validate :valid_tags
 
@@ -19,11 +19,11 @@ class User < ApplicationRecord
     end
 
     def self.safe_fields
-        select(:id, :name, :uid, :slug, :occupation, :tag_list)
+        select(:id, :name, :uid, :slug, :occupation, :skill_list)
     end
 
     def self.searchable_columns
-        [:name, :tag_list, :occupation, :description, :projects]
+        [:name, :skill_list, :occupation, :description, :projects]
     end
 
     def first_name
