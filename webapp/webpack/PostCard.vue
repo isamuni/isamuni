@@ -1,5 +1,5 @@
 <template>
-<div class="post-card card post" @click="$emit('click')">
+<div class="post-card card post" @click="$emit('click')" :style="style">
     <img v-if="post.picture" v-bind:src="post.picture" v-bind:alt="post.alt" class="card-img-top"></img>
     <div class="card-block">
         <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
@@ -33,6 +33,14 @@ function postIcon(postType) {
     return "fa fa-sticky-note-o";
 }
 
+function postStyle(postType) {
+    if (postType == 'link')
+        return 'border-color: #FDD835;';
+    if (postType == 'photo')
+        return "border-color: #FFB300;";
+    return "border-color: #AED581;";
+}
+
 let PostCard = {
     props: {
         post: Object
@@ -54,6 +62,9 @@ let PostCard = {
         icon: function() {
             return postIcon(this.post.post_type);
         },
+        style: function() {
+            return postStyle(this.post.post_type);
+        }
     }
 };
 

@@ -18,7 +18,7 @@
         </div>
     </div>
     <hr>
-    <PostDisplay v-if="sources_ready" :filter="{}" :posts="posts"></PostDisplay>
+    <PostDisplay :posts="posts"></PostDisplay>
 </div>
 </template>
 
@@ -26,13 +26,12 @@
 import PostDisplay from './PostDisplay.vue';
 import Multiselect from 'vue-multiselect';
 
-
 /* Main app
    Contains both filters and postDisplay
    listens to events from filters, and stores the last version in data
    the filters are then passed to postDisplay as props */
 
-/* global $, console */
+/* global console, DataSource */
 
 var Feed = {
     data: function() {
@@ -42,23 +41,17 @@ var Feed = {
                 sources: "",
                 start: null,
                 end: null,
-                jobs_only: 0
+                jobs_only: 0,
+                limit: 50
             },
             posts: []
         };
     },
     mounted: function() {
-        let sources = $.getJSON('/feed/sources.json');
-
-        sources.then((sources) => {
+        DataSource.getSources().then((sources) => {
             this.sources = sources;
             this.updatePosts();
         });
-    },
-    computed: {
-        sources_ready: function() {
-            return Object.keys(this.sources).length > 0;
-        }
     },
     watch: {
         filter: {
@@ -75,14 +68,8 @@ var Feed = {
             this.filter.sources = selectedIDs.join(",");
         },
         updatePosts() {
-            let _this = this;
-            let result = $.getJSON('/feed/posts.json', this.filter);
-
-            result.then(function(posts) {
-                posts.forEach(function(post) {
-                    post['source'] = _this.sources.find((s) => s.id == post['source_id']) || {};
-                });
-                _this.posts = posts;
+            DataSource.getPosts(this.filter).then((posts) => {
+                this.posts = posts;
             });
         }
     },

@@ -36,6 +36,16 @@ class EventsController < ApplicationController
     render json: event_data
   end
 
+  def sources
+      counts = Event.group(:source_id).count
+
+      sources = Source.find(counts.keys).map { |e|
+        e.as_json.merge({count: counts[e.id]})
+      }
+
+      render json: sources
+  end
+
   def all_events
     events = Event.where("date(ends_at) < ?", Date.today)
                   .group("date(ends_at)")

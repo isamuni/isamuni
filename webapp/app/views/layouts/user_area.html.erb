@@ -1,36 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= favicon_link_tag 'logo.png' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Isamuni</title>
+
   <%= stylesheet_link_tag    'application', media: 'all' %>
+<%= csrf_meta_tags %>
+  <meta charset="UTF-8">
+  <meta name="description" content="Isamuni - Una panoramica sull'ambiente tech in Sicilia.
+                                    Scopri studenti, professionisti, comunità, aziende ed eventi del settore tech.">
+  <meta name="keywords" content="isamuni, sicilia, tecnologia, programmatori, social network, open source">
+
   <%= javascript_include_tag :application, integrity: true %>
-
-  <%= csrf_meta_tags %>
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.min.js"></script>
-
-  <script type="text/javascript">
-
-  // Load the Visualization API and the corechart package.
-  google.charts.load('current', {
-    'packages': ['corechart', 'controls']
-  });
-  </script>
-
+  <% # Scripts included from views %>
   <%= content_for :scripts %>
 </head>
 <body>
-<!-- Do not display alerts by default
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
--->
-
 <%= render partial: "layouts/navbar" %>
 
 <div class="container" id="main-container">
@@ -74,6 +60,25 @@
 		</div>
 	</div>
 </div>
+
+<% # Analytics %>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86302047-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+<!-- End Cookie Consent plugin -->
 
 </body>
 </html>

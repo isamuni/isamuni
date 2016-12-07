@@ -31,7 +31,7 @@
       Dipendenti
     </div>
     <div class="col-md-2">
-      <div class="field">        
+      <div class="field">
           <%= f.select :no_employees, ['n/a', '1-10', '11-25', '26-50', '51-100', '101-1000', '1000+'], {}, {class: "form-control"} %>
       </div>
     </div>
@@ -61,11 +61,11 @@
     <%= f.label "Contatti" %><br>
     <%= f.text_area :contacts , class: "form-control" %>
   </div>
-  
   <div class="field">
     <%= f.label "In cerca di" %><br>
     <%= f.text_area :lookingfor, class: "form-control" %>
   </div>
+  <br>
   <div class="actions">
     <%= button_tag(type: 'submit', class: "btn btn-success") do %>
       <i class="fa fa-save"></i> Save

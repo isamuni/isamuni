@@ -1,63 +1,62 @@
 module ApplicationHelper
+    def markdown(text)
+        text ||= ''
 
-  def markdown(text)
-    text ||= ""
+        unless @markdown
+            options = {
+                filter_html:     true,
+                hard_wrap:       true,
+                no_images:       true,
+                no_styles:       true,
+                prettify:        true,
+                link_attributes: { rel: 'nofollow', target: '_blank' },
+                space_after_headers: true
+            }
 
-    unless @markdown
-      options = {
-        filter_html:     true,
-        hard_wrap:       true,
-        no_images:       true,
-        prettify:        true,
-        link_attributes: { rel: 'nofollow', target: "_blank" },
-        space_after_headers: true
-      }
+            extensions = {
+                autolink:           true,
+                superscript:        true,
+                fenced_code_blocks: true,
+                disable_indented_code_blocks: true,
+                lax_spacing:        true,
+                strikethrough:      true,
+                highlight:          true
+            }
 
-      extensions = {
-        autolink:           true,
-        superscript:        true,
-        fenced_code_blocks: true,
-        disable_indented_code_blocks: true,
-        lax_spacing:        true,
-        strikethrough:      true,
-        highlight:          true
-      }
+            renderer = Redcarpet::Render::HTML.new(options)
+            @markdown = Redcarpet::Markdown.new(renderer, extensions)
+        end
 
-      renderer = Redcarpet::Render::HTML.new(options)
-      @markdown = Redcarpet::Markdown.new(renderer, extensions)
+        @markdown.render(text).html_safe
     end
 
-    @markdown.render(text).html_safe
-  end
+    def markdown_html(text)
+        text ||= ''
 
-  def markdown_html(text)
-    text ||= ""
+        unless @markdown
+            options = {
+                filter_html:     false,
+                hard_wrap:       true,
+                no_images:       true,
+                prettify:        true,
+                link_attributes: { rel: 'nofollow', target: '_blank' },
+                space_after_headers: true
+            }
 
-    unless @markdown
-      options = {
-        filter_html:     false,
-        hard_wrap:       true,
-        no_images:       true,
-        prettify:        true,
-        link_attributes: { rel: 'nofollow', target: "_blank" },
-        space_after_headers: true
-      }
+            extensions = {
+                autolink:           true,
+                superscript:        true,
+                fenced_code_blocks: true,
+                disable_indented_code_blocks: true,
+                lax_spacing:        true,
+                strikethrough:      true,
+                highlight:          true
+            }
 
-      extensions = {
-        autolink:           true,
-        superscript:        true,
-        fenced_code_blocks: true,
-        disable_indented_code_blocks: true,
-        lax_spacing:        true,
-        strikethrough:      true,
-        highlight:          true
-      }
+            renderer = Redcarpet::Render::HTML.new(options)
+            @markdown = Redcarpet::Markdown.new(renderer, extensions)
+        end
 
-      renderer = Redcarpet::Render::HTML.new(options)
-      @markdown = Redcarpet::Markdown.new(renderer, extensions)
+        @markdown.render(text).html_safe
     end
-
-    @markdown.render(text).html_safe
-  end
-
 end

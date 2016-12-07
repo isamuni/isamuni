@@ -36,11 +36,9 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     @page.active = false
+    @page.owner_id = current_user.id # TODO - deprecate this in favour of @page.owners
+    @page.owners << current_user
     correctly_saved = @page.save
-
-    if correctly_saved
-      @page.owners << current_user
-    end
 
     respond_to do |format|
       if correctly_saved
