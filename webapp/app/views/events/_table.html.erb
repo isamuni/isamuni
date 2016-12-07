@@ -1,4 +1,4 @@
-<table id="table-events" class="table table-hover table-sm">
+<table id="table-events" class="table table-striped table-hover table-sm">
   <thead class="thead-inverse">
     <tr>
       <th class="col-xs">Evento</th>
@@ -13,11 +13,11 @@
     <div class="event">
       <% events.each do |event| %>
         <% if event.current? %>
-          <tr id="future" bgcolor="#FF8A65">
+          <tr id="future" class="table-success"">
         <% elsif event_type == :future %>
-          <tr id="future" class="table-success">
+          <tr id="future">
         <% elsif event_type == :old %>
-          <tr id="old" class="table-warning">
+          <tr id="old" >
         <% end %>
 
         <td class="col-xs">
