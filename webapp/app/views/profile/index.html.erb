@@ -71,7 +71,10 @@
           </div>
         </div>
         <br>
-        <strong>Tags:</strong> <%= truncate(user.tags, length: 40) %>
+        <strong>Tags:</strong> 
+          <% user.tag_list.each do |tag| %>
+            <%= tag %> ,
+          <% end %>
       </div>
     </div>
     <% end %>
@@ -99,7 +102,10 @@
           </td>
           <td><%= link_to user.name, user %></td>
           <td><%= truncate(user.occupation, length: 40) %></td>
-          <td><%= truncate(user.tags, length: 40) %></td>
+          <td>         
+            <% user.tag_list.each do |tag| %>
+              <%= tag %> ,
+            <% end %>
         </tr>
       <% end %>
     </tbody>

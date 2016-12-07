@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'users/:id/all_posts', to: 'profile#all_posts', as: 'all_posts'
   get 'profile/delete'
 
+  get 'tags/:tag', to: 'profile#show', as: :tag
+
   #get 'me/new', to: 'profile#new', as: 'new_user'
   #post 'me', to: 'profile#create', as: 'create_user'
 
@@ -29,7 +31,9 @@ Rails.application.routes.draw do
 
   resources :communities
   resources :companies
-
+  # Tags
+  # get 'tags/:tag', to: 'users#index', as: :tag
+  
   # Events
   get 'events', to: 'events#index', defaults: { format: 'html' }
   get 'events/typeahead', to:'events#typeahead'
