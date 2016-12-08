@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 class CompaniesController < PagesController
-  layout "application"
+  layout 'application'
 
   def index
     if params[:query]
@@ -11,8 +12,8 @@ class CompaniesController < PagesController
     @pages = @pages.order(:name)
 
     respond_to do |format|
-        format.html { render :index}
-        format.json { render json: @pages }
+      format.html { render :index }
+      format.json { render json: @pages }
     end
   end
 
@@ -20,5 +21,4 @@ class CompaniesController < PagesController
     @search = Page.companies.ilike(:name, params[:query]).where(active: true)
     render json: @search
   end
-
 end

@@ -1,10 +1,10 @@
+# frozen_string_literal: true
 class EventsController < ApplicationController
-
   def index
     @future = Event.future.page(params[:future_page]).order('ends_at ASC')
     @old = Event.page(params[:old_page]).order('ends_at DESC')
 
-    if params[:start] and params[:end]
+    if params[:start] && params[:end]
       @start_time = Time.at(params[:start].to_i / 1000.0)
       @end_time = Time.at(params[:end].to_i / 1000.0)
 
@@ -16,8 +16,8 @@ class EventsController < ApplicationController
     @old = @old.name_like(params[:query]) if params[:query]
 
     respond_to do |format|
-        format.html { render :index }
-        format.json { render json: @future | @old }
+      format.html { render :index }
+      format.json { render json: @future | @old }
     end
   end
 
@@ -28,41 +28,43 @@ class EventsController < ApplicationController
   def locations
     today_events = Event.future.where('coordinates IS NOT NULL')
 
-    event_data = today_events.map{ |event| {:uid => event.uid,
-                                  :name => event.name,
-                                  :coordinates => event.coordinates,
-                                  :isToday => event.current? } }
+    event_data = today_events.map do |event|
+      { uid: event.uid,
+        name: event.name,
+        coordinates: event.coordinates,
+        isToday: event.current? }
+    end
 
     render json: event_data
   end
 
   def sources
-      counts = Event.group(:source_id).count
+    counts = Event.group(:source_id).count
 
-      sources = Source.find(counts.keys).map { |e|
-        e.as_json.merge({count: counts[e.id]})
-      }
+    sources = Source.find(counts.keys).map do |e|
+      e.as_json.merge(count: counts[e.id])
+    end
 
-      render json: sources
+    render json: sources
   end
 
   def all_events
-    events = Event.where("date(ends_at) < ?", Date.today)
-                  .group("date(ends_at)")
+    events = Event.where('date(ends_at) < ?', Date.today)
+                  .group('date(ends_at)')
                   .order('date(ends_at) DESC')
                   .distinct.count(:uid)
 
     events = events.map do |date, count|
-      {c:[
-        {v: to_js_date(date)},
-        {v: count}
-      ]}
+      { c: [
+        { v: to_js_date(date) },
+        { v: count }
+      ] }
     end
 
     datatable = {
       "cols": [
-        {'id': '', 'label': 'day', 'type': 'date'},
-        {'id': '', 'label': 'events', 'type': 'number'}
+        { 'id': '', 'label': 'day', 'type': 'date' },
+        { 'id': '', 'label': 'events', 'type': 'number' }
       ],
       "rows": events
     }
@@ -71,5 +73,4 @@ class EventsController < ApplicationController
       format.json { render json: datatable }
     end
   end
-
 end

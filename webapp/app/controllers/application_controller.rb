@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -7,15 +8,13 @@ class ApplicationController < ActionController::Base
 
   WillPaginate.per_page = 10
 
-protected
+  protected
 
   def current_user
-    if @current_user
-      return @current_user
-    end
+    return @current_user if @current_user
 
     if session[:user_id]
-      @current_user = User.find_by_id(session[:user_id])
+      @current_user = User.find_by(id: session[:user_id])
       if @current_user
         return @current_user
       else
@@ -26,12 +25,12 @@ protected
   end
 
   def check_logged_in
-    redirect_to login_path, notice: "You need to be logged in to perform that action" unless current_user
+    redirect_to login_path, notice: 'You need to be logged in to perform that action' unless current_user
   end
 
   helper_method :current_user
 
-  def page_url(page, options = {})
+  def page_url(page, _options = {})
     if page.community?
       community_url page
     else
@@ -39,7 +38,7 @@ protected
     end
   end
 
-  def page_path(page, options = {})
+  def page_path(page, _options = {})
     if page.community?
       community_path page
     else
@@ -48,35 +47,35 @@ protected
   end
 
   def not_found
-    render :file => "#{Rails.root}/public/404.html",  :status => 404
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   # Call this function to stop users from accessing admins functionalities and/or
   # pages that have been blocked
   def require_admin
-    unless current_user != nil && current_user.is_admin?
-      render :file => "public/401.html", :status => :unauthorized
+    unless !current_user.nil? && current_user.is_admin?
+      render file: 'public/401.html', status: :unauthorized
     end
   end
 
   def to_js_date(date)
-    d = if date.is_a?(String) then Date.parse(date) else date end
+    d = date.is_a?(String) ? Date.parse(date) : date
     "Date(#{d.year},#{d.month - 1},#{d.day})"
   end
 
-	def paginated_json page
-		{
-			current_page: page.current_page,
-			per_page: page.per_page,
-			total_entries: page.total_entries,
-			entries: page
-		}
-	end
+  def paginated_json(page)
+    {
+      current_page: page.current_page,
+      per_page: page.per_page,
+      total_entries: page.total_entries,
+      entries: page
+    }
+  end
 
   helper_method :page_url
   helper_method :page_path
 
-private
+  private
 
   # Alternatively use secure_headers gem
   def set_csp
@@ -84,5 +83,4 @@ private
       response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'"
     end
   end
-
 end

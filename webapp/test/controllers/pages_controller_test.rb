@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 require 'test_helper'
 
-# TODO MOCK CURRENT USER
+# TODO: MOCK CURRENT USER
 
 class PagesControllerTest < ActionController::TestCase
   # setup do

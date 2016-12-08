@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 class Source < ApplicationRecord
   has_many :posts
   has_many :events
 
-  def self.from_fb_group fb_group
+  def self.from_fb_group(fb_group)
     group = find_or_initialize_by(uid: fb_group['id'])
 
     group.stype = 'group'
@@ -14,7 +15,7 @@ class Source < ApplicationRecord
     group
   end
 
-  def self.from_fb_page fb_page
+  def self.from_fb_page(fb_page)
     page = find_or_initialize_by(uid: fb_page['id'])
 
     page.stype = 'page'
@@ -25,7 +26,6 @@ class Source < ApplicationRecord
   end
 
   def isOPEN
-    privacy.eql? "OPEN"
+    privacy.eql? 'OPEN'
   end
-
 end
