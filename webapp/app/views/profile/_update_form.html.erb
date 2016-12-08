@@ -15,12 +15,12 @@
     <%= f.text_field :name, class: "form-control", disabled: true %>
   </div>
   <div class="field">
-    <%= f.label :tags %><br>
-    <%= f.text_area :tags, class: "form-control", name: 'tags' %>
+    <%= f.label :skill_list %><br>
+    <%= f.text_area :skill_list, class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :occupazione %><br>
-    <%= f.text_field :occupation, class: "form-control", name: 'occupation' %>
+    <%= f.text_field :occupation, class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :descrizione %><br>
@@ -51,10 +51,10 @@ for (var i = 0; i < fields.length; ++i) {
 
 $('#update_user_form').validate({
         rules: {
-            tags: {
+            "user[skill_list]": {
                 required: true,
             },
-            occupation: {
+            "user[occupation]": {
                 required: true,
             }
         }

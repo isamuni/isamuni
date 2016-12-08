@@ -1,6 +1,7 @@
 class User < ApplicationRecord
+    acts_as_taggable_on :skills
     has_and_belongs_to_many :pages, :join_table => :owners_pages
-    validate :valid_tags
+    #validate :valid_tags
 
     extend FriendlyId
     friendly_id :name, use: :slugged
@@ -18,11 +19,11 @@ class User < ApplicationRecord
     end
 
     def self.safe_fields
-        select(:id, :name, :uid, :slug, :occupation, :tags)
+        select(:id, :name, :uid, :slug, :occupation, :skill_list)
     end
 
     def self.searchable_columns
-        [:name, :tags, :occupation, :description, :projects]
+        [:name, :skill_list, :occupation, :description, :projects]
     end
 
     def first_name
@@ -50,9 +51,9 @@ class User < ApplicationRecord
 
     private
 
-    def valid_tags
-        unless tags.nil? || tags.split(' ').all? { |tag| tag.length < 24 }
-            errors.add(:tags, 'includes some tag longer than 24 chars')
-        end
-    end
+    #def valid_tags
+    #    unless tags.nil? || tags.split(' ').all? { |tag| tag.length < 24 }
+    #        errors.add(:tags, 'includes some tag longer than 24 chars')
+    #    end
+    #end
 end

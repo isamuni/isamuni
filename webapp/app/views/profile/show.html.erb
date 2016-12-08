@@ -10,7 +10,9 @@
 		<h4>Occupazione</h4>
 		<p style="word-wrap: break-word;"><%= @user.occupation %></p>
 		<h4>Tags</h4>
-		<p style="word-wrap: break-word;"><%= @user.tags %></p>
+		<p style="word-wrap: break-word;">
+			<%= @user.skill_list.join(", ") %>
+		</p>
 		<% if current_user && @user.id == current_user.id %>
 			<div class="col-md-4 text-center">
 			<%= link_to edit_user_path(@user), class: "btn btn-success btn-md" do %>
