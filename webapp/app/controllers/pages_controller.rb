@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 class PagesController < ApplicationController
-  layout "user_area"
+  layout 'user_area'
 
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :check_logged_in, only: [:new, :create, :request_ownership]
   before_action :check_page_owner, only: [:edit, :update, :destroy]
 
   def index_all_names
-    render json: Page.all.as_json(only: [:name,:id])
+    render json: Page.all.as_json(only: [:name, :id])
   end
 
   def request_ownership
@@ -36,7 +37,7 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     @page.active = false
-    @page.owner_id = current_user.id # TODO - deprecate this in favour of @page.owners
+    @page.owner_id = current_user.id # TODO: - deprecate this in favour of @page.owners
     @page.owners << current_user
     correctly_saved = @page.save
 
@@ -77,18 +78,18 @@ class PagesController < ApplicationController
 
   private
 
-    def check_page_owner
-      redirect_to "/", notice: 'Only a page owner can edit a page' unless (current_user&.is_admin? || @page.owners.include?(current_user))
-    end
+  def check_page_owner
+    redirect_to '/', notice: 'Only a page owner can edit a page' unless current_user&.is_admin? || @page.owners.include?(current_user)
+  end
 
-    def set_page
-      @page = Page.friendly.find(params[:id])
-    end
+  def set_page
+    @page = Page.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.require(:page).permit(:name, :links, :description, :contacts, :sector,
-                                    :kind, :fbpage, :twitterpage, :location,
-                                    :lookingfor, :no_employees)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.require(:page).permit(:name, :links, :description, :contacts, :sector,
+                                 :kind, :fbpage, :twitterpage, :location,
+                                 :lookingfor, :no_employees)
+  end
 end

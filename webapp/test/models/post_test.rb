@@ -1,26 +1,25 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
+  test 'author existing' do
+    p = posts(:one)
+    a = users(:one)
 
-  test "author existing" do
-     p = posts(:one)
-     a = users(:one)
+    a.uid = 'abcde'
+    p.author_uid = a.uid
 
-     a.uid = "abcde"
-     p.author_uid = a.uid
+    a.save!
+    p.save!
 
-     a.save!
-     p.save!
-
-     assert p.author == a
+    assert p.author == a
   end
 
-  test "author not in db" do
-     p = posts(:one)
-     p.author_uid = "nonexistent"
-     p.save!
+  test 'author not in db' do
+    p = posts(:one)
+    p.author_uid = 'nonexistent'
+    p.save!
 
-     assert p.author.nil?
+    assert p.author.nil?
   end
-  
 end

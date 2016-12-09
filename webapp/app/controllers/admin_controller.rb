@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 class AdminController < ApplicationController
-  layout "user_area"
+  layout 'user_area'
   before_action :require_admin
 
   def index
-      @pages = Page.page(params[:page_page]).order('created_at DESC')
-      @users = User.page(params[:user_page]).order('created_at DESC')
-      @events = Event.page(params[:event_page]).order('starts_at DESC')
-      @posts = Post.page(params[:post_page]).order('created_at DESC')
+    @pages = Page.page(params[:page_page]).order('created_at DESC')
+    @users = User.page(params[:user_page]).order('created_at DESC')
+    @events = Event.page(params[:event_page]).order('starts_at DESC')
+    @posts = Post.page(params[:post_page]).order('created_at DESC')
   end
 
   def make_page_inactive
@@ -60,5 +61,4 @@ class AdminController < ApplicationController
     user.banned = false
     user.save
   end
-
 end

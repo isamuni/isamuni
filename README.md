@@ -149,12 +149,13 @@ You may want to install the following packages:
 
 Atom (Best):
 ```
-atom-beautify
+atom-beautify (please set a tab-width of 2 for ruby)
 base16-syntax
 file-icons
 language-vue
 linter
 linter-eslint
+linter-rubocop
 git-time-machine
 ```
 

@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+  TargetRubyVersion: 2.3
+Rails:
+  Enabled: true
+Metrics/AbcSize:
+  Enabled: false
