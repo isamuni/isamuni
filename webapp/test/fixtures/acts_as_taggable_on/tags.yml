@@ -1,0 +1,11 @@
+tag_cpp:
+    name: "c++"
+
+tag_c:
+    name: "c"
+
+tag_java:
+    name: "java"
+
+tag_awesomeness:
+    name: "awesomeness"

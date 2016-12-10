@@ -1,0 +1,24 @@
+tagging_java:
+    taggable_id: 1
+    taggable_type: User
+    context: skills
+    tag: tag_java
+
+tagging_c:
+    taggable_id: 1
+    taggable_type: User
+    context: skills
+    tag: tag_c
+
+tagging_cpp:
+    taggable_id: 4
+    taggable_type: User
+    context: skills
+    tag: tag_cpp
+
+tagging_awesomeness:
+    taggable_id: 4
+    taggable_type: User
+    context: skills
+    tag: tag_awesomeness
+

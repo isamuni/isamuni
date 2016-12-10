@@ -11,7 +11,10 @@ one:
   description: hey, I can code in C++
   projects: watering++
   links: 'my website: http://www.example.com'
-  tags: c++, c, java
+  #skill_list: 
+  #  - c++
+  #  - c 
+  #  - java
   slug: cactus1
   banned: false
 
@@ -54,6 +57,8 @@ two:
   links: |-
     - https://sic2.host.cs.st-andrews.ac.uk/
     - https://uk.linkedin.com/in/simoneivanconte
-  tags:
+  #skill_list: 
+  #   - c++ 
+  #   - awesomeness
   slug: simone-ivan-conte
   banned: false
