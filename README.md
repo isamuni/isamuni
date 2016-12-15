@@ -25,7 +25,7 @@ So, what does isamuni really do? isamuni aggregates:
 - social activity from different social networks
 - events
 
-Data aggregated under isamuni is searchable, easy to explore and open to other sources, via a RESTful API.
+Data aggregated under isamuni is searchable, easy to explore and open to other sources/applications, via a RESTful API. See the project [unni](https://github.com/sic2/unni) as an example.
 
 Now, you may wonder: why the word **isamuni**? The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**. We think that isamuni can help communities to grow stronger together, that isamuni can help communities to stand up.
 
@@ -251,6 +251,9 @@ $ docker-compose run --rm -p 8080:8080 webapp tmuxinator
     + No. The instance at isamuni.it is for the specific use case of the tech community in Sicily. However, we are working on generalising the isamuni framework to support other regions and other sectors too (e.g. gamers, book lovers, football fans, etc).
 - I already use FB and Twitter. How is isamuni better?
     + Isamuni attempts to solve the fragmentation issue that comes with using multiple social networks as well as the despertion of information within a given social network
+- I already use Linkedin. I do not want to join isamuni
+    + Linkedin is a world database for professionals. Isamuni's goal is to aggregate local professionals and hobbists. 
+    Also, you do not have to join isamuni if you do not wish to create your own profile page or company/community page
 - I like isamuni and would love to contribute
     + Join our [Telegram group](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA) or email us (programmatori.a.catania+isamuni@gmail.com)
 
