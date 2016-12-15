@@ -8,7 +8,6 @@
 * [How to deploy](#how-to-deploy)
  * [Environment Configuration](#environment-configuration)
  * [Running the App](#running-the-app)
- * [App Configuration](#app-configuration)
  * [More Configuration](#more-configuration)
  * [Via Docker](#docker)
 * [FAQ](faq)
@@ -23,9 +22,10 @@ The goal of isamuni is to facilitate the communication and integration across th
 So, what does isamuni really do? isamuni aggregates:
 - users
 - communities and companies
-- social activity
+- social activity from different social networks
 - events
 
+Data aggregated under isamuni is searchable, easy to explore and open to other sources, via a RESTful API.
 
 Now, you may wonder: why the word **isamuni**? The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**. We think that isamuni can help communities to grow stronger together, that isamuni can help communities to stand up.
 
@@ -137,9 +137,11 @@ To execute crawling periodically you can either add that command to a cron job (
 $ clockwork crawler_clock.rb
 ```
 
-### App Configuration
+Find the source code for the crawler under `webapp/lib`. Note, however, that the crawler will soon be moved out of isamuni into the **favara** project (more details soon).
 
-TODO - how to set sources (specify this in the crawler?)
+**Configuration**
+
+You can configure the crawler's sources from the file `webapp/crawler_config.yml`
 
 ### More Configuration
 
@@ -242,4 +244,13 @@ $ docker-compose run --rm -p 8080:8080 webapp tmuxinator
 ```
 
 ## FAQ
+
+- Does isamuni work only with FB?
+    + No. We are currently in the process of moving out the crawler component of isamuni into its own project. The crawler will support multiple sources (facebook, twitter, nodebb, etc).
+- Is it only about Sicily and technology?
+    + No. The instance at isamuni.it is for the specific use case of the tech community in Sicily. However, we are working on generalising the isamuni framework to support other regions and other sectors too (e.g. gamers, book lovers, football fans, etc).
+- I already use FB and Twitter. How is isamuni better?
+    + Isamuni attempts to solve the fragmentation issue that comes with using multiple social networks as well as the despertion of information within a given social network
+- I like isamuni and would love to contribute
+    + Join our [Telegram group](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA) or email us (programmatori.a.catania+isamuni@gmail.com)
 
