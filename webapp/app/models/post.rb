@@ -60,8 +60,10 @@ class Post < ApplicationRecord
   def alt
     if name?
       name
-    else
+    elsif content
       content[0..40]
+    else
+      ''
     end
   end
 
