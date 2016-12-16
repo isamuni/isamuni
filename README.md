@@ -2,6 +2,7 @@
 
 [**Telegram Group**](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA)
 
+
 ## Index
 
 * [Project description](#project-description)
@@ -11,13 +12,27 @@
  * [More Configuration](#more-configuration)
  * [Via Docker](#docker)
 * [FAQ](faq)
+* [Contributors](#contributors)
 
 
 ## Project description
 
-**isamuni** is an information aggregator for social networks (e.g. FB, Twitter, NodeBB forums). More specifically, isamuni is created with the idea of collecting digital information about local communities (e.g. tech community of a particular region, football clubs of a certain league, book readers across the country). 
+**isamuni** is a lazy social network for small communities. Forget about chats and posting your mad ideas. There are already thousands of other solutions for that. **isamuni**, instead, aggregates data from multiple selected social networks (e.g. FB, Twitter, NodeBB forums) for a better understanding of what is happening with a commmunity (e.g. tech community of a particular region, football clubs of a certain league, book readers across the country). Moreover, **isamuni** allows individuals and groups of people to create neat and beautiful static pages to tell others how great they are.
 
-The goal of isamuni is to facilitate the communication and integration across the following parties of a given community.
+
+### Why did you create isamuni?
+
+The basic idea of isamuni was conceived in 2013 in Sicily, Italy. But it was not until May 2016 that this idea became clear and we started to make isamuni.
+
+Over the last few years, we have noticed that many tech communities and startups/companies are constantly being created or already exist, but not many people really know about them. This meant: many experts, professionals, students and tech lovers. Put it simply: a lot of value and opportunities. There is, however, a significant fragmentation across the different components of the general tech Sicilian community. 
+
+Therefore, we created **isamuni** to facilitate the communication and integration between individuals and groups of people within a larger community. 
+
+
+Find an example of isamuni at [isamuni.it](http://www.isamuni.it). In this case, the Sicilian tech community (Sicily, Italy) is represented by tech professionals, students and hobbyist as well as nonprofit communities and companies/startups of the tech sector.
+
+
+### Main features
 
 So, what does isamuni really do? isamuni aggregates:
 - users
@@ -25,13 +40,18 @@ So, what does isamuni really do? isamuni aggregates:
 - social activity from different social networks
 - events
 
-Data aggregated under isamuni is searchable, easy to explore and open to other sources/applications, via a RESTful API. See the project [unni](https://github.com/sic2/unni) as an example.
+Data aggregated under isamuni is **searchable, easy to explore and open to other sources/applications, via a RESTful API**. See the project [unni](https://github.com/sic2/unni) as an example.
+
+
+### Meaning of isamuni
 
 Now, you may wonder: why the word **isamuni**? The word **isamuni** comes from the Sicilian dialect and means: **let's stand up**. We think that isamuni can help communities to grow stronger together, that isamuni can help communities to stand up.
 
+
+### More
 Checkout our [Showcase](https://github.com/sic2/isamuni/wiki/Showcase)
 
-More info and roadmap in the [wiki](https://github.com/sic2/isamuni/wiki)
+More info (plus a roadmap) in the [wiki](https://github.com/sic2/isamuni/wiki)
 
 ## How to deploy
 
@@ -246,14 +266,23 @@ $ docker-compose run --rm -p 8080:8080 webapp tmuxinator
 ## FAQ
 
 - Does isamuni work only with FB?
-    + No. We are currently in the process of moving out the crawler component of isamuni into its own project. The crawler will support multiple sources (facebook, twitter, nodebb, etc).
-- Is it only about Sicily and technology?
-    + No. The instance at isamuni.it is for the specific use case of the tech community in Sicily. However, we are working on generalising the isamuni framework to support other regions and other sectors too (e.g. gamers, book lovers, football fans, etc).
+    + No. We are currently in the process of moving out the crawler component of isamuni into its own project. The crawler will support multiple sources (facebook, twitter, nodebb, etc)
+- Is isamuni only about Sicily and technology?
+    + No. The instance at isamuni.it is for the specific use case of the tech community in Sicily. However, we are working on generalising the isamuni framework to support other regions and other sectors too (e.g. gamers, book lovers, football fans, etc)
 - I already use FB and Twitter. How is isamuni better?
-    + Isamuni attempts to solve the fragmentation issue that comes with using multiple social networks as well as the despertion of information within a given social network
+    + Isamuni is not attempting to overtake the giants of the web. Isamuni, instead, attempts to solve the fragmentation issue that comes with using multiple social networks as well as the despertion of information within a given social network
 - I already use Linkedin. I do not want to join isamuni
-    + Linkedin is a world database for professionals. Isamuni's goal is to aggregate local professionals and hobbists. 
+    + Linkedin is a world database for professionals. Isamuni's goal is to aggregate local professionals, students, and hobbyists. 
     Also, you do not have to join isamuni if you do not wish to create your own profile page or company/community page
-- I like isamuni and would love to contribute
-    + Join our [Telegram group](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA) or email us (programmatori.a.catania+isamuni@gmail.com)
+- I like this project and would love to run an instance myself
+    + Please do so. That would be really great. We ask you, however, to respect the license of the project. Also, let us know about your isamuni instance and we will list it here on this README file
+- I like isamuni and I would love to contribute
+    + Join our [Telegram group](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA)(very-responsive) or email us (programmatori.a.catania+isamuni@gmail.com)
 
+## Contributors
+
+* [@sic2](https://github.com/sic2) - co-founder
+* [@vigliag](https://github.com/vigliag) - co-founder
+* [@giupardeb](https://github.com/giupardeb)
+* [@aegroto](https://github.com/aegroto)
+ 
