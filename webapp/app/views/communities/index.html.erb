@@ -30,6 +30,7 @@
       <th>Nome</th>
       <th>Sede</th>
       <th>Ambito</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -42,6 +43,11 @@
         <td><%= link_to page.name, page %></td>
         <td><%= page.location %></td>
         <td><%= page.sector %></td>
+        <td>
+          <%= link_to page.url, target: "_blank", class: "btn btn-primary btn-sm" do %>
+            <i class="fa fa-external-link"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,4 +1,4 @@
-<%= form_for(@page) do |f| %>
+<%= form_for @page, :html => { :id => "update_page_form" } do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
@@ -38,24 +38,36 @@
   </div>
 
   <div class="field">
-    <%= f.label :links %><br>
+    <%= f.label :url %><br>
+    <%= f.text_field :url, class: "form-control" %>
+  </div>
+  <div class="field">
+    Additional links<br>
     <%= f.text_field :links, class: "form-control" %>
   </div>
-  <div class="field">
-    Facebook Page (e.g. https://www.facebook.com/example/)<br>
-    <%= f.text_field :fbpage, class: "form-control" %>
+
+  <div class="row">
+    <div class="col-md-6">
+        <div class="field">
+          Facebook Page (e.g. https://www.facebook.com/example/)<br>
+          <%= f.text_field :fbpage, class: "form-control" %>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="field">
+          Twitter Page (e.g. @DevsCT)<br>
+          <%= f.text_field :twitterpage, class: "form-control" %>
+        </div>
+    </div>
   </div>
-  <div class="field">
-    Twitter Page (e.g. @DevsCT)<br>
-    <%= f.text_field :twitterpage, class: "form-control" %>
-  </div>
+
   <div class="field">
     <%= f.label "Settore/Area" %><br>
-    <%= f.text_field  :sector, class: "form-control" %>
+    <%= f.text_field :sector, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label "Descrizione" %><br>
-    <%= f.text_area  :description, class: "form-control" %>
+    <%= f.text_area :description, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label "Contatti" %><br>
@@ -93,4 +105,15 @@
     })
     .change();
 
+  $('#update_page_form').validate({
+        rules: {
+            "page[url]": {
+                required: true,
+                url: true
+            },
+            "page[sector]": {
+                required: true,
+            }
+        }
+    });
 </script>
