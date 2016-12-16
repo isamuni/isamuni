@@ -17,6 +17,10 @@ class CommunitiesController < PagesController
     end
   end
 
+  def show
+    @events = Event.all # TODO: - filter by page
+  end
+
   def typeahead
     @search = Page.communities.ilike(:name, params[:query]).where(active: true)
     render json: @search

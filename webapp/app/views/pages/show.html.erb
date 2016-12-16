@@ -98,6 +98,37 @@
   </div>
 </div>
 
+<!-- TODO use common table for this! -->
+<table id="table-events" class="table table-hover table-condensed">
+  <thead class="thead-inverse">
+    <tr>
+      <th class="col-xs">Evento</th>
+      <th class="col-xs">Quando</th>
+      <th class="col-xs">Chi</th>
+      <th class="col-xs">Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <div class="event">
+      <% @events.each do |event| %>
+        <td class="col-xs"><%= event.name %></td>
+        <td class="col-xs"><%= l event.starts_at, format: :short %></td>
+        <td class="col-xs"><%= event.organiser %></td>
+        <td class="col-xs">
+          <%= link_to "#", data: {toggle: "modal", target: '#' + event.uid}, class: "btn btn-primary btn-sm" do %>
+          <i class="fa fa-eye"></i>
+        <% end %>
+        </td>
+        <td>N/A</td>
+      </tr>
+
+      <% end %>
+    </div>
+  </tbody>
+</table>
+
+
 <% content_for :scripts do %>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <% end %>
