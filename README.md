@@ -2,6 +2,7 @@
 
 [**Telegram Group**](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA)
 
+[**isamuni.it**](http://www.isamuni.it)
 
 ## Index
 
@@ -19,14 +20,15 @@
 
 **isamuni** is a lazy social network for small communities. Forget about chats and posting your mad ideas. There are already thousands of other solutions for that. **isamuni**, instead, aggregates data from multiple selected social networks (e.g. FB, Twitter, NodeBB forums) for a better understanding of what is happening with a commmunity (e.g. tech community of a particular region, football clubs of a certain league, book readers across the country). Moreover, **isamuni** allows individuals and groups of people to create neat and beautiful static pages to tell others how great they are.
 
+Isamuni relies on its sister project [Favara](https://github.com/sic2/favara) to crawl events from various sources and get them into its database.
 
 ### Why did you create isamuni?
 
 The basic idea of isamuni was conceived in 2013 in Sicily, Italy. But it was not until May 2016 that this idea became clear and we started to make isamuni.
 
-Over the last few years, we have noticed that many tech communities and startups/companies are constantly being created or already exist, but not many people really know about them. This meant: many experts, professionals, students and tech lovers. Put it simply: a lot of value and opportunities. There is, however, a significant fragmentation across the different components of the general tech Sicilian community. 
+Over the last few years, we have noticed that many tech communities and startups/companies are constantly being created or already exist, but not many people really know about them. This meant: many experts, professionals, students and tech lovers. Put it simply: a lot of value and opportunities. There is, however, a significant fragmentation across the different components of the general tech Sicilian community.
 
-Therefore, we created **isamuni** to facilitate the communication and integration between individuals and groups of people within a larger community. 
+Therefore, we created **isamuni** to facilitate the communication and integration between individuals and groups of people within a larger community.
 
 
 Find an example of isamuni at [isamuni.it](http://www.isamuni.it). In this case, the Sicilian tech community (Sicily, Italy) is represented by tech professionals, students and hobbyist as well as nonprofit communities and companies/startups of the tech sector.
@@ -97,9 +99,15 @@ $ npm install
 
 We are using postgres on development and production mode.
 
-NOTE: you can also use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:create` on the first usage.
 
-First, make sure that you have postgres installed and configure it as following:
+#### With docker
+
+You can use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:create` on the first usage. That's it
+
+#### Without docker
+
+First, make sure that you have postgres installed on your machine.
+Then create a user and a database for isamuni:
 
 ```
 $ sudo -u <YOUR USERNAME> psql postgres
@@ -118,6 +126,8 @@ $ cd isamuni/webapp/
 $ rails db:create # if necessary
 $ rails db:migrate
 ```
+
+#### Test data
 
 To populate the database with some default/test entries run:
 ```
@@ -142,26 +152,13 @@ $ npm run dev
 Point your browser to squirrels.vii.ovh:8080
 ```
 
+### Using Favara to get the latest posts
 
-#### Running the Crawler
+Make sure the database is initialized, and already migrated to the last version.
 
-Make sure the database was initialized, then run the `crawl` rake task with
+Then clone [favara](https://github.com/sic2/favara) in a different folder, point it to the same database Isamuni uses, and run it.
+Refer to favara's readme for further details.
 
-```
-$ rails crawl
-```
-
-To execute crawling periodically you can either add that command to a cron job (remember setting PATH and ENV) or launch the crawler_clock script with clockwork
-
-```
-$ clockwork crawler_clock.rb
-```
-
-Find the source code for the crawler under `webapp/lib`. Note, however, that the crawler will soon be moved out of isamuni into the **favara** project (more details soon).
-
-**Configuration**
-
-You can configure the crawler's sources from the file `webapp/crawler_config.yml`
 
 ### More Configuration
 
@@ -253,9 +250,9 @@ $ docker-compose up
 $ docker-compose down
 ```
 
-You can also run a single components (eg. the crawler)
+You can also run a single components (eg. the database)
 ```
-$ docker-compose up crawler
+$ docker-compose up devdb
 ```
 
 To run both the rails server and webpack dev server
@@ -272,7 +269,7 @@ $ docker-compose run --rm -p 8080:8080 webapp tmuxinator
 - I already use FB and Twitter. How is isamuni better?
     + Isamuni is not attempting to overtake the giants of the web. Isamuni, instead, attempts to solve the fragmentation issue that comes with using multiple social networks as well as the despertion of information within a given social network
 - I already use Linkedin. I do not want to join isamuni
-    + Linkedin is a world database for professionals. Isamuni's goal is to aggregate local professionals, students, and hobbyists. 
+    + Linkedin is a world database for professionals. Isamuni's goal is to aggregate local professionals, students, and hobbyists.
     Also, you do not have to join isamuni if you do not wish to create your own profile page or company/community page
 - I like this project and would love to run an instance myself
     + Please do so. That would be really great. We ask you, however, to respect the license of the project. Also, let us know about your isamuni instance and we will list it here on this README file
@@ -285,4 +282,3 @@ $ docker-compose run --rm -p 8080:8080 webapp tmuxinator
 * [@vigliag](https://github.com/vigliag) - co-founder
 * [@giupardeb](https://github.com/giupardeb)
 * [@aegroto](https://github.com/aegroto)
- 
