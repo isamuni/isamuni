@@ -32,9 +32,9 @@ RUN npm install
 COPY . .
 
 # precompiling assets
-RUN RAILS_ENV=production rake assets:precompile
 RUN npm run build
+RUN RAILS_ENV=production rake assets:precompile
 
 # running the server in production mode by default
 EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bash", "./docker_entrypoint.sh"]
