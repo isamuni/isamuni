@@ -11,7 +11,7 @@
  * [Running the App](#running-the-app)
  * [More Configuration](#more-configuration)
  * [Via Docker](#docker)
-* [FAQ](faq)
+* [FAQ](#faq)
 * [Contributors](#contributors)
 
 
