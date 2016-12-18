@@ -18,7 +18,7 @@ class FeedController < ApplicationController
   def sources
     counts = Post.group(:source_id).count
 
-    sources = Source.find(counts.keys).map do |e|
+    sources = Source.where(id: counts.keys).map do |e|
       e.as_json.merge(count: counts[e.id])
     end
 
