@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require_relative 'sanitize'
 
 class Event < ApplicationRecord
   belongs_to :source, optional: true
