@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 class EventsController < ApplicationController
   def index
-    @future = Event.future.page(params[:future_page]).order('ends_at ASC')
-    @old = Event.page(params[:old_page]).order('ends_at DESC')
+    @future = Event.future.page(params[:future_page]).order_asc
+    @old = Event.page(params[:old_page]).order_desc
 
     if params[:start] && params[:end]
       @start_time = Time.at(params[:start].to_i / 1000.0)
