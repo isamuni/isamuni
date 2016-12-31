@@ -82,6 +82,7 @@ GEM
     hashie (3.4.6)
     htmlbeautifier (1.2.0)
     i18n (0.7.0)
+    icalendar (2.4.1)
     introjs-rails (1.0.0)
       sass-rails (>= 3.2)
       thor (~> 0.14)
@@ -259,6 +260,7 @@ DEPENDENCIES
   font-awesome-rails
   friendly_id (~> 5.1.0)
   htmlbeautifier
+  icalendar (~> 2.4, >= 2.4.1)
   introjs-rails
   jbuilder (~> 2.0)
   jquery-rails

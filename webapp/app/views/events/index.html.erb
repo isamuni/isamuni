@@ -11,6 +11,7 @@
         <div id="future">
             <%= render partial: "table", locals: {events: @future, event_type: :future} %>
             <%= will_paginate @future, param_name: :future_page %>
+            <p>Scarica come <%= link_to "ical", events_path(format: :ical) %> </p>
         </div>
     </div>
     <div class="col-md-4">

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'icalendar'
+
 class Event < ApplicationRecord
   belongs_to :source, optional: true
 
@@ -49,5 +51,16 @@ class Event < ApplicationRecord
   def as_json(_options = {})
     super(only: [:name, :starts_at, :ends_at, :content, :location, :location_name, :coordinates],
           methods: [:external_link])
+  end
+
+  def to_ics
+    event = Icalendar::Event.new
+    event.dtstart = starts_at
+    event.dtend = ends_at
+    event.summary = name
+    event.description = content
+    event.location = location
+    event.uid = event.url = external_link
+    event
   end
 end

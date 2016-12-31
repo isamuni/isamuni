@@ -18,6 +18,14 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @future | @old }
+      format.ical {
+        calendar = Icalendar::Calendar.new
+        @future.each do |event|
+          calendar.add_event(event.to_ics)
+        end
+        calendar.publish
+        render :body => calendar.to_ical
+      }
     end
   end
 
