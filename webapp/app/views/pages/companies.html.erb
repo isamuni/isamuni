@@ -1,25 +1,25 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     $(document).on('ready',function(){
-      initTypeahead('/communities/typeahead', '/communities/');
+      initTypeahead('/companies/typeahead', '/companies/');
     });
   </script>
 <% end %>
 
 <div class="row">
   <div class="col-md-4">
-    <h1 data-intro="Scopri le community tech Siciliane. Qui troverai solo le community registrate tu isamuni.
-                  Gestisci una community? Crea la tua pagina dal tuo profilo.">Community</h1>
+    <h1 data-intro="Scopri le aziende tech Siciliane. Qui troverai solo le aziende registrate tu isamuni.
+                  Hai un'azienda? Crea la tua pagina dal tuo profilo.">Aziende</h1>
   </div>
   <div class="col-md-2">
     <% if current_user %>
-      <%= link_to new_page_path, class: "btn btn-success" do %>
-        <i class="fa fa-plus"></i> Community
-      <% end %>
+        <%= link_to new_me_page_path, class: "btn btn-success" do %>
+          <i class="fa fa-plus"></i> Azienda
+        <% end %>
     <% end %>
   </div>
   <div class="col-md-6">
-    <%= render partial: "search_form", locals: {res_path: communities_path, placeholder: "Ricerca community"}  %>
+    <%= render partial: "search_form", locals: {res_path: companies_path, placeholder: "Ricerca aziende"}  %>
   </div>
 </div>
 
@@ -30,6 +30,7 @@
       <th>Nome</th>
       <th>Sede</th>
       <th>Ambito</th>
+      <th># Dipendenti</th>
       <th></th>
     </tr>
   </thead>
@@ -43,6 +44,7 @@
         <td><%= link_to page.name, page %></td>
         <td><%= page.location %></td>
         <td><%= page.sector %></td>
+        <td><%= page.no_employees %></td>
         <td>
           <%= link_to page.url, target: "_blank", class: "btn btn-primary btn-sm" do %>
             <i class="fa fa-external-link"></i>

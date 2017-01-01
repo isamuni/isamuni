@@ -45,8 +45,8 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    admins = ENV['ISAMUNI_ADMINS'].split(' ')
-    !uid.nil? && admins.include?(uid)
+    admins = ENV['ISAMUNI_ADMINS']&.split(' ')
+    admins && !uid.nil? && admins.include?(uid)
   end
 
   private

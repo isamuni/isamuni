@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
+
   # Home page
-  get 'home/index'
   root 'home#index'
 
-  # User routing
-  get 'me', to: 'profile#edit', as: 'edit_user'
+  # Login
+  get '/auth/:provider/callback', to: 'session#create'
+  get '/auth/failure', to: 'session#auth_failure'
+  get 'signout', to: 'session#destroy', as: 'signout'
   get 'login', to: 'session#login', as: 'login'
 
+  # Users
   get 'users/typeahead(/query/:query)', to: 'profile#typeahead'
   get 'users(/query/:query)', to: 'profile#index', as: 'users'
   get 'users/:id', to: 'profile#show', as: 'user'
@@ -17,21 +20,20 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'profile#show', as: :tag
 
-  # get 'me/new', to: 'profile#new', as: 'new_user'
-  # post 'me', to: 'profile#create', as: 'create_user'
+  # User /me area
+  namespace :me do
+    get '/', to: 'profiles#edit', as: 'edit_user'
+    resources :pages
+    resources :ownership_requests, only: [:create]
+    resource :profile, only: [:edit, :update]
+  end
 
-  patch 'users/:id', to: 'profile#update', as: 'update_user'
-
-  get 'communities/typeahead', to: 'communities#typeahead'
-  get 'companies/typeahead', to: 'companies#typeahead'
-
-  put 'me/pages/request_ownership', to: 'pages#request_ownership'
-  get 'pages', to: 'pages#index_all_names'
-  post 'pages', to: 'pages#create'
-  resources :pages, path: '/me/pages'
-
-  resources :communities
-  resources :companies
+  # Pages
+  get 'pages', to: 'pages#index', defaults: {name_only: true, format: :json}
+  get 'communities', to: 'pages#index', defaults: {kind: :community}
+  get 'companies', to: 'pages#index', defaults: {kind: :company}
+  get 'communities/typeahead', to: 'pages#typeahead', defaults: {kind: :community}
+  get 'companies/typeahead', to: 'pages#typeahead', defaults: {kind: :company}
 
   # Events
   get 'events', to: 'events#index', defaults: { format: 'html' }
@@ -55,29 +57,6 @@ Rails.application.routes.draw do
   put 'admin/make_post_unjob', to: 'admin#make_post_unjob'
   put 'admin/ban_user', to: 'admin#ban_user'
   put 'admin/unban_user', to: 'admin#unban_user'
-
-  # get 'me/pages/new', to: 'pages#new', as: 'new_page'
-  # get 'me/pages', to: 'pages#my_pages', as: 'pages'
-  # post 'me/pages/', to: 'pages#create'
-  # get 'me/pages/:id', to: 'pages#edit', as: 'edit_page'
-  # delete '/me/pages/:id', to: 'pages#destroy', as: 'delete_page'
-  #
-  # put 'pages/:id', to: 'pages#update'
-  # patch 'pages/:id', to: 'pages#update'
-  #
-  # get 'companies/', to: 'companies#index', as: 'companies'
-  # get 'companies/:id', to: 'companies#show', as: 'company'
-  # put 'companies/:id', to: 'pages#update'
-  # patch 'companies/:id', to: 'pages#update'
-
-  # get 'communities/', to: 'communities#index', as: 'communities'
-  # get 'communities/:id', to: 'communities#show', as: 'community'
-  # put 'communities/:id', to: 'pages#update'
-  # patch 'communities/:id', to: 'pages#update'
-
-  get '/auth/:provider/callback', to: 'session#create'
-  get '/auth/failure', to: 'session#auth_failure'
-  get 'signout', to: 'session#destroy', as: 'signout'
 
   # Feed
   get 'feed', to: 'feed#index', as: 'feed'

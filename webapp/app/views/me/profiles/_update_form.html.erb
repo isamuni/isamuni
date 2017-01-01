@@ -1,4 +1,4 @@
-<%= form_for current_user, :url => update_user_path(current_user), :html => { :id => "update_user_form" } do |f| %>
+<%= form_for current_user, :url => me_profile_url, :html => { :id => "update_user_form" } do |f| %>
   <% if current_user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>

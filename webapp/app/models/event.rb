@@ -59,7 +59,7 @@ class Event < ApplicationRecord
     event.dtend = ends_at
     event.summary = name
     event.description = content
-    event.location = location
+    event.location = location_name
     event.uid = event.url = external_link
     event
   end

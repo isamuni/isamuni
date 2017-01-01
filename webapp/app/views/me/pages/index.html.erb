@@ -3,7 +3,7 @@
     <h1>Le mie pagine</h1>
   </div>
   <div class="col-md-2" data-intro="Crea una nuova pagina per la tua community o azienda">
-      <%= link_to new_page_path, class: "btn btn-success btn-sm" do %>
+      <%= link_to new_me_page_path, class: "btn btn-success btn-sm" do %>
         <i class="fa fa-plus"></i> Nuova Pagina
       <% end %>
   </div>
@@ -44,7 +44,7 @@ Una volta creata la pagina dovrai aspettare l'approvazione degli admin per rende
           <% end %>
         </td>
         <td>
-          <%= link_to edit_page_path(page), class: "btn btn-info btn-sm" do %>
+          <%= link_to edit_me_page_path(page), class: "btn btn-info btn-sm" do %>
             Edit
           <% end %>
         </td>
@@ -91,7 +91,7 @@ Una volta creata la pagina dovrai aspettare l'approvazione degli admin per rende
     $("#submitRequest").click(function(){
       var selected = PageSelector.$data.selected;
       if (selected){
-        var request_ownership = $.ajax({type: 'PUT', url: '/me/pages/request_ownership', data: {page: selected.id}});
+        var request_ownership = $.ajax({type: 'POST', url: '/me/ownership_requests', data: {page: selected.id}});
         request_ownership.then(function(result){
           alert(result);
           $('#page-ownership-modal').modal('hide');
