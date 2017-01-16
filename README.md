@@ -2,7 +2,9 @@
 
 [**Telegram Group**](https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA)
 
-[**isamuni.it**](http://www.isamuni.it)
+[**isamuni.it**](https://www.isamuni.it)
+
+[**beta version**](https://beta.isamuni.it)
 
 ## Index
 
