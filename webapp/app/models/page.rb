@@ -36,7 +36,7 @@ class Page < ApplicationRecord
     if options
       super(options)
     else
-      super(only: [:name, :description, :contacts, :links, :slug])
+      super(only: [:name, :description, :contacts, :links, :slug, :url])
     end
   end
 

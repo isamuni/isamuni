@@ -1,8 +1,7 @@
-# frozen_string_literal: true
 class User < ApplicationRecord
   acts_as_taggable_on :skills
   has_and_belongs_to_many :pages, join_table: :owners_pages
-  # validate :valid_tags
+  validate :valid_skill_list
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -13,7 +12,7 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.oauth_expires_at = Time.zone.at(auth.credentials.expires_at)
 
       user.save!
     end
@@ -46,15 +45,14 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    admins = ENV['ISAMUNI_ADMINS'].split(' ')
-    !uid.nil? && admins.include?(uid)
+    admins = ENV['ISAMUNI_ADMINS']&.split(' ')
+    admins && !uid.nil? && admins.include?(uid)
   end
 
   private
 
-  # def valid_tags
-  #    unless tags.nil? || tags.split(' ').all? { |tag| tag.length < 24 }
-  #        errors.add(:tags, 'includes some tag longer than 24 chars')
-  #    end
-  # end
+  def valid_skill_list
+    return if skill_list.nil? || skill_list.all? { |tag| tag.length < 24 }
+    errors.add(:skill_list, 'includes some tag longer than 24 chars')
+  end
 end

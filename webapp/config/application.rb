@@ -19,5 +19,10 @@ module Isamuni
     config.time_zone = 'Rome'
     I18n.available_locales = [:en, :it]
     I18n.default_locale = :it
+
+    config.before_configuration do
+      # initialization code goes here
+    end
+
   end
 end

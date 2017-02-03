@@ -18,12 +18,14 @@
   <% else %>
     <div class="col-lg-8"><h2><%= @page.name %></h2></div>
   <% end %>
+
   <div class="col-lg-4">
-    <% if @page.community? %>
-      Community <i class="fa fa-institution fa-lg"></i> 
-    <% else %> 
-      Azienda <i class="fa fa-industry fa-lg"></i> 
-    <% end %>
+      <% if @page.community? %>
+        <i class="fa fa-institution fa-lg"></i>
+      <% else %>
+        <i class="fa fa-industry fa-lg"></i>
+      <% end %>
+      <%= link_to @page.url, @page.url, :target => "_blank" %>
   </div>
 </div>
 <br>
@@ -49,7 +51,7 @@
           <% else %>
             <a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a>
           <% end %>
-          
+
         </li>
       <% end %>
     </ul>
@@ -57,12 +59,12 @@
     <div class="tab-content">
       <div id="fb" class="tab-pane active">
         <% if @page.fb_url %>
-          <div class="fb-page" 
-               data-href="<%= @page.fb_url %>" 
-               data-tabs="timeline, events, messages" 
-               data-small-header="true" 
-               data-adapt-container-width="true" 
-               data-hide-cover="false" 
+          <div class="fb-page"
+               data-href="<%= @page.fb_url %>"
+               data-tabs="timeline, events, messages"
+               data-small-header="true"
+               data-adapt-container-width="true"
+               data-hide-cover="false"
                data-show-facepile="true">
           </div>
         <% end %>
@@ -73,13 +75,13 @@
         <div id="twitter" class="tab-pane">
       <% end %>
         <% if @page.twitter_url %>
-          <a class="twitter-timeline" 
-              data-lang="it" 
+          <a class="twitter-timeline"
+              data-lang="it"
               href="<%= @page.twitter_url %>"
               data-height="600"
               data-chrome="noheader nofooter noborders"
               data-aria-polite="assertive">
-          </a> 
+          </a>
         <% end %>
       </div>
     </div>

@@ -60,3 +60,19 @@ future-one:
     Africa 31","zip":"95129"}'
   coordinates: 37.5119517, 15.1031799
   source_id: 1
+
+current-nil-ends_at:
+  id: 4
+  uid: '143981662733499'
+  name: This should be future
+  content: stuff
+  organiser: Future events
+  created_at: 2016-11-18 08:34:06.541638000
+  updated_at: 2016-11-18 08:34:06.541638000
+  starts_at: <%= Time.zone.now.beginning_of_day + 1.hour %>
+  ends_at: <%= nil %>
+  location_name: Vulcanìc
+  location: '{"city":"Catania","country":"Italy","latitude":37.5119514,"longitude":15.1031799,"street":"Viale
+    Africa 31","zip":"95129"}'
+  coordinates: 37.5119517, 15.1031799
+  source_id: 1

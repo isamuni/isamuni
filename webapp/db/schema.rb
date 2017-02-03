@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130214739) do
+ActiveRecord::Schema.define(version: 20161216172638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(version: 20161130214739) do
     t.datetime "updated_at",   null: false
     t.string   "slug",         null: false
     t.string   "twitterpage"
+    t.string   "url"
     t.index ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
   end
 

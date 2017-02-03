@@ -18,7 +18,7 @@ class FeedController < ApplicationController
   def sources
     counts = Post.group(:source_id).count
 
-    sources = Source.find(counts.keys).map do |e|
+    sources = Source.where(id: counts.keys).map do |e|
       e.as_json.merge(count: counts[e.id])
     end
 
@@ -26,8 +26,16 @@ class FeedController < ApplicationController
   end
 
   def posts
-    @posts = Post
-    @posts = @posts.limit(params[:limit].to_i) unless params[:limit].to_i == 0
+
+    post_limit = if params[:limit].blank?
+      MAX_NUMBER_OF_POSTS
+    elsif params[:limit].to_i == 0
+      10000
+    else
+      params[:limit].to_i
+    end
+
+    @posts = Post.limit(post_limit)
 
     @posts = @posts.order('created_at desc')
                    .includes(:source)

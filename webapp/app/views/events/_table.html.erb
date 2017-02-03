@@ -24,7 +24,7 @@
           <%= link_to event.name, "#", { title: event.name, data: {toggle: "modal", target: '#' + event.uid}} %>
         </td>
         <% if event_type == :future %>
-          <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %> <br> <%= l event.ends_at, format: :rfc822_short %></td>
+          <td class="col-xs"><%= l event.starts_at, format: :rfc822_short %> <br> <%= l event.ends_at, format: :rfc822_short if event.ends_at %></td>
         <% elsif event_type == :old %>
           <td class="col-xs"><%= l event.starts_at, format: :rfc822 %></td>
         <% end %>
@@ -49,7 +49,7 @@
                 <% end %>
               </div>
               <div class="col-xs-6 text-xs-right">
-                <small style="color:black;"><%= l event.starts_at, format: :long %> - <%= l event.ends_at, format: :long %></small>
+                <small style="color:black;"><%= l event.starts_at, format: :long %> - <%= l event.ends_at, format: :long if event.ends_at %></small>
               </div>
             </div>
             <div class="modal-body">

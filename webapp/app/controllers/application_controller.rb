@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_csp
-
   WillPaginate.per_page = 10
 
   protected
@@ -32,17 +30,17 @@ class ApplicationController < ActionController::Base
 
   def page_url(page, _options = {})
     if page.community?
-      community_url page
+      communities_url page
     else
-      company_url page
+      commpanies_url page
     end
   end
 
   def page_path(page, _options = {})
     if page.community?
-      community_path page
+      communities_path page
     else
-      company_path page
+      companies_path page
     end
   end
 
@@ -75,12 +73,11 @@ class ApplicationController < ActionController::Base
   helper_method :page_url
   helper_method :page_path
 
-  private
+  # Simple CSP implementation. Alternatively use secure_headers gem
+  # before_action :set_csp
+  #
+  # def set_csp
+  #   response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'"
+  # end
 
-  # Alternatively use secure_headers gem
-  def set_csp
-    if Rails.env.production?
-      response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'"
-    end
-  end
 end

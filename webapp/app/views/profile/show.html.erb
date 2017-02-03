@@ -15,7 +15,7 @@
 		</p>
 		<% if current_user && @user.id == current_user.id %>
 			<div class="col-md-4 text-center">
-			<%= link_to edit_user_path(@user), class: "btn btn-success btn-md" do %>
+			<%= link_to me_edit_user_url, class: "btn btn-success btn-md" do %>
 				<i class="fa fa-pencil"></i> Modifica profilo
 			<% end %>
 			</div>

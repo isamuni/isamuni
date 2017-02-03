@@ -13,7 +13,7 @@
   </div>
   <div class="col-md-2">
     <% if current_user %>
-        <%= link_to new_page_path, class: "btn btn-success" do %>
+        <%= link_to new_me_page_path, class: "btn btn-success" do %>
           <i class="fa fa-plus"></i> Azienda
         <% end %>
     <% end %>
@@ -46,7 +46,7 @@
         <td><%= page.sector %></td>
         <td><%= page.no_employees %></td>
         <td>
-          <%= link_to page.links, target: "_blank", class: "btn btn-primary btn-sm" do %>
+          <%= link_to page.url, target: "_blank", class: "btn btn-primary btn-sm" do %>
             <i class="fa fa-external-link"></i>
           <% end %>
         </td>

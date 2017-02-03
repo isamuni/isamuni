@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:show, :update, :all_posts]
-  before_action :check_logged_in, only: [:edit, :update]
+  before_action :set_user, only: [:show, :all_posts]
 
   # GET /users/typeahead?query=text
   def typeahead
@@ -33,40 +32,15 @@ class ProfileController < ApplicationController
     @user = User.new
   end
 
-  # GET /me
-  def edit
-    render :edit, layout: 'user_area'
-  end
-
   # GET /users/:id/all_posts
   def all_posts
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
-  def update
-    respond_to do |format|
-      if current_user.update(post_params)
-        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: current_user }
-      else
-        format.html { render :edit, layout: 'user_area' }
-        format.json { render json: current_user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.friendly.find(params[:id])
     require_admin if @user.banned
-  end
-
-  def post_params
-    params.require(:user).permit(:name, :occupation, :description,
-                                 :projects, :links, :skill_list)
   end
 
   def search_params
