@@ -4,6 +4,12 @@ tagging_java:
     context: skills
     tag: tag_java
 
+tagging_java2:
+    taggable_id: 4
+    taggable_type: User
+    context: skills
+    tag: tag_java
+
 tagging_c:
     taggable_id: 1
     taggable_type: User
@@ -39,4 +45,6 @@ tagging_awesomeness:
     taggable_type: User
     context: skills
     tag: tag_awesomeness
+
+
 
