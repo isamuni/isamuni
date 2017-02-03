@@ -33,6 +33,12 @@
   </div>
 </div>
 
+<div class="tag-cloud">
+  <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+    <%= link_to tag.name, { :action => :skills, :id => tag.name }, :class => css_class %>
+  <% end %>
+</div>
+
 <div id="cards-users">
   <h2>Ultimi iscritti</h2>
   <div class="card-columns">

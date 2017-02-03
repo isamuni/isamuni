@@ -62,3 +62,31 @@ two:
   #   - awesomeness
   slug: simone-ivan-conte
   banned: false
+
+three:
+  id: 5
+  provider:
+  uid: '124'
+  name: Cactus2
+  oauth_token:
+  oauth_expires_at:
+  occupation: student at succulents school
+  description: hey, I can code in C++
+  projects: watering++
+  links: 'my website: http://www.example.com'
+  slug: cactus2
+  banned: false
+
+four:
+  id: 6
+  provider:
+  uid: '125'
+  name: Cactus3
+  oauth_token:
+  oauth_expires_at:
+  occupation: student at succulents school
+  description: hey, I can code in C++
+  projects: watering++
+  links: 'my website: http://www.example.com'
+  slug: cactus3
+  banned: false

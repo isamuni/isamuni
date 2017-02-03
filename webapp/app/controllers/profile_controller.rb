@@ -14,6 +14,7 @@ class ProfileController < ApplicationController
     @search = UserSearch.new(search_params)
     @users = search_params.present? ? @search.results : User.where(banned: false)
     @users = @users.order(:name)
+    @tags = User.tag_counts_on(:skills)
 
     @latest_users = User.where(banned: false).limit(3).order('created_at desc')
 
@@ -21,6 +22,9 @@ class ProfileController < ApplicationController
       format.html { render :index }
       format.json { render json: @users }
     end
+  end
+
+  def skills    
   end
 
   # GET /users/:id

@@ -11,7 +11,25 @@ tagging_c:
     tag: tag_c
 
 tagging_cpp:
+    taggable_id: 1
+    taggable_type: User
+    context: skills
+    tag: tag_cpp
+
+tagging_cpp2:
     taggable_id: 4
+    taggable_type: User
+    context: skills
+    tag: tag_cpp
+
+tagging_cpp3:
+    taggable_id: 5
+    taggable_type: User
+    context: skills
+    tag: tag_cpp
+
+tagging_cpp4:
+    taggable_id: 6
     taggable_type: User
     context: skills
     tag: tag_cpp
