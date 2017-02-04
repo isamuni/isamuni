@@ -24,7 +24,20 @@ class ProfileController < ApplicationController
     end
   end
 
-  def skills    
+  #GET /users/skills?id=skill_id
+  def skills 
+    @search = UserSearch.new(search_params)  
+    @current_skill = params[:id]
+    @users = User.where(banned: false).tagged_with(@current_skill)
+    @users = @users.order(:name)
+    @tags = User.tag_counts_on(:skills)
+
+    #@latest_users = User.where(banned: false).limit(3).order('created_at desc')
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @users }
+    end
   end
 
   # GET /users/:id

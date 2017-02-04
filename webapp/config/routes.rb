@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   get 'users(/query/:query)', to: 'profile#index', as: 'users'
   get 'users/:id', to: 'profile#show', as: 'user'
   get 'users/:id/all_posts', to: 'profile#all_posts', as: 'all_posts'
-  get 'profile/delete'
+
   get 'profile/skills', to: 'profile#skills'
+  get 'profile/delete'
 
   get 'tags/:tag', to: 'profile#show', as: :tag
 
