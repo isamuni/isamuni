@@ -20,19 +20,19 @@
 
 .tag-cloud-container a { text-decoration: none; }
 
-.tag-cloud-container a:hover { 
+.tag-cloud-container a:hover {
 	text-decoration: none;
 	color: #bb3344;
 }
 
-.tag-cloud-container a:active { 
-	text-decoration: none; 
+.tag-cloud-container a:active {
+	text-decoration: none;
 	color: #bb3344;
 }
 
 .cloud-tag {
-	color: #4db6cc;
-    transition: text-shadow 0.25s,color 0.35s,font-size 0.25s;
+	color: #4DB6AC;
+  transition: text-shadow 0.25s,color 0.35s,font-size 0.25s;
 }
 
 .cloud-tag-small { font-size: 1.0em; }

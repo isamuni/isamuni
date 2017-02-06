@@ -18,10 +18,6 @@ class User < ApplicationRecord
     end
   end
 
-  def self.safe_fields
-    select(:id, :name, :uid, :slug, :occupation, :skill_list)
-  end
-
   def self.searchable_columns
     [:name, :skill_list, :occupation, :description, :projects]
   end
