@@ -12,12 +12,30 @@
 	white-space: nowrap;
 }
 
-.tag-cloud {
+.tag-cloud-container {
+	min-height: 3em;
 	text-align: center;
 	font-weight: bold;
 }
 
-.css1 { font-size: 1.0em; }
-.css2 { font-size: 1.2em; }
-.css3 { font-size: 1.4em; }
-.css4 { font-size: 1.6em; }
+.tag-cloud-container a { text-decoration: none; }
+
+.tag-cloud-container a:hover { 
+	text-decoration: none;
+	color: #bb3344;
+}
+
+.tag-cloud-container a:active { 
+	text-decoration: none; 
+	color: #bb3344;
+}
+
+.cloud-tag {
+	color: #4db6cc;
+    transition: text-shadow 0.25s,color 0.35s,font-size 0.25s;
+}
+
+.cloud-tag-small { font-size: 1.0em; }
+.cloud-tag-medium { font-size: 1.2em; }
+.cloud-tag-big { font-size: 1.4em; }
+.cloud-tag-verybig { font-size: 1.6em; }

@@ -24,7 +24,7 @@ class ProfileController < ApplicationController
     end
   end
 
-  #GET /users/skills?id=skill_id
+  #GET /profile/skills?id=skill_id
   def skills 
     @search = UserSearch.new(search_params)  
     @current_skill = params[:id]
