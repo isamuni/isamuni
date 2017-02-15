@@ -13,6 +13,12 @@
       </div>
       <div class="col-md-1"></div>
     </div>
+    <% if ENV['ISAMUNI_BETA_WARNING'] %>
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">Attenzione: Questo è isamuni beta!</h4>
+      <p class="mb-0">Questa versione di isamuni è online a scopo di testing, e i dati inseriti vengono periodicamente resettati. Visita <a href="http://www.isamuni.it" class="alert-link" >http://www.isamuni.it</a> per accedere alla versione stabile </p>
+    </div>
+    <% end %>
     <h4>
       Una panoramica sull'ambiente tech in Sicilia
     </h4>
