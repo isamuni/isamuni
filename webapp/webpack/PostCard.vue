@@ -9,10 +9,10 @@
         <br> <img v-bind:src="post.source.icon_link" /> {{post.source.name}}
         <hr>
         <div class="row">
-            <div class="col-xs-6 text-xs-left">
+            <div class="col-6 text-left">
                 {{post.likes}} <i class="fa fa-thumbs-up"></i> {{post.comments}} <i class="fa fa-comments"></i> {{post.shares}} <i class="fa fa-share-alt"></i>
             </div>
-            <div class="col-xs-6 text-xs-right">
+            <div class="col-6 text-right">
                 <i :class="icon">
             </div>
         </div>

@@ -1,17 +1,17 @@
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-9">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-9">
         <h1>Isamuni</h1>
       </div>
-      <div class="col-md-2">
+      <div class="col-2">
         <% if !current_user %>
         <%= link_to login_path, id: "sign_in", class: "btn btn-success" do %>
           <i class="fa fa-sign-in"></i> Login/Registrati
         <% end %>
         <% end %>
       </div>
-      <div class="col-md-1"></div>
+      <div class="col-1"></div>
     </div>
     <% if ENV['ISAMUNI_BETA_WARNING'] %>
     <div class="alert alert-info" role="alert">
@@ -32,45 +32,45 @@
       <footer><i>da <a href="https://github.com/sic2/awesome-sicily">awesome-sicily</a></i></footer>
     </blockquote>
   </div>
-  <div class="col-md-3">
+  <div class="col-3">
     <%= image_tag 'logo-300ppi.png', width:"300", alt: "isamuni logo" %> <!-- TODO use css for defining logo size -->
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="col-md-1">
+  <div class="col-1">
   </div>
-  <div class="col-md-2 home-section-link">
+  <div class="col-2 home-section-link">
     <a href="/companies">
       <i class="fa fa-industry fa-3x"></i><br>
       <big><%= @companies_count %></big> Aziende
     </a>
   </div>
-  <div class="col-md-2 home-section-link">
+  <div class="col-2 home-section-link">
     <a href="/communities">
       <i class="fa fa-institution fa-3x"></i><br>
       <big><%= @communities_count %></big> Community
     </a>
   </div>
-  <div class="col-md-2 home-section-link">
+  <div class="col-2 home-section-link">
     <a href="/users">
       <i class="fa fa-users fa-3x"></i><br>
       <big><%= @users_count %></big> Utenti
     </a>
   </div>
-  <div class="col-md-2 home-section-link">
+  <div class="col-2 home-section-link">
     <a href="/feed">
       <i class="fa fa-rss-square fa-3x"></i><br>
       <big><%= @posts_count %></big> Post
     </a>
   </div>
-  <div class="col-md-2 home-section-link">
+  <div class="col-2 home-section-link">
     <a href="/events">
       <i class="fa fa-calendar fa-3x"></i><br>
       <big><%= @upcoming_events_count %></big> Prossimi eventi
     </a>
   </div>
-  <div class="col-md-1">
+  <div class="col-1">
   </div>
 </div>
 
@@ -78,13 +78,13 @@
 
 <div data-intro="Aiutaci a far crescere isamuni.">
   <p>
-    Puoi leggere <a href="https://docs.google.com/presentation/d/11mpmVVwxWYvVaMCGfrpNLSxiUXJTXd-bq7C0OBQFZFw/edit?usp=sharing">qui</a> una presentazione del progetto.
+      Puoi leggere <a href="https://docs.google.com/presentation/d/11mpmVVwxWYvVaMCGfrpNLSxiUXJTXd-bq7C0OBQFZFw/edit?usp=sharing">qui</a> una presentazione del progetto.
   </p>
   <p>
-  Isamuni è un progetto no-profit mantenuto da <a href="https://github.com/sic2">sic2</a> e <a href="https://github.com/vigliag">vigliag</a>
-  (della community di PAC).
-  Isamuni è open-source (MIT) e disponibile su <a href="https://github.com/sic2/isamuni">github</a>.
-  Puoi contattarci tramite il gruppo fb <a href="https://www.facebook.com/groups/programmatoriCatania/">PAC</a>, via <a href="https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA" target="_top">telegram</a> o via 
-  <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">e-mail</a>.
+      Isamuni è un progetto no-profit mantenuto da <a href="https://github.com/sic2">sic2</a> e <a href="https://github.com/vigliag">vigliag</a>
+      (della community di PAC).
+      Isamuni è open-source (MIT) e disponibile su <a href="https://github.com/sic2/isamuni">github</a>.
+      Puoi contattarci tramite il gruppo fb <a href="https://www.facebook.com/groups/programmatoriCatania/">PAC</a>, via <a href="https://telegram.me/joinchat/Bk1QGAlK-ZUJ0ZidWo4CYA" target="_top">telegram</a> o via
+      <a href="mailto:programmatori.a.catania+isamuni@gmail.com?Subject=Info%20Isamuni" target="_top">e-mail</a>.
   </p>
 </div>

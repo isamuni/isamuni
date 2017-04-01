@@ -1,13 +1,13 @@
 <template>
 <div id="feedapp">
     <div id="dashboard_div" class="row">
-        <div class="col-md-3">
+        <div class="col-3">
             <multiselect :options="sources" :multiple="true" :close-on-select="true" @input="updateFilter" placeholder="Scegli fonti" label="name" />
             <p>
                 <label for="jobs_only">Solo annunci di lavoro</label> <input id="jobs_only" type="checkbox" value="false" v-model="filter.jobs_only"></input>
             </p>
         </div>
-        <div class="col-md-9">
+        <div class="col-9">
             <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
             <div class="row" style="display:none">
                 <div id="chart_div" data-intro="Questo grafico mostra tutti i post della community nel tempo."></div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <hr>
+
     <PostDisplay :posts="posts"></PostDisplay>
 </div>
 </template>

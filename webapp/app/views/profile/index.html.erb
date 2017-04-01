@@ -7,16 +7,16 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-4">
     <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni.
                   Registrati su isamuni per creare un tuo profilo e farti conoscere.">Utenti</h1>
   </div>
-  <div class="col-md-6">
+  <div class="col-6">
     <div class="form-group" data-intro="Scopri gli utenti di isamuni (ricerca per nome solamente)">
       <%= render partial: "search_form", locals: {res_path: users_path, placeholder: "Ricerca utenti"}  %>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-2">
     <input type="checkbox" name="users-checkbox" data-off-text="<i class='fa fa-list'></i>" data-on-text="<i class='fa fa-list-alt'></i>" data-size="large" <%= "checked" if cookies[:cards] %> >
   </div>
 </div>
@@ -35,10 +35,10 @@
       <div class="card" id="card-<%= user_path(user) %>">
         <div class="card-block">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-5">
               <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>
             </div>
-            <div class="col-md-7">
+            <div class="col-7">
               <strong><%= user.name %></strong>
               <br>
               <%= truncate(user.occupation, length: 40) %>

@@ -2,7 +2,7 @@
 
 <h1><%= @user.name %></h1>
 <div class="row">
-	<div class="col-lg-3" data-intro="Scopri velocemente le info su questo utente.">
+	<div class="col-3" data-intro="Scopri velocemente le info su questo utente.">
 		<p>
 			<img src="<%= @user.profile_pic(250) %>" class="img-fluid img-rounded" height="250">
 		</p>
@@ -14,7 +14,7 @@
 			<%= @user.skill_list.join(", ") %>
 		</p>
 		<% if current_user && @user.id == current_user.id %>
-			<div class="col-md-4 text-center">
+			<div class="col-4 text-center">
 			<%= link_to me_edit_user_url, class: "btn btn-success btn-md" do %>
 				<i class="fa fa-pencil"></i> Modifica profilo
 			<% end %>
@@ -22,14 +22,14 @@
 		<% end %>
 		<% if @count > 12 %>
 			<br><br>
-			<div class="col-md-4 text-center">
+			<div class="col-4 text-center">
 				<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
 					<i class="fa fa-eye"></i> Vedi tutti i post
 				<% end %>
 			</div>
 		<% end %>
 	</div>
-	<div class="col-lg-9" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
+	<div class="col-9" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
 		<div id="user-data">
 			<% unless @user.description.blank? %>
 			<%= markdown(@user.description) %>

@@ -23,9 +23,9 @@
     min-height: 150px;
 }
 
-$navbar-bg: #4DB6AC;
+$navbar-bg: ffffff; // #4DB6AC;
 $navbar-text-shadow:rgb(0,0,30);
-$navbar-brand: #EEEEEE;
+$navbar-brand: #000000;
 
 #main-nav {
 
@@ -38,7 +38,7 @@ $navbar-brand: #EEEEEE;
     .navbar-brand {
         text-decoration: none;
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        color: #eee;
+        color: #500;
         cursor: pointer;
         transition: text-shadow 0.25s;
         padding-top: 8px;
@@ -63,7 +63,7 @@ $navbar-brand: #EEEEEE;
 
     .navbar-brand {
         color: $navbar-brand;
-        background-color: #308C83;
+        background-color: none;
         padding-left: 12px;
         padding-right: 12px;
         font-size: 1.25rem;

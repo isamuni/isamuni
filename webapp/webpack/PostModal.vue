@@ -3,10 +3,10 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="col-xs-6 text-xs-left">
+                <div class="col-6 text-left">
                     <a :href="post.link" target="_blank"><i :class="icon"></i></a>
                 </div>
-                <div class="col-xs-6 text-xs-right">
+                <div class="col-6 text-right">
                     <a :href="post.post_link" target="_blank">{{ time }}</a>
                 </div>
             </div>
@@ -19,11 +19,11 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <div class="col-xs-6 text-xs-left">
+                <div class="col-6 text-left">
                     <a v-if="post.author_link " :href="post.author_link ">{{ post.author_name }}</a>
                     <span v-else> {{ post.author_name }}</span> @ {{post.source.name}}
                 </div>
-                <div class="col-xs-6 text-xs-right">
+                <div class="col-6 text-right">
                     <button type="button " class="btn btn-secondary " data-dismiss="modal">Close</button>
                 </div>
             </div>
