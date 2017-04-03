@@ -11,6 +11,7 @@
 // Pinks FF4081 F50057
 // Blues 3D5AFE
 // Oranges FF3D00
+// Green 4DB6AC
 
 @import "bootstrap";
 @import "font-awesome";
@@ -23,24 +24,25 @@
     min-height: 150px;
 }
 
-$navbar-bg: ffffff; // #4DB6AC;
+$navbar-bg: #FFFFFF; /*#4DB6AC;*/
 $navbar-text-shadow:rgb(0,0,30);
 $navbar-brand: #000000;
 
 #main-nav {
 
     background-color: $navbar-bg;
-    border-bottom: 2px solid #E6E6E6;
+    background-image: none;
+    border-bottom: 2px solid #4DB6AC;
     padding: 0;
 
     .nav-link,
     .navbar-toggler,
     .navbar-brand {
         text-decoration: none;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        color: #500;
+        /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+        color: #222;
         cursor: pointer;
-        transition: text-shadow 0.25s;
+        /*transition: text-shadow 0.25s;*/
         padding-top: 8px;
         padding-bottom: 8px;
         font-size: 1.1rem;
@@ -70,20 +72,20 @@ $navbar-brand: #000000;
     }
 
     .nav-link:hover {
-        text-shadow: 0 0 0.2rem $navbar-text-shadow;
+        text-shadow: 0 0 3rem $navbar-text-shadow;
     }
 
     .nav-link:active {
-        text-shadow: 0 0 0.2rem $navbar-text-shadow, 0 0 1.5rem $navbar-text-shadow;
+        text-shadow: 0 0 3rem $navbar-text-shadow, 0 0 3rem $navbar-text-shadow;
     }
 
     .navbar-brand:hover {
-        text-shadow: 0 0 0.2em $navbar-text-shadow;
+        text-shadow: 0 0 3em $navbar-text-shadow;
         color: $navbar-brand;
     }
 
     .navbar-brand:active {
-        text-shadow: 0 0 0.2rem $navbar-text-shadow, 0 0 1.5rem $navbar-text-shadow;
+        text-shadow: 0 0 3rem $navbar-text-shadow, 0 0 3rem $navbar-text-shadow;
         color: $navbar-brand;
     }
 }

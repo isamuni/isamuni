@@ -22,7 +22,7 @@
 
 .tag-cloud-container a:hover {
 	text-decoration: none;
-	color: #bb3344;
+	color: #222;
 }
 
 .tag-cloud-container a:active {
@@ -32,7 +32,7 @@
 
 .cloud-tag {
 	color: #4DB6AC;
-  transition: text-shadow 0.25s,color 0.35s,font-size 0.25s;
+  	transition: text-shadow 0.25s,color 0.35s,font-size 0.25s;
 }
 
 .cloud-tag-small { font-size: 1.0em; }

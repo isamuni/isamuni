@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20170402161508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "allowedusers", force: :cascade do |t|
     t.string   "group_uid"

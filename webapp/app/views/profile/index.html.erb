@@ -66,10 +66,10 @@
   <div class="card" id="card-<%= user_path(user) %>">
     <div class="card-block">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-5">
           <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>
         </div>
-        <div class="col-md-7">
+        <div class="col-7">
           <strong><%= user.name %></strong>
           <br>
           <%= truncate(user.occupation, length: 40) %>
