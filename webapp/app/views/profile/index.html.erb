@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-4">
+  <div class="col-6">
     <h1 data-intro="Qui troverai una lista di tutti gli utenti iscritti a isamuni.
                   Registrati su isamuni per creare un tuo profilo e farti conoscere.">Utenti</h1>
   </div>
@@ -16,39 +16,11 @@
       <%= render partial: "search_form", locals: {res_path: users_path, placeholder: "Ricerca utenti"}  %>
     </div>
   </div>
-  <div class="col-2">
-    <input type="checkbox" name="users-checkbox" data-off-text="<i class='fa fa-list'></i>" data-on-text="<i class='fa fa-list-alt'></i>" data-size="large" <%= "checked" if cookies[:cards] %> >
-  </div>
 </div>
 
 <div class="tag-cloud-container">
   <% tag_cloud(@tags, ["cloud-tag cloud-tag-small","cloud-tag cloud-tag-medium","cloud-tag cloud-tag-big","cloud-tag cloud-tag-verybig"]) do |tag, css_class| %>
     <%= link_to tag.name, { :action => :index, :skills => tag.name }, :class => css_class %>
-  <% end %>
-</div>
-
-<div id="cards-users">
-  <% if @latest_users %>
-    <h2>Ultimi iscritti</h2>
-    <div class="card-columns">
-      <% @latest_users.each do |user| %>
-      <div class="card" id="card-<%= user_path(user) %>">
-        <div class="card-block">
-          <div class="row">
-            <div class="col-5">
-              <%= image_tag(user.profile_pic(70), alt: user.name, class: "card-img-top img-fluid") %>
-            </div>
-            <div class="col-7">
-              <strong><%= user.name %></strong>
-              <br>
-              <%= truncate(user.occupation, length: 40) %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-    </div>
-    <hr>
   <% end %>
 </div>
 
@@ -60,29 +32,7 @@
   <h2>Tutti gli utenti</h2>
 <% end %>
 
-<% if cookies[:cards] %>
-<div class="card-columns">
-  <% @users.each do |user| %>
-  <div class="card" id="card-<%= user_path(user) %>">
-    <div class="card-block">
-      <div class="row">
-        <div class="col-5">
-          <%= image_tag(user.profile_pic(250), alt: user.name, class: "card-img-top img-fluid") %>
-        </div>
-        <div class="col-7">
-          <strong><%= user.name %></strong>
-          <br>
-          <%= truncate(user.occupation, length: 40) %>
-        </div>
-      </div>
-      <br>
-      <strong>Tags:</strong>
-        <%= user.skill_list.join(", ") %>
-    </div>
-  </div>
-  <% end %>
-</div>
-<% else %>
+
 <div id="list-users">
   <table class="table table-hover table-condensed" id="user-table">
     <thead>
@@ -111,7 +61,6 @@
     </tbody>
 </table>
 </div>
-<% end %>
 
 <% content_for :scripts do %>
 <script>

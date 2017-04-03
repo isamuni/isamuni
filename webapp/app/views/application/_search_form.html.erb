@@ -1,7 +1,7 @@
 <div class="form-group">
   <%= form_tag res_path, :method => "get" do |f| %>
+    <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: placeholder %>
     <div class="input-group">
-      <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: placeholder %>
       <span class="input-group-btn">
         <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
             <i class="fa fa-search"></i>

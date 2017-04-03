@@ -16,7 +16,6 @@ class ProfileController < ApplicationController
     @users = @users.tagged_with(params[:skills]) unless params[:skills].blank?
 
     @tags = User.tag_counts_on(:skills)
-    @latest_users = User.where(banned: false).limit(3).order('created_at desc')
 
     respond_to do |format|
       format.html { render :index }

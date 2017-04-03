@@ -5,8 +5,8 @@
         <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
     </div>
     <div class="card-footer text-muted text-right">
-        {{author_name}} - {{ time }}
-        <br> <img v-bind:src="post.source.icon_link" /> {{post.source.name}}
+        {{author_name}}
+        <br> {{post.source.name}} <img v-bind:src="post.source.icon_link" />
         <hr>
         <div class="row">
             <div class="col-6 text-left">
@@ -14,6 +14,11 @@
             </div>
             <div class="col-6 text-right">
                 <i :class="icon">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-right">
+            {{ time }}
             </div>
         </div>
     </div>

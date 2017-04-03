@@ -41,8 +41,6 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (4.0.0)
       activerecord (>= 4.0)
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     ast (2.3.0)
     autoprefixer-rails (6.7.7.1)
@@ -54,9 +52,6 @@ GEM
       sass (>= 3.4.19)
     builder (3.2.3)
     byebug (9.0.6)
-    clockwork (2.0.2)
-      activesupport
-      tzinfo
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -102,10 +97,6 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    koala (3.0.0)
-      addressable
-      faraday
-      json (>= 1.8)
     leaflet-rails (0.7.7)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -142,7 +133,6 @@ GEM
       ast (~> 2.2)
     pg (0.20.0)
     powerpack (0.1.1)
-    public_suffix (2.0.5)
     rack (2.0.1)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -256,7 +246,6 @@ DEPENDENCIES
   acts-as-taggable-on
   bootstrap (~> 4.0.0.alpha6)
   byebug
-  clockwork (~> 2.0)
   coffee-rails (~> 4.1.0)
   font-awesome-rails
   friendly_id (~> 5.1.0)
@@ -266,7 +255,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails
-  koala
   leaflet-rails (~> 0.7.7)
   omniauth-facebook
   pg

@@ -7,14 +7,14 @@
 
 <h3>Eventi correnti e prossimi</h3>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-8">
         <div id="future">
             <%= render partial: "table", locals: {events: @future, event_type: :future} %>
             <%= will_paginate @future, param_name: :future_page %>
             <p>Scarica come <%= link_to "ical", events_path(format: :ical) %> </p>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-4">
         <h5>Mappa&nbsp;<button id="resetmap" class="btn btn-success btn-sm"><i class="fa fa-refresh">&nbsp;Ricentra</i></button></h5>
         <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         <div id="mapid" class="map"
@@ -30,11 +30,11 @@
 
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-6">
     <h3>Eventi passati</h3>
     <p>Puoi usare la form sulla destra per filtrare gli eventi. Premi il tasto di ricerca per applicare i filtri</p>
   </div>
-  <div class="col-md-6">
+  <div class="col-6">
   <div id="dashboard_div" class="row">
     <div class="row" style="display: none;">
         <div id="chart_div"></div>
@@ -45,9 +45,8 @@
     <p>
     <div class="form-group">
       <%= form_tag events_path, :method => "get" do |f| %>
+        <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
         <div class="input-group">
-          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
-
           <input type="hidden" id="start_input" name="start" value="0">
           <input type="hidden" id="end_input" name="end" value="0">
 
@@ -68,7 +67,7 @@
 
 <br>
 
-<div id="old" class="col-md-12">
+<div id="old" class="col-12">
     <% if @start_time && @end_time %>
         <small>Eventi dal <%= l @start_time, format: :long %> al <%= l @end_time, format: :long %></small>
     <% end %>
