@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   # Pages
   get 'pages', to: 'pages#index', defaults: {name_only: true, format: :json}
   get 'communities', to: 'pages#index', defaults: {kind: :community}
+  get 'communities/:id', to: 'pages#show', defaults: {kind: :community}, as: 'community'
   get 'companies', to: 'pages#index', defaults: {kind: :company}
+  get 'companies/:id', to: 'pages#show', defaults: {kind: :company}, as: 'company'  
   get 'communities/typeahead', to: 'pages#typeahead', defaults: {kind: :community}
   get 'companies/typeahead', to: 'pages#typeahead', defaults: {kind: :company}
 

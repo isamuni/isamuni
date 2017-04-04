@@ -30,17 +30,17 @@ class ApplicationController < ActionController::Base
 
   def page_url(page, _options = {})
     if page.community?
-      communities_url page
+      community_url page
     else
-      commpanies_url page
+      commpany_url page
     end
   end
 
   def page_path(page, _options = {})
     if page.community?
-      communities_path page
+      community_path page
     else
-      companies_path page
+      company_path page
     end
   end
 
