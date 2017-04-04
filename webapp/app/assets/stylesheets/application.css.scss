@@ -24,8 +24,8 @@
     min-height: 150px;
 }
 
-$navbar-bg: #FFFFFF; /*#4DB6AC;*/
-$navbar-text-shadow:rgb(30,30,30);
+$navbar-bg: #FFFFFF;
+$navbar-text-hover: #FF3D00;
 $navbar-brand: #000000;
 
 #main-nav {
@@ -39,10 +39,8 @@ $navbar-brand: #000000;
     .navbar-toggler,
     .navbar-brand {
         text-decoration: none;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
         color: #222;
         cursor: pointer;
-        transition: text-shadow 0.25s;
         padding-top: 8px;
         padding-bottom: 8px;
         font-size: 1.1rem;
@@ -72,21 +70,19 @@ $navbar-brand: #000000;
     }
 
     .nav-link:hover {
-        text-shadow: 0 0 3rem $navbar-text-shadow;
+        color: $navbar-text-hover;
     }
 
     .nav-link:active {
-        text-shadow: 0 0 3rem $navbar-text-shadow, 0 0 3rem $navbar-text-shadow;
+        color: $navbar-text-hover;
     }
 
     .navbar-brand:hover {
-        text-shadow: 0 0 3em $navbar-text-shadow;
-        color: $navbar-brand;
+        color: $navbar-text-hover;
     }
 
     .navbar-brand:active {
-        text-shadow: 0 0 3rem $navbar-text-shadow, 0 0 3rem $navbar-text-shadow;
-        color: $navbar-brand;
+        color: $navbar-text-hover;
     }
 }
 

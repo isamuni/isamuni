@@ -1,5 +1,15 @@
 <template>
 <div class="post-card card post" @click="$emit('click')" :style="style">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-2 text-left">
+                <i :class="icon">
+            </div>
+            <div class="col-10 text-right">
+                {{ time }}
+            </div>
+        </div>
+    </div>
     <img v-if="post.picture" v-bind:src="post.picture" v-bind:alt="post.alt" class="card-img-top"></img>
     <div class="card-block">
         <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
@@ -9,16 +19,8 @@
         <br> {{post.source.name}} <img v-bind:src="post.source.icon_link" />
         <hr>
         <div class="row">
-            <div class="col-6 text-left">
-                {{post.likes}} <i class="fa fa-thumbs-up"></i> {{post.comments}} <i class="fa fa-comments"></i> {{post.shares}} <i class="fa fa-share-alt"></i>
-            </div>
-            <div class="col-6 text-right">
-                <i :class="icon">
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12 text-right">
-            {{ time }}
+                {{post.likes}} <i class="fa fa-thumbs-up"></i> {{post.comments}} <i class="fa fa-comments"></i> {{post.shares}} <i class="fa fa-share-alt"></i>
             </div>
         </div>
     </div>
@@ -85,11 +87,17 @@ export default PostCard;
     margin-right: 10px;
 }
 
+.post-card .card-header {
+    width: 100%;
+    position: absolute;
+    font-size: 12px;
+}
+
 .post-card .card-footer {
     width: 100%;
     position: absolute;
     bottom: 0;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .post-card .card-img-top {
