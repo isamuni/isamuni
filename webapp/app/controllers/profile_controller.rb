@@ -15,7 +15,7 @@ class ProfileController < ApplicationController
     @users = @users.ilike(:name, params[:query]) unless params[:query].blank?
     @users = @users.tagged_with(params[:skills]) unless params[:skills].blank?
 
-    @tags = User.tag_counts_on(:skills)
+    @tags = User.tag_counts_on(:skills).order('taggings_count DESC')
 
     respond_to do |format|
       format.html { render :index }

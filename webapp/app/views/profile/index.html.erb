@@ -20,7 +20,7 @@
 
 <div class="tag-cloud-container">
   <% tag_cloud(@tags, ["cloud-tag cloud-tag-small","cloud-tag cloud-tag-medium","cloud-tag cloud-tag-big","cloud-tag cloud-tag-verybig"]) do |tag, css_class| %>
-    <%= link_to tag.name, { :action => :index, :skills => tag.name }, :class => css_class %>
+    <%= link_to "#{tag.name}(#{tag.taggings_count})", { :action => :index, :skills => tag.name }, :class => css_class %>
   <% end %>
 </div>
 
@@ -55,7 +55,7 @@
           <td><%= link_to user.name, user %></td>
           <td><%= truncate(user.occupation, length: 40) %></td>
           <td>
-            <%= user.skill_list.join(", ") %>
+            <%= user.skills.collect{ |t| t.name }.join(", ") %> <%# solves n+1 queries problem, not referring to skills_list %>
         </tr>
       <% end %>
     </tbody>

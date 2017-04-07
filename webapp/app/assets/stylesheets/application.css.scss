@@ -122,3 +122,7 @@ $navbar-brand: #000000;
     color: #e71d1d;
     cursor: pointer;
 }
+
+#query {
+    width: 100%; /*bootstrap typeahead fix http://stackoverflow.com/questions/41592993/bootstrap-4-alpha-6-not-working-with-typeahead */
+}
