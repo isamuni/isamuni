@@ -47,9 +47,9 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td>
+          <td class="image-column">
             <%= link_to user_path(user) do %>
-            <img src="<%= user.profile_pic %>" class="img-fluid img-rounded">
+            <img src="<%= user.profile_pic %>" class="img-rounded">
             <% end %>
           </td>
           <td><%= link_to user.name, user %></td>

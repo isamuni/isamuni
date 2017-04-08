@@ -11,7 +11,7 @@
         <div id="future">
             <%= render partial: "table", locals: {events: @future, event_type: :future} %>
             <%= will_paginate @future, param_name: :future_page %>
-            <p>Scarica come <%= link_to "ical", events_path(format: :ical) %> </p>
+            <p>Scarica come <%= link_to "ical", events_path(format: :ical) %> (puoi copiare il link e <a href="https://support.google.com/calendar/answer/37100?co=GENIE.Platform%3DDesktop&hl=it">aggiungere il calendario</a> sul tuo google calendar)</p>
         </div>
     </div>
     <div class="col-4">
@@ -45,15 +45,16 @@
     <p>
     <div class="form-group">
       <%= form_tag events_path, :method => "get" do |f| %>
-        <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
         <div class="input-group">
           <input type="hidden" id="start_input" name="start" value="0">
           <input type="hidden" id="end_input" name="end" value="0">
-
+          <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: "Ricerca eventi" %>
           <span class="input-group-btn">
             <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
                 <i class="fa fa-search"></i>
             <% end %>
+          </span>
+          <span class="input-group-btn">
             <%= link_to events_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
               <i class="fa fa-refresh"></i>
             <% end %>

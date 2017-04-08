@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def profile_pic(height = '')
     height = '?height=' + height.to_s unless height == ''
-    'http://graph.facebook.com/' + uid + '/picture' + height
+    'https://graph.facebook.com/' + uid + '/picture' + height
   end
 
   def thumbnail
