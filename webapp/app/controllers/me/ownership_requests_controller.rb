@@ -5,7 +5,8 @@ class Me::OwnershipRequestsController < ApplicationController
     if p.owners.include? current_user
       render text: 'Hai già la ownership per questa pagina', status: 404
     else
-      OwnershipRequest.create!(page_id: p.id, user_id: current_user.id)
+      request = OwnershipRequest.create!(page_id: p.id, user_id: current_user.id)
+      NotificationMailer.ownership_request_notification(request).deliver_later
       render text: 'Richiesta di ownership inviata'
     end
   end

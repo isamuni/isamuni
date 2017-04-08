@@ -24,5 +24,8 @@ module Isamuni
       # initialization code goes here
     end
 
+    config.admins = ENV['ISAMUNI_ADMINS']&.split(' ') || []
+    config.admin_mails = ENV['ISAMUNI_ADMINS_MAILS']&.split(' ') || []
+
   end
 end
