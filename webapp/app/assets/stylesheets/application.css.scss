@@ -25,21 +25,23 @@
 }
 
 $navbar-bg: #FFFFFF;
-$navbar-text-hover: #FF3D00;
+$navbar-text-hover: #34733D;
+$navbar-border: #34733D;
+$navbar-text: #0B2626;
 $navbar-brand: #000000;
 
 #main-nav {
 
     background-color: $navbar-bg;
     background-image: none;
-    border-bottom: 2px solid #4DB6AC;
+    border-bottom: 2px solid $navbar-border;
     padding: 0;
 
     .nav-link,
     .navbar-toggler,
     .navbar-brand {
         text-decoration: none;
-        color: #222;
+        color: $navbar-text;
         cursor: pointer;
         padding-top: 8px;
         padding-bottom: 8px;
@@ -85,7 +87,6 @@ $navbar-brand: #000000;
         color: $navbar-text-hover;
     }
 }
-
 
 .home-section-link {
   text-align: center;
