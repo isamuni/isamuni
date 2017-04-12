@@ -13,7 +13,7 @@
 
 <div class="row">
   <% if @page.pic # Display the picture if available %>
-    <div class="col-lg-1"><img src="<%= @page.pic %>" class="img-fluid img-rounded"></div>
+    <div class="col-lg-1"><img src="<%= @page.pic %>" class="img-fluid rounded"></div>
     <div class="col-lg-7"><h2><%= @page.name %></h2></div>
   <% else %>
     <div class="col-lg-8"><h2><%= @page.name %></h2></div>

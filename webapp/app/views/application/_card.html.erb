@@ -14,9 +14,9 @@
 	<div class="row ">
 		<div class="col-md-12 text-right">
 			<i class="fa <%= post_icon post.post_type %>"></i>
-			
-			<small style="color:black;"> <%= post.author_name[0..0] + ". " + 
-											post.author_name.split.last %> 
+
+			<small style="color:black;"> <%= post.author_name[0..0] + ". " +
+											post.author_name.split.last %>
 											<%= post.created_at.strftime("%d-%m-%y") %>
 			</small>
 		</div>
@@ -62,7 +62,7 @@
 					<% if post.post_type.eql? 'event' %>
 						<small style="color:black;"><%= l post.created_at, format: :long %></small>
 					<% end %>
-					
+
 				</div>
 			</div>
   			<div class="modal-body">
@@ -70,7 +70,7 @@
 
 				<% if post.link != nil && post.picture != nil %>
 					<a href=<%= post.link %> target="_blank">
-						<%= image_tag(post.picture, alt: post.alt, class: "center-block img-fluid img-rounded") %>
+						<%= image_tag(post.picture, alt: post.alt, class: "center-block img-fluid rounded") %>
 					</a>
 				<% elsif post.picture != nil %>
 					<%= image_tag(post.picture, alt: post.alt, class: "center-block img-fluid img-rounded") %>

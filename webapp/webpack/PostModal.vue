@@ -14,7 +14,7 @@
                 {{post.content}}
                 <p>
                     <a :href="post.link " target="_blank">
-                        <img v-if="post.picture " :src="post.picture " :alt="post.alt" class="center-block img-fluid img-rounded" />
+                        <img v-if="post.picture " :src="post.picture" :alt="post.alt" class="mx-auto d-block img-fluid rounded" />
                     </a>
                 </p>
             </div>
