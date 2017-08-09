@@ -9,7 +9,7 @@
 <% content_for :scripts do %>
 
 <script type="text/javascript">
-  var UserFeed = new Vue(App.default.UserFeed);
+  var UserFeed = new Vue(App.UserFeed);
   UserFeed.$data.filter.author = "<%=raw @user.uid %>";
   UserFeed.$mount('#user-feed-app');
 </script>

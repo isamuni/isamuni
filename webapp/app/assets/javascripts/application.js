@@ -24,4 +24,3 @@
 //= require leaflet.markercluster.js
 //= require bootstrap-switch.min.js
 //= require typeahead.js
-//= require App.js

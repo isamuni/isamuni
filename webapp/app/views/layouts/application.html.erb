@@ -24,19 +24,13 @@
 <% #Javascript on the bottom for the time being, since turbolinks is disabled %>
 
 <%= javascript_include_tag :application, integrity: true %>
+<%= javascript_pack_tag 'application' %>
+<%= stylesheet_pack_tag 'application' %>
 
 <% #Leaflet (main source file is included in application js) %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.min.js"></script>
-
-<% # Google charts %>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function(event) {
-    google.charts.load('current', {'packages': ['corechart', 'controls']});
-});
-</script>
 
 <% # Scripts included from views %>
 <%= content_for :scripts %>

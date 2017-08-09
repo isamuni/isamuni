@@ -1,11 +1,12 @@
 <template>
+<div>
     <Multiselect
       :options="pages"
       :searchable="true"
       v-model="selected"
       placeholder="Scegli pagina"
       label="name"
-      key="id" ></Multiselect>
+      key="id" ></Multiselect></div>
 </template>
 
 <script>
@@ -13,6 +14,7 @@
 /* global $ */
 
 import Multiselect from 'vue-multiselect';
+import "vue-multiselect/dist/vue-multiselect.min.css";
 
 let PageSelector = {
   mounted: function() {

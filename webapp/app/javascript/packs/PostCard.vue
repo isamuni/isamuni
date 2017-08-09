@@ -3,7 +3,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-2 text-left">
-                <i :class="icon">
+                <i :class="icon"></i>
             </div>
             <div class="col-10 text-right">
                 {{ time }}

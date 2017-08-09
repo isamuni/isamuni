@@ -1,0 +1,25 @@
+
+.post-card {
+    width: 250px;
+    display: inline-block;
+    height: 400px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.post-card .card-header {
+    width: 100%;
+    position: absolute;
+    font-size: 12px;
+}
+.post-card .card-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+}
+.post-card .card-img-top {
+    width: 100%;
+    height: 100px;
+    -o-object-fit: cover;
+       object-fit: cover;
+}

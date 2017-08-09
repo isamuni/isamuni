@@ -5,13 +5,16 @@
 
 <% content_for :scripts do %>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="text/javascript">
-  var Feed = new Vue(App.default.Feed);
+  var Feed = new Vue(App.Feed);
   Feed.$mount('#feed-app');
 </script>
 
 <script type="text/javascript">
   // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.load('current', {'packages': ['corechart', 'controls']});
   google.charts.setOnLoadCallback(loadChart);
 
   function loadChart() {

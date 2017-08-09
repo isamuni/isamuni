@@ -86,7 +86,7 @@ Una volta creata la pagina dovrai aspettare l'approvazione degli admin per rende
 <script type="text/javascript">
   /* global Vue, App, $ */
   $(function(){
-    var PageSelector = new Vue(App.default.PageSelector);
+    var PageSelector = new Vue(App.PageSelector);
     PageSelector.$mount('#pageSelector');
     $("#submitRequest").click(function(){
       var selected = PageSelector.$data.selected;

@@ -1,7 +1,7 @@
-FROM ruby:2.3
+FROM ruby:2.4.1
 
 # Adding recent nodejs repositories
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -9,14 +9,20 @@ RUN apt-get update \
         libpq-dev \
         sqlite3 \
         nodejs \
-        tmux byobu\
+        libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install yarn && \
+    rm -rf /var/lib/apt/lists/*
 
 # installing some gems manually
 # (either because they shouldn't be in bundler or for caching purposes)
 
-RUN gem install tmuxinator foreman rails
+RUN gem install foreman rails
 
 # copying in Gemfile and running bundle install, so that we only do that when
 # Gemfile changes

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.2'
+gem 'rails', '5.1.3'
 
 # Database
 group :development do
@@ -19,9 +21,9 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 3.2.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -30,7 +32,7 @@ gem 'jquery-rails'
 gem 'jquery-validation-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -44,19 +46,19 @@ end
 # Search gems
 gem 'twitter-typeahead-rails'
 gem 'searchlight'
-gem 'textacular', '~> 4.0'
+gem 'textacular'
 
 # Human readable URIs
-gem 'friendly_id', '~> 5.1.0'
+gem 'friendly_id'
 # Markdown renderer
 gem 'redcarpet'
 # Nice and neat Tour cards
 gem 'introjs-rails'
 
 # Leaflet is a small and nice js library that will help with showing maps
-gem 'leaflet-rails', '~> 0.7.7'
+gem 'leaflet-rails'
 
-gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -67,14 +69,14 @@ gem 'will_paginate', '~> 3.1.0'
 # Use acts_as_taggable_on for Tagging
 gem 'acts-as-taggable-on'
 
-gem 'icalendar', '~> 2.4', '>= 2.4.1'
+gem 'icalendar'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'omniauth-facebook'
-gem 'rails_admin', '~> 1.1'
-gem 'rails_admin_tag_list', '~> 0.2.0'
+gem 'rails_admin'
+gem 'rails_admin_tag_list'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,7 +85,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -91,3 +93,5 @@ group :development do
   gem 'htmlbeautifier', require: false
   gem 'rubocop', require: false
 end
+
+gem 'webpacker', '~> 2.0'

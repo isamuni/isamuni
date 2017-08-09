@@ -1,6 +1,6 @@
 <template>
   <div class="post-display">
-    <PostCard v-for="p in posts" :post="p" @click="showModal(p)" ></PostCard>
+    <PostCard v-for="p in posts" :post="p" :key="p.id" @click="showModal(p)" ></PostCard>
     <PostModal v-if="currentPost" :post="currentPost" ref="postModal"></PostModal>
   </div>
 </template>
