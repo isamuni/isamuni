@@ -32,13 +32,12 @@ COPY Gemfile* ./
 RUN bundle install
 
 COPY package.json ./
-RUN npm install
+RUN yarn install
 
 # copying in the rest of the application
 COPY . .
 
 # precompiling assets
-RUN npm run build
 RUN RAILS_ENV=production rake assets:precompile
 
 # running the server in production mode by default
