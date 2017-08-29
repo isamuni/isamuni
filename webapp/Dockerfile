@@ -37,9 +37,6 @@ RUN yarn install
 # copying in the rest of the application
 COPY . .
 
-# precompiling assets
-RUN RAILS_ENV=production rake assets:precompile
-
 # running the server in production mode by default
 EXPOSE 3000
 CMD ["bash", "./docker_entrypoint.sh"]
