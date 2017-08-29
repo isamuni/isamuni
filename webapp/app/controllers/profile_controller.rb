@@ -4,13 +4,13 @@ class ProfileController < ApplicationController
 
   # GET /users/typeahead?query=text
   def typeahead
-    render json: User.where(banned: false).ilike(:name, params[:query])
+    render json: User.where(banned: false, public_profile: true).ilike(:name, params[:query])
   end
 
   # GET /users/query/name
   # GET /users?query=text
   def index
-    @users = User.where(banned: false).order(:name).includes(:skills)
+    @users = User.where(banned: false, public_profile: true).order(:name).includes(:skills)
 
     @users = @users.ilike(:name, params[:query]) unless params[:query].blank?
     @users = @users.tagged_with(params[:skills]) unless params[:skills].blank?
@@ -26,6 +26,7 @@ class ProfileController < ApplicationController
   # GET /users/:id
   def show
     @count = Post.where(author_uid: @user.uid, show: true).count
+    require_admin unless @user.public_profile or @user == current_user 
   end
 
   def new

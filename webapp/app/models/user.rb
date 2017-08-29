@@ -13,7 +13,8 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.zone.at(auth.credentials.expires_at)
-
+      user.public_profile = false
+      
       user.save!
     end
   end

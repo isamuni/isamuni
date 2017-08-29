@@ -1,0 +1,20 @@
+{
+  "Feed.css": "/packs-test/Feed.css",
+  "Feed.js": "/packs-test/Feed.js",
+  "PageSelector.css": "/packs-test/PageSelector.css",
+  "PageSelector.js": "/packs-test/PageSelector.js",
+  "PostCard.css": "/packs-test/PostCard.css",
+  "PostCard.js": "/packs-test/PostCard.js",
+  "PostDisplay.css": "/packs-test/PostDisplay.css",
+  "PostDisplay.js": "/packs-test/PostDisplay.js",
+  "PostModal.css": "/packs-test/PostModal.css",
+  "PostModal.js": "/packs-test/PostModal.js",
+  "UserFeed.css": "/packs-test/UserFeed.css",
+  "UserFeed.js": "/packs-test/UserFeed.js",
+  "app.css": "/packs-test/app.css",
+  "app.js": "/packs-test/app.js",
+  "application.css": "/packs-test/application.css",
+  "application.js": "/packs-test/application.js",
+  "hello_vue.css": "/packs-test/hello_vue.css",
+  "hello_vue.js": "/packs-test/hello_vue.js"
+}
