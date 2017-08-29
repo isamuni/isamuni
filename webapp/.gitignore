@@ -44,6 +44,7 @@ bower.json
 
 node_modules/
 public/assets
+public/packs
 npm-debug.log
 lib/assets/*/public/packs
 /node_modules
