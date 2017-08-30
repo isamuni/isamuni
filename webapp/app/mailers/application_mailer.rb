@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@isamuni.vii.ovh'
+  default from: ENV['SMTP_USERNAME']
   layout 'mailer'
 end
 
