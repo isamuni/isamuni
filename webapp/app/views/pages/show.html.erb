@@ -12,29 +12,52 @@
 <% end %>
 
 <div class="row">
-  <% if @page.pic # Display the picture if available %>
-    <div class="col-lg-1"><img src="<%= @page.pic %>" class="img-fluid rounded"></div>
-    <div class="col-lg-7"><h2><%= @page.name %></h2></div>
-  <% else %>
-    <div class="col-lg-8"><h2><%= @page.name %></h2></div>
-  <% end %>
-
-  <div class="col-lg-4">
-      <% if @page.community? %>
-        <i class="fa fa-institution fa-lg"></i>
-      <% else %>
-        <i class="fa fa-industry fa-lg"></i>
-      <% end %>
-      <%= link_to @page.url, @page.url, :target => "_blank" %>
-  </div>
-</div>
-<br>
-
-<div class="row">
   <div class="col-lg-8">
-    <p><%= markdown(@page.description) %></p>
-  </div>
+    <div class="row">
+      <% if @page.pic %>
+      <div class="col-lg-2">
+        <img src="<%= @page.pic %>" class="img-fluid rounded"> 
+      </div>
+      <% end %>
+      <div class="col-lg-10">
+        <h2><%= @page.name %></h2>
+        <p>
+        <%= if @page.community? then "Community" else "Azienda" end %> nell'ambito <%= @page.sector %><br>
+        <%= link_to @page.website, @page.website, :target => "_blank" if @page.website.present? %>
+        </p>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Descrizione</h3>
+        <p><%= markdown(@page.description) %></p>
+        <% if @page.lookingfor.present? %>
+          <h3>In cerca di</h3>
+          <p><%= markdown(@page.lookingfor) %></p>
+        <% end %> 
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+          <h4>Contatti</h4>
+          <p><%= markdown(@page.contacts) %></p>
+        </div>
+        <% if @page.links.present? %>
+        <div class="col-lg-6">
+          <h4>Links</h4>
+          <p><%= markdown(@page.links) %></p>
+        </div>
+        <% end %>
+        <div class="col-lg-6">
+          <h4>Sede</h4>
+          <p style="word-wrap: break-word;"><%= @page.location %></p>
+          <p style="word-wrap: break-word;"><%= @page.coordinates %></p>
+        </div>
+      </div>
+  </div>
   <div class="col-lg-4">
   <% if @page.fb_url or @page.twitter_url %>
     <ul class="nav nav-tabs">
@@ -86,15 +109,6 @@
       </div>
     </div>
   <% end %>
-
-    <p>
-    <h4>Contatti</h4>
-    <p><%= markdown(@page.contacts) %></p>
-    <h4>Links</h4>
-    <p><%= markdown(@page.links) %></p>
-    <h4>Sede</h4>
-    <p style="word-wrap: break-word;"><%= @page.location %></p>
-    <p style="word-wrap: break-word;"><%= @page.coordinates %></p>
   </div>
 </div>
 

@@ -38,7 +38,7 @@
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td>
+        <td width="70px">
           <img src="<%= page.pic 70 %>" class="img-fluid img-rounded">
         </td>
         <td><%= link_to page.name, page %></td>
@@ -46,8 +46,10 @@
         <td><%= page.sector %></td>
         <td><%= page.no_employees %></td>
         <td>
-          <%= link_to page.url, target: "_blank", class: "btn btn-primary btn-sm" do %>
-            <i class="fa fa-external-link"></i>
+          <% if page.website.present? %>
+            <%= link_to page.website, target: "_blank", class: "btn btn-primary btn-sm" do %>
+              <i class="fa fa-external-link"></i>
+            <% end %>
           <% end %>
         </td>
       </tr>
