@@ -7,6 +7,14 @@ class SessionController < ApplicationController
 
   def create
     user = User.from_omniauth(request.env['omniauth.auth'])
+    
+    user_is_new = user.id.nil?
+    user.save!
+
+    if user_is_new
+      NotificationMailer.new_user_notification(user).deliver_later
+    end
+
     session[:user_id] = user.id
     redirect_to me_edit_user_url
   end

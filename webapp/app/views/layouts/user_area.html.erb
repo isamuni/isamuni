@@ -12,7 +12,10 @@
                                     Scopri studenti, professionisti, comunità, aziende ed eventi del settore tech.">
   <meta name="keywords" content="isamuni, sicilia, tecnologia, programmatori, social network, open source">
 
-  <%= javascript_include_tag :application, integrity: true %>
+	<%= javascript_include_tag :application, integrity: true %>
+	<%= javascript_pack_tag 'application' %>
+	<%= stylesheet_pack_tag 'application' %>
+
   <% # Scripts included from views %>
   <%= content_for :scripts %>
 </head>
