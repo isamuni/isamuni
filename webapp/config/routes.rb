@@ -66,7 +66,8 @@ Rails.application.routes.draw do
   get 'feed/data', to: 'feed#data', defaults: { format: 'json' }
   get 'feed/posts', to: 'feed#posts'
   get 'feed/sources', to: 'feed#sources'
-
+  get 'feed/count_by_month', to: 'feed#count_by_month'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

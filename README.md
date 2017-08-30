@@ -257,11 +257,6 @@ You can also run a single components (eg. the database)
 $ docker-compose up devdb
 ```
 
-To run both the rails server and webpack dev server
-```
-$ docker-compose run --rm -p 8080:8080 webapp tmuxinator
-```
-
 
 ## FAQ
 

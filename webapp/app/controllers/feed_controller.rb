@@ -26,7 +26,6 @@ class FeedController < ApplicationController
   end
 
   def posts
-
     post_limit = if params[:limit].blank?
       MAX_NUMBER_OF_POSTS
     elsif params[:limit].to_i == 0
@@ -99,5 +98,15 @@ class FeedController < ApplicationController
     respond_to do |format|
       format.json { render json: datatable }
     end
+  end
+
+  def count_by_month
+    posts_by_month = Post.all
+      .group("DATE_TRUNC('month', created_at)")
+      .order("DATE_TRUNC('month', created_at) DESC")
+      .count
+      .map { |k,v| [k.strftime("%Y-%m"), v] }
+      
+    render json: posts_by_month
   end
 end

@@ -1,24 +1,71 @@
 <template>
   <div class="post-display">
-    <PostCard v-for="p in posts" :post="p" :key="p.id" @click="showModal(p)" ></PostCard>
+    <div v-if="asList">
+      <vue-good-table
+        title="Post dalle community"
+        :columns="columns"
+        :rows="posts"
+        :paginate="false"
+        :globalSearch="true"
+        :onClick="showModal"
+        styleClass="mytable table condensed table-bordered table-striped" />
+    </div>
+    <div v-else>
+      <PostCard v-for="p in posts" :post="p" :key="p.id" @click="showModal(p)" ></PostCard>
+    </div>
     <PostModal v-if="currentPost" :post="currentPost" ref="postModal"></PostModal>
   </div>
 </template>
 
 <script>
 
-/* global Vue */
-
 import PostCard from './PostCard.vue';
 import PostModal from './PostModal.vue';
 
+import Vue from 'vue';
+import VueGoodTable from 'vue-good-table';
+Vue.use(VueGoodTable);
+
+import moment from 'moment';
+
+function truncate(str, len){
+  str = str || "";
+  if(str.length > len){
+    return str.substring(0, len) + " [...]"; 
+  } else {
+    return str;
+  }
+}
+
 let PostDisplay = {
   props: {
-    posts: Array
+    posts: Array,
+    asList: Boolean
   },
   data: function() {
     return {
-      currentPost: null
+      currentPost: null,
+      columns: [ {
+          label: 'Data',
+          field: (x) => moment(x.created_at).format("L LT"),
+          width: "20%"
+        },
+        {
+          label: 'Autore',
+          field: 'author_name',
+          width: "20%"
+        },
+        {
+          label: 'Contenuto',
+          field: (x) => truncate([(x.name),(x.content)].filter(Boolean).join(" -- ") , 200),
+          tdClass: "content",
+          width: "40%"
+        },
+        {
+          label: 'Fonte',
+          field: "source.name",
+          width: "20%"
+        }],
     };
   },
   methods: {
@@ -40,5 +87,10 @@ export default PostDisplay;
 </script>
 
 <style>
-
+.content {
+  overflow-wrap: break-word;
+}
+.mytable {
+  table-layout: fixed;
+}
 </style>
