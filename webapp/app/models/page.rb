@@ -4,6 +4,7 @@ class Page < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_and_belongs_to_many :owners, class_name: 'User', join_table: :owners_pages
+  has_paper_trail
 
   def self.companies
     where(kind: Page.kinds[:company])

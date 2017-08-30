@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   WillPaginate.per_page = 10
 
+  before_action :set_paper_trail_whodunnit
+
   protected
 
   def current_user

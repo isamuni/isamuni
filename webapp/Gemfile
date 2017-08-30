@@ -95,3 +95,4 @@ group :development do
 end
 
 gem 'webpacker', '~> 2.0'
+gem 'paper_trail'
