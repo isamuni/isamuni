@@ -18,50 +18,56 @@
   </div>
 </div>
 
-<div class="tag-cloud-container">
-  <% tag_cloud(@tags, ["cloud-tag cloud-tag-small","cloud-tag cloud-tag-medium","cloud-tag cloud-tag-big","cloud-tag cloud-tag-verybig"]) do |tag, css_class| %>
-    <%= link_to "#{tag.name}(#{tag.taggings_count})", { :action => :index, :skills => tag.name }, :class => css_class %>
-  <% end %>
-</div>
-
-<% if params[:skills] %>
-  <h2>Utenti con conoscenze di "<%= params[:skills] %>"</h2>
-<% elsif params[:query] %>
-  <h2>Ricerca per nome "<%= params[:query] %>"</h2>
-<% else %>
-  <h2>Tutti gli utenti</h2>
-<% end %>
-
-
-<div id="list-users">
-  <table class="table table-hover table-condensed" id="user-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Nome</th>
-        <th>Occupazione</th>
-        <th>Tags</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td class="image-column">
-            <%= link_to user_path(user) do %>
-            <img src="<%= user.profile_pic %>" class="img-rounded">
-            <% end %>
-          </td>
-          <td><%= link_to user.name, user %></td>
-          <td><%= truncate(user.occupation, length: 40) %></td>
-          <td>
-            <%= user.skills.collect{ |t| t.name }.join(", ") %> <%# solves n+1 queries problem, not referring to skills_list %>
-        </tr>
+<div class="row">
+  <div class="col-12">
+    <h4>Skills degli utenti</h4>
+    <div class="tag-cloud-container">
+      <% tag_cloud(@tags, ["cloud-tag cloud-tag-small","cloud-tag cloud-tag-medium","cloud-tag cloud-tag-big","cloud-tag cloud-tag-verybig"]) do |tag, css_class| %>
+        <%= link_to "#{tag.name}(#{tag.taggings_count})", { :action => :index, :skills => tag.name }, :class => css_class %>
       <% end %>
-    </tbody>
-</table>
+    </div>
+  </div>
 </div>
 
+<div class="row">
+    <div class="col-12">
+  <% if params[:skills] %>
+    <h2>Utenti con conoscenze di "<%= params[:skills] %>"</h2>
+  <% elsif params[:query] %>
+    <h2>Ricerca per nome "<%= params[:query] %>"</h2>
+  <% else %>
+    <h2>Tutti gli utenti</h2>
+  <% end %>
+    <div id="list-users">
+      <table class="table table-hover table-condensed" id="user-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Occupazione</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class="image-column">
+                <%= link_to user_path(user) do %>
+                <img src="<%= user.profile_pic %>" class="img-rounded">
+                <% end %>
+              </td>
+              <td><%= link_to user.name, user %></td>
+              <td><%= truncate(user.occupation, length: 40) %></td>
+              <td>
+                <%= user.skills.collect{ |t| t.name }.join(", ") %> <%# solves n+1 queries problem, not referring to skills_list %>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+    </div>
+  </div>
+</div>
 <% content_for :scripts do %>
 <script>
 /* global $, initTypeahead */

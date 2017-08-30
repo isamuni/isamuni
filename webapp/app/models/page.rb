@@ -19,7 +19,7 @@ class Page < ApplicationRecord
   end
 
   def pic(height = 100)
-    "http://graph.facebook.com/#{fb_id}/picture?height=#{height}" if fb_id
+    "https://graph.facebook.com/#{fb_id}/picture?height=#{height}" if fb_id
   end
 
   def fb_url
