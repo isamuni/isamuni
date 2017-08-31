@@ -48,3 +48,6 @@ public/packs
 npm-debug.log
 lib/assets/*/public/packs
 /node_modules
+/public/packs
+/public/packs-test
+/node_modules

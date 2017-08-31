@@ -94,5 +94,5 @@ group :development do
   gem 'rubocop', require: false
 end
 
-gem 'webpacker', '~> 2.0'
+gem 'webpacker', '~> 3.0'
 gem 'paper_trail'

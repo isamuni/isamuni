@@ -12,6 +12,7 @@ import Vue from 'vue';
 import Feed from './Feed.vue';
 import PageSelector from './PageSelector.vue';
 import UserFeed from './UserFeed.vue';
+import UserPage from './UserPage.vue';
 
 window.Vue = Vue;
 /* global $ */

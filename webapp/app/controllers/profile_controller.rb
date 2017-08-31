@@ -16,11 +16,6 @@ class ProfileController < ApplicationController
     @users = @users.tagged_with(params[:skills]) unless params[:skills].blank?
 
     @tags = User.tag_counts_on(:skills).order('taggings_count DESC')
-
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @users }
-    end
   end
 
   # GET /users/:id
