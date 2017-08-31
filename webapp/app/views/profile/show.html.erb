@@ -1,18 +1,21 @@
 <p id="notice" class="text-success"><strong><%= notice %></strong></p>
 
-<h1><%= @user.name %></h1>
+
 <div class="row">
-	<div class="col-3" data-intro="Scopri velocemente le info su questo utente.">
+	<div class="col-4" data-intro="Scopri velocemente le info su questo utente.">
+		<h1><%= @user.name %></h1>
+		<p style="word-wrap: break-word;"><%= @user.occupation %></p>
 		<p>
 			<img src="<%= @user.profile_pic(250) %>" class="img-fluid img-rounded">
 		</p>
 
-		<h4>Occupazione</h4>
-		<p style="word-wrap: break-word;"><%= @user.occupation %></p>
-		<h4>Tags</h4>
+		<% unless @user.skill_list.empty? %>
+		<h4>Skills</h4>
 		<p style="word-wrap: break-word;">
 			<%= @user.skill_list.join(", ") %>
 		</p>
+		<% end %>
+
 		<% if current_user && @user.id == current_user.id %>
 			<div class="col-4 text-center">
 			<%= link_to me_edit_user_url, class: "btn btn-success btn-md" do %>
@@ -29,11 +32,16 @@
 			</div>
 		<% end %>
 	</div>
-	<div class="col-9" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
+	<div class="col-8" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
 		<div id="user-data">
+			<% if @user.description.blank? and  @user.projects.blank? and @user.links.blank? %>
+			<h4>Descrizione</h4>
+			<p>Da riempire.. :)</p>
+			<% end %> 
+
 			<% unless @user.description.blank? %>
+			<h4>Descrizione</h4>
 			<%= markdown(@user.description) %>
-			<hr>
 			<% end %>
 
 			<% unless @user.projects.blank? %>

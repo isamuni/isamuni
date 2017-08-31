@@ -14,31 +14,27 @@
     <%= f.check_box :public_profile, class: "form-check-inpu" %>
   </div>
   <div class="form-group">
-    <%= f.label :nome %><br>
+    <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name, class: "form-control", disabled: true %>
   </div>
   <div class="form-group">
-    <%= f.label :nome %><br>
-    <%= f.text_field :name, class: "form-control", disabled: true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :skill_list %><br>
-    <%= f.text_area :skill_list, class: "form-control"%>
-  </div>
-  <div class="form-group">
-    <%= f.label :occupazione %><br>
+    <%= f.label :occupation, "Occupazione" %><br>
     <%= f.text_field :occupation, class: "form-control"%>
   </div>
   <div class="form-group">
-    <%= f.label :descrizione %><br>
+    <%= f.label :skill_list, "Skills (separate da virgola)" %><br>
+    <%= f.text_area :skill_list, class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :descrizione, "Descrizione" %><br>
     <%= f.text_area :description, class: "form-control richtext" %>
   </div>
   <div class="form-group">
-    <%= f.label :progetti %><br>
+    <%= f.label :projects, "Progetti" %><br>
     <%= f.text_area :projects, class: "form-control richtext" %>
   </div>
   <div class="form-group">
-    <%= f.label 'Link e contatti' %><br>
+    <%= f.label :links, 'Link e contatti' %><br>
     <%= f.text_area :links, class: "form-control richtext" %>
   </div>
   <br>
