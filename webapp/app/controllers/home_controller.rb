@@ -6,8 +6,8 @@ class HomeController < ApplicationController
     @communities_count = Page.communities.where('active = ?', true).count
     @companies_count = Page.companies.where('active = ?', true).count
 
-    three_weeks = Time.now + (3 * 7 * 24 * 60 * 60)
-    @upcoming_events_count = Event.where(ends_at: Time.zone.now.beginning_of_day..three_weeks)
+    today = Time.zone.now.beginning_of_day
+    @upcoming_events_count = Event.where('ends_at >= ? OR starts_at >= ?', today, today)
                                   .order('ends_at desc')
                                   .count
   end

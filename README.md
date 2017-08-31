@@ -66,7 +66,7 @@ To allow the login to work using Facebook, you will have to create a Facebook ap
 
 In your bash *.profile* file, add:
 
-```
+```bash
 export ISAMUNI_APP_ID=appid
 export ISAMUNI_APP_SECRET=secret
 export ISAMUNI_ADMINS=<list of facebook user uids divided by space ' '> # This is required only if you want to be an admin
@@ -87,12 +87,13 @@ you'll need recent versions of ruby (2.3+), nodejs and rubygem. You can find som
 ```bash
 # Install some required tools
 $ (sudo) gem install foreman
-$ (sudo) npm install -g webpack
+
+# Install yarn (for rails webpacker). See https://yarnpkg.com/lang/en/docs/install/
 
 # Install isamuni's dependences
 # (you'll need to repeat this step every time some dependences are updated)
 $ cd isamuni/webapp
-$ bundle install
+$ bundle exec rails webpacker:install
 $ npm install
 ```
 
@@ -111,7 +112,7 @@ You can use docker to run the database, while starting rails normally. To run th
 First, make sure that you have postgres installed on your machine.
 Then create a user and a database for isamuni:
 
-```
+```bash
 $ sudo -u <YOUR USERNAME> psql postgres
 
 # Entering psql interactive mode and create a user for isamuni
@@ -123,7 +124,7 @@ $ CREATE DATABASE isamuni_dev WITH OWNER isamuni;
 
 Then ask webapp to create the database and bring it to the last version of the schema
 
-```
+```bash
 $ cd isamuni/webapp/
 $ rails db:create # if necessary
 $ rails db:migrate
@@ -132,7 +133,7 @@ $ rails db:migrate
 #### Test data
 
 To populate the database with some default/test entries run:
-```
+```bash
 $ rails db:fixtures:load
 ```
 
@@ -141,15 +142,15 @@ Use the crawler to get posts and events (see below).
 
 ### Running the App
 
-```
+```bash
 $ bundle install # Execute this only when dependencies change
 $ rails server webrick
 ```
 
 Then, in another terminal, run the following:
-```
-$ npm install # Execute this only when dependencies change
-$ npm run dev
+```bash
+$ ./bin/webpack-dev-server
+# More info on webpacker usage - https://github.com/rails/webpacker#usage
 
 Point your browser to squirrels.vii.ovh:8080
 ```
