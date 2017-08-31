@@ -70,13 +70,15 @@ In your bash *.profile* file, add:
 export ISAMUNI_APP_ID=appid
 export ISAMUNI_APP_SECRET=secret
 export ISAMUNI_ADMINS=<list of facebook user uids divided by space ' '> # This is required only if you want to be an admin
+export SMTP_PORT="2525"
+export SMTP_HOST="smtp.mailgun.org"
+export SMTP_USERNAME="USERNAME HERE"
+export SMTP_PASSWORD="PASSWORD HERE"
+export SMTP_DOMAIN="DOMAN HERE"
+export ISAMUNI_ADMINS_MAILS="YOUR_MAIL_HERE"
 ```
 
-To make the facebook login work, your browser needs to access the website with the same domain you registered for your application in the developer console. You can either add "localhost" as domain in the console, or add the host to your hostfile. On linux/macOS you'd add to the file `/etc/hosts` to include the following line (we're using `squirrels.vii.ovh` as example).
-
-```
-127.0.0.1	squirrels.vii.ovh
-```
+(or ask a developer for the already compiled lines)
 
 #### Setup rails
 
@@ -85,23 +87,19 @@ To make the facebook login work, your browser needs to access the website with t
 you'll need recent versions of ruby (2.3+), nodejs and rubygem. You can find some good installation guides [here](https://gorails.com/setup/ubuntu/16.04)
 
 ```bash
-# Install some required tools
-$ (sudo) gem install foreman
-
 # Install yarn (for rails webpacker). See https://yarnpkg.com/lang/en/docs/install/
 
 # Install isamuni's dependences
 # (you'll need to repeat this step every time some dependences are updated)
 $ cd isamuni/webapp
-$ bundle exec rails webpacker:install
-$ npm install
+$ bundler
+$ yarn
 ```
 
 
 ### Database setup
 
 We are using postgres on development and production mode.
-
 
 #### With docker
 
@@ -133,26 +131,19 @@ $ rails db:migrate
 #### Test data
 
 To populate the database with some default/test entries run:
+
 ```bash
 $ rails db:fixtures:load
 ```
 
 Use the crawler to get posts and events (see below).
 
-
 ### Running the App
 
 ```bash
 $ bundle install # Execute this only when dependencies change
+$ yarn
 $ rails server webrick
-```
-
-Then, in another terminal, run the following:
-```bash
-$ ./bin/webpack-dev-server
-# More info on webpacker usage - https://github.com/rails/webpacker#usage
-
-Point your browser to squirrels.vii.ovh:8080
 ```
 
 ### Using Favara to get the latest posts
@@ -167,28 +158,14 @@ Refer to favara's readme for further details.
 
 #### Editing webpack-managed assets
 
-A part of the javascript assets is handled by webpack, which allows us to take advantage of modern javascript frameworks, obtain better modularity, hot reloading, and make the front-end more independent from the backend.
-
+A part of the javascript assets is handled by webpacker
 Webpack is configured like this:
 
-* The dependences are listed in `package.json`, and are installed through `npm install`
-* The source files are in the `/webpack` folder.
-* The Webpack configuration is in `webpack.config.js`
-* The entrypoint is in `/webpack/App.js`, which is compiled into `/app/assets/javascripts/App.js`. This file needs to explicitly export anything you want to be able to access from the other `<script>` tags in the page. The exports will be available as `App`
-* `/app/assets/javascripts/App.js` is included in the sprockets bundle like any other library, that will handle fingerprinting and caching for us
-* `npm run build` compiles and minifies the webpack-managed assets
-* `npm run watch` recompiles the files on save
-* `npm run dev` starts a development server that will only serve `App.js` and proxies all the other requests to `squirrels.vii.ovh:3000`. It will provide hot reloading, but it will not touch the `App.js` file on disk. Please use `build` or `watch` to rebuild `App.js` when you are done testing.
-* a procfile is provided to start both `rails server` and `npm run watch`. You can run it with `foreman start`.
-
-While using `foreman start` is simple and perfectly fine, the best workflow for editing the webpack-managed assets is:
-* `rails s webrick -p 3000` in the first console
-* `npm run dev` in a second console
-* `npm run build` when you finish working with the assets
-
-
-If you get errors that look like `ERROR in Cannot find module '../modules/web.dom.iterable'....` then try to run the following command `rm -rf node_modules && npm install`. This will re-install the node dependencies from scratch.
-
+* The dependences are listed in `package.json`, and are installed through `yarn`
+* The source files are in the `/app/javascript/packs` folder.
+* The Webpack configuration is in `/config/webpack`
+* The entrypoint is in `/app/javascript/packs/application.js`
+* You don't need to do anything special to start the server
 
 #### Configuring your editor
 
@@ -241,7 +218,13 @@ SublimeText:
 ISAMUNI_APP_ID=appid
 ISAMUNI_APP_SECRET=secret
 ISAMUNI_ADMINS=<list of user uids divided by space ' '>
+ISAMUNI_ADMINS_MAILS=<list of user uids divided by space ' '>
 ISAMUNI_DATABASE_HOST=devdb
+SMTP_PORT=2525
+SMTP_HOST=smtp.mailgun.org
+SMTP_USERNAME=MAILGUN_SMTP_USERNAME_HERE
+SMTP_PASSWORD=MAILGUN_SMTP_PASSWORD_HERE
+SMTP_DOMAIN=MAILGUN_SMTP_DOMAIN_HERE
 ```
 
 Then build and run the containers:
@@ -257,7 +240,6 @@ You can also run a single components (eg. the database)
 ```
 $ docker-compose up devdb
 ```
-
 
 ## FAQ
 
