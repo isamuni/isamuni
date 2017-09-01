@@ -106,7 +106,7 @@ class FeedController < ApplicationController
       .order("DATE_TRUNC('month', created_at) DESC")
       .count
       .map { |k,v| [k.strftime("%Y-%m"), v] }
-      
+
     render json: posts_by_month
   end
 end
