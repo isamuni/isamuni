@@ -1,13 +1,13 @@
 <template>
-<div id="feedapp" >
+<div id="feedapp">
     <div v-if="loading" class="row">
         <div class="col-3">
-        <p>Caricamento in corso</p>
+            <p>Caricamento in corso</p>
         </div>
     </div>
     <div v-else class="row">
         <div class="col-5">
-            <multiselect :options="months" label="label" :multiple="false" :close-on-select="true" v-model="selectedMonth" placeholder="Scegli un mese"/>
+            <multiselect :options="months" label="label" :multiple="false" :close-on-select="true" v-model="selectedMonth" placeholder="Scegli un mese" />
         </div>
         <div class="col-6">
             <multiselect :options="sources" :multiple="true" :close-on-select="true" v-model="selectedSources" placeholder="Filtra per fonti" label="name" />
@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <PostDisplay :posts="filteredPosts" :as-list="asList" ></PostDisplay>
+            <PostDisplay :posts="filteredPosts" :as-list="asList"></PostDisplay>
         </div>
     </div>
 </div>
@@ -53,30 +53,30 @@ var Feed = {
     mounted: function() {
         $.when(DataSource.getSources(), this.getMonths())
             .then((sources) => {
-            this.sources = sources;
-            this.loading = false;
-        });
+                this.sources = sources;
+                this.loading = false;
+            });
     },
     computed: {
         request_filters() {
             let startD = null;
             let endD = null;
-            if(this.selectedMonth){
+            if (this.selectedMonth) {
                 startD = new Date(this.selectedMonth.id);
                 endD = new Date(this.selectedMonth.id);
                 endD.setMonth(startD.getMonth() + 1);
                 startD = startD.getTime();
-                endD= endD.getTime();
+                endD = endD.getTime();
             }
             return {
                 sources: "",
                 start: startD,
                 end: endD,
                 jobs_only: this.jobsOnly,
-                limit: 70
+                limit: 100
             };
         },
-        filteredPosts(){
+        filteredPosts() {
             let selectedIDs = this.selectedSources.map((e) => e.id);
             return this.posts.filter((post) => !selectedIDs.length || selectedIDs.includes(post.source_id));
         }
@@ -95,17 +95,31 @@ var Feed = {
                 this.posts = posts;
             });
         },
-        getMonths(){
+        getMonths() {
             return $.getJSON("/feed/count_by_month")
                 .then((data) => {
-                    if(data){
-                        this.months = data.map(x => ({ id: x[0], label: `${x[0]} (${x[1]} post)` })) ;
+                    if (data) {
+                        this.months = data.map(x => ({
+                            id: x[0],
+                            label: `${x[0]} (${x[1]} post)`
+                        }));
                         this.selectedMonth = this.months[0];
                     }
                 });
         }
     },
     components: {
+        PostDisplay,
+        Multiselect
+    }
+};
+
+export default Feed;
+</script>
+
+<style>
+
+</style>
         PostDisplay,
         Multiselect
     }
