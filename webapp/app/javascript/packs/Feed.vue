@@ -118,16 +118,4 @@ export default Feed;
 </script>
 
 <style>
-
-</style>
-        PostDisplay,
-        Multiselect
-    }
-};
-
-export default Feed;
-</script>
-
-<style>
-
 </style>
