@@ -1,0 +1,13 @@
+<h3>Richieste di ownership</h3>
+
+<% @requests.each do |request| %>
+<ul>
+    <li>
+        <%= request.user.name %> - <%= request.page.name %> -
+        <%= link_to 'Accept', me_accept_ownership_request_path(request),
+            method: :post, data: { confirm: 'Are you sure?' } %> ,
+        <%= link_to 'Reject', me_reject_ownership_request_path(request),
+            method: :post, data: { confirm: 'Are you sure?' } %>
+    </li>
+</ul> 
+<% end %>

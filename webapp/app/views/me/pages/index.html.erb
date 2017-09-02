@@ -7,16 +7,14 @@
         <i class="fa fa-plus"></i> Nuova Pagina
       <% end %>
   </div>
-  <div class="col-2">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#page-ownership-modal">
-      <i class="fa fa-key"></i> Richiedi pagina
-    </button>
-  </div>
 </div>
 <br>
 <p>
 Crea e gestisci pagine per far conoscere la tua community o la tua azienda.
 Una volta creata la pagina dovrai aspettare l'approvazione degli admin per renderla pubblica.
+</p>
+<p>
+  Per richiedere permessi in modifica di una pagina di community/azienda già creata, clicca il link "Modifica pagina" nella pagina in questione. 
 </p>
 <table class="table table-striped table-hover table-condensed">
   <tbody>
@@ -56,51 +54,3 @@ Una volta creata la pagina dovrai aspettare l'approvazione degli admin per rende
     <% end %>
   </tbody>
 </table>
-
-<!-- page-ownership-modal -->
-<div class="modal fade" id="page-ownership-modal" tabindex="-1" role="dialog" aria-labelledby="PageOwnershipModal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Richiesta permessi</h4>
-      </div>
-      <div class="modal-body">
-        <p>Con questa procedura puoi richiedere agli admin accesso in modifica ad una pagina già creata.
-           L'approvazione avviene manualmente, quindi ti preghiamo di pazientare ed eventualmente contattare
-           direttamente gli amministratori</p>
-        <div id="pageSelector"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="submitRequest" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<% content_for :scripts do %>
-
-<script type="text/javascript">
-  /* global Vue, App, $ */
-  $(function(){
-    var PageSelector = new Vue(App.PageSelector);
-    PageSelector.$mount('#pageSelector');
-    $("#submitRequest").click(function(){
-      var selected = PageSelector.$data.selected;
-      if (selected){
-        var request_ownership = $.ajax({type: 'POST', url: '/me/ownership_requests', data: {page: selected.id}});
-        request_ownership.then(function(result){
-          alert(result);
-          $('#page-ownership-modal').modal('hide');
-        }).fail(function(result){
-          alert(result);
-        });
-      }
-    });
-  });
-
-</script>
-<% end %>

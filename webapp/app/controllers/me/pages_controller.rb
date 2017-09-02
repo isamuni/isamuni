@@ -40,6 +40,10 @@ class Me::PagesController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   # PATCH/PUT /pages/1
   # PATCH/PUT /pages/1.json
   def update
@@ -71,7 +75,7 @@ class Me::PagesController < ApplicationController
   private
 
   def check_page_owner
-    redirect_to '/', notice: 'Only a page owner can edit a page' unless current_user&.is_admin? || @page.owners.include?(current_user)
+    redirect_to controller: 'me/ownership_requests', action: :new, page: @page.id unless current_user&.is_admin? and @page.owners.include?(current_user)
   end
 
   def set_page

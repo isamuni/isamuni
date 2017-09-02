@@ -115,3 +115,14 @@
 <% content_for :scripts do %>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <% end %>
+
+
+<hr>
+
+<div class="row">
+  <div class="col-md-12">
+	<%= link_to edit_me_page_path(@page) do %>
+		<i class="fa fa-pencil"></i> Modifica pagina
+  <% end if current_user %>
+  </div>
+</div>

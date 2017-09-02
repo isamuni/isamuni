@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   namespace :me do
     get '/', to: 'profiles#edit', as: 'edit_user'
     resources :pages
-    resources :ownership_requests, only: [:create]
+    resources :ownership_requests, only: [:create, :new, :index]
+    post '/ownership_requests/:id/accept', to: 'ownership_requests#accept', as: 'accept_ownership_request'
+    post '/ownership_requests/:id/reject', to: 'ownership_requests#reject', as: 'reject_ownership_request'    
     resource :profile, only: [:edit, :update]
   end
 

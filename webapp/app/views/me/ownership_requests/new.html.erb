@@ -1,0 +1,30 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Richiesta di ownership per <%= @page.name %></h3>
+        <p>
+            Puoi richiedere i permessi di modifica di questa pagina tramite
+            questa form. I permessi sono concessi a mano dagli admin, che
+            approveranno il prima possibile.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    <%= form_tag('/me/ownership_requests', method: :post) do %>
+        <h4>Cosa vuoi modificare?</h4>
+        <input type="hidden" id="page" name="page" value="<%= @page.id %>"></input>
+        <div class="field">
+            <%= text_area_tag :message, nil, class: "form-control", placeholder: 'Messaggio' %>
+        </div>
+        <br>
+        <div class="actions">
+                <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+                  <i class="fa fa-save"></i> Save
+                <% end %>
+        </div>
+    </div>
+</div>
+
+<% end %>

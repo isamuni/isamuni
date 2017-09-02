@@ -39,7 +39,10 @@
 		        <% if current_user != nil && current_user.is_admin? %>
 		        <li class="nav-item">
 		            <%= link_to "Pannello Admin", admin_path, class: "nav-link"  %>
-		        </li>
+						</li>
+						<li class="nav-item">
+                <%= link_to "Richieste ownwership", me_ownership_requests_path, class: "nav-link"  %>
+            </li>
             <li class="nav-item">
                 <%= link_to "Pannello CRUD", rails_admin.dashboard_path, class: "nav-link"  %>
             </li>
@@ -59,7 +62,11 @@
 		    </ul>
 		</div>
 		<div class="col-10 container">
-	  		<%= yield %>
+				<% if flash[:notice] %>
+				<div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+				<% end %>
+				
+				<%= yield %>
 		</div>
 	</div>
 </div>
