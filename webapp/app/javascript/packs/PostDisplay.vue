@@ -87,25 +87,3 @@ export default PostDisplay;
     table-layout: fixed;
 }
 </style>
-odal.show();
-            });
-        }
-    },
-    components: {
-        PostCard,
-        PostModal
-    }
-};
-
-export default PostDisplay;
-</script>
-
-<style>
-.content {
-    overflow-wrap: break-word;
-}
-
-.mytable {
-    table-layout: fixed;
-}
-</style>
