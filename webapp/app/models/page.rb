@@ -15,7 +15,7 @@ class Page < ApplicationRecord
   end
 
   def fb_id
-    /www.facebook.com\/(\w+)/.match(fbpage)&.[](1)
+    /www.facebook.com\/([\w\.]+)/.match(fbpage)&.[](1)
   end
 
   def pic(height = 100)
