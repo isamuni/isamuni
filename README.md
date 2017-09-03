@@ -61,9 +61,6 @@ More info (plus a roadmap) in the [wiki](https://github.com/sic2/isamuni/wiki)
 
 ### Environment Configuration
 
-#### Facebook APP ID
-To allow the login to work using Facebook, you will have to create a Facebook app (if you do not have one already). [Here](https://developers.facebook.com/docs/apps/register) is a guide from Facebook on how to create one.
-
 In your bash *.profile* file, add:
 
 ```bash
@@ -80,7 +77,10 @@ export ISAMUNI_ADMINS_MAILS="YOUR_MAIL_HERE"
 
 (or ask a developer for the already compiled lines)
 
-#### Setup rails
+##### Facebook APP ID
+To allow the login to work using Facebook, you will have to create a Facebook app (if you do not have one already). [Here](https://developers.facebook.com/docs/apps/register) is a guide from Facebook on how to create one.
+
+### Rails Setup
 
 **Get rails on your system**
 
@@ -92,20 +92,20 @@ you'll need recent versions of ruby (2.3+), nodejs and rubygem. You can find som
 # Install isamuni's dependences
 # (you'll need to repeat this step every time some dependences are updated)
 $ cd isamuni/webapp
-$ bundler
-$ yarn
+$ (sudo) bundler
+$ (sudo) yarn
 ```
 
 
-### Database setup
+### Database Setup
 
 We are using postgres on development and production mode.
 
-#### With docker
+#### With Docker
 
 You can use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:create` on the first usage. That's it
 
-#### Without docker
+#### Without Docker
 
 First, make sure that you have postgres installed on your machine.
 Then create a user and a database for isamuni:
@@ -142,7 +142,7 @@ Use the crawler to get posts and events (see below).
 
 ```bash
 $ bundle install # Execute this only when dependencies change
-$ yarn
+$ (sudo) yarn
 $ rails server webrick
 ```
 
@@ -228,7 +228,7 @@ SMTP_DOMAIN=MAILGUN_SMTP_DOMAIN_HERE
 ```
 
 Then build and run the containers:
-```
+```bash
 $ docker-compose build
 $ docker-compose up
 
@@ -237,7 +237,7 @@ $ docker-compose down
 ```
 
 You can also run a single components (eg. the database)
-```
+```bash
 $ docker-compose up devdb
 ```
 
