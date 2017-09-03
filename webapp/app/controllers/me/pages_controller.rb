@@ -86,6 +86,6 @@ class Me::PagesController < ApplicationController
   def page_params
     params.require(:page).permit(:name, :links, :description, :contacts, :sector,
                                  :kind, :fbpage, :twitterpage, :location,
-                                 :lookingfor, :no_employees, :url)
+                                 :lookingfor, :no_employees, :website)
   end
 end
