@@ -16,6 +16,7 @@
 //= require jquery.validate.additional-methods
 //= require twitter/typeahead.min
 //= require tether
+//= require popper
 //= require bootstrap-sprockets
 //= require simplemde.min.js
 //= require moment.min.js

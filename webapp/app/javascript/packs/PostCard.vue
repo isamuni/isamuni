@@ -99,6 +99,7 @@ export default PostCard;
     position: absolute;
     bottom: 0;
     font-size: 12px;
+    background-color: rgb(255, 255, 255);
 }
 
 .post-card .card-img-top {

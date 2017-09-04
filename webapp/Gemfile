@@ -16,7 +16,12 @@ group :production do
   gem 'thin'
 end
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-validation-rails'
+
 # Bootstrap gem for cool UI
+gem 'popper', '~> 0.2.5'
 gem 'bootstrap', '~> 4.0.0.beta'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -24,12 +29,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 3.2.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2.2'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'jquery-validation-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
