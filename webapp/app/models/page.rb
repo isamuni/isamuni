@@ -24,18 +24,32 @@ class Page < ApplicationRecord
   end
 
   def pic(height = 100)
-    "https://graph.facebook.com/#{fb_id}/picture?height=#{height}" if fb_id
+    if fb_id
+      "https://graph.facebook.com/#{fb_id}/picture?height=#{height}"
+    elsif twitter_id
+      if height >= 100
+        twitter_url + "/profile_image?size=original"
+      else
+        twitter_url + "/profile_image"
+      end
+    end
   end
 
   def fb_url
     "https://www.facebook.com/#{fb_id}/" if fb_id
   end
 
-  def twitter_url
-    if twitterpage
-      page = twitterpage.split('@')[1]
-      "https://twitter.com/#{page}"
+  def twitter_id
+    return nil if twitterpage.blank?
+    if twitterpage.include? '@'
+      twitterpage.split('@')[1]
+    else
+      twitterpage
     end
+  end
+
+  def twitter_url
+    "https://twitter.com/#{twitter_id}" if twitter_id
   end
 
   def as_json(options = {})
