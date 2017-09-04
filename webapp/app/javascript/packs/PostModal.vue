@@ -24,7 +24,7 @@
                     <span v-else> {{ post.author_name }}</span> @ {{post.source.name}}
                 </div>
                 <div class="col-6 text-right">
-                    <button type="button " class="btn btn-secondary " data-dismiss="modal">Close</button>
+                    <button type="button " class="btn btn-dark " data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@ var PostModal = {
             return postIcon(this.post.post_type);
         },
         time: function() {
-            return moment(this.post.created_at).format("L LT");
+            return moment(this.post.created_at).format("DD/MM/YYYY LT");
         }
     },
     methods: {

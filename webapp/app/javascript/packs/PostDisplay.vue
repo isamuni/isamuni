@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 /* global moment, Vue */
 
 import PostCard from './PostCard.vue';
@@ -36,7 +35,7 @@ let PostDisplay = {
             currentPost: null,
             columns: [{
                     label: 'Data',
-                    field: (x) => moment(x.created_at).format("L LT"),
+                    field: (x) => moment(x.created_at).format("DD/MM/YYYY LT"),
                     width: "15%"
                 },
                 {

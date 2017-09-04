@@ -1,5 +1,5 @@
 <template>
-<div class="post-card card post" @click="$emit('click')" :style="style">
+<div class="post-card card post" @click="$emit('click')" style="border-color: #AED581;">
     <div class="card-header">
         <div class="row">
             <div class="col-2 text-left">
@@ -40,14 +40,6 @@ function postIcon(postType) {
     return "fa fa-sticky-note-o";
 }
 
-function postStyle(postType) {
-    if (postType == 'link')
-        return 'border-color: #FDD835;';
-    if (postType == 'photo')
-        return "border-color: #FFB300;";
-    return "border-color: #AED581;";
-}
-
 let PostCard = {
     props: {
         post: Object
@@ -59,7 +51,7 @@ let PostCard = {
             return name + content;
         },
         time: function() {
-            return moment(this.post.created_at).format("L LT");
+            return moment(this.post.created_at).format("DD/MM/YYYY LT");
         },
         author_name: function() {
             var name = this.post.author_name.split(" ");
@@ -68,9 +60,6 @@ let PostCard = {
         },
         icon: function() {
             return postIcon(this.post.post_type);
-        },
-        style: function() {
-            return postStyle(this.post.post_type);
         }
     }
 };
@@ -86,13 +75,6 @@ export default PostCard;
     overflow: hidden;
     margin-right: 10px;
 }
-
-
-/*.post-card .card-header {
-    width: 100%;
-    position: absolute;
-    font-size: 12px;
-}*/
 
 .post-card .card-footer {
     width: 100%;
