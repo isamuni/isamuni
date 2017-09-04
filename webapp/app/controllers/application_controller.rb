@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     if page.community?
       community_url page
     else
-      commpany_url page
+      company_url page
     end
   end
 
