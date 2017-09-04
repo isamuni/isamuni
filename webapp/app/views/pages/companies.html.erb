@@ -37,11 +37,11 @@
   <tbody>
     <% @pages.each do |page| %>
       <tr>
-        <td width="70px">
+        <td width="50px">
           <% if page.pic %>
-              <img src="<%= page.pic 70 %>" class="img-fluid img-rounded">
+              <img src="<%= page.pic 50 %>" class="img-fluid img-rounded">
           <% else %>
-              <i class="fa fa-industry" style="font-size: 70px"></i><br>
+              <i class="fa fa-industry" style="font-size: 50px"></i><br>
           <% end %>
         </td>
         <td><%= link_to page.name, page %></td>
