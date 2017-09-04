@@ -16,13 +16,15 @@
     <div class="row">
       <% if @page.pic %>
       <div class="col-lg-2">
-        <img src="<%= @page.pic %>" class="img-fluid rounded"> 
+        <img src="<%= @page.pic %>" class="img-fluid rounded">
       </div>
       <% end %>
       <div class="col-lg-10">
         <h2><%= @page.name %></h2>
         <p>
-        <%= if @page.community? then "Community" else "Azienda" end %> nell'ambito <%= @page.sector %><br>
+        <% if @page.sector? %>
+            <%= if @page.community? then "Community" else "Azienda" end %> nell'ambito <strong><%= @page.sector %></strong><br>
+        <% end %>
         <%= link_to @page.website, @page.website, :target => "_blank" if @page.website.present? %>
         </p>
       </div>
@@ -30,12 +32,11 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <h3>Descrizione</h3>
         <p><%= markdown(@page.description) %></p>
         <% if @page.lookingfor.present? %>
           <h3>In cerca di</h3>
           <p><%= markdown(@page.lookingfor) %></p>
-        <% end %> 
+        <% end %>
         <hr>
       </div>
     </div>
@@ -102,7 +103,7 @@
               data-lang="it"
               href="<%= @page.twitter_url %>"
               data-height="600"
-              data-chrome="noheader nofooter noborders"
+              data-chrome="nofooter noborders"
               data-aria-polite="assertive">
           </a>
         <% end %>
@@ -115,7 +116,6 @@
 <% content_for :scripts do %>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <% end %>
-
 
 <hr>
 
