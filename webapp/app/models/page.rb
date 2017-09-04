@@ -6,6 +6,11 @@ class Page < ApplicationRecord
   has_and_belongs_to_many :owners, class_name: 'User', join_table: :owners_pages
   has_paper_trail
 
+  enum kind: [:company, :community]
+
+  validates :name, presence: true, uniqueness: true
+
+
   def self.companies
     where(kind: Page.kinds[:company])
   end
@@ -41,6 +46,5 @@ class Page < ApplicationRecord
     end
   end
 
-  enum kind: [:company, :community]
-  validates :name, presence: true
+
 end

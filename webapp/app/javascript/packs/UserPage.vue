@@ -12,10 +12,6 @@
 
 <script>
 
-import Vue from 'vue';
-import VueGoodTable from 'vue-good-table';
-Vue.use(VueGoodTable);
-
 //TODO still unused
 
 function truncate(str, len){
