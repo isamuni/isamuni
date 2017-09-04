@@ -67,24 +67,20 @@
     </div>
   </div>
 </div>
+
 <% content_for :scripts do %>
 <script>
 /* global $, initTypeahead */
-
-  $("[name='users-checkbox']").bootstrapSwitch();
-
-  $('input[name="users-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-    if (state==true) {
-      document.cookie = "cards=true";
-    } else {
-      document.cookie = 'cards=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+$(function(){
+  $("#user-table").DataTable({
+    autowidth: false,
+    info: false,
+    lengthChange: false,
+    pageLength: 50,
+    language: {
+      "search": "Filtra:"
     }
-    window.location.reload();
   });
-
-  $("div[id^=card-]").click(function() {
-    var id = $(this).attr('id').split('card-')[1];
-    window.location.href = window.location.protocol + "//" + window.location.host + id;
-  });
+})
 </script>
 <% end %>
