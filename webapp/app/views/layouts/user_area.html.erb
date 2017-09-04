@@ -54,7 +54,7 @@
 		        </li>
 		      <% else %>
 		        <li class="nav-item">
-		          <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link', data: {intro:'Login with Facebook to join Isamuni and create a personal profile'} do %>
+		          <%= link_to "/auth/facebook", id: "sign_in", class: 'nav-link' do %>
 		            <i class="fa fa-facebook"></i> Login
 		          <% end %>
 		        </li>
@@ -65,7 +65,7 @@
 				<% if flash[:notice] %>
 				<div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
 				<% end %>
-				
+
 				<%= yield %>
 		</div>
 	</div>

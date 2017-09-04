@@ -11,7 +11,7 @@
         </div>
     </div>
     <img v-if="post.picture" v-bind:src="post.picture" v-bind:alt="post.alt" class="card-img-top"></img>
-    <div class="card-block">
+    <div class="card-body">
         <p class="card-text" style="word-wrap: break-word;">{{ text }}</p>
     </div>
     <div class="card-footer text-muted text-right">
@@ -87,11 +87,12 @@ export default PostCard;
     margin-right: 10px;
 }
 
-.post-card .card-header {
+
+/*.post-card .card-header {
     width: 100%;
     position: absolute;
     font-size: 12px;
-}
+}*/
 
 .post-card .card-footer {
     width: 100%;

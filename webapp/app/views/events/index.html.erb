@@ -17,10 +17,7 @@
     <div class="col-4">
         <h5>Mappa&nbsp;<button id="resetmap" class="btn btn-success btn-sm"><i class="fa fa-refresh">&nbsp;Ricentra</i></button></h5>
         <i id="spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-        <div id="mapid" class="map"
-                data-intro="Scopri gli eventi correnti e  prossimi usando la mappa.
-                            Gli eventi in rosso sono quelli di oggi.
-                            Clicca sull'evento per saperne di più.">
+        <div id="mapid" class="map">
         </div>
         <br>
 
@@ -39,7 +36,7 @@
         <div id="chart_div"></div>
     </div>
     <div class="row">
-        <div id="filter_div" data-intro="Usa lo slider per scoprire gli eventi passati."></div>
+        <div id="filter_div"></div>
     </div>
     <div class="my-2 form-group">
       <%= form_tag events_path, :method => "get" do |f| %>

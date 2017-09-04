@@ -1,15 +1,11 @@
 <% @posts.each_with_index do |post, index| %>
-<div class="card" 
+<div class="card"
 	<% if post.post_type == 'link' %>
 		style="background-color: #FFEE58; border-color: #FDD835;"
 	<% elsif post.post_type == 'photo' %>
 		style="background-color: #FFCA28; border-color: #FFB300;"
 	<% else %>
 		style="background-color: #C5E1A5; border-color: #AED581;"
-	<% end %>
-	
-	<% if index==0 %>
-		data-intro="Questo è un post del gruppo PAC. Clicca sul post per saperne di più! Tutti i post sono verdi, eccetto i link (gialli) e le foto (arancioni)" data-position='right'
 	<% end %>
 >
 	<%= render partial: "card", locals: {post: post} %>

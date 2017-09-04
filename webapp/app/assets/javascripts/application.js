@@ -17,7 +17,6 @@
 //= require twitter/typeahead.min
 //= require tether
 //= require bootstrap-sprockets
-//= require introjs
 //= require simplemde.min.js
 //= require moment.min.js
 //= require leaflet

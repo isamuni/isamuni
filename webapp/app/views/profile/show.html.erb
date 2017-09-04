@@ -2,7 +2,7 @@
 
 
 <div class="row">
-	<div class="col-4" data-intro="Scopri velocemente le info su questo utente.">
+	<div class="col-4">
 		<h1><%= @user.name %></h1>
 		<p style="word-wrap: break-word;"><%= @user.occupation %></p>
 		<p>
@@ -32,12 +32,12 @@
 			</div>
 		<% end %>
 	</div>
-	<div class="col-8" data-intro="Vuoi saperne di più? Leggi la descrizione di questo utente e i suoi progetti.">
+	<div class="col-8">
 		<div id="user-data">
 			<% if @user.description.blank? and  @user.projects.blank? and @user.links.blank? %>
 			<h4>Descrizione</h4>
 			<p>Da riempire.. :)</p>
-			<% end %> 
+			<% end %>
 
 			<% unless @user.description.blank? %>
 			<h4>Descrizione</h4>

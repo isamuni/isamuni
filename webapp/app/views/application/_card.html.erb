@@ -1,8 +1,8 @@
-<%= content_tag(:div, class: 'post card-block', data: {toggle: "modal", target: '#' + post.uid} ) do %>
+<%= content_tag(:div, class: 'post card-body', data: {toggle: "modal", target: '#' + post.uid} ) do %>
 	<% if post.picture %>
 		<%= image_tag(post.picture, alt: post.alt, class: "card-img-top img-fluid") %>
 	<% end %>
-	<blockquote class="card-blockquote" style="word-wrap: break-word;">
+	<blockquote class="blockquote" style="word-wrap: break-word;">
 		<p>
 			<%= truncate(post.name, length: 40) if post.name %>
 			<% if post.name %>

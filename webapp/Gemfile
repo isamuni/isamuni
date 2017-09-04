@@ -17,7 +17,7 @@ group :production do
 end
 
 # Bootstrap gem for cool UI
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.0.0.beta'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -52,8 +52,6 @@ gem 'textacular'
 gem 'friendly_id'
 # Markdown renderer
 gem 'redcarpet'
-# Nice and neat Tour cards
-gem 'introjs-rails'
 
 # Leaflet is a small and nice js library that will help with showing maps
 gem 'leaflet-rails'
