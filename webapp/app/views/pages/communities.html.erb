@@ -69,7 +69,10 @@ $(function(){
     pageLength: 50,
     language: {
       "search": "Filtra:"
-    }
+    },
+    columnDefs: [
+      { "orderable": false, searchable: false, "targets": [0,-1] }
+    ]
   });
 })
 </script>
