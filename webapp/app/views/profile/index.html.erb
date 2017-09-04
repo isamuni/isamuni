@@ -19,7 +19,6 @@
 
 <div class="row">
   <div class="col-12">
-    <h4>Skills degli utenti</h4>
     <div class="tag-cloud-container">
       <% tag_cloud(@tags, ["cloud-tag cloud-tag-small","cloud-tag cloud-tag-medium","cloud-tag cloud-tag-big","cloud-tag cloud-tag-verybig"]) do |tag, css_class| %>
         <%= link_to "#{tag.name}(#{tag.taggings_count})", { :action => :index, :skills => tag.name }, :class => css_class %>
