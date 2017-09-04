@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-9">
+  <div class="col-12 col-md-9">
     <div class="row">
       <div class="col-12">
         <h1>Isamuni</h1>
@@ -24,7 +24,7 @@
       <footer><i>da <a href="https://github.com/sic2/awesome-sicily">awesome-sicily</a></i></footer>
     </blockquote>
   </div>
-  <div class="col-3">
+  <div class="col-12 col-md-3">
       <div class="row">
         <% if !current_user %>
         <%= link_to login_path, id: "sign_in", class: "btn btn-success" do %>
@@ -61,12 +61,14 @@
   <div class="col-2 home-section-link">
     <a href="/feed">
       <i class="fa fa-rss-square fa-3x"></i><br>
-      <big><%= @posts_count %></big> Post
+      <big><%= @posts_count %></big> Post<br>
+      <big><%= @posts_week_count %></big> Post questa settimana<br>
     </a>
   </div>
   <div class="col-2 home-section-link">
     <a href="/events">
       <i class="fa fa-calendar fa-3x"></i><br>
+      <big><%= @events_count %></big> Eventi<br>
       <big><%= @upcoming_events_count %></big> Prossimi eventi
     </a>
   </div>
