@@ -11,14 +11,11 @@
 </template>
 
 <script>
+
+/* global moment, Vue */
+
 import PostCard from './PostCard.vue';
 import PostModal from './PostModal.vue';
-
-import Vue from 'vue';
-import VueGoodTable from 'vue-good-table';
-Vue.use(VueGoodTable);
-
-import moment from 'moment';
 
 function truncate(str, len) {
     str = str || "";

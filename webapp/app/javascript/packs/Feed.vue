@@ -14,7 +14,6 @@
             <p>
                 <label for="jobs_only">Solo annunci di lavoro</label> <input id="jobs_only" type="checkbox" value="false" v-model="jobsOnly"></input>
                 <label for="as_list">Mostra come tabella</label> <input id="as_list" type="checkbox" value="false" v-model="asList"></input>
-
             </p>
         </div>
     </div>
@@ -29,6 +28,7 @@
 <script>
 import PostDisplay from './PostDisplay.vue';
 import Multiselect from 'vue-multiselect';
+import "vue-multiselect/dist/vue-multiselect.min.css";
 
 /* Main app
    Contains both filters and postDisplay

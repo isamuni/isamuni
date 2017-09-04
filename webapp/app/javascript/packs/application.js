@@ -9,12 +9,17 @@
 
 
 import Vue from 'vue';
+
+import VueGoodTable from 'vue-good-table';
+Vue.use(VueGoodTable);
+
 import Feed from './Feed.vue';
-import PageSelector from './PageSelector.vue';
+//import PageSelector from './PageSelector.vue';
 import UserFeed from './UserFeed.vue';
-import UserPage from './UserPage.vue';
+//import UserPage from './UserPage.vue';
 
 window.Vue = Vue;
+
 /* global $ */
 
 /*
@@ -50,7 +55,6 @@ window.DataSource = {
 
 window.App = {
     Feed,
-    PageSelector,
     UserFeed
 };
 
