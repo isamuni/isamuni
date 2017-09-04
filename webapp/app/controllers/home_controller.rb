@@ -13,4 +13,7 @@ class HomeController < ApplicationController
                                   .order('ends_at desc')
                                   .count
   end
+
+  def opendata
+  end
 end

@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   get 'events/range_events(/query/:query)', to: 'events#range_events'
 
   # Opendata
-  get 'opendata', to: 'opendata#index'
+  get 'opendata', to: 'home#opendata'
 
   # Admin
   get 'admin', to: 'admin#index'
