@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h2> <%= @wikipage.name %></h2>
+<div id="wikisamuni_header">
+  <h1><a href="<%= wikipages_url%>">WikIsamuni</a> > <%= @wikipage.name %></h1>
+</div>
 
 <div id="wiki-content">
   <%= markdown(@wikipage.content) %>
