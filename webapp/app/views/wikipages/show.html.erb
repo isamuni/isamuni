@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h2> <%= @wikipage.name %></h2>
+
+<div id="wiki-content">
+  <%= markdown(@wikipage.content) %>
+</div>
+
+<%= link_to 'Edit', edit_wikipage_path(@wikipage) %> |
+<%= link_to 'Back', wikipages_path %>

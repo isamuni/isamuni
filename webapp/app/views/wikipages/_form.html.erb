@@ -1,0 +1,50 @@
+<%= form_with(model: wikipage, local: true) do |form| %>
+  <% if wikipage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(wikipage.errors.count, "error") %> prohibited this wikipage from being saved:</h2>
+
+      <ul>
+      <% wikipage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :wikipage_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :slug , "Slug (lascia vuoto per autogenerare)"%>
+    <%= form.text_field :slug, id: :wikipage_slug, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :wikipage_content, class: "form-control" %>
+  </div>
+
+  <p class="actions">
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+      <i class="fa fa-save"></i> Salva
+    <% end %>
+  </p>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+var fields = document.querySelectorAll('textarea');
+for (var i = 0; i < fields.length; ++i) {
+  var item = fields[i];
+  var simplemde = new SimpleMDE({
+    element: item,
+    spellChecker: false,
+    insertTexts: {
+      link: ["[", "](/wiki/)"]
+    }
+  });
+}
+</script>
+<% end %>
