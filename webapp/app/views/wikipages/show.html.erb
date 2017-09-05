@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<p id="notice" class="alert alert-info" role="alert">
+  <%= notice %>
+</p>
+<% end %>
 
 <div class="row">
     <div class="col-12 col-md-8">
