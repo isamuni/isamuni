@@ -30,7 +30,7 @@
 <table class="table table-striped table-hover table-condensed">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nome Pagina</th>
       <th>Slug</th>
       <th colspan="3"></th>
     </tr>
@@ -41,9 +41,9 @@
       <tr>
         <td><%= wikipage.name %></td>
         <td><%= wikipage.slug %></td>
-        <td><%= link_to 'Show', wikipage %></td>
-        <td><%= link_to 'Edit', edit_wikipage_path(wikipage) %></td>
-        <td><%= link_to 'Destroy', wikipage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Vedi', wikipage %></td>
+        <td><%= link_to 'Modifica', edit_wikipage_path(wikipage) %></td>
+        <td><%= link_to 'Cancella', wikipage, method: :delete, data: { confirm: 'Sei sicuro di voler cancellare la pagina?' } %></td>
       </tr>
     <% end %>
   </tbody>

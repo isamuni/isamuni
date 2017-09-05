@@ -1,5 +1,12 @@
-<h1>Modifica Pagina Wiki</h1>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <h2>Modifica Pagina Wiki</h2>
+    </div>
+    <div class="col-12 col-md-4">
+        <%= link_to @wikipage, class: "btn btn-success" do %>
+          <i class="fa fa-eye"></i> Vedi pagina
+        <% end %>
+    </div>
+</div>
 
 <%= render 'form', wikipage: @wikipage %>
-
-<%= link_to 'Show', @wikipage %>
