@@ -36,7 +36,7 @@
 		        <li class="nav-item">
 		        	<%= link_to "Le mie pagine", '/me/pages', class: "nav-link"  %>
 		        </li>
-		        <% if current_user != nil && current_user.is_admin? %>
+		        <% if current_user != nil && current_user.admin? %>
 		        <li class="nav-item">
 		            <%= link_to "Pannello Admin", admin_path, class: "nav-link"  %>
 						</li>

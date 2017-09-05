@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   # Call this function to stop users from accessing admins functionalities and/or
   # pages that have been blocked
   def require_admin
-    unless !current_user.nil? && current_user.is_admin?
+    unless !current_user.nil? && current_user.admin?
       render file: 'public/401.html', status: :unauthorized
     end
   end

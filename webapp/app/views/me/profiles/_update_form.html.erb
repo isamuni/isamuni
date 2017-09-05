@@ -1,13 +1,14 @@
 <%= form_for current_user, :url => {controller: 'me/profiles', action: 'update'}, :html => { :id => "update_user_form" } do |f| %>
   <% if current_user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(current_user.errors.count, "error") %> hanno impedito il salvataggio delle modifiche:</h2>
       <ul>
       <% current_user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
+    <hr>
   <% end %>
   <div class="field">
     <%= f.label :public_profile, "Vuoi che il tuo profilo sia pubblico?" %>
@@ -16,6 +17,10 @@
   <div class="form-group">
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name, class: "form-control", disabled: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, "Email (rimarrà privata)" %><br>
+    <%= f.text_field :email, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label :occupation, "Occupazione" %><br>

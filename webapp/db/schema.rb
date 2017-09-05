@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831073345) do
+ActiveRecord::Schema.define(version: 20170904204112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(version: 20170831073345) do
     t.string "slug", null: false
     t.boolean "banned", default: false
     t.boolean "public_profile", default: true
+    t.integer "role", default: 0
+    t.string "email"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 

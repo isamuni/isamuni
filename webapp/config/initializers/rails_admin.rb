@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
 
   config.authorize_with do
     cur_user = User.find_by(id: session[:user_id]) if session[:user_id]
-    redirect_to main_app.root_path unless cur_user && cur_user.is_admin?
+    redirect_to main_app.root_path unless cur_user && cur_user.admin?
   end
 end
 

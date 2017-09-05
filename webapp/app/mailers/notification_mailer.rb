@@ -1,5 +1,5 @@
 class NotificationMailer < ApplicationMailer
-    default to: Rails.configuration.admin_mails
+    default to: User.admin.where.not(email: nil).pluck(:email)
 
     def ownership_request_notification(request)
         @request = request

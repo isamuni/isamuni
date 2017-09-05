@@ -22,7 +22,7 @@ private
 
   def post_params
     params.require(:user).permit(:name, :occupation, :description,
-                                 :projects, :links, :skill_list, :public_profile)
+                                 :projects, :links, :skill_list, :public_profile, :email)
   end
 
 end
