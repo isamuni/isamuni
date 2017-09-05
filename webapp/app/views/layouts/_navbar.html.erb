@@ -49,6 +49,11 @@
         <% end %>
       </li>
       <li class="nav-item">
+        <%= link_to wikipages_path, title: 'Wiki', rel: 'tooltip', class: 'nav-link' do %>
+          <i class="fa fa-sticky-note"></i> Wiki
+        <% end %>
+      </li>
+      <li class="nav-item">
         <%= link_to opendata_path, title: 'API', rel: 'tooltip', class: 'nav-link' do %>
           <i class="fa fa-cloud"></i> API
         <% end %>

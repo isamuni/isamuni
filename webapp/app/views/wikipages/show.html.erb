@@ -1,12 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<div id="wikisamuni_header">
-  <h1><a href="<%= wikipages_url%>">WikIsamuni</a> > <%= @wikipage.name %></h1>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div id="wikisamuni_header">
+          <h2><a href="<%= wikipages_url%>">WikIsamuni</a> > <%= @wikipage.name %></h2>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <%= link_to edit_wikipage_path(@wikipage), class: "btn btn-success" do %>
+          <i class="fa fa-pencil"></i> Modifica
+        <% end %>
+    </div>
 </div>
+
+<br>
 
 <div id="wiki-content">
   <%= markdown(@wikipage.content) %>
 </div>
-
-<%= link_to 'Edit', edit_wikipage_path(@wikipage) %> |
-<%= link_to 'Back', wikipages_path %>

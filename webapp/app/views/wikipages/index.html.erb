@@ -4,15 +4,26 @@
 </p>
 <% end %>
 
-<h1>WikIsamuni!</h1>
+<div class="row">
+    <div class="col-12 col-md-8">
+        <h1>WikIsamuni!</h1>
+    </div>
+    <div class="col-12 col-md-4">
+        <% if current_user %>
+          <%= link_to new_wikipage_path, class: "btn btn-success" do %>
+            <i class="fa fa-plus"></i> Pagina Wiki
+          <% end %>
+        <% end %>
+    </div>
+</div>
 
 <p>
-  Benvenuto nel wiki interno di isamuni. Questo wiki consiste di pagine "libere",
+  Benvenuto nel wiki interno di isamuni. Questa wiki consiste di pagine "libere",
   che non descrivono aziende o community.
 </p>
 <p>
   Per editare le pagine nel wiki devi avere i permessi di editor. Contattaci a
-  vigliag@gmail.com o simone.ivan.conte@gmail.com e saremo felici di abilitare
+  vigliag@gmail.com o simone.ivan.conte@gmail.com. Saremo felici di abilitare
   il tuo account.
 </p>
 
@@ -39,5 +50,3 @@
 </table>
 
 <br>
-
-<%= link_to 'Nuova pagina wiki', new_wikipage_path %>
