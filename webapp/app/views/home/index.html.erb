@@ -38,43 +38,57 @@
 </div>
 <hr>
 <div class="row">
-  <div class="col-1">
+  <div class="col-3">
   </div>
   <div class="col-2 home-section-link">
     <a href="/companies">
       <i class="fa fa-industry fa-3x"></i><br>
-      <big><%= @companies_count %></big> Aziende
+      <big><%= number_with_delimiter(@companies_count) %></big> Aziende
     </a>
   </div>
   <div class="col-2 home-section-link">
     <a href="/communities">
       <i class="fa fa-institution fa-3x"></i><br>
-      <big><%= @communities_count %></big> Community
+      <big><%= number_with_delimiter(@communities_count) %></big> Community
     </a>
   </div>
   <div class="col-2 home-section-link">
     <a href="/users">
       <i class="fa fa-users fa-3x"></i><br>
-      <big><%= @users_count %></big> Utenti
+      <big><%= number_with_delimiter(@users_count) %></big> Utenti
     </a>
+  </div>
+  <div class="col-3">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-3">
   </div>
   <div class="col-2 home-section-link">
     <a href="/feed">
       <i class="fa fa-rss-square fa-3x"></i><br>
-      <big><%= @posts_count %></big> Post<br>
+      <big><%= number_with_delimiter(@posts_count) %></big> Post<br>
       <big><%= @posts_week_count %></big> Post questa settimana<br>
     </a>
   </div>
   <div class="col-2 home-section-link">
     <a href="/events">
       <i class="fa fa-calendar fa-3x"></i><br>
-      <big><%= @events_count %></big> Eventi<br>
+      <big><%= number_with_delimiter(@events_count) %></big> Eventi<br>
       <big><%= @upcoming_events_count %></big> Prossimi eventi
     </a>
   </div>
-  <div class="col-1">
+  <div class="col-2 home-section-link">
+    <a href="/events">
+      <i class="fa fa-sticky-note fa-3x"></i><br>
+      <big><%= number_with_delimiter(@wikipages_count) %></big> Pagine Wiki<br>
+    </a>
+  </div>
+  <div class="col-3">
   </div>
 </div>
+
 
 <hr>
 

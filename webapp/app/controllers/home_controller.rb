@@ -12,8 +12,8 @@ class HomeController < ApplicationController
     @upcoming_events_count = Event.where('ends_at >= ? OR starts_at >= ?', today, today)
                                   .order('ends_at desc')
                                   .count
+    @wikipages_count = Wikipage.count
   end
 
-  def opendata
-  end
+  def opendata; end
 end
