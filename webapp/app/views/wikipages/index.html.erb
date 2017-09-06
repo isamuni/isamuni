@@ -33,6 +33,7 @@
       <th>Nome Pagina</th>
       <th>Slug</th>
       <th colspan="3"></th>
+      <th>Ultima Modifica</th>
     </tr>
   </thead>
 
@@ -44,6 +45,7 @@
         <td><%= link_to 'Vedi', wikipage %></td>
         <td><%= link_to 'Modifica', edit_wikipage_path(wikipage) %></td>
         <td><%= link_to 'Cancella', wikipage, method: :delete, data: { confirm: 'Sei sicuro di voler cancellare la pagina?' } %></td>
+        <td><%= wikipage.updated_at.to_formatted_s(:db) %></td>
       </tr>
     <% end %>
   </tbody>
