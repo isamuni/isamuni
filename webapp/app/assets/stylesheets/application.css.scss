@@ -35,7 +35,7 @@ $navbar-brand: #000000;
     background-image: none;
     border-bottom: 2px solid $navbar-border;
     padding: 0;
-    
+
     /* Lowered z-index, so that the navbar is under simplemde */
     z-index: 9;
 
@@ -92,6 +92,21 @@ $navbar-brand: #000000;
 
 .home-section-link {
   text-align: center;
+}
+
+.home-link {
+    color: $navbar-text;
+    text-decoration: none;
+}
+
+.home-link:hover {
+    color: $navbar-text-hover;
+    text-decoration: none;
+}
+
+.social-icon {
+    color: #000;
+    text-decoration: none;
 }
 
 .custom-overflow {
