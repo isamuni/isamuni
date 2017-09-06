@@ -35,6 +35,9 @@ $navbar-brand: #000000;
     background-image: none;
     border-bottom: 2px solid $navbar-border;
     padding: 0;
+    
+    /* Lowered z-index, so that the navbar is under simplemde */
+    z-index: 9;
 
     .nav-link,
     .navbar-toggler,
