@@ -46,6 +46,6 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.friendly.find(params[:id])
-    @owners = User.where(id: @page.owners)
+    @owners = User.where(id: @page.owners, public_profile: true)
   end
 end

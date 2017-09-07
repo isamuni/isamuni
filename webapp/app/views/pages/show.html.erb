@@ -110,13 +110,25 @@
         </div>
       <% end %> <!-- end of social component -->
 
+      <% unless @owners.blank? %>
       <br>
       <h3>Admin Pagina</h3>
-      <ul class="list-group">
-      <% @owners.each do |owner| %>
-        <li class="list-group-item"><%= link_to owner.name, owner %></li>
+      <table class="table table-hover table-sm">
+          <tbody>
+          <% @owners.each do |owner| %>
+              <tr>
+                  <td>
+                      <%= link_to user_path(owner) do %>
+                      <img src="<%= owner.profile_pic 25 %>" class="img-rounded">
+                      <% end %>
+                  </td>
+                  <td><%= link_to owner.name, owner %></td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
       <% end %>
-      </ul>
+
       <br>
       <%= link_to edit_me_page_path(@page), class: "btn btn-info btn-sm" do %>
         <i class="fa fa-pencil"></i> Modifica pagina
