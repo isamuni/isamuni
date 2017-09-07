@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class FeedController < ApplicationController
-  MAX_NUMBER_OF_POSTS = 50
-  MAX_NUMBER_OF_JOB_POSTS = 20
+  MAX_NUMBER_OF_POSTS = 400
+  MAX_NUMBER_OF_JOB_POSTS = 100
 
   def index
     @posts = Post.where(show: true).limit(MAX_NUMBER_OF_POSTS).order('created_at desc')
