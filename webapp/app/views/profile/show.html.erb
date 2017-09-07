@@ -16,21 +16,49 @@
 		</p>
 		<% end %>
 
-		<% if current_user && @user.id == current_user.id %>
-			<div class="col-4 text-center">
+		<% if current_user && @user.id == current_user.id || true %>
 			<%= link_to me_edit_user_url, class: "btn btn-success btn-md" do %>
 				<i class="fa fa-pencil"></i> Modifica profilo
 			<% end %>
-			</div>
 		<% end %>
+
+        <br><br>
+        <div class="btn-group" role="group" aria-label="Basic example">
 		<% if @count > 12 %>
-			<br><br>
-			<div class="col-4 text-center">
-				<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
-					<i class="fa fa-eye"></i> Vedi tutti i post
-				<% end %>
-			</div>
+			<%= link_to all_posts_path(@user), class: "btn btn-primary btn-md" do %>
+				<i class="fa fa-eye"></i> Vedi tutti i post
+			<% end %>
 		<% end %>
+
+            <button class="btn btn-dark btn-md" type="button" data-toggle="collapse" data-target="#pagesOwned" aria-expanded="false" aria-controls="pagesOwned">
+               Pagine gestite
+            </button>
+        </div>
+
+        <br><br>
+        <div class="collapse" id="pagesOwned">
+           <table class="table table-hover table-sm">
+               <tbody>
+                   <% @pages.each do |page| %>
+                   <tr>
+                       <td>
+                       <% if page.pic %>
+                           <img src="<%= page.pic 25 %>" class="img-fluid img-rounded" style="width: 25px">
+                       <% else %>
+                            <% if page.community? %>
+                            <i class="fa fa-institution" style="font-size: 25px"></i><br>
+                            <% else %>
+                            <i class="fa fa-industry" style="font-size: 25px"></i><br>
+                            <% end %>
+                       <% end %>
+                       </td>
+                       <td><%= link_to page.name, page %></td>
+                   </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+
 	</div>
 	<div class="col-12 col-md-8">
 		<div id="user-data">

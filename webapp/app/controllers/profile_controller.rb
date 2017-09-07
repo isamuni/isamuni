@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+
 class ProfileController < ApplicationController
-  before_action :set_user, only: [:show, :all_posts]
+  before_action :set_user, only: %i[show all_posts]
 
   # GET /users/typeahead?query=text
   def typeahead
@@ -21,7 +22,9 @@ class ProfileController < ApplicationController
   # GET /users/:id
   def show
     @count = Post.where(author_uid: @user.uid, show: true).count
-    require_admin unless @user.public_profile or @user == current_user 
+    require_admin unless @user.public_profile || @user == current_user
+
+    @pages = Page.where(id: Owners_pages.where(user_id: @user.id).pluck(:page_id))
   end
 
   def new
@@ -29,8 +32,7 @@ class ProfileController < ApplicationController
   end
 
   # GET /users/:id/all_posts
-  def all_posts
-  end
+  def all_posts; end
 
   private
 

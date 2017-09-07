@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class PagesController < ApplicationController
 
+class PagesController < ApplicationController
   def index
     @pages = Page.where(active: true).order(:name)
 
@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {
+      format.html do
         if kind == :company
           render :companies
         elsif kind == :community
@@ -22,14 +22,14 @@ class PagesController < ApplicationController
         else
           render :index
         end
-      }
-      format.json {
+      end
+      format.json do
         if params[:names_only]
-          render json: @pages.as_json(only: [:name, :id])
+          render json: @pages.as_json(only: %i[name id])
         else
           render json: @pages
         end
-       }
+      end
     end
   end
 
@@ -46,6 +46,6 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.friendly.find(params[:id])
+    @owners = User.where(id: @page.owners)
   end
-
 end

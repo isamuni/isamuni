@@ -60,56 +60,69 @@
       </div>
   </div>
   <div class="col-12 col-lg-4">
-  <% if @page.fb_url or @page.twitter_url %>
-    <ul class="nav nav-tabs">
-      <% if @page.fb_url %>
-        <li class=" nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#fb">Facebook</a>
-        </li>
-      <% end %>
-
-      <% if @page.twitter_url %>
-        <li class="nav-item">
-          <% if !@page.fb_url %>
-            <a class="nav-link active" data-toggle="tab" href="#twitter">Twitter</a>
-          <% else %>
-            <a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a>
+      <% if @page.fb_url or @page.twitter_url %>
+        <ul class="nav nav-tabs">
+          <% if @page.fb_url %>
+            <li class=" nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#fb">Facebook</a>
+            </li>
           <% end %>
-        </li>
-      <% end %>
-    </ul>
 
-    <div class="tab-content">
-      <div id="fb" class="tab-pane active">
-        <% if @page.fb_url %>
-          <div class="fb-page"
-               data-href="<%= @page.fb_url %>"
-               data-tabs="timeline, events, messages"
-               data-small-header="true"
-               data-adapt-container-width="true"
-               data-hide-cover="false"
-               data-show-facepile="true">
+          <% if @page.twitter_url %>
+            <li class="nav-item">
+              <% if !@page.fb_url %>
+                <a class="nav-link active" data-toggle="tab" href="#twitter">Twitter</a>
+              <% else %>
+                <a class="nav-link" data-toggle="tab" href="#twitter">Twitter</a>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+        <div class="tab-content">
+          <div id="fb" class="tab-pane active">
+            <% if @page.fb_url %>
+              <div class="fb-page"
+                   data-href="<%= @page.fb_url %>"
+                   data-tabs="timeline, events, messages"
+                   data-small-header="true"
+                   data-adapt-container-width="true"
+                   data-hide-cover="false"
+                   data-show-facepile="true">
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <% if !@page.fb_url %>
-        <div id="twitter" class="tab-pane active">
-      <% else %>
-        <div id="twitter" class="tab-pane">
+          <% if !@page.fb_url %>
+            <div id="twitter" class="tab-pane active">
+          <% else %>
+            <div id="twitter" class="tab-pane">
+          <% end %>
+            <% if @page.twitter_url %>
+              <a class="twitter-timeline"
+                  data-lang="it"
+                  href="<%= @page.twitter_url %>"
+                  data-height="600"
+                  data-chrome="nofooter noborders"
+                  data-aria-polite="assertive">
+              </a>
+            <% end %>
+          </div>
+        </div>
+      <% end %> <!-- end of social component -->
+
+      <br>
+      <h3>Admin Pagina</h3>
+      <ul class="list-group">
+      <% @owners.each do |owner| %>
+        <li class="list-group-item"><%= link_to owner.name, owner %></li>
       <% end %>
-        <% if @page.twitter_url %>
-          <a class="twitter-timeline"
-              data-lang="it"
-              href="<%= @page.twitter_url %>"
-              data-height="600"
-              data-chrome="nofooter noborders"
-              data-aria-polite="assertive">
-          </a>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-  </div>
+      </ul>
+      <br>
+      <%= link_to edit_me_page_path(@page), class: "btn btn-info btn-sm" do %>
+        <i class="fa fa-pencil"></i> Modifica pagina
+      <% end %>
+  </div> <!-- end of right page component -->
+
 </div>
 
 <% content_for :scripts do %>
