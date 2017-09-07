@@ -36,6 +36,7 @@ RUN yarn install
 
 # copying in the rest of the application
 COPY . .
+RUN rake assets:precompile
 
 # running the server in production mode by default
 EXPOSE 3000
