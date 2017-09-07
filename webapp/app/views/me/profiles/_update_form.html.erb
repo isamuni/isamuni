@@ -10,10 +10,6 @@
     </div>
     <hr>
   <% end %>
-  <div class="field">
-    <%= f.label :public_profile, "Vuoi che il tuo profilo sia pubblico?" %>
-    <%= f.check_box :public_profile, class: "form-check-inpu" %>
-  </div>
   <div class="form-group">
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name, class: "form-control", disabled: true %>
@@ -41,6 +37,12 @@
   <div class="form-group">
     <%= f.label :links, 'Link e contatti' %><br>
     <%= f.text_area :links, class: "form-control richtext" %>
+  </div>
+  <div class="form-check form-check-inline">
+    <%= f.label :public_profile, class: "form-check-label" do %>
+      <%= f.check_box :public_profile, class: "form-check-input" %>
+      Aggiungi il mio profilo alla lista utenti
+    <% end %> 
   </div>
   <br>
   <p class="actions">
