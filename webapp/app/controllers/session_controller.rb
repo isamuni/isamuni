@@ -9,7 +9,7 @@ class SessionController < ApplicationController
     user = User.from_omniauth(request.env['omniauth.auth'])
     
     user_is_new = user.id.nil?
-    user.save!(validate: false)
+    user.save
 
     if user_is_new
       NotificationMailer.new_user_notification(user).deliver_later

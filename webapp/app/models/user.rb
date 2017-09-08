@@ -7,10 +7,10 @@ class User < ApplicationRecord
   
   validate :valid_skill_list
 
-  with_options if: :public_profile do |p|
-    p.validates :description, presence: true
-    p.validates :occupation, presence: true
-  end
+  #with_options if: :public_profile do |p|
+  #  p.validates :description, presence: true
+  #  p.validates :occupation, presence: true
+  #end
 
   extend FriendlyId
   friendly_id :name, use: :slugged
