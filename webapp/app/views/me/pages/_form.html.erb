@@ -1,8 +1,7 @@
 <%= form_for [:me, @page], :html => { :id => "update_page_form" } do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
-
+      <h3>Alcuni errori hanno impedito alla pagina di essere salvata</h3>
       <ul>
       <% @page.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,17 +12,12 @@
 
   <div class="row">
     <div class="col-md-2">
-      <div class="field">
+      <div class="form-group">
         <%= f.select :kind, Page.kinds.keys.to_a, {}, {class: "form-control"} %>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="field">
-        <%= f.text_field :name , class: "form-control", placeholder: 'Nome' %>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="field">
+    <div class="col-md-6">
+      <div class="form-group">
         <%= f.text_field :location , class: "form-control", placeholder: 'Località' %>
       </div>
     </div>
@@ -31,56 +25,62 @@
       Dipendenti
     </div>
     <div class="col-md-2">
-      <div class="field">
+      <div class="form-group">
           <%= f.select :no_employees, ['n/a', '1-10', '11-25', '26-50', '51-100', '101-1000', '1000+'], {}, {class: "form-control"} %>
       </div>
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :website %><br>
+  <div class="form-group">
+      <%= f.label :name, "Nome" %><br>
+    <%= f.text_field :name , class: "form-control", placeholder: 'Nome' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, "Sito web (http://...)" %><br>
     <%= f.text_field :website, class: "form-control" %>
   </div>
-  <div class="field">
-    Additional links<br>
+
+  <div class="form-group">
+    Altri collegamenti<br>
     <%= f.text_field :links, class: "form-control" %>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-        <div class="field">
+        <div class="form-group">
           Facebook Page (e.g. https://www.facebook.com/example/)<br>
           <%= f.text_field :fbpage, class: "form-control" %>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="field">
+        <div class="form-group">
           Twitter Page (e.g. @DevsCT)<br>
           <%= f.text_field :twitterpage, class: "form-control" %>
         </div>
     </div>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label "Settore/Area" %><br>
     <%= f.text_field :sector, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label "Descrizione" %><br>
     <%= f.text_area :description, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label "Contatti" %><br>
     <%= f.text_area :contacts , class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label "In cerca di" %><br>
     <%= f.text_area :lookingfor, class: "form-control" %>
   </div>
   <br>
-  <div class="actions">
+  <div class="form-group">
     <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-      <i class="fa fa-save"></i> Save
+      <i class="fa fa-save"></i> Salva
     <% end %>
   </div>
 <% end %>

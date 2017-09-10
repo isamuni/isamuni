@@ -153,3 +153,30 @@ $navbar-brand: #000000;
 #wikisamuni_header a {
     color: black;
 }
+
+#error_explanation {
+    color: #f00;
+    ul {
+      list-style: none;
+      margin: 0 0 18px 0;
+    }
+  }
+  
+.field_with_errors label,
+.field_with_errors .form-control-feedback,
+.field_with_errors .form-control-label,
+.field_with_errors .col-form-label,
+.field_with_errors .form-check-label,
+.field_with_errors .custom-control {
+    color: #d9534f;
+}
+
+.field_with_errors .form-control {
+    border-color: #d9534f;
+}
+
+.field_with_errors .input-group-addon {
+    color: #d9534f;
+    border-color: #d9534f;
+    background-color: #fdf7f7;
+}

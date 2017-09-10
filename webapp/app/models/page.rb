@@ -9,7 +9,7 @@ class Page < ApplicationRecord
   enum kind: [:company, :community]
 
   validates :name, presence: true, uniqueness: true
-
+  validates :website, format: URI::regexp(%w(http https))
 
   def self.companies
     where(kind: Page.kinds[:company])
@@ -20,7 +20,7 @@ class Page < ApplicationRecord
   end
 
   def fb_id
-    /www.facebook.com\/([\w\.\-\_]+)\/?$/.match(fbpage)&.[](1)
+    /www.facebook.com\/(?:.+-)?([\w\.\_]+)\/?$/.match(fbpage)&.[](1)
   end
 
   def pic(height = 100)
