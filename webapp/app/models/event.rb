@@ -5,6 +5,8 @@ require 'icalendar'
 class Event < ApplicationRecord
   belongs_to :source, optional: true
 
+  scope :visible, -> { where(hidden:false) }
+
   scope :future, -> {
     today = Time.zone.now.beginning_of_day
     where 'ends_at >= ? OR starts_at >= ?', today, today

@@ -5,6 +5,9 @@ class SessionController < ApplicationController
   def login
   end
 
+  def password_login
+  end
+
   def create
     user = User.from_omniauth(request.env['omniauth.auth'])
     
@@ -17,6 +20,22 @@ class SessionController < ApplicationController
 
     session[:user_id] = user.id
     redirect_to me_edit_user_url
+  end
+
+  def create_by_password_login
+    email = params[:email]
+    password = params[:password]
+
+    user = User.where("password_digest <> ''")
+              .find_by(email: email)
+              .try(:authenticate, password)
+
+    if user
+      session[:user_id] = user.id
+      redirect_to me_edit_user_url
+    else 
+      redirect_to root_url, notice: 'Unable to login by password'
+    end
   end
 
   def destroy

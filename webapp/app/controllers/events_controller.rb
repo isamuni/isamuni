@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 class EventsController < ApplicationController
   def index
-    @future = Event.future.page(params[:future_page]).order_asc
-    @old = Event.page(params[:old_page]).order_desc
+    @future = Event.visible.future.page(params[:future_page]).order_asc
+    @old = Event.visible.page(params[:old_page]).order_desc
 
     if params[:start] && params[:end]
       @start_time = Time.at(params[:start].to_i / 1000.0)
@@ -30,11 +30,11 @@ class EventsController < ApplicationController
   end
 
   def typeahead
-    render json: Event.name_like(params[:query])
+    render json: Event.visible.name_like(params[:query])
   end
 
   def locations
-    today_events = Event.future.where('coordinates IS NOT NULL')
+    today_events = Event.visible.future.where('coordinates IS NOT NULL')
 
     event_data = today_events.map do |event|
       { uid: event.uid,
@@ -47,7 +47,7 @@ class EventsController < ApplicationController
   end
 
   def sources
-    counts = Event.group(:source_id).count
+    counts = Event.visible.group(:source_id).count
 
     sources = Source.find(counts.keys).map do |e|
       e.as_json.merge(count: counts[e.id])
@@ -57,7 +57,8 @@ class EventsController < ApplicationController
   end
 
   def all_events
-    events = Event.where('date(ends_at) < ?', Date.today)
+    events = Event.visible
+                  .where('date(ends_at) < ?', Date.today)
                   .group('date(ends_at)')
                   .order('date(ends_at) DESC')
                   .distinct.count(:uid)

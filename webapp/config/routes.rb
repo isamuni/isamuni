@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'session#auth_failure'
   get 'signout', to: 'session#destroy', as: 'signout'
   get 'login', to: 'session#login', as: 'login'
+  get 'password_login', to: 'session#password_login'
+  post 'password_login', to: 'session#create_by_password_login'
 
   # Users
   get 'users/typeahead', to: 'profile#typeahead'

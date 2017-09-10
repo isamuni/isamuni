@@ -1,11 +1,16 @@
 class User < ApplicationRecord
   enum role: {user: 0, editor: 1, admin: 2}
+  has_secure_password validations: false
   
   has_and_belongs_to_many :pages, join_table: :owners_pages
   acts_as_taggable_on :skills
   
   validates :name, presence: true  
   validate :valid_skill_list
+
+  # ensures that users without a facebook login can't have a public profile
+  # at least for now
+  validates :uid, presence: true, if: :public_profile 
 
   with_options on: :manual_update, if: :public_profile do |p|
     p.validates :description, presence: true
@@ -37,8 +42,10 @@ class User < ApplicationRecord
   end
 
   def profile_pic(height = '')
-    height = '?height=' + height.to_s unless height == ''
-    'https://graph.facebook.com/' + uid + '/picture' + height
+    if uid
+      height = '?height=' + height.to_s unless height == ''
+      'https://graph.facebook.com/' + uid + '/picture' + height
+    end
   end
 
   def thumbnail

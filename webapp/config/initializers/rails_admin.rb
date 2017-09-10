@@ -44,7 +44,3 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless cur_user && cur_user.admin?
   end
 end
-
-Kaminari.configure do |config|
-  config.page_method_name = :per_page_kaminari
-end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905061755) do
+ActiveRecord::Schema.define(version: 20170910213308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170905061755) do
     t.string "location"
     t.string "coordinates"
     t.integer "source_id"
+    t.boolean "hidden", default: false
     t.index ["source_id"], name: "index_events_on_source_id"
   end
 
@@ -164,6 +165,7 @@ ActiveRecord::Schema.define(version: 20170905061755) do
     t.boolean "public_profile", default: true
     t.integer "role", default: 0
     t.string "email"
+    t.string "password_digest"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
