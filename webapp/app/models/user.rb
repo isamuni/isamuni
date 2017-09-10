@@ -2,15 +2,15 @@ class User < ApplicationRecord
   enum role: {user: 0, editor: 1, admin: 2}
   
   has_and_belongs_to_many :pages, join_table: :owners_pages
-  
   acts_as_taggable_on :skills
   
+  validates :name, presence: true  
   validate :valid_skill_list
 
-  #with_options if: :public_profile do |p|
-  #  p.validates :description, presence: true
-  #  p.validates :occupation, presence: true
-  #end
+  with_options on: :manual_update, if: :public_profile do |p|
+    p.validates :description, presence: true
+    p.validates :occupation, presence: true
+  end
 
   extend FriendlyId
   friendly_id :name, use: :slugged

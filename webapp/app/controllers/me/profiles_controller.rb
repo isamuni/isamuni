@@ -3,8 +3,9 @@ class Me::ProfilesController < ApplicationController
   before_action :check_logged_in
 
   def update
+    current_user.assign_attributes(post_params)
     respond_to do |format|
-      if current_user.update(post_params)
+      if current_user.save(context: :manual_update)
         format.html { redirect_to current_user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: current_user }
       else
