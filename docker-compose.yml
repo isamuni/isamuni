@@ -4,20 +4,18 @@ services:
   webapp:
     build: ./webapp
     command: bash -c "rm /app/tmp/pids/server.pid; bundle exec rails s webrick -p 3000 -b '0.0.0.0'"
-    user: "${UID}"
+    user: "${SUDO_UID:-1000}"
     volumes:
       - ./webapp:/app
-      - ./services-data/isamunitmp:/app/tmp
-    ports:
-      - "3000:3000"
-      - "8080:8080"
+    network_mode: "host"
     depends_on:
       - devdb
-    env_file: .env
+    environment:
+      RAILS_ENV: "development"
 
   devdb:
     build: ./database
-    volumes:
-      - /var/services-data/isamunipg:/var/lib/postgresql/data
-    ports:
-      - "127.0.0.1:5432:5432"
+    network_mode: "host"
+    environment:
+      POSTGRES_USER: "isamuni"
+      POSTGRES_PASSWORD: "isamuni"

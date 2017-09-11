@@ -1,1 +1,1 @@
-create extension pg_trgm
+CREATE EXTENSION pg_trgm;

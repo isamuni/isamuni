@@ -1,4 +1,5 @@
 FROM ruby:2.4.1
+RUN useradd -r -u 1000 appuser
 
 # Adding recent nodejs repositories
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
@@ -36,7 +37,7 @@ RUN yarn install
 
 # copying in the rest of the application
 COPY . .
-RUN rake assets:precompile
+RUN RAILS_ENV=production rake assets:precompile
 
 # running the server in production mode by default
 EXPOSE 3000
