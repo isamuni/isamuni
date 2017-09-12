@@ -37,7 +37,7 @@
     <h2>Tutti gli utenti</h2>
   <% end %>
     <div id="list-users">
-      <table class="table table-hover table-condensed" id="user-table">
+      <table class="table table-hover table-condensed" id="user-table" class="main-table">
         <thead>
           <tr>
             <th></th>
@@ -82,7 +82,8 @@ $(function(){
     order: [1, "asc"],
     columnDefs: [
       { "orderable": false, searchable: false, "targets": [0, -1] }
-    ]
+    ],
+    responsive: true
   });
 })
 </script>

@@ -34,7 +34,8 @@ $navbar-brand: #000000;
     background-color: $navbar-bg;
     background-image: none;
     border-bottom: 2px solid $navbar-border;
-    padding: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
 
     /* Lowered z-index, so that the navbar is under simplemde */
     z-index: 9;
@@ -49,6 +50,11 @@ $navbar-brand: #000000;
         padding-bottom: 8px;
         font-size: 1.1rem;
         line-height: 30px;
+    }
+
+    .nav-link {
+        text-align: center;
+        line-height: 1.3em;
     }
 
     /* NOTE
@@ -119,8 +125,8 @@ $navbar-brand: #000000;
     margin-top: 80px;
 }
 
-#user-table {
-   vertical-align: middle;
+.main-table {
+    width:100%;
 }
 
 #user-table td {
