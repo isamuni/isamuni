@@ -34,6 +34,7 @@ $navbar-brand: #000000;
     background-color: $navbar-bg;
     background-image: none;
     border-bottom: 2px solid $navbar-border;
+
     padding-top: 1px;
     padding-bottom: 1px;
 
@@ -52,9 +53,9 @@ $navbar-brand: #000000;
         line-height: 30px;
     }
 
-    .nav-link {
-        text-align: center;
-        line-height: 1.3em;
+    /* Prevents font-awesome icons going to a new line */
+    .fa {
+        display: inline;
     }
 
     /* NOTE
