@@ -60,7 +60,7 @@ class User < ApplicationRecord
   private
 
   def valid_skill_list
-    return if skill_list.nil? || skill_list.all? { |tag| tag.length < 24 }
-    errors.add(:skill_list, 'includes some tag longer than 24 chars')
+    return if skill_list.nil? || skill_list.all? { |tag| tag.length < 40 }
+    errors.add(:skill_list, 'include tag piu lunghe di 40 caratteri')
   end
 end
