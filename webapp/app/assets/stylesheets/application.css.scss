@@ -141,6 +141,13 @@ $navbar-brand: #000000;
     padding-right: 0px;
 }
 
+#user-table .tags-column {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .sidebar {
     border-right: 2px solid #eee;
 }

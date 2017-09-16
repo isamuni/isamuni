@@ -57,7 +57,7 @@
               </td>
               <td><%= link_to user.name, user %></td>
               <td><%= truncate(user.occupation, length: 40) %></td>
-              <td>
+              <td class="tags-column">
                 <%= user.skills.collect{ |t| t.name }.join(", ") %> <%# solves n+1 queries problem, not referring to skills_list %>
             </tr>
           <% end %>
