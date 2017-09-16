@@ -6,14 +6,13 @@
 ## Index
 
 * [Project description](#project-description)
-* [How to deploy](#how-to-deploy)
+* [How to deploy](#Getting-started-with-development)
  * [Environment Configuration](#environment-configuration)
  * [Running the App](#running-the-app)
  * [More Configuration](#more-configuration)
  * [Via Docker](#docker)
 * [FAQ](#faq)
 * [Contributors](#contributors)
-
 
 ## Project description
 
@@ -124,7 +123,26 @@ $ rails db:migrate
 
 #### Test data
 
-Ask a developer for a dump of the database!
+Ask a developer for a dump of the database from isamuni.it, you can then restore it as 
+
+```bash
+$ cat your_dump.sql | rails db
+```
+
+#### Making yourself an admin
+
+You'll need to assign yourself an email, a password, and mark yourself as an administrator.
+You can do these things easily from the rails console, running `rails c`
+
+```ruby
+> a = User.create(name: "vigliag", email:"vigliag@gmail.com", password:"ciao", public_profile: false)
+# or a = User.find_by(name: "...")
+> a.admin!
+> a.save!
+```
+
+Once you have a password assigned to your account, you can also login by it from `/password_login`.
+This is handy, as it works even if an `APP_ID` is not set and facebook login is disabled. 
 
 ### Running the App
 
