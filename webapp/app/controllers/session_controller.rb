@@ -15,7 +15,7 @@ class SessionController < ApplicationController
     user.save
 
     if user_is_new
-      NotificationMailer.new_user_notification(user).deliver_later
+      NotificationMailer.new_user_notification(user).deliver_now
     end
 
     session[:user_id] = user.id

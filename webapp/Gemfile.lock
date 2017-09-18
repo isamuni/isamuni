@@ -56,6 +56,9 @@ GEM
       sass (>= 3.4.19)
     builder (3.2.3)
     byebug (9.1.0)
+    clockwork (2.0.0)
+      activesupport
+      tzinfo
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -112,6 +115,10 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
+    koala (3.0.0)
+      addressable
+      faraday
+      json (>= 1.8)
     leaflet-rails (1.1.0)
       rails (>= 4.2.0)
     loofah (2.0.3)
@@ -301,6 +308,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap (~> 4.0.0.beta)
   byebug
+  clockwork
   coffee-rails (~> 4.2.2)
   dotenv-rails
   font-awesome-rails
@@ -310,6 +318,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-validation-rails
+  koala
   leaflet-rails
   omniauth-facebook
   paper_trail

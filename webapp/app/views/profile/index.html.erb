@@ -40,10 +40,10 @@
       <table class="table table-hover table-condensed" id="user-table" class="main-table">
         <thead>
           <tr>
-            <th></th>
+            <th class="image-column"></th>
             <th>Nome</th>
             <th>Occupazione</th>
-            <th>Tags</th>
+            <th class="tags-column">Tags</th>
           </tr>
         </thead>
 
@@ -81,6 +81,7 @@ $(function(){
     },
     order: [1, "asc"],
     columnDefs: [
+      { width: "60px", targets: [0]}
       { "orderable": false, searchable: false, "targets": [0, -1] }
     ],
     responsive: true

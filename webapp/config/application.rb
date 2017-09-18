@@ -24,5 +24,6 @@ module Isamuni
       # initialization code goes here
     end
     
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end

@@ -10,7 +10,7 @@ class Me::OwnershipRequestsController < ApplicationController
       flash[:notice] = "Hai già la ownership per questa pagina"
     else
       request = OwnershipRequest.create!(page_id: p.id, user_id: current_user.id)
-      NotificationMailer.ownership_request_notification(request).deliver_later
+      NotificationMailer.ownership_request_notification(request).deliver_now
       flash[:notice] = "Richiesta di ownership inviata"
     end
 

@@ -27,7 +27,7 @@ class Me::PagesController < ApplicationController
     @page.owners << current_user
     correctly_saved = @page.save
 
-    NotificationMailer.page_edit_notification(current_user, @page).deliver_later if correctly_saved
+    NotificationMailer.page_edit_notification(current_user, @page).deliver_now if correctly_saved
 
     respond_to do |format|
       if correctly_saved
@@ -48,7 +48,7 @@ class Me::PagesController < ApplicationController
   # PATCH/PUT /pages/1.json
   def update
     page_updated = @page.update(page_params)
-    NotificationMailer.page_edit_notification(current_user, @page).deliver_later if page_updated    
+    NotificationMailer.page_edit_notification(current_user, @page).deliver_now if page_updated    
 
     respond_to do |format|
       if page_updated
