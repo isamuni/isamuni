@@ -11,8 +11,6 @@ module FB
       end
     end
     
-
-  
     class Post < DObj
       FIELDS = ['id', 'message', 'from', 'type',
                'picture', 'link', 'created_time',

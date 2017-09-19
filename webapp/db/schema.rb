@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918223425) do
+ActiveRecord::Schema.define(version: 20170919061852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170918223425) do
     t.string "coordinates"
     t.integer "source_id"
     t.boolean "hidden", default: false
+    t.string "province"
     t.index ["source_id"], name: "index_events_on_source_id"
   end
 
@@ -85,6 +86,9 @@ ActiveRecord::Schema.define(version: 20170918223425) do
     t.string "slug", null: false
     t.string "twitterpage"
     t.string "website"
+    t.string "city"
+    t.string "province"
+    t.string "region"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
@@ -121,6 +125,7 @@ ActiveRecord::Schema.define(version: 20170918223425) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.text "message"
+    t.datetime "last_crawled_at"
     t.index ["uid"], name: "index_sources_on_uid"
   end
 

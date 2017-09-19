@@ -1,4 +1,4 @@
-require csv
+require 'csv'
 
 class RegionFinder
   
@@ -8,12 +8,13 @@ class RegionFinder
   end
   
   def from_string(text)
-    found = cities_areas.find { |(city,area)| text.include? city }
-    if found then found[1] else nil
+    found = @cities_areas.find { |(city,area)| text.include? city }
+    found ? found[1] : nil
   end
       
-  def self.new_from_csv(file)
+  def self.from_csv(file = nil)
+    file = file || File.join(__dir__, 'cities.csv')
     self.new(CSV.read(file))
   end
-      
+
 end

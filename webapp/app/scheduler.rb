@@ -1,4 +1,7 @@
-require 'config/boot'
-require 'config/environment'
+require 'clockwork'
+require_relative '../config/boot'
+require_relative '../config/environment'
 
-every(1.hour, 'crawl') { CrawlerJob.perform_now }
+module Clockwork
+    every(1.hour, 'crawl') { CrawlerJob.perform_now }
+end

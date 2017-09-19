@@ -1,10 +1,12 @@
 require 'FacebookCrawler'
+require 'RegionFinder'
 
 class CrawlerJob < ApplicationJob
   queue_as :default
 
   def initialize
-    @crawler = ::FB::Crawler.new(app_id: ENV['ISAMUNI_APP_ID'], app_secret: ENV['ISAMUNI_APP_SECRET'])    
+    @crawler = ::FB::Crawler.new(app_id: ENV['ISAMUNI_APP_ID'], app_secret: ENV['ISAMUNI_APP_SECRET'])
+    @regionfinder = RegionFinder.from_csv 
   end
 
   def crawlGroup(source)
@@ -26,8 +28,8 @@ class CrawlerJob < ApplicationJob
 
       if elinks.key? 'fb'
         einfo = @crawler.event_info(elinks['fb'])
-        einfo.area_str
         e = Event.from_fb_event(einfo)
+        e.province = @regionfinder.from_string(einfo.area_str)
         e.source = source
         e.save!
         n_events += 1
@@ -53,11 +55,37 @@ class CrawlerJob < ApplicationJob
     logger.info "page #{source.name}: inserted/updated #{n_events} events"
   end
 
-  def perform
-    logger.info 'crawling sources'
+  def refresh_sources
+    count = 0
     Source.where.not(status: :disabled).each do |source|
-      logger.info "crawling source: #{source.name}"
-      
+      begin
+        if source.stype == 'group'
+          source.from_fb_group @crawler.group_info(source.uid)
+        elsif source.stype == 'page'
+          source.from_fb_page @crawler.page_info(source.uid)
+        end
+        count += 1
+      rescue => e
+        logger.error "error while refreshing source #{source.id}:" + e.message
+        source.message = e.message
+        source.status = 'disabled'
+      end
+      source.message = ""
+      source.touch
+      source.save!
+    end
+    logger.info "refreshed #{count} sources"
+  end
+
+  def perform
+    logger.info 'refreshing sources'
+    refresh_sources()
+
+    logger.info 'crawling'
+    
+    Source.where.not(status: :disabled).each do |source|
+      logger.info "crawling source: #{source.name}" 
+
       begin
         if source.stype == 'group'
           crawlGroup(source)
@@ -77,7 +105,7 @@ class CrawlerJob < ApplicationJob
         logger.info "error while processing source #{source.id}:" + e.message
       end
 
-      #source.lastCrawled = Time.now
+      source.last_crawled_at = Time.now
       source.save!
 
     end
