@@ -90,27 +90,40 @@ module FB
         @graph.get_connection(group_id, 'members', options)
       end
   
-      def page_events(page_id)
+      def page_raw_feed(page_id, page_size=0)
         options = { fields: Event::FIELDS }
-        @logger.info "downloading events from page: #{page_id}"
-        events = @graph.get_connection(page_id, 'events', options)
-        @logger.info "downloaded #{events.size} events"
-        events.map {|a| Event.new(a) }
+        @graph.get_connection(page_id, 'events', options)
       end
-      
-      def group_raw_feed(group_id, limit)
-        options = { limit: limit, fields: Post::FIELDS }
+
+      def page_events(page_id, limit=0)
+        limit = @page_size unless limit > 0
+        Enumerator.new do |y|
+          processed = 0
+          current_page = page_raw_feed(page_id)
+          until current_page.nil? || current_page.empty? || (processed >= limit)
+            current_page.each do |element|
+              y << Event.new(element)
+              processed = processed + 1
+            end
+            current_page = current_page.next_page
+          end
+        end
+      end
+
+      def group_raw_feed(group_id, page_size)
+        options = { limit: page_size, fields: Post::FIELDS }
         @graph.get_connection(group_id, 'feed', options)
       end
   
       # gets and processes 'limit' elements from a group with a given group_id
       # returns an enumerator with the resulting elements
-      def group_feed(group_id, limit=@page_size)
+      def group_feed(group_id, limit=0)
+        limit = @page_size unless limit > 0
         Enumerator.new do |y|
           processed = 0
           current_page = group_raw_feed(group_id, @page_size)
   
-          until current_page.empty? || (processed >= limit)
+          until current_page.nil? || current_page.empty? || (processed >= limit)
             current_page.each do |element|
               y << Post.new(element)
               processed = processed + 1

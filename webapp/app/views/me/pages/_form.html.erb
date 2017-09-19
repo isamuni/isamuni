@@ -16,11 +16,6 @@
         <%= f.select :kind, Page.kinds.keys.to_a, {}, {class: "form-control"} %>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.text_field :location , class: "form-control", placeholder: 'Località' %>
-      </div>
-    </div>
     <div class="col-md-2">
       Dipendenti
     </div>
@@ -34,6 +29,21 @@
   <div class="form-group">
       <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name , class: "form-control", placeholder: 'Nome' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location, "Sede" %><br>
+    <%= f.text_field :location , class: "form-control", placeholder: 'Sede' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :province, "Provincia (per esteso)" %><br>
+    <%= f.text_field :province , class: "form-control", placeholder: 'Provincia' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, "Sito web (http://...)" %><br>
+    <%= f.text_field :website, class: "form-control" %>
   </div>
 
   <div class="form-group">

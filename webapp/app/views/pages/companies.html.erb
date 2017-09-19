@@ -28,6 +28,7 @@
       <th></th>
       <th>Nome</th>
       <th>Sede</th>
+      <th>Provincia</th>
       <th>Ambito</th>
       <th># Dipendenti</th>
       <th></th>
@@ -46,6 +47,7 @@
         </td>
         <td><%= link_to page.name, page %></td>
         <td><%= page.location %></td>
+        <td><%= page.province || "Altro" %></td>
         <td><%= page.sector %></td>
         <td><%= page.no_employees %></td>
         <td>

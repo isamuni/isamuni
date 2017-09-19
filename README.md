@@ -155,12 +155,11 @@ $ yarn
 $ rails server webrick
 ```
 
-### Using Favara to get the latest posts
+### Crawling posts
 
-Make sure the database is initialized, and already migrated to the last version.
+Run `rake crawl:fb`, or `rake crawl:fb 200`, to crawl the last 200 elements from all enabled sources in the database.
 
-Then clone [favara](https://github.com/sic2/favara) in a different folder, point it to the same database Isamuni uses, and run it.
-Refer to favara's readme for further details.
+You can add, remove, enable and disable sources from the rails_admin admin panel
 
 ### More Configuration
 

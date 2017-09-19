@@ -4,6 +4,7 @@
       <th class="col-xs">Evento</th>
       <th class="col-xs">Quando</th>
       <th class="col-xs">Dove</th>
+      <th class="col-xs">Provincia</th>
       <th class="col-xs">Chi</th>
       <th class="col-xs"></th>
     </tr>
@@ -30,6 +31,7 @@
         <% end %>
 
         <td class="col-xs"><%= event.location_name %></td>
+        <td class="col-xs"><%= event.province || "Altro" %></td>
         <td class="col-xs"><%= event.organiser %></td>
         <td class="col-xs">
           <%= link_to fa_icon("external-link"), event.external_link, :target => "_blank" %>

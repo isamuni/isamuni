@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   scope :only_with_coordinates, -> { where 'coordinates IS NOT NULL' }
 
   def self.order_asc
-    order "COALESCE(ends_at,starts_at) ASC"
+    order "COALESCE(starts_at,ends_at) ASC"
   end
 
   def self.order_desc

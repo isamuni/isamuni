@@ -4,16 +4,17 @@ require 'RegionFinder'
 class CrawlerJob < ApplicationJob
   queue_as :default
 
-  def initialize
-    @crawler = ::FB::Crawler.new(app_id: ENV['ISAMUNI_APP_ID'], app_secret: ENV['ISAMUNI_APP_SECRET'])
+  def initialize(options={})
+    options.merge!(app_id: ENV['ISAMUNI_APP_ID'], app_secret: ENV['ISAMUNI_APP_SECRET'])
+    @crawler = ::FB::Crawler.new(options)
     @regionfinder = RegionFinder.from_csv 
   end
 
-  def crawlGroup(source)
+  def crawlGroup(source, limit=0)
     n_posts = 0
     n_events = 0
 
-    feed = @crawler.group_feed(source.uid)
+    feed = @crawler.group_feed(source.uid, limit)
 
     feed.each do |element|
 
@@ -40,13 +41,14 @@ class CrawlerJob < ApplicationJob
     logger.info "group #{source.name}: inserted/updated #{n_posts} posts, #{n_events} events"
   end
 
-  def crawlPage(source)
+  def crawlPage(source, posts_per_source=0)
     n_events = 0
     
-    page_events = @crawler.page_events(source.uid)
+    page_events = @crawler.page_events(source.uid, posts_per_source)
 
     page_events.each do |element|
       e = Event.from_fb_event(element)
+      e.province = @regionfinder.from_string(element.area_str)
       e.source = source
       e.save!
       n_events += 1
@@ -77,18 +79,18 @@ class CrawlerJob < ApplicationJob
     logger.info "refreshed #{count} sources"
   end
 
-  def perform
+  def perform(posts_per_source=0)
     logger.info 'refreshing sources'
     refresh_sources()
 
-    logger.info 'crawling'
+    logger.info "crawling, with #{posts_per_source} posts per source"
     
     Source.where.not(status: :disabled).each do |source|
       logger.info "crawling source: #{source.name}" 
 
       begin
         if source.stype == 'group'
-          crawlGroup(source)
+          crawlGroup(source, posts_per_source)
         elsif source.stype == 'page'
           crawlPage(source)
         else
@@ -103,6 +105,7 @@ class CrawlerJob < ApplicationJob
         source.status = 'failing'  
         source.message = e.message
         logger.info "error while processing source #{source.id}:" + e.message
+        logger.error e.backtrace.join("\n")
       end
 
       source.last_crawled_at = Time.now

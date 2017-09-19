@@ -1,8 +1,9 @@
-namespace :crawler do
+namespace :crawl do
 
     desc 'Crawl fb sources'
-    task :crawl_fb, [:complete] => :environment do |_t, args|
+    task :fb, [:posts_per_source] => :environment do |_t, args|
         Rails.logger = Logger.new(STDOUT)
-        CrawlerJob.new.perform
+        cj = CrawlerJob.new()
+        cj.perform(args[:posts_per_source].to_i)
     end
 end

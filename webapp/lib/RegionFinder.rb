@@ -8,6 +8,7 @@ class RegionFinder
   end
   
   def from_string(text)
+    return nil unless text
     found = @cities_areas.find { |(city,area)| text.include? city }
     found ? found[1] : nil
   end

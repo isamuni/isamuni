@@ -130,7 +130,7 @@
         OpenStreetMap_DE.addTo(mymap);
 
         //draw markers
-        var markers = L.markerClusterGroup();
+        var markers = L.markerClusterGroup({maxClusterRadius: 30});
         locations.map(markerForEvent).forEach(function (marker) {
             markers.addLayer(marker);
         });
