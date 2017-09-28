@@ -109,7 +109,7 @@ $ sudo -u <YOUR USERNAME> psql postgres
 # Entering psql interactive mode and create a user for isamuni
 # we'll then let the app create the databases with `rails db:create`
 
-$ CREATE USER isamuni SUPERUSER;
+$ CREATE USER isamuni SUPERUSER with encrypted password 'isamuni';
 $ CREATE DATABASE isamuni_dev WITH OWNER isamuni;
 ```
 
