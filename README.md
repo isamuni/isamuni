@@ -157,7 +157,7 @@ $ rails server webrick
 
 ### Crawling posts
 
-Run `rake crawl:fb`, or `rake crawl:fb 200`, to crawl the last 200 elements from all enabled sources in the database.
+Run `rake crawl:fb`, or `rake "crawl:fb[200]"`, to crawl the last 200 elements from all enabled sources in the database.
 
 You can add, remove, enable and disable sources from the rails_admin admin panel
 
