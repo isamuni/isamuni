@@ -136,7 +136,7 @@ You can do these things easily from the rails console, running `rails c`
 
 ```ruby
 > a = User.create(name: "vigliag", email:"vigliag@gmail.com", password:"ciao", public_profile: false)
-# or a = User.find_by(name: "...")
+# or a = User.find_by(name: "...") if your user is already in the db
 > a.admin!
 > a.save!
 ```

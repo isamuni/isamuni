@@ -1,1 +1,1 @@
-<%= markdown_html(render :partial => 'opendata_md') %>
+<%= markdown_unsafe(render :partial => 'opendata_md').html_safe %>
