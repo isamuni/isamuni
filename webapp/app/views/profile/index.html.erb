@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col-6">
-    <h1>Utenti</h1>
+    <h1 class="pagetitle"><%= link_to "Utenti", users_path %></h1>
   </div>
   <div class="col-6">
     <div class="form-group">
@@ -81,7 +81,7 @@ $(function(){
     },
     order: [1, "asc"],
     columnDefs: [
-      { width: "60px", targets: [0]}
+      { width: "60px", targets: [0]},
       { "orderable": false, searchable: false, "targets": [0, -1] }
     ],
     responsive: true

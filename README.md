@@ -96,7 +96,7 @@ You can also opt to have the ruby environment installed, but run postgres from d
 
 #### With Docker
 
-You can use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:setup` on the first usage. That's it
+You can use docker to run the database, while starting rails normally. To run the database with docker, run `docker-compose up --build devdb`, and stop it with `docker-compose down devdb`. This option doesn't require you to install postgres. You'll only need to do `rails db:setup` on the first usage. That's it.
 
 #### Without Docker
 
@@ -104,21 +104,27 @@ First, make sure that you have postgres installed on your machine.
 Then create a user and a database for isamuni:
 
 ```bash
-$ sudo -u <YOUR USERNAME> psql postgres
-
-# Entering psql interactive mode and create a user for isamuni
-# we'll then let the app create the databases with `rails db:create`
-
-$ CREATE USER isamuni SUPERUSER with encrypted password 'isamuni';
-$ CREATE DATABASE isamuni_dev WITH OWNER isamuni;
+# enter the postgres shell with
+$ sudo -u postgresql psql postgres
 ```
 
-Then ask webapp to create the database and bring it to the last version of the schema
+then enter the following commands, making sure to terminate them with a semicolon
+
+```SQL
+CREATE USER isamuni with encrypted password 'isamuni';
+CREATE DATABASE isamuni_dev WITH OWNER isamuni;
+CREATE DATABASE isamuni_test WITH OWNER isamuni;
+\c isamuni_test
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+\c isamuni_dev
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+```
+
 
 ```bash
 $ cd isamuni/webapp/
-$ rails db:setup
-$ rails db:migrate
+$ rails db:schema:load
+$ rails db:seed
 ```
 
 #### Test data

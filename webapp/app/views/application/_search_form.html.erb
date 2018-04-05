@@ -1,17 +1,17 @@
 <div class="form-group">
   <%= form_tag res_path, :method => "get" do |f| %>
     <div class="input-group">
-    <%= text_field_tag :query, nil, class: 'typeahead form-control', autocomplete: 'off', placeholder: placeholder %>
-      <span class="input-group-btn">
-        <%= button_tag type: "submit", class: "btn btn-primary", name: ""  do %>
-            <i class="fa fa-search"></i>
-        <% end %>
+      <span class="form-control">
+    <%= text_field_tag :query, nil, class: 'form-control typeahead', autocomplete: 'off', placeholder: placeholder %>
       </span>
-      <span class="input-group-btn">
-        <%= link_to res_path, class: "btn btn-default", style: "background-color: #E0E0E0" do %>
-          <i class="fa fa-refresh"></i>
-        <% end %>
-      </span>
+
+      <div class="input-group-append">
+
+          <%= button_tag type: "submit", class: "btn btn-outline-primary", name: ""  do %>
+              <i class="fa fa-search"></i>
+          <% end %>
+
+      </div>
     </div>
   <% end %>
 </div>
