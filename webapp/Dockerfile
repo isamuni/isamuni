@@ -1,4 +1,4 @@
-FROM ruby:2.4.1
+FROM ruby:2.5.1
 RUN useradd -r -u 1000 appuser
 
 # Adding recent nodejs repositories
