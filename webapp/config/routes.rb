@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   post 'password_login', to: 'session#create_by_password_login'
 
   # Users
-  get 'users/typeahead', to: 'profile#typeahead'
   get 'users/', to: 'profile#index', as: 'users'
+  get 'users/typeahead', to: 'profile#typeahead'
   get 'users/:id', to: 'profile#show', as: 'user'
   get 'users/:id/all_posts', to: 'profile#all_posts', as: 'all_posts'
 
@@ -36,11 +36,11 @@ Rails.application.routes.draw do
   # Pages
   get 'pages', to: 'pages#index', defaults: {name_only: true, format: :json}
   get 'communities', to: 'pages#index', defaults: {kind: :community}
+  get 'communities/typeahead', to: 'pages#typeahead', defaults: {kind: :community}
   get 'communities/:id', to: 'pages#show', defaults: {kind: :community}, as: 'community'
   get 'companies', to: 'pages#index', defaults: {kind: :company}
-  get 'companies/:id', to: 'pages#show', defaults: {kind: :company}, as: 'company'  
-  get 'communities/typeahead', to: 'pages#typeahead', defaults: {kind: :community}
   get 'companies/typeahead', to: 'pages#typeahead', defaults: {kind: :company}
+  get 'companies/:id', to: 'pages#show', defaults: {kind: :company}, as: 'company'  
 
   # Events
   get 'events', to: 'events#index', defaults: { format: 'html' }
