@@ -30,14 +30,15 @@ RUN gem install foreman rails
 
 WORKDIR /app
 COPY Gemfile* ./
-RUN bundle install
 
-COPY package.json ./
-RUN yarn install
+ENV RAILS_ENV production
+RUN bundle install
 
 # copying in the rest of the application
 COPY . .
-RUN RAILS_ENV=production rake assets:precompile
+
+RUN rake webpacker:yarn_install
+RUN rake assets:precompile
 
 # running the server in production mode by default
 EXPOSE 3000
