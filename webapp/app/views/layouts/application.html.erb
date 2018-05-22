@@ -43,67 +43,6 @@
 <%= content_for :scripts %>
 
 <%= render partial: "layouts/cookies" %>
-<% # Analytics %>
-<script>
-function enableGoogleAnalytics(){
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-86302047-1', 'auto');
-  ga('send', 'pageview');
-}
-</script>
-
-<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#252e39"
-    },
-    "button": {
-      "background": "#14a7d0"
-    }
-  },
-  "position": "bottom-left",
-  "type": "opt-in",
-  "revokable": true,
-  "content": {
-    "message": "Isamuni.it carica alcune immagini da Facebook ed altri siti esterni, che potrebbero impostare cookie. Usando il siti accetti la presenza di questi cookie. Alcuni cookie, che usiamo per raccogliere statistiche sui visitatori sono opzionali.",
-    "dismiss": "Ho capito!",
-    "allow": "Accetta cookie opzionali",
-    "link": "Approfondisci"
-  },
-  
-  onInitialise: function (status) {
-    var type = this.options.type;
-    var didConsent = this.getStatus() == "allow";
-    if (type == 'opt-in' && didConsent) {
-      enableGoogleAnalytics();
-    }
-  },
-  
-  onStatusChange: function(status, chosenBefore) {
-    console.log(this.hasConsented());
-    console.log(this.hasAnswered())
-    
-    var type = this.options.type;
-    var didConsent = this.getStatus() == "allow"
-    if (type == 'opt-in' && didConsent) {
-      enableGoogleAnalytics();
-    } else {
-      window.location.reload()
-    }
-  }
-})
-});
-</script>
-<!-- End Cookie Consent plugin -->
 
 </body>
 </html>
