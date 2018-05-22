@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   # Opendata
   get 'opendata', to: 'home#opendata'
+  get 'privacy', to: 'home#privacy'
 
   # Admin
   get 'admin', to: 'admin#index'

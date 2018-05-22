@@ -16,4 +16,6 @@ class HomeController < ApplicationController
   end
 
   def opendata; end
+
+  def privacy; end
 end

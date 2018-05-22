@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <%= favicon_link_tag 'logo.png' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isamuni</title>
-
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-
-  <meta charset="UTF-8">
-  <meta name="description" content="Isamuni - Una panoramica sull'ambiente tech in Sicilia.
-                                    Scopri studenti, professionisti, comunità, aziende ed eventi del settore tech.">
-  <meta name="keywords" content="isamuni, sicilia, tecnologia, programmatori, social network, open source">
-
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= render partial: "layouts/navbar" %>
-
-<div class="container" id="main-container">
-  <%= yield %>
-</div>
-<br>
-
-<% #Javascript on the bottom for the time being, since turbolinks is disabled %>
-
-<%= javascript_include_tag :application, integrity: true %>
-<%= javascript_pack_tag 'application' %>
-<%= stylesheet_pack_tag 'application' %>
-
-<% #Leaflet (main source file is included in application js) %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.1.14/leaflet-providers.min.js"></script>
-
-<% #Datatables %>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-
-<% # Scripts included from views %>
-<%= content_for :scripts %>
-
-<%= render partial: "layouts/cookies" %>
 <% # Analytics %>
 <script>
 function enableGoogleAnalytics(){
@@ -104,6 +59,3 @@ window.cookieconsent.initialise({
 });
 </script>
 <!-- End Cookie Consent plugin -->
-
-</body>
-</html>
